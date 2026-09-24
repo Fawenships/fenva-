@@ -1,1158 +1,1026 @@
 "use strict";
 
-const API_BASE_URL = "";
-
-const state = {
-products: [],
-orders: [],
-promotion: null,
-settings: null,
-editingProductId: null
-};
-
-const $ = (selector) =>
-document.querySelector(selector);
-
-const $$ = (selector) =>
-document.querySelectorAll(selector);
-
 /* =========================================================
-API
+   FENVA BEAUTY
+   ADMINISTRATION
+   Version 100 % GitHub Pages
+   Aucun serveur / aucune API externe
 ========================================================= */
 
-const API = {
+/* =========================================================
+   STOCKAGE LOCAL
+========================================================= */
 
-async request(endpoint, options = {}) {
+const STORAGE_KEYS = {
+  products: "fenva_products",
+  orders: "fenva_orders",
+  promotion: "fenva_promotion",
+  settings: "fenva_settings"
+};
 
-```
-const response = await fetch(
-  `${API_BASE_URL}${endpoint}`,
-  {
-    method: options.method || "GET",
-
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {})
-    },
-
-    credentials: "include",
-
-    body:
-      options.body !== undefined
-        ? JSON.stringify(options.body)
-        : undefined
-  }
-);
-
-
-let data = null;
-
-try {
-  data = await response.json();
-} catch {
-  data = null;
-}
-
-
-if (!response.ok) {
-
-  throw new Error(
-    data?.message ||
-    data?.error ||
-    `Erreur serveur (${response.status})`
-  );
-
-}
-
-
-return data;
-```
-
-},
-
-getProducts() {
-return this.request("/api/products");
-},
-
-getOrders() {
-return this.request("/api/admin/orders");
-},
-
-getPromotion() {
-return this.request("/api/promotion");
-},
-
-getSettings() {
-return this.request("/api/settings");
-},
-
-createProduct(product) {
-return this.request(
-"/api/admin/products",
-{
-method: "POST",
-body: product
-}
-);
-},
-
-updateProduct(id, product) {
-return this.request(
-`/api/admin/products/${id}`,
-{
-method: "PUT",
-body: product
-}
-);
-},
-
-deleteProduct(id) {
-return this.request(
-`/api/admin/products/${id}`,
-{
-method: "DELETE"
-}
-);
-},
-
-updateOrderStatus(id, status) {
-return this.request(
-`/api/admin/orders/${id}/status`,
-{
-method: "PUT",
-body: { status }
-}
-);
-},
-
-updatePromotion(data) {
-return this.request(
-"/api/admin/promotion",
-{
-method: "PUT",
-body: data
-}
-);
-},
-
-updateSettings(data) {
-return this.request(
-"/api/admin/settings",
-{
-method: "PUT",
-body: data
-}
-);
-}
-
+const state = {
+  products: [],
+  orders: [],
+  promotion: null,
+  settings: null,
+  editingProductId: null
 };
 
 /* =========================================================
-INIT
+   HELPERS DOM
+========================================================= */
+
+const $ = (selector) =>
+  document.querySelector(selector);
+
+const $$ = (selector) =>
+  document.querySelectorAll(selector);
+
+/* =========================================================
+   INITIALISATION
 ========================================================= */
 
 document.addEventListener(
-"DOMContentLoaded",
-init
+  "DOMContentLoaded",
+  init
 );
 
-async function init() {
+function init() {
 
-setupNavigation();
-setupQuickNavigation();
-setupProducts();
-setupOrders();
-setupPromotion();
-setupSettings();
-setupModals();
-setupLogout();
+  setupNavigation();
+  setupQuickNavigation();
+  setupProducts();
+  setupOrders();
+  setupPromotion();
+  setupSettings();
+  setupModals();
+  setupLogout();
 
-showSection("dashboard");
+  showSection("dashboard");
 
-await loadData();
+  loadData();
 
 }
 
 /* =========================================================
-NAVIGATION
+   STOCKAGE
+========================================================= */
+
+function readStorage(key, fallback) {
+
+  try {
+
+    const value =
+      localStorage.getItem(key);
+
+    if (!value) {
+      return fallback;
+    }
+
+    return JSON.parse(value);
+
+  } catch (error) {
+
+    console.warn(
+      `Impossible de lire ${key}`,
+      error
+    );
+
+    return fallback;
+
+  }
+
+}
+
+
+function writeStorage(key, value) {
+
+  try {
+
+    localStorage.setItem(
+      key,
+      JSON.stringify(value)
+    );
+
+    return true;
+
+  } catch (error) {
+
+    console.error(
+      `Impossible d'enregistrer ${key}`,
+      error
+    );
+
+    showToast(
+      "Impossible d'enregistrer les données.",
+      "error"
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================================
+   CHARGEMENT DES DONNÉES
+========================================================= */
+
+function loadData() {
+
+  state.products =
+    readStorage(
+      STORAGE_KEYS.products,
+      []
+    );
+
+  state.orders =
+    readStorage(
+      STORAGE_KEYS.orders,
+      []
+    );
+
+  state.promotion =
+    readStorage(
+      STORAGE_KEYS.promotion,
+      null
+    );
+
+  state.settings =
+    readStorage(
+      STORAGE_KEYS.settings,
+      {
+        name: "FENVA BEAUTY",
+        phone: "",
+        whatsapp: "",
+        address: "",
+        description: ""
+      }
+    );
+
+  renderAll();
+
+}
+
+
+/* =========================================================
+   RENDU GLOBAL
+========================================================= */
+
+function renderAll() {
+
+  renderStats();
+  renderRecentOrders();
+  renderLowStock();
+  renderProducts();
+  renderOrders();
+  renderPromotion();
+  renderSettings();
+
+}
+
+
+/* =========================================================
+   NAVIGATION
 ========================================================= */
 
 function setupNavigation() {
 
-$$$(".nav-item").forEach(
-  (button) => {
+  $$(".nav-item").forEach(
+    (button) => {
 
-    button.addEventListener(
-      "click",
-      () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        showSection(
-          button.dataset.section
-        );
+          showSection(
+            button.dataset.section
+          );
 
-      }
-    );
+        }
+      );
 
-  }
-);
+    }
+  );
 
 }
 
 
 function setupQuickNavigation() {
 
-$$("[data-go-section]").forEach(
-  (button) => {
+  $$("[data-go-section]").forEach(
+    (button) => {
 
-    button.addEventListener(
-      "click",
-      () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        showSection(
-          button.dataset.goSection
-        );
+          showSection(
+            button.dataset.goSection
+          );
 
-      }
-    );
+        }
+      );
 
-  }
-);
+    }
+  );
 
 }
 
 
 function showSection(section) {
 
-$$(".admin-section").forEach(
-  (item) =>
-    item.classList.remove(
+  $$(".admin-section").forEach(
+    (item) =>
+      item.classList.remove("active")
+  );
+
+  $$(".nav-item").forEach(
+    (button) =>
+      button.classList.toggle(
+        "active",
+        button.dataset.section === section
+      )
+  );
+
+  const target =
+    $(`#${section}Section`);
+
+  if (target) {
+
+    target.classList.add(
       "active"
-    )
-);
+    );
 
+  }
 
-$$(".nav-item").forEach(
-  (button) =>
-    button.classList.toggle(
-      "active",
-      button.dataset.section ===
-        section
-    )
-);
+  const titles = {
 
+    dashboard:
+      "Tableau de bord",
 
-const target =
-  $(`#${section}Section`);
+    products:
+      "Produits",
 
+    orders:
+      "Commandes",
 
-if (target) {
-  target.classList.add(
-    "active"
-  );
-}
+    promotions:
+      "Promotions",
 
+    settings:
+      "Paramètres"
 
-const titles = {
-  dashboard: "Tableau de bord",
-  products: "Produits",
-  orders: "Commandes",
-  promotions: "Promotions",
-  settings: "Paramètres"
-};
+  };
 
+  const pageTitle =
+    $("#pageTitle");
 
-const pageTitle =
-  $("#pageTitle");
+  if (pageTitle) {
 
+    pageTitle.textContent =
+      titles[section] ||
+      "Administration";
 
-if (pageTitle) {
-  pageTitle.textContent =
-    titles[section] ||
-    "Administration";
-}
+  }
 
 }
 
 
 /* =========================================================
- DATA
- ========================================================= */
-
-async function loadData() {
-
-try {
-
-  const results =
-    await Promise.all([
-      API.getProducts(),
-      API.getOrders(),
-      API.getPromotion(),
-      API.getSettings()
-    ]);
-
-
-  state.products =
-    getArray(
-      results[0],
-      "products"
-    );
-
-
-  state.orders =
-    getArray(
-      results[1],
-      "orders"
-    );
-
-
-  state.promotion =
-    getObject(
-      results[2]
-    );
-
-
-  state.settings =
-    getObject(
-      results[3]
-    );
-
-
-  renderAll();
-
-} catch (error) {
-
-  console.warn(
-    "Serveur non connecté :",
-    error.message
-  );
-
-  renderAll();
-
-  showToast(
-    "Le serveur n'est pas encore connecté.",
-    "warning"
-  );
-
-}
-
-}
-
-
-function getArray(
-response,
-key
-) {
-
-if (Array.isArray(response)) {
-  return response;
-}
-
-if (Array.isArray(response?.data)) {
-  return response.data;
-}
-
-if (Array.isArray(response?.[key])) {
-  return response[key];
-}
-
-return [];
-}
-
-
-function getObject(response) {
-
-if (!response) {
-  return null;
-}
-
-return (
-  response.data ||
-  response.settings ||
-  response.promotion ||
-  response
-);
-
-}
-
-
-/* =========================================================
- RENDER
- ========================================================= */
-
-function renderAll() {
-
-renderStats();
-renderRecentOrders();
-renderLowStock();
-renderProducts();
-renderOrders();
-renderPromotion();
-renderSettings();
-
-}
-
-
-/* =========================================================
- STATS
- ========================================================= */
+   STATISTIQUES
+========================================================= */
 
 function renderStats() {
 
-const activeProducts =
-  state.products.filter(
-    (product) =>
-      product.active !== false
-  ).length;
+  const activeProducts =
+    state.products.filter(
+      (product) =>
+        product.active !== false
+    ).length;
 
-
-const pending =
-  state.orders.filter(
-    (order) =>
-      normalizeStatus(
-        order.status
-      ) === "pending"
-  ).length;
-
-
-const revenue =
-  state.orders.reduce(
-    (sum, order) => {
-
-      if (
+  const pending =
+    state.orders.filter(
+      (order) =>
         normalizeStatus(
           order.status
-        ) === "cancelled"
-      ) {
-        return sum;
-      }
+        ) === "pending"
+    ).length;
 
-      return (
-        sum +
-        getOrderTotal(order)
-      );
+  const revenue =
+    state.orders.reduce(
+      (sum, order) => {
 
-    },
-    0
+        if (
+          normalizeStatus(
+            order.status
+          ) === "cancelled"
+        ) {
+
+          return sum;
+
+        }
+
+        return (
+          sum +
+          getOrderTotal(order)
+        );
+
+      },
+      0
+    );
+
+  setText(
+    "statProducts",
+    formatNumber(
+      activeProducts
+    )
   );
 
+  setText(
+    "statOrders",
+    formatNumber(
+      state.orders.length
+    )
+  );
 
-setText(
-  "statProducts",
-  formatNumber(
-    activeProducts
-  )
-);
+  setText(
+    "statPending",
+    formatNumber(
+      pending
+    )
+  );
 
-
-setText(
-  "statOrders",
-  formatNumber(
-    state.orders.length
-  )
-);
-
-
-setText(
-  "statPending",
-  formatNumber(
-    pending
-  )
-);
-
-
-setText(
-  "statRevenue",
-  `${formatMoney(revenue)} HTG`
-);
+  setText(
+    "statRevenue",
+    `${formatMoney(revenue)} HTG`
+  );
 
 }
 
 
 /* =========================================================
- RECENT ORDERS
- ========================================================= */
+   COMMANDES RÉCENTES
+========================================================= */
 
 function renderRecentOrders() {
 
-const container =
-  $("#recentOrders");
+  const container =
+    $("#recentOrders");
 
+  if (!container) return;
 
-if (!container) return;
+  if (!state.orders.length) {
 
+    container.innerHTML = `
+      <div class="empty-state">
+        Aucune commande récente.
+      </div>
+    `;
 
-if (!state.orders.length) {
+    return;
 
-  container.innerHTML = `
-    <div class="empty-state">
-      Aucune commande récente.
-    </div>
-  `;
+  }
 
-  return;
+  const orders =
+    [...state.orders]
+      .sort(
+        (a, b) =>
+          getDateValue(b) -
+          getDateValue(a)
+      )
+      .slice(0, 7);
 
-}
+  container.innerHTML =
+    orders
+      .map(
+        (order) => {
 
-
-const orders =
-  [...state.orders]
-    .sort(
-      (a, b) =>
-        getDateValue(b) -
-        getDateValue(a)
-    )
-    .slice(0, 7);
-
-
-container.innerHTML =
-  orders
-    .map(
-      (order) => {
-
-        const status =
-          normalizeStatus(
-            order.status
-          );
-
-
-        return `
-          <div
-            class="order-item"
-            data-order-id="${escapeAttribute(
-              String(order.id ?? "")
-            )}"
-          >
-
-            <div class="order-item-main">
-
-              <strong>
-                ${escapeHtml(
-                  getOrderNumber(order)
-                )}
-              </strong>
-
-              <span>
-                ${escapeHtml(
-                  getCustomerName(order)
-                )}
-              </span>
-
-              <span
-                class="status-badge ${getStatusClass(
-                  status
-                )}"
-              >
-                ${escapeHtml(
-                  getStatusLabel(status)
-                )}
-              </span>
-
-            </div>
-
-
-            <div class="order-item-total">
-              ${formatMoney(
-                getOrderTotal(order)
-              )} HTG
-            </div>
-
-          </div>
-        `;
-
-      }
-    )
-    .join("");
-
-
-container
-  .querySelectorAll(
-    "[data-order-id]"
-  )
-  .forEach(
-    (item) => {
-
-      item.addEventListener(
-        "click",
-        () => {
-
-          const order =
-            state.orders.find(
-              (entry) =>
-                String(entry.id) ===
-                String(
-                  item.dataset.orderId
-                )
+          const status =
+            normalizeStatus(
+              order.status
             );
 
+          return `
+            <div
+              class="order-item"
+              data-order-id="${escapeAttribute(
+                String(order.id ?? "")
+              )}"
+            >
 
-          if (order) {
-            openOrderModal(
-              order
-            );
-          }
+              <div class="order-item-main">
+
+                <strong>
+                  ${escapeHtml(
+                    getOrderNumber(order)
+                  )}
+                </strong>
+
+                <span>
+                  ${escapeHtml(
+                    getCustomerName(order)
+                  )}
+                </span>
+
+                <span
+                  class="status-badge ${getStatusClass(
+                    status
+                  )}"
+                >
+                  ${escapeHtml(
+                    getStatusLabel(status)
+                  )}
+                </span>
+
+              </div>
+
+              <div class="order-item-total">
+                ${formatMoney(
+                  getOrderTotal(order)
+                )} HTG
+              </div>
+
+            </div>
+          `;
 
         }
-      );
+      )
+      .join("");
 
-    }
-  );
+  container
+    .querySelectorAll(
+      "[data-order-id]"
+    )
+    .forEach(
+      (item) => {
+
+        item.addEventListener(
+          "click",
+          () => {
+
+            const order =
+              state.orders.find(
+                (entry) =>
+                  String(entry.id) ===
+                  String(
+                    item.dataset.orderId
+                  )
+              );
+
+            if (order) {
+
+              openOrderModal(
+                order
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
 
 }
 
 
 /* =========================================================
- STOCK
- ========================================================= */
+   STOCK FAIBLE
+========================================================= */
 
 function renderLowStock() {
 
-const container =
-  $("#lowStockList");
+  const container =
+    $("#lowStockList");
 
+  if (!container) return;
 
-if (!container) return;
+  const products =
+    state.products
+      .filter(
+        (product) =>
+          Number(
+            product.stock ?? 0
+          ) <= 5
+      )
+      .sort(
+        (a, b) =>
+          Number(a.stock ?? 0) -
+          Number(b.stock ?? 0)
+      )
+      .slice(0, 8);
 
+  if (!products.length) {
 
-const products =
-  state.products
-    .filter(
-      (product) =>
-        Number(
-          product.stock ?? 0
-        ) <= 5
-    )
-    .sort(
-      (a, b) =>
-        Number(a.stock ?? 0) -
-        Number(b.stock ?? 0)
-    )
-    .slice(0, 8);
+    container.innerHTML = `
+      <div class="empty-state">
+        Aucun produit en stock faible.
+      </div>
+    `;
 
+    return;
 
-if (!products.length) {
+  }
 
-  container.innerHTML = `
-    <div class="empty-state">
-      Aucun produit en stock faible.
-    </div>
-  `;
+  container.innerHTML =
+    products
+      .map(
+        (product) => `
 
-  return;
+          <div class="low-stock-item">
 
-}
+            <div class="low-stock-name">
+              ${escapeHtml(
+                product.name ||
+                "Produit"
+              )}
+            </div>
 
+            <div class="low-stock-count">
+              ${Number(
+                product.stock ?? 0
+              )}
+              unité(s) restante(s)
+            </div>
 
-container.innerHTML =
-  products
-    .map(
-      (product) => `
-        <div class="low-stock-item">
-
-          <div class="low-stock-name">
-            ${escapeHtml(
-              product.name ||
-              "Produit"
-            )}
           </div>
 
-          <div class="low-stock-count">
-            ${Number(
-              product.stock ?? 0
-            )} unité(s) restante(s)
-          </div>
-
-        </div>
-      `
-    )
-    .join("");
+        `
+      )
+      .join("");
 
 }
 
 
 /* =========================================================
- PRODUCTS
- ========================================================= */
+   PRODUITS
+========================================================= */
 
 function setupProducts() {
 
-$("#addProductBtn")
-  ?.addEventListener(
-    "click",
-    () =>
-      openProductModal()
-  );
+  $("#addProductBtn")
+    ?.addEventListener(
+      "click",
+      () =>
+        openProductModal()
+    );
 
+  $("#productSearch")
+    ?.addEventListener(
+      "input",
+      renderProducts
+    );
 
-$("#productSearch")
-  ?.addEventListener(
-    "input",
-    renderProducts
-  );
+  $("#productCategoryFilter")
+    ?.addEventListener(
+      "change",
+      renderProducts
+    );
 
-
-$("#productCategoryFilter")
-  ?.addEventListener(
-    "change",
-    renderProducts
-  );
-
-
-$("#productForm")
-  ?.addEventListener(
-    "submit",
-    saveProduct
-  );
+  $("#productForm")
+    ?.addEventListener(
+      "submit",
+      saveProduct
+    );
 
 }
 
 
 function renderProducts() {
 
-const container =
-  $("#productsGrid");
+  const container =
+    $("#productsGrid");
 
+  if (!container) return;
 
-if (!container) return;
-
-
-const search =
-  String(
-    $("#productSearch")?.value ||
-    ""
-  )
-    .trim()
-    .toLowerCase();
-
-
-const category =
-  $("#productCategoryFilter")
-    ?.value ||
-  "";
-
-
-const products =
-  state.products.filter(
-    (product) => {
-
-      const name =
-        String(
-          product.name ||
-          ""
-        )
-          .toLowerCase();
-
-
-      const productCategory =
-        String(
-          product.category ||
-          ""
-        )
-          .toLowerCase();
-
-
-      return (
-        (!search ||
-          name.includes(
-            search
-          )) &&
-
-        (!category ||
-          productCategory ===
-            category.toLowerCase())
-      );
-
-    }
-  );
-
-
-if (!products.length) {
-
-  container.innerHTML = `
-    <div class="empty-state">
-      Aucun produit trouvé.
-    </div>
-  `;
-
-  return;
-}
-
-
-container.innerHTML =
-  products
-    .map(
-      productCard
+  const search =
+    String(
+      $("#productSearch")?.value ||
+      ""
     )
-    .join("");
+      .trim()
+      .toLowerCase();
 
+  const category =
+    $("#productCategoryFilter")
+      ?.value ||
+    "";
 
-container
-  .querySelectorAll(
-    "[data-action='edit']"
-  )
-  .forEach(
-    (button) => {
+  const products =
+    state.products.filter(
+      (product) => {
 
-      button.addEventListener(
-        "click",
-        () => {
+        const name =
+          String(
+            product.name ||
+            ""
+          )
+            .toLowerCase();
 
-          const product =
-            state.products.find(
-              (item) =>
-                String(item.id) ===
-                String(
-                  button.dataset.id
-                )
-            );
+        const productCategory =
+          String(
+            product.category ||
+            ""
+          )
+            .toLowerCase();
 
+        return (
 
-          if (product) {
-            openProductModal(
-              product
-            );
+          (
+            !search ||
+            name.includes(search)
+          )
+
+          &&
+
+          (
+            !category ||
+            productCategory ===
+            category.toLowerCase()
+          )
+
+        );
+
+      }
+    );
+
+  if (!products.length) {
+
+    container.innerHTML = `
+      <div class="empty-state">
+        Aucun produit trouvé.
+      </div>
+    `;
+
+    return;
+
+  }
+
+  container.innerHTML =
+    products
+      .map(productCard)
+      .join("");
+
+  container
+    .querySelectorAll(
+      "[data-action='edit']"
+    )
+    .forEach(
+      (button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const product =
+              state.products.find(
+                (item) =>
+                  String(item.id) ===
+                  String(
+                    button.dataset.id
+                  )
+              );
+
+            if (product) {
+
+              openProductModal(
+                product
+              );
+
+            }
+
           }
+        );
 
-        }
-      );
+      }
+    );
 
-    }
-  );
+  container
+    .querySelectorAll(
+      "[data-action='delete']"
+    )
+    .forEach(
+      (button) => {
 
+        button.addEventListener(
+          "click",
+          () => {
 
-container
-  .querySelectorAll(
-    "[data-action='delete']"
-  )
-  .forEach(
-    (button) => {
+            const product =
+              state.products.find(
+                (item) =>
+                  String(item.id) ===
+                  String(
+                    button.dataset.id
+                  )
+              );
 
-      button.addEventListener(
-        "click",
-        () => {
+            if (product) {
 
-          const product =
-            state.products.find(
-              (item) =>
-                String(item.id) ===
-                String(
-                  button.dataset.id
-                )
-            );
+              deleteProduct(
+                product
+              );
 
+            }
 
-          if (product) {
-            deleteProduct(
-              product
-            );
           }
+        );
 
-        }
-      );
-
-    }
-  );
+      }
+    );
 
 }
 
 
 function productCard(product) {
 
-const image =
-  product.image_url ||
-  product.image ||
-  "https://placehold.co/700x500/f1e9e0/3a2a21?text=FENVA+BEAUTY";
+  const image =
+    product.image_url ||
+    product.image ||
+    "https://placehold.co/700x500/f1e9e0/3a2a21?text=FENVA+BEAUTY";
 
+  return `
 
-return `
-  <article class="product-card">
+    <article class="product-card">
 
-    <img
-      class="product-card-image"
-      src="${escapeAttribute(image)}"
-      alt="${escapeAttribute(
-        product.name ||
-        "Produit"
-      )}"
-      onerror="this.src='https://placehold.co/700x500/f1e9e0/3a2a21?text=FENVA+BEAUTY'"
-    >
-
-
-    <div class="product-card-body">
-
-      <div class="product-category">
-        ${escapeHtml(
-          categoryLabel(
-            product.category
-          )
-        )}
-      </div>
-
-      <h3 class="product-name">
-        ${escapeHtml(
+      <img
+        class="product-card-image"
+        src="${escapeAttribute(image)}"
+        alt="${escapeAttribute(
           product.name ||
-          "Sans nom"
-        )}
-      </h3>
+          "Produit"
+        )}"
+        onerror="this.src='https://placehold.co/700x500/f1e9e0/3a2a21?text=FENVA+BEAUTY'"
+      >
 
-      <div class="product-price">
-        ${formatMoney(
-          product.price
-        )} HTG
-      </div>
+      <div class="product-card-body">
 
-      <div class="product-stock">
-        Stock :
-        ${Number(
-          product.stock ?? 0
-        )}
-      </div>
-
-      <div class="product-actions">
-
-        <button
-          type="button"
-          class="edit-btn"
-          data-action="edit"
-          data-id="${escapeAttribute(
-            String(
-              product.id ??
-              ""
+        <div class="product-category">
+          ${escapeHtml(
+            categoryLabel(
+              product.category
             )
-          )}"
-        >
-          Modifier
-        </button>
+          )}
+        </div>
 
-        <button
-          type="button"
-          class="delete-btn"
-          data-action="delete"
-          data-id="${escapeAttribute(
-            String(
-              product.id ??
-              ""
-            )
-          )}"
-        >
-          Supprimer
-        </button>
+        <h3 class="product-name">
+          ${escapeHtml(
+            product.name ||
+            "Sans nom"
+          )}
+        </h3>
+
+        <div class="product-price">
+          ${formatMoney(
+            product.price
+          )} HTG
+        </div>
+
+        <div class="product-stock">
+          Stock :
+          ${Number(
+            product.stock ?? 0
+          )}
+        </div>
+
+        <div class="product-actions">
+
+          <button
+            type="button"
+            class="edit-btn"
+            data-action="edit"
+            data-id="${escapeAttribute(
+              String(
+                product.id ??
+                ""
+              )
+            )}"
+          >
+            Modifier
+          </button>
+
+          <button
+            type="button"
+            class="delete-btn"
+            data-action="delete"
+            data-id="${escapeAttribute(
+              String(
+                product.id ??
+                ""
+              )
+            )}"
+          >
+            Supprimer
+          </button>
+
+        </div>
 
       </div>
 
-    </div>
+    </article>
 
-  </article>
-`;
+  `;
 
 }
 
+
+/* =========================================================
+   MODALE PRODUIT
+========================================================= */
 
 function openProductModal(
-product = null
+  product = null
 ) {
 
-state.editingProductId =
-  product?.id ?? null;
+  state.editingProductId =
+    product?.id ?? null;
 
+  const title =
+    $("#productModalTitle");
 
-$("#productModalTitle")
-  && (
-    $("#productModalTitle").textContent =
+  if (title) {
+
+    title.textContent =
       product
         ? "Modifier le produit"
-        : "Ajouter un produit"
+        : "Ajouter un produit";
+
+  }
+
+  setValue(
+    "productId",
+    product?.id ?? ""
   );
 
+  setValue(
+    "productName",
+    product?.name ?? ""
+  );
 
-setValue(
-  "productId",
-  product?.id ?? ""
-);
+  setValue(
+    "productCategory",
+    product?.category ?? ""
+  );
 
+  setValue(
+    "productPrice",
+    product?.price ?? ""
+  );
 
-setValue(
-  "productName",
-  product?.name ?? ""
-);
+  setValue(
+    "productStock",
+    product?.stock ?? 0
+  );
 
+  setValue(
+    "productImage",
+    product?.image_url ||
+    product?.image ||
+    ""
+  );
 
-setValue(
-  "productCategory",
-  product?.category ?? ""
-);
+  setValue(
+    "productDescription",
+    product?.description ||
+    ""
+  );
 
+  setChecked(
+    "productActive",
+    product
+      ? product.active !== false
+      : true
+  );
 
-setValue(
-  "productPrice",
-  product?.price ?? ""
-);
+  setChecked(
+    "productPopular",
+    Boolean(
+      product?.popular
+    )
+  );
 
+  setChecked(
+    "productNew",
+    Boolean(
+      product?.is_new ??
+      product?.new
+    )
+  );
 
-setValue(
-  "productStock",
-  product?.stock ?? 0
-);
+  setChecked(
+    "productPromo",
+    Boolean(
+      product?.promo ??
+      product?.promotion
+    )
+  );
 
-
-setValue(
-  "productImage",
-  product?.image_url ||
-  product?.image ||
-  ""
-);
-
-
-setValue(
-  "productDescription",
-  product?.description ||
-  ""
-);
-
-
-setChecked(
-  "productActive",
-  product
-    ? product.active !== false
-    : true
-);
-
-
-setChecked(
-  "productPopular",
-  Boolean(
-    product?.popular
-  )
-);
-
-
-setChecked(
-  "productNew",
-  Boolean(
-    product?.is_new ??
-    product?.new
-  )
-);
-
-
-setChecked(
-  "productPromo",
-  Boolean(
-    product?.promo ??
-    product?.promotion
-  )
-);
-
-
-openModal(
-  $("#productModal")
-);
+  openModal(
+    $("#productModal")
+  );
 
 }
 
 
-async function saveProduct(
-event
+/* =========================================================
+   ENREGISTRER PRODUIT
+========================================================= */
+
+function saveProduct(
+  event
 ) {
 
-event.preventDefault();
+  event.preventDefault();
 
+  const product = {
 
-const product = {
+    id:
+      state.editingProductId ??
+      generateId(),
 
-  name:
-    getValue(
-      "productName"
-    ).trim(),
-
-  category:
-    getValue(
-      "productCategory"
-    ),
-
-  price:
-    Number(
+    name:
       getValue(
-        "productPrice"
-      )
-    ),
+        "productName"
+      ).trim(),
 
-  stock:
-    Number(
+    category:
       getValue(
-        "productStock"
+        "productCategory"
+      ),
+
+    price:
+      Number(
+        getValue(
+          "productPrice"
+        )
+      ) || 0,
+
+    stock:
+      Number(
+        getValue(
+          "productStock"
+        )
+      ) || 0,
+
+    image_url:
+      getValue(
+        "productImage"
+      ).trim(),
+
+    description:
+      getValue(
+        "productDescription"
+      ).trim(),
+
+    active:
+      getChecked(
+        "productActive"
+      ),
+
+    popular:
+      getChecked(
+        "productPopular"
+      ),
+
+    is_new:
+      getChecked(
+        "productNew"
+      ),
+
+    promo:
+      getChecked(
+        "productPromo"
       )
-    ),
 
-  image_url:
-    getValue(
-      "productImage"
-    ).trim(),
+  };
 
-  description:
-    getValue(
-      "productDescription"
-    ).trim(),
+  if (!product.name) {
 
-  active:
-    getChecked(
-      "productActive"
-    ),
+    showToast(
+      "Le nom du produit est obligatoire.",
+      "error"
+    );
 
-  popular:
-    getChecked(
-      "productPopular"
-    ),
+    return;
 
-  is_new:
-    getChecked(
-      "productNew"
-    ),
+  }
 
-  promo:
-    getChecked(
-      "productPromo"
-    )
+  if (!product.category) {
 
-};
+    showToast(
+      "Sélectionne une catégorie.",
+      "error"
+    );
 
+    return;
 
-if (!product.name) {
-  showToast(
-    "Le nom du produit est obligatoire.",
-    "error"
-  );
-  return;
-}
-
-
-if (!product.category) {
-  showToast(
-    "Sélectionne une catégorie.",
-    "error"
-  );
-  return;
-}
-
-
-try {
+  }
 
   if (
-    state.editingProductId !==
-    null
+    state.editingProductId !== null
   ) {
-
-    const result =
-      await API.updateProduct(
-        state.editingProductId,
-        product
-      );
-
-
-    const updated =
-      result?.product ||
-      result?.data ||
-      result;
-
 
     const index =
       state.products.findIndex(
@@ -1163,15 +1031,15 @@ try {
           )
       );
 
+    if (index !== -1) {
 
-    if (
-      index !== -1 &&
-      updated
-    ) {
       state.products[index] =
-        updated;
-    }
+        {
+          ...state.products[index],
+          ...product
+        };
 
+    }
 
     showToast(
       "Produit modifié.",
@@ -1180,24 +1048,9 @@ try {
 
   } else {
 
-    const result =
-      await API.createProduct(
-        product
-      );
-
-
-    const created =
-      result?.product ||
-      result?.data ||
-      result;
-
-
-    if (created) {
-      state.products.unshift(
-        created
-      );
-    }
-
+    state.products.unshift(
+      product
+    );
 
     showToast(
       "Produit ajouté.",
@@ -1206,311 +1059,354 @@ try {
 
   }
 
+  writeStorage(
+    STORAGE_KEYS.products,
+    state.products
+  );
 
   closeModal(
     "productModal"
   );
 
-
   renderAll();
 
-} catch (error) {
-
-  showToast(
-    error.message ||
-    "Impossible d'enregistrer le produit.",
-    "error"
-  );
-
-}
-
 }
 
 
-async function deleteProduct(
-product
+/* =========================================================
+   SUPPRIMER PRODUIT
+========================================================= */
+
+function deleteProduct(
+  product
 ) {
 
-if (
-  !window.confirm(
-    `Supprimer « ${
-      product.name ||
-      "ce produit"
-    } » ?`
-  )
-) {
-  return;
-}
+  if (
+    !window.confirm(
+      `Supprimer « ${
+        product.name ||
+        "ce produit"
+      } » ?`
+    )
+  ) {
 
+    return;
 
-try {
-
-  await API.deleteProduct(
-    product.id
-  );
-
+  }
 
   state.products =
     state.products.filter(
       (item) =>
         String(item.id) !==
-        String(
-          product.id
-        )
+        String(product.id)
     );
 
+  writeStorage(
+    STORAGE_KEYS.products,
+    state.products
+  );
 
   renderAll();
-
 
   showToast(
     "Produit supprimé.",
     "success"
   );
 
-} catch (error) {
-
-  showToast(
-    error.message ||
-    "Impossible de supprimer le produit.",
-    "error"
-  );
-
-}
-
 }
 
 
 /* =========================================================
- ORDERS
- ========================================================= */
+   COMMANDES
+========================================================= */
 
 function setupOrders() {
 
-$("#orderSearch")
-  ?.addEventListener(
-    "input",
-    renderOrders
-  );
+  $("#orderSearch")
+    ?.addEventListener(
+      "input",
+      renderOrders
+    );
 
-
-$("#orderStatusFilter")
-  ?.addEventListener(
-    "change",
-    renderOrders
-  );
+  $("#orderStatusFilter")
+    ?.addEventListener(
+      "change",
+      renderOrders
+    );
 
 }
 
 
 function renderOrders() {
 
-const container =
-  $("#ordersTableContainer");
+  const container =
+    $("#ordersTableContainer");
 
+  if (!container) return;
 
-if (!container) return;
+  const search =
+    String(
+      $("#orderSearch")?.value ||
+      ""
+    )
+      .trim()
+      .toLowerCase();
 
+  const statusFilter =
+    $("#orderStatusFilter")
+      ?.value ||
+    "";
 
-const search =
-  String(
-    $("#orderSearch")?.value ||
-    ""
-  )
-    .trim()
-    .toLowerCase();
+  const orders =
+    state.orders.filter(
+      (order) => {
 
+        const number =
+          getOrderNumber(
+            order
+          ).toLowerCase();
 
-const statusFilter =
-  $("#orderStatusFilter")
-    ?.value ||
-  "";
+        const customer =
+          getCustomerName(
+            order
+          ).toLowerCase();
 
+        const phone =
+          String(
+            order.phone ||
+            order.customer_phone ||
+            order.customerPhone ||
+            ""
+          ).toLowerCase();
 
-const orders =
-  state.orders.filter(
-    (order) => {
+        const status =
+          normalizeStatus(
+            order.status
+          );
 
-      const number =
-        getOrderNumber(
-          order
-        ).toLowerCase();
+        return (
 
+          (
+            !search ||
+            number.includes(search) ||
+            customer.includes(search) ||
+            phone.includes(search)
+          )
 
-      const customer =
-        getCustomerName(
-          order
-        ).toLowerCase();
+          &&
 
+          (
+            !statusFilter ||
+            status === statusFilter
+          )
 
-      const phone =
-        String(
-          order.phone ||
-          order.customer_phone ||
-          order.customerPhone ||
-          ""
-        ).toLowerCase();
-
-
-      const status =
-        normalizeStatus(
-          order.status
         );
 
+      }
+    );
 
-      return (
+  if (!orders.length) {
 
-        (
-          !search ||
-          number.includes(search) ||
-          customer.includes(search) ||
-          phone.includes(search)
-        )
+    container.innerHTML = `
+      <div class="empty-state">
+        Aucune commande trouvée.
+      </div>
+    `;
 
-        &&
+    return;
 
-        (
-          !statusFilter ||
-          status === statusFilter
-        )
-
-      );
-
-    }
-  );
-
-
-if (!orders.length) {
+  }
 
   container.innerHTML = `
-    <div class="empty-state">
-      Aucune commande trouvée.
-    </div>
+
+    <table class="orders-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Commande</th>
+          <th>Client</th>
+          <th>Total</th>
+          <th>Paiement</th>
+          <th>Statut</th>
+          <th>Date</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        ${
+          orders
+            .map(
+              renderOrderRow
+            )
+            .join("")
+        }
+
+      </tbody>
+
+    </table>
+
   `;
 
-  return;
+  container
+    .querySelectorAll(
+      "[data-order-id]"
+    )
+    .forEach(
+      (row) => {
 
-}
+        row.addEventListener(
+          "click",
+          () => {
 
+            const order =
+              state.orders.find(
+                (item) =>
+                  String(item.id) ===
+                  String(
+                    row.dataset.orderId
+                  )
+              );
 
-container.innerHTML = `
-  <table class="orders-table">
+            if (order) {
 
-    <thead>
+              openOrderModal(
+                order
+              );
 
-      <tr>
-        <th>Commande</th>
-        <th>Client</th>
-        <th>Total</th>
-        <th>Paiement</th>
-        <th>Statut</th>
-        <th>Date</th>
-      </tr>
+            }
 
-    </thead>
-
-    <tbody>
-
-      ${
-        orders
-          .map(
-            renderOrderRow
-          )
-          .join("")
-      }
-
-    </tbody>
-
-  </table>
-`;
-
-
-container
-  .querySelectorAll(
-    "[data-order-id]"
-  )
-  .forEach(
-    (row) => {
-
-      row.addEventListener(
-        "click",
-        () => {
-
-          const order =
-            state.orders.find(
-              (item) =>
-                String(item.id) ===
-                String(
-                  row.dataset.orderId
-                )
-            );
-
-
-          if (order) {
-            openOrderModal(
-              order
-            );
           }
+        );
 
-        }
-      );
-
-    }
-  );
+      }
+    );
 
 }
 
 
 function renderOrderRow(
-order
+  order
 ) {
 
-const status =
-  normalizeStatus(
-    order.status
-  );
+  const status =
+    normalizeStatus(
+      order.status
+    );
 
+  return `
 
-return `
-  <tr
-    data-order-id="${escapeAttribute(
-      String(
-        order.id ??
-        ""
-      )
-    )}"
-  >
-
-    <td>
-      <strong>
-        ${escapeHtml(
-          getOrderNumber(order)
-        )}
-      </strong>
-    </td>
-
-    <td>
-      ${escapeHtml(
-        getCustomerName(order)
-      )}
-    </td>
-
-    <td>
-      ${formatMoney(
-        getOrderTotal(order)
-      )} HTG
-    </td>
-
-    <td>
-      ${escapeHtml(
-        getPaymentLabel(
-          order.payment_method ||
-          order.paymentMethod
+    <tr
+      data-order-id="${escapeAttribute(
+        String(
+          order.id ??
+          ""
         )
-      )}
-    </td>
+      )}"
+    >
 
-    <td>
+      <td>
+        <strong>
+          ${escapeHtml(
+            getOrderNumber(order)
+          )}
+        </strong>
+      </td>
+
+      <td>
+        ${escapeHtml(
+          getCustomerName(order)
+        )}
+      </td>
+
+      <td>
+        ${formatMoney(
+          getOrderTotal(order)
+        )} HTG
+      </td>
+
+      <td>
+        ${escapeHtml(
+          getPaymentLabel(
+            order.payment_method ||
+            order.paymentMethod
+          )
+        )}
+      </td>
+
+      <td>
+
+        <span
+          class="status-badge ${getStatusClass(
+            status
+          )}"
+        >
+          ${escapeHtml(
+            getStatusLabel(status)
+          )}
+        </span>
+
+      </td>
+
+      <td>
+        ${formatDate(
+          order.created_at ||
+          order.createdAt ||
+          order.date
+        )}
+      </td>
+
+    </tr>
+
+  `;
+
+}
+
+
+/* =========================================================
+   MODALE COMMANDE
+========================================================= */
+
+function openOrderModal(
+  order
+) {
+
+  const container =
+    $("#orderDetails");
+
+  if (!container) return;
+
+  const status =
+    normalizeStatus(
+      order.status
+    );
+
+  const items =
+    normalizeOrderItems(
+      order
+    );
+
+  container.innerHTML = `
+
+    <div class="order-detail-top">
+
+      <div>
+
+        <span class="eyebrow">
+          COMMANDE
+        </span>
+
+        <h3>
+          ${escapeHtml(
+            getOrderNumber(order)
+          )}
+        </h3>
+
+      </div>
 
       <span
         class="status-badge ${getStatusClass(
@@ -1522,1327 +1418,1234 @@ return `
         )}
       </span>
 
-    </td>
-
-    <td>
-      ${formatDate(
-        order.created_at ||
-        order.createdAt ||
-        order.date
-      )}
-    </td>
-
-  </tr>
-`;
-
-}
+    </div>
 
 
-function openOrderModal(
-order
-) {
+    <div class="order-customer-block">
 
-const container =
-  $("#orderDetails");
+      <div>
 
+        <strong>
+          Client
+        </strong>
 
-if (!container) return;
+        <p>
+          ${escapeHtml(
+            getCustomerName(order)
+          )}
+        </p>
 
-
-const status =
-  normalizeStatus(
-    order.status
-  );
-
-
-const items =
-  normalizeOrderItems(
-    order
-  );
+      </div>
 
 
-container.innerHTML = `
+      <div>
 
-  <div class="order-detail-top">
+        <strong>
+          Téléphone
+        </strong>
 
-    <div>
+        <p>
+          ${escapeHtml(
+            order.phone ||
+            order.customer_phone ||
+            order.customerPhone ||
+            "—"
+          )}
+        </p>
 
-      <span class="eyebrow">
-        COMMANDE
-      </span>
+      </div>
 
-      <h3>
-        ${escapeHtml(
-          getOrderNumber(order)
-        )}
-      </h3>
+
+      <div>
+
+        <strong>
+          Adresse
+        </strong>
+
+        <p>
+          ${escapeHtml(
+            order.address ||
+            order.customer_address ||
+            "—"
+          )}
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          Paiement
+        </strong>
+
+        <p>
+          ${escapeHtml(
+            getPaymentLabel(
+              order.payment_method ||
+              order.paymentMethod
+            )
+          )}
+        </p>
+
+      </div>
 
     </div>
 
-    <span
-      class="status-badge ${getStatusClass(
-        status
-      )}"
-    >
-      ${escapeHtml(
-        getStatusLabel(status)
-      )}
-    </span>
 
-  </div>
+    <div class="order-items-block">
 
+      <h4>
+        Produits
+      </h4>
 
-  <div class="order-customer-block">
+      ${
+        items.length
 
-    <div>
-      <strong>Client</strong>
+          ? items
+              .map(
+                (item) => {
 
-      <p>
-        ${escapeHtml(
-          getCustomerName(order)
-        )}
-      </p>
-    </div>
+                  const name =
+                    item.name ||
+                    item.product_name ||
+                    "Produit";
 
-    <div>
-      <strong>Téléphone</strong>
+                  const quantity =
+                    Number(
+                      item.quantity ??
+                      1
+                    );
 
-      <p>
-        ${escapeHtml(
-          order.phone ||
-          order.customer_phone ||
-          order.customerPhone ||
-          "—"
-        )}
-      </p>
-    </div>
+                  const price =
+                    Number(
+                      item.price ??
+                      item.unit_price ??
+                      0
+                    );
 
-    <div>
-      <strong>Adresse</strong>
+                  return `
 
-      <p>
-        ${escapeHtml(
-          order.address ||
-          order.customer_address ||
-          "—"
-        )}
-      </p>
-    </div>
+                    <div class="order-line">
 
-    <div>
-      <strong>Paiement</strong>
+                      <div>
 
-      <p>
-        ${escapeHtml(
-          getPaymentLabel(
-            order.payment_method ||
-            order.paymentMethod
-          )
-        )}
-      </p>
-    </div>
+                        <strong>
+                          ${escapeHtml(
+                            name
+                          )}
+                        </strong>
 
-  </div>
+                        <span>
+                          × ${quantity}
+                        </span>
 
-
-  <div class="order-items-block">
-
-    <h4>Produits</h4>
-
-    ${
-      items.length
-        ? items
-            .map(
-              (item) => {
-
-                const name =
-                  item.name ||
-                  item.product_name ||
-                  "Produit";
-
-
-                const quantity =
-                  Number(
-                    item.quantity ??
-                    1
-                  );
-
-
-                const price =
-                  Number(
-                    item.price ??
-                    item.unit_price ??
-                    0
-                  );
-
-
-                return `
-                  <div class="order-line">
-
-                    <div>
+                      </div>
 
                       <strong>
-                        ${escapeHtml(name)}
+                        ${formatMoney(
+                          price *
+                          quantity
+                        )} HTG
                       </strong>
-
-                      <span>
-                        × ${quantity}
-                      </span>
 
                     </div>
 
-                    <strong>
-                      ${formatMoney(
-                        price * quantity
-                      )} HTG
-                    </strong>
+                  `;
 
-                  </div>
-                `;
+                }
+              )
+              .join("")
 
-              }
-            )
-            .join("")
-        : `
-          <div class="empty-state">
-            Aucun détail disponible.
-          </div>
-        `
-    }
+          : `
 
-  </div>
+              <div class="empty-state">
+                Aucun détail disponible.
+              </div>
+
+            `
+
+      }
+
+    </div>
 
 
-  <div class="order-summary">
+    <div class="order-summary">
 
-    <span>Total</span>
+      <span>
+        Total
+      </span>
 
-    <strong>
-      ${formatMoney(
-        getOrderTotal(order)
-      )} HTG
-    </strong>
+      <strong>
+        ${formatMoney(
+          getOrderTotal(order)
+        )} HTG
+      </strong>
 
-  </div>
-
-
-  <div class="order-status-editor">
-
-    <label for="detailOrderStatus">
-      Modifier le statut
-    </label>
-
-    <select id="detailOrderStatus">
-      ${buildStatusOptions(status)}
-    </select>
-
-    <button
-      type="button"
-      class="primary-btn"
-      id="saveOrderStatusBtn"
-    >
-      Enregistrer
-    </button>
-
-  </div>
-
-`;
+    </div>
 
 
-$("#saveOrderStatusBtn")
-  ?.addEventListener(
-    "click",
-    () =>
-      saveOrderStatus(order)
+    <div class="order-status-editor">
+
+      <label for="detailOrderStatus">
+        Modifier le statut
+      </label>
+
+      <select id="detailOrderStatus">
+
+        ${buildStatusOptions(
+          status
+        )}
+
+      </select>
+
+      <button
+        type="button"
+        class="primary-btn"
+        id="saveOrderStatusBtn"
+      >
+        Enregistrer
+      </button>
+
+    </div>
+
+  `;
+
+  $("#saveOrderStatusBtn")
+    ?.addEventListener(
+      "click",
+      () =>
+        saveOrderStatus(order)
+    );
+
+  openModal(
+    $("#orderModal")
   );
-
-
-openModal(
-  $("#orderModal")
-);
 
 }
 
 
-async function saveOrderStatus(
-order
+/* =========================================================
+   STATUT COMMANDE
+========================================================= */
+
+function saveOrderStatus(
+  order
 ) {
 
-const select =
-  $("#detailOrderStatus");
+  const select =
+    $("#detailOrderStatus");
 
-
-if (!select) return;
-
-
-try {
-
-  await API.updateOrderStatus(
-    order.id,
-    select.value
-  );
-
+  if (!select) return;
 
   order.status =
     select.value;
 
+  writeStorage(
+    STORAGE_KEYS.orders,
+    state.orders
+  );
 
   renderAll();
-
 
   closeModal(
     "orderModal"
   );
-
 
   showToast(
     "Statut mis à jour.",
     "success"
   );
 
-} catch (error) {
-
-  showToast(
-    error.message ||
-    "Impossible de modifier le statut.",
-    "error"
-  );
-
-}
-
 }
 
 
 /* =========================================================
- PROMOTION
- ========================================================= */
+   PROMOTION
+========================================================= */
 
 function setupPromotion() {
 
-$("#promotionForm")
-  ?.addEventListener(
-    "submit",
-    async (event) => {
+  $("#promotionForm")
+    ?.addEventListener(
+      "submit",
+      (event) => {
 
-      event.preventDefault();
+        event.preventDefault();
 
+        const data = {
 
-      const data = {
-
-        title:
-          getValue(
-            "promotionTitle"
-          ).trim(),
-
-        description:
-          getValue(
-            "promotionText"
-          ).trim(),
-
-        discount:
-          Number(
+          title:
             getValue(
-              "promotionDiscount"
-            ) || 0
-          ),
+              "promotionTitle"
+            ).trim(),
 
-        active:
-          getValue(
-            "promotionActive"
-          ) === "true"
+          description:
+            getValue(
+              "promotionText"
+            ).trim(),
 
-      };
+          discount:
+            Number(
+              getValue(
+                "promotionDiscount"
+              ) || 0
+            ),
 
+          active:
+            getValue(
+              "promotionActive"
+            ) === "true"
 
-      try {
-
-        await API.updatePromotion(
-          data
-        );
-
+        };
 
         state.promotion =
           data;
 
+        writeStorage(
+          STORAGE_KEYS.promotion,
+          data
+        );
 
         showToast(
           "Promotion enregistrée.",
           "success"
         );
 
-      } catch (error) {
-
-        showToast(
-          error.message ||
-          "Impossible d'enregistrer la promotion.",
-          "error"
-        );
-
       }
-
-    }
-  );
+    );
 
 }
 
 
 function renderPromotion() {
 
-if (!state.promotion) {
-  return;
-}
+  if (!state.promotion) {
+    return;
+  }
 
+  setValue(
+    "promotionTitle",
+    state.promotion.title ||
+    ""
+  );
 
-setValue(
-  "promotionTitle",
-  state.promotion.title ||
-  ""
-);
+  setValue(
+    "promotionText",
+    state.promotion.description ||
+    state.promotion.text ||
+    ""
+  );
 
+  setValue(
+    "promotionDiscount",
+    state.promotion.discount ??
+    0
+  );
 
-setValue(
-  "promotionText",
-  state.promotion.description ||
-  state.promotion.text ||
-  ""
-);
-
-
-setValue(
-  "promotionDiscount",
-  state.promotion.discount ??
-  0
-);
-
-
-setValue(
-  "promotionActive",
-  String(
-    state.promotion.active !== false
-  )
-);
+  setValue(
+    "promotionActive",
+    String(
+      state.promotion.active !== false
+    )
+  );
 
 }
 
 
 /* =========================================================
- SETTINGS
- ========================================================= */
+   PARAMÈTRES
+========================================================= */
 
 function setupSettings() {
 
-$("#settingsForm")
-  ?.addEventListener(
-    "submit",
-    async (event) => {
+  $("#settingsForm")
+    ?.addEventListener(
+      "submit",
+      (event) => {
 
-      event.preventDefault();
+        event.preventDefault();
 
+        const data = {
 
-      const data = {
+          name:
+            getValue(
+              "storeName"
+            ).trim(),
 
-        name:
-          getValue(
-            "storeName"
-          ).trim(),
+          phone:
+            getValue(
+              "storePhone"
+            ).trim(),
 
-        phone:
-          getValue(
-            "storePhone"
-          ).trim(),
+          whatsapp:
+            getValue(
+              "storeWhatsapp"
+            ).trim(),
 
-        whatsapp:
-          getValue(
-            "storeWhatsapp"
-          ).trim(),
+          address:
+            getValue(
+              "storeAddress"
+            ).trim(),
 
-        address:
-          getValue(
-            "storeAddress"
-          ).trim(),
+          description:
+            getValue(
+              "storeDescription"
+            ).trim()
 
-        description:
-          getValue(
-            "storeDescription"
-          ).trim()
-
-      };
-
-
-      try {
-
-        await API.updateSettings(
-          data
-        );
-
+        };
 
         state.settings =
           data;
 
+        writeStorage(
+          STORAGE_KEYS.settings,
+          data
+        );
 
         showToast(
           "Paramètres enregistrés.",
           "success"
         );
 
-      } catch (error) {
-
-        showToast(
-          error.message ||
-          "Impossible d'enregistrer les paramètres.",
-          "error"
-        );
-
       }
-
-    }
-  );
+    );
 
 }
 
 
 function renderSettings() {
 
-if (!state.settings) {
-  return;
-}
+  if (!state.settings) {
+    return;
+  }
 
+  setValue(
+    "storeName",
+    state.settings.name ||
+    state.settings.store_name ||
+    ""
+  );
 
-setValue(
-  "storeName",
-  state.settings.name ||
-  state.settings.store_name ||
-  ""
-);
+  setValue(
+    "storePhone",
+    state.settings.phone ||
+    ""
+  );
 
+  setValue(
+    "storeWhatsapp",
+    state.settings.whatsapp ||
+    ""
+  );
 
-setValue(
-  "storePhone",
-  state.settings.phone ||
-  ""
-);
+  setValue(
+    "storeAddress",
+    state.settings.address ||
+    ""
+  );
 
-
-setValue(
-  "storeWhatsapp",
-  state.settings.whatsapp ||
-  ""
-);
-
-
-setValue(
-  "storeAddress",
-  state.settings.address ||
-  ""
-);
-
-
-setValue(
-  "storeDescription",
-  state.settings.description ||
-  ""
-);
+  setValue(
+    "storeDescription",
+    state.settings.description ||
+    ""
+  );
 
 }
 
 
 /* =========================================================
- MODALS
- ========================================================= */
+   MODALES
+========================================================= */
 
 function setupModals() {
 
-$$("[data-close]").forEach(
-  (button) => {
+  $$("[data-close]").forEach(
+    (button) => {
 
-    button.addEventListener(
-      "click",
-      () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        closeModal(
-          button.dataset.close
-        );
-
-      }
-    );
-
-  }
-);
-
-
-$$(".modal-overlay").forEach(
-  (overlay) => {
-
-    overlay.addEventListener(
-      "click",
-      () => {
-
-        const modal =
-          overlay.closest(
-            ".modal"
-          );
-
-
-        if (modal) {
           closeModal(
-            modal.id
+            button.dataset.close
           );
+
         }
-
-      }
-    );
-
-  }
-);
-
-
-document.addEventListener(
-  "keydown",
-  (event) => {
-
-    if (
-      event.key ===
-      "Escape"
-    ) {
-
-      $$(".modal.open")
-        .forEach(
-          (modal) =>
-            closeModal(
-              modal.id
-            )
-        );
+      );
 
     }
+  );
 
-  }
-);
+  $$(".modal-overlay").forEach(
+    (overlay) => {
+
+      overlay.addEventListener(
+        "click",
+        () => {
+
+          const modal =
+            overlay.closest(
+              ".modal"
+            );
+
+          if (modal) {
+
+            closeModal(
+              modal.id
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        $$(".modal.open")
+          .forEach(
+            (modal) =>
+              closeModal(
+                modal.id
+              )
+          );
+
+      }
+
+    }
+  );
 
 }
 
 
 function openModal(
-modal
+  modal
 ) {
 
-if (!modal) return;
+  if (!modal) return;
 
-modal.classList.add(
-  "open"
-);
+  modal.classList.add(
+    "open"
+  );
 
-modal.setAttribute(
-  "aria-hidden",
-  "false"
-);
+  modal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
 
-document.body.style.overflow =
-  "hidden";
+  document.body.style.overflow =
+    "hidden";
 
 }
 
 
 function closeModal(
-id
+  id
 ) {
 
-const modal =
-  document.getElementById(
-    id
+  const modal =
+    document.getElementById(
+      id
+    );
+
+  if (!modal) return;
+
+  modal.classList.remove(
+    "open"
   );
 
+  modal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
 
-if (!modal) return;
-
-modal.classList.remove(
-  "open"
-);
-
-modal.setAttribute(
-  "aria-hidden",
-  "true"
-);
-
-document.body.style.overflow =
-  "";
+  document.body.style.overflow =
+    "";
 
 }
 
 
 /* =========================================================
- LOGOUT
- ========================================================= */
+   DÉCONNEXION
+========================================================= */
 
 function setupLogout() {
 
-$("#logoutBtn")
-  ?.addEventListener(
-    "click",
-    async () => {
+  $("#logoutBtn")
+    ?.addEventListener(
+      "click",
+      () => {
 
-      try {
-
-        await API.request(
-          "/api/admin/logout",
-          {
-            method: "POST",
-            body: {}
-          }
+        sessionStorage.removeItem(
+          "fenva_admin_token"
         );
 
-      } catch {
-        /* Backend à venir */
+        window.location.href =
+          "./index.html";
+
       }
-
-
-      window.location.href =
-        "./index.html";
-
-    }
-  );
+    );
 
 }
 
 
 /* =========================================================
- HELPERS
- ========================================================= */
+   HELPERS DOM
+========================================================= */
 
 function setText(
-id,
-value
+  id,
+  value
 ) {
 
-const element =
-  document.getElementById(
-    id
-  );
+  const element =
+    document.getElementById(
+      id
+    );
 
+  if (element) {
 
-if (element) {
-  element.textContent =
-    value;
-}
+    element.textContent =
+      value;
+
+  }
 
 }
 
 
 function getValue(
-id
+  id
 ) {
 
-return (
-  document.getElementById(
-    id
-  )?.value ||
-  ""
-);
+  return (
+    document.getElementById(
+      id
+    )?.value ||
+    ""
+  );
 
 }
 
 
 function setValue(
-id,
-value
+  id,
+  value
 ) {
 
-const element =
-  document.getElementById(
-    id
-  );
+  const element =
+    document.getElementById(
+      id
+    );
 
+  if (element) {
 
-if (element) {
-  element.value =
-    value;
-}
+    element.value =
+      value;
+
+  }
 
 }
 
 
 function getChecked(
-id
+  id
 ) {
 
-return Boolean(
-  document.getElementById(
-    id
-  )?.checked
-);
+  return Boolean(
+    document.getElementById(
+      id
+    )?.checked
+  );
 
 }
 
 
 function setChecked(
-id,
-value
+  id,
+  value
 ) {
 
-const element =
-  document.getElementById(
-    id
-  );
+  const element =
+    document.getElementById(
+      id
+    );
 
+  if (element) {
 
-if (element) {
-  element.checked =
-    Boolean(value);
-}
+    element.checked =
+      Boolean(value);
+
+  }
 
 }
 
 
 /* =========================================================
- ORDER HELPERS
- ========================================================= */
+   COMMANDES - HELPERS
+========================================================= */
 
 function getOrderNumber(
-order
+  order
 ) {
 
-return (
-  order.order_number ||
-  order.orderNumber ||
-  `#${order.id ?? ""}`
-);
+  return (
+    order.order_number ||
+    order.orderNumber ||
+    `#${order.id ?? ""}`
+  );
 
 }
 
 
 function getCustomerName(
-order
+  order
 ) {
 
-return (
-  order.customer_name ||
-  order.customerName ||
-  order.name ||
-  "Client"
-);
+  return (
+    order.customer_name ||
+    order.customerName ||
+    order.name ||
+    "Client"
+  );
 
 }
 
 
 function normalizeOrderItems(
-order
+  order
 ) {
 
-if (
-  Array.isArray(
-    order.items
-  )
-) {
-  return order.items;
-}
+  if (
+    Array.isArray(
+      order.items
+    )
+  ) {
 
+    return order.items;
 
-if (
-  Array.isArray(
-    order.order_items
-  )
-) {
-  return order.order_items;
-}
+  }
 
+  if (
+    Array.isArray(
+      order.order_items
+    )
+  ) {
 
-return [];
+    return order.order_items;
+
+  }
+
+  return [];
 
 }
 
 
 function getOrderTotal(
-order
-) {
-
-if (
-  order.total !== undefined
-) {
-
-  return (
-    Number(
-      order.total
-    ) || 0
-  );
-
-}
-
-
-if (
-  order.total_amount !== undefined
-) {
-
-  return (
-    Number(
-      order.total_amount
-    ) || 0
-  );
-
-}
-
-
-return normalizeOrderItems(
   order
-).reduce(
-  (sum, item) => {
+) {
+
+  if (
+    order.total !== undefined
+  ) {
 
     return (
-      sum +
-      (
-        Number(
-          item.price ??
-          item.unit_price ??
-          0
-        ) *
-        Number(
-          item.quantity ??
-          1
-        )
-      )
+      Number(
+        order.total
+      ) || 0
     );
 
-  },
-  0
-);
+  }
+
+  if (
+    order.total_amount !== undefined
+  ) {
+
+    return (
+      Number(
+        order.total_amount
+      ) || 0
+    );
+
+  }
+
+  return normalizeOrderItems(
+    order
+  ).reduce(
+    (sum, item) => {
+
+      return (
+        sum +
+        (
+          Number(
+            item.price ??
+            item.unit_price ??
+            0
+          ) *
+          Number(
+            item.quantity ??
+            1
+          )
+        )
+      );
+
+    },
+    0
+  );
 
 }
 
 
 /* =========================================================
- STATUS
- ========================================================= */
+   STATUTS
+========================================================= */
 
 function normalizeStatus(
-status
+  status
 ) {
 
-const value =
-  String(
-    status ||
+  const value =
+    String(
+      status ||
+      "pending"
+    )
+      .trim()
+      .toLowerCase();
+
+  const map = {
+
+    pending:
+      "pending",
+
+    "en attente":
+      "pending",
+
+    en_attente:
+      "pending",
+
+    confirmed:
+      "confirmed",
+
+    confirme:
+      "confirmed",
+
+    confirmée:
+      "confirmed",
+
+    processing:
+      "processing",
+
+    preparation:
+      "processing",
+
+    "en préparation":
+      "processing",
+
+    shipped:
+      "shipped",
+
+    expédiée:
+      "shipped",
+
+    expediee:
+      "shipped",
+
+    completed:
+      "completed",
+
+    terminée:
+      "completed",
+
+    terminee:
+      "completed",
+
+    cancelled:
+      "cancelled",
+
+    canceled:
+      "cancelled",
+
+    annulée:
+      "cancelled",
+
+    annulee:
+      "cancelled"
+
+  };
+
+  return (
+    map[value] ||
     "pending"
-  )
-    .trim()
-    .toLowerCase();
-
-
-const map = {
-
-  pending:
-    "pending",
-
-  "en attente":
-    "pending",
-
-  en_attente:
-    "pending",
-
-  confirmed:
-    "confirmed",
-
-  confirme:
-    "confirmed",
-
-  confirmée:
-    "confirmed",
-
-  processing:
-    "processing",
-
-  preparation:
-    "processing",
-
-  "en préparation":
-    "processing",
-
-  shipped:
-    "shipped",
-
-  expédiée:
-    "shipped",
-
-  expediee:
-    "shipped",
-
-  completed:
-    "completed",
-
-  terminée:
-    "completed",
-
-  terminee:
-    "completed",
-
-  cancelled:
-    "cancelled",
-
-  canceled:
-    "cancelled",
-
-  annulée:
-    "cancelled",
-
-  annulee:
-    "cancelled"
-
-};
-
-
-return (
-  map[value] ||
-  "pending"
-);
+  );
 
 }
 
 
 function getStatusLabel(
-status
+  status
 ) {
 
-const labels = {
+  const labels = {
 
-  pending:
-    "En attente",
+    pending:
+      "En attente",
 
-  confirmed:
-    "Confirmée",
+    confirmed:
+      "Confirmée",
 
-  processing:
-    "En préparation",
+    processing:
+      "En préparation",
 
-  shipped:
-    "Expédiée",
+    shipped:
+      "Expédiée",
 
-  completed:
-    "Terminée",
+    completed:
+      "Terminée",
 
-  cancelled:
-    "Annulée"
+    cancelled:
+      "Annulée"
 
-};
+  };
 
-
-return (
-  labels[status] ||
-  "En attente"
-);
+  return (
+    labels[status] ||
+    "En attente"
+  );
 
 }
 
 
 function getStatusClass(
-status
+  status
 ) {
 
-return `status-${status}`;
+  return `status-${status}`;
 
 }
 
 
 function buildStatusOptions(
-current
+  current
 ) {
 
-const statuses = [
+  const statuses = [
 
-  ["pending", "En attente"],
-  ["confirmed", "Confirmée"],
-  ["processing", "En préparation"],
-  ["shipped", "Expédiée"],
-  ["completed", "Terminée"],
-  ["cancelled", "Annulée"]
+    ["pending", "En attente"],
+    ["confirmed", "Confirmée"],
+    ["processing", "En préparation"],
+    ["shipped", "Expédiée"],
+    ["completed", "Terminée"],
+    ["cancelled", "Annulée"]
 
-];
+  ];
 
+  return statuses
+    .map(
+      ([value, label]) => `
 
-return statuses
-  .map(
-    ([value, label]) => `
-      <option
-        value="${value}"
-        ${
-          current === value
-            ? "selected"
-            : ""
-        }
-      >
-        ${label}
-      </option>
-    `
-  )
-  .join("");
+        <option
+          value="${value}"
+          ${
+            current === value
+              ? "selected"
+              : ""
+          }
+        >
+          ${label}
+        </option>
+
+      `
+    )
+    .join("");
 
 }
 
 
 /* =========================================================
- CATEGORY
- ========================================================= */
+   CATÉGORIES
+========================================================= */
 
 function categoryLabel(
-category
+  category
 ) {
 
-const labels = {
+  const labels = {
 
-  visage:
-    "Soins du visage",
+    visage:
+      "Soins du visage",
 
-  corps:
-    "Soins du corps",
+    corps:
+      "Soins du corps",
 
-  cheveux:
-    "Soins des cheveux",
+    cheveux:
+      "Soins des cheveux",
 
-  parfums:
-    "Parfums",
+    parfums:
+      "Parfums",
 
-  maquillage:
-    "Maquillage",
+    maquillage:
+      "Maquillage",
 
-  accessoires:
-    "Accessoires beauté"
+    accessoires:
+      "Accessoires beauté"
 
-};
+  };
 
-
-return (
-  labels[
-    String(
-      category ||
-      ""
-    ).toLowerCase()
-  ] ||
-  category ||
-  "Sans catégorie"
-);
+  return (
+    labels[
+      String(
+        category ||
+        ""
+      ).toLowerCase()
+    ] ||
+    category ||
+    "Sans catégorie"
+  );
 
 }
 
 
 /* =========================================================
- PAYMENT
- ========================================================= */
+   PAIEMENT
+========================================================= */
 
 function getPaymentLabel(
-payment
+  payment
 ) {
 
-const value =
-  String(
+  const value =
+    String(
+      payment ||
+      ""
+    )
+      .trim()
+      .toLowerCase();
+
+  const labels = {
+
+    moncash:
+      "MonCash",
+
+    natcash:
+      "NatCash",
+
+    livraison:
+      "Paiement à la livraison",
+
+    cash:
+      "Espèces"
+
+  };
+
+  return (
+    labels[value] ||
     payment ||
-    ""
-  )
-    .trim()
-    .toLowerCase();
-
-
-const labels = {
-
-  moncash:
-    "MonCash",
-
-  natcash:
-    "NatCash",
-
-  livraison:
-    "Paiement à la livraison",
-
-  cash:
-    "Espèces"
-
-};
-
-
-return (
-  labels[value] ||
-  payment ||
-  "—"
-);
+    "—"
+  );
 
 }
 
 
 /* =========================================================
- DATE / MONEY
- ========================================================= */
+   DATES
+========================================================= */
 
 function getDateValue(
-order
+  order
 ) {
 
-const value =
-  order.created_at ||
-  order.createdAt ||
-  order.date;
+  const value =
+    order.created_at ||
+    order.createdAt ||
+    order.date;
 
+  if (!value) {
+    return 0;
+  }
 
-if (!value) {
-  return 0;
-}
+  const date =
+    new Date(value);
 
-
-const date =
-  new Date(value);
-
-
-return Number.isNaN(
-  date.getTime()
-)
-  ? 0
-  : date.getTime();
+  return Number.isNaN(
+    date.getTime()
+  )
+    ? 0
+    : date.getTime();
 
 }
 
 
 function formatDate(
-value
+  value
 ) {
 
-if (!value) {
-  return "—";
-}
-
-
-const date =
-  new Date(value);
-
-
-if (
-  Number.isNaN(
-    date.getTime()
-  )
-) {
-  return "—";
-}
-
-
-return new Intl.DateTimeFormat(
-  "fr-FR",
-  {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric"
+  if (!value) {
+    return "—";
   }
-).format(date);
+
+  const date =
+    new Date(value);
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "—";
+
+  }
+
+  return new Intl.DateTimeFormat(
+    "fr-FR",
+    {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    }
+  ).format(date);
 
 }
 
+
+/* =========================================================
+   NOMBRES
+========================================================= */
 
 function formatNumber(
-value
+  value
 ) {
 
-return new Intl.NumberFormat(
-  "fr-FR"
-).format(
-  Number(value) || 0
-);
+  return new Intl.NumberFormat(
+    "fr-FR"
+  ).format(
+    Number(value) || 0
+  );
 
 }
 
 
 function formatMoney(
-value
+  value
 ) {
 
-return new Intl.NumberFormat(
-  "fr-FR"
-).format(
-  Number(value) || 0
-);
+  return new Intl.NumberFormat(
+    "fr-FR"
+  ).format(
+    Number(value) || 0
+  );
 
 }
 
 
 /* =========================================================
- SECURITY
- ========================================================= */
+   ID PRODUIT
+========================================================= */
+
+function generateId() {
+
+  return (
+    "product_" +
+    Date.now() +
+    "_" +
+    Math.random()
+      .toString(36)
+      .slice(2, 9)
+  );
+
+}
+
+
+/* =========================================================
+   SÉCURITÉ HTML
+========================================================= */
 
 function escapeHtml(
-value
+  value
 ) {
 
-return String(
-  value ?? ""
-)
-  .replaceAll(
-    "&",
-    "&amp;"
+  return String(
+    value ?? ""
   )
-  .replaceAll(
-    "<",
-    "&lt;"
-  )
-  .replaceAll(
-    ">",
-    "&gt;"
-  )
-  .replaceAll(
-    '"',
-    "&quot;"
-  )
-  .replaceAll(
-    "'",
-    "&#039;"
-  );
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
 
 
 function escapeAttribute(
-value
+  value
 ) {
 
-return escapeHtml(
-  value
-);
+  return escapeHtml(
+    value
+  );
 
 }
 
 
 /* =========================================================
- TOAST
- ========================================================= */
+   TOAST
+========================================================= */
 
 let toastTimer = null;
 
-
 function showToast(
-message,
-type = "info"
+  message,
+  type = "info"
 ) {
 
-const toast =
-  $("#toast");
+  const toast =
+    $("#toast");
 
+  if (!toast) return;
 
-if (!toast) return;
+  toast.textContent =
+    message;
 
+  toast.className =
+    `toast show toast-${type}`;
 
-toast.textContent =
-  message;
-
-
-toast.className =
-  `toast show toast-${type}`;
-
-
-clearTimeout(
-  toastTimer
-);
-
-
-toastTimer =
-  setTimeout(
-    () => {
-
-      toast.classList.remove(
-        "show"
-      );
-
-    },
-    3200
+  clearTimeout(
+    toastTimer
   );
 
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3200
+    );
+
 }
-$$$
