@@ -1,62 +1,46 @@
 /* =========================================================
    FENVA BEAUTY
-   PREMIUM SHOPIFY-INSPIRED DESIGN
-   Palette : blanc / noir / gris
+   SHOPIFY-STYLE / PREMIUM BEAUTY STORE
+   Direction : minimal, éditorial, produit au centre
    ========================================================= */
 
 :root {
-  --bg: #ffffff;
-  --surface: #ffffff;
-  --surface-soft: #f7f7f7;
-  --surface-alt: #f2f2f2;
-
-  --ink: #111111;
-  --ink-soft: #333333;
-  --muted: #777777;
-
-  --line: #e6e6e6;
-  --line-dark: #d2d2d2;
-
-  --black: #000000;
   --white: #ffffff;
+  --black: #111111;
+  --text: #202020;
+  --muted: #707070;
+  --light: #f6f6f4;
+  --line: #e5e5e5;
+  --soft-line: #eeeeee;
 
-  --success: #55705a;
-  --danger: #a34f4f;
+  --container: 1440px;
 
-  --container: 1380px;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Jost", Arial, sans-serif;
 
-  --shadow-sm: 0 5px 20px rgba(0, 0, 0, 0.05);
-  --shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 25px 70px rgba(0, 0, 0, 0.15);
-
-  --ease: 220ms ease;
+  --transition: 0.25s ease;
 }
 
 /* =========================================================
    RESET
    ========================================================= */
 
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 120px;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: "Jost", Arial, sans-serif;
+  background: var(--white);
+  color: var(--text);
+  font-family: var(--sans);
   font-size: 14px;
-  line-height: 1.65;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
 img {
@@ -95,18 +79,9 @@ p {
   margin-top: 0;
 }
 
-::selection {
-  background: #111111;
-  color: #ffffff;
-}
-
-/* =========================================================
-   CONTAINER
-   ========================================================= */
-
 .container {
   width: min(calc(100% - 48px), var(--container));
-  margin-inline: auto;
+  margin: 0 auto;
 }
 
 /* =========================================================
@@ -114,14 +89,14 @@ p {
    ========================================================= */
 
 .topbar {
-  min-height: 34px;
+  height: 34px;
   background: var(--black);
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--white);
 }
 
 .topbar-inner {
+  height: 34px;
   display: flex;
-  min-height: 34px;
   align-items: center;
   justify-content: center;
 }
@@ -130,8 +105,7 @@ p {
   margin: 0;
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.13em;
-  text-align: center;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -141,19 +115,17 @@ p {
 
 .header {
   position: sticky;
-  z-index: 100;
   top: 0;
+  z-index: 1000;
   background: rgba(255, 255, 255, 0.97);
   border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(12px);
 }
 
 .header-inner {
-  position: relative;
+  min-height: 86px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  min-height: 82px;
   align-items: center;
   gap: 30px;
 }
@@ -164,24 +136,23 @@ p {
 
 .logo {
   display: inline-flex;
-  width: max-content;
+  width: fit-content;
   flex-direction: column;
-  justify-self: start;
   line-height: 1;
 }
 
 .logo-main {
   color: var(--black);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 32px;
+  font-family: var(--serif);
+  font-size: 34px;
   font-weight: 600;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
 }
 
 .logo-sub {
   margin-top: 5px;
-  color: #555555;
-  font-size: 8px;
+  color: #777;
+  font-size: 7px;
   font-weight: 600;
   letter-spacing: 0.42em;
   text-align: center;
@@ -193,37 +164,38 @@ p {
 
 .search-box {
   position: absolute;
-  right: 155px;
+  right: 160px;
   top: 50%;
+  width: 220px;
+  height: 38px;
   display: flex;
-  width: 260px;
-  height: 40px;
   align-items: center;
-  border-bottom: 1px solid var(--line-dark);
   transform: translateY(-50%);
+  border-bottom: 1px solid var(--line);
 }
 
 .search-box input {
   width: 100%;
   height: 100%;
+  padding: 0;
   border: 0;
   outline: 0;
   background: transparent;
-  color: var(--ink);
+  color: var(--black);
   font-size: 12px;
 }
 
 .search-box input::placeholder {
-  color: #999999;
+  color: #999;
 }
 
 .search-box button {
-  width: 38px;
+  width: 35px;
   height: 100%;
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--ink);
+  color: var(--black);
 }
 
 /* =========================================================
@@ -242,45 +214,46 @@ p {
   min-height: 40px;
   border: 1px solid var(--line);
   background: var(--white);
-  color: var(--ink);
-  transition:
-    background var(--ease),
-    color var(--ease),
-    border-color var(--ease);
+  color: var(--black);
+  transition: var(--transition);
 }
 
 .admin-button {
   padding: 0 15px;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .cart-button {
   position: relative;
-  min-width: 43px;
+  min-width: 44px;
   padding: 0 11px;
 }
 
 .admin-button:hover,
 .cart-button:hover {
-  border-color: var(--black);
   background: var(--black);
+  border-color: var(--black);
   color: var(--white);
 }
 
 #cartCount {
   position: absolute;
-  top: -6px;
-  right: -6px;
-  display: grid;
+  top: -7px;
+  right: -7px;
+
   width: 18px;
   height: 18px;
+
+  display: grid;
   place-items: center;
+
   border-radius: 50%;
   background: var(--black);
   color: var(--white);
+
   font-size: 9px;
   font-weight: 700;
 }
@@ -314,45 +287,50 @@ p {
    ========================================================= */
 
 .navigation {
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid var(--soft-line);
   background: var(--white);
 }
 
 .navigation > ul {
+  min-height: 48px;
+
   display: flex;
-  min-height: 46px;
   align-items: center;
   justify-content: center;
-  gap: 45px;
+
+  gap: 42px;
 }
 
 .navigation a {
   position: relative;
+
+  min-height: 44px;
+
   display: flex;
-  min-height: 42px;
   align-items: center;
-  color: var(--ink-soft);
+
+  color: #353535;
+
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
 .navigation a::after {
   position: absolute;
   right: 0;
-  bottom: 4px;
+  bottom: 3px;
   left: 0;
-  height: 1px;
-  background: var(--black);
-  content: "";
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform var(--ease);
-}
 
-.navigation a:hover {
-  color: var(--black);
+  height: 1px;
+
+  background: var(--black);
+
+  content: "";
+
+  transform: scaleX(0);
+  transition: transform var(--transition);
 }
 
 .navigation a:hover::after {
@@ -364,66 +342,64 @@ p {
    ========================================================= */
 
 .hero {
-  overflow: hidden;
-  background: var(--surface-soft);
+  background: var(--light);
 }
 
 .hero-content {
+  min-height: 680px;
+
   display: grid;
-  min-height: 650px;
-  grid-template-columns: 0.9fr 1.1fr;
-  align-items: stretch;
+  grid-template-columns: 0.78fr 1.22fr;
 }
 
 .hero-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   padding: 80px 70px 80px 0;
 }
 
 .eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  color: #555555;
+  margin-bottom: 18px;
+
+  color: #666;
+
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.eyebrow::before {
-  width: 25px;
-  height: 1px;
-  background: currentColor;
-  content: "";
-}
-
 .hero h1 {
-  max-width: 650px;
-  margin: 0 0 25px;
+  max-width: 600px;
+
+  margin: 0 0 22px;
+
   color: var(--black);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(4rem, 7vw, 7rem);
+
+  font-family: var(--serif);
+  font-size: clamp(4rem, 6vw, 6.7rem);
   font-weight: 500;
-  line-height: 0.85;
-  letter-spacing: -0.045em;
+  line-height: 0.86;
+  letter-spacing: -0.04em;
 }
 
 .hero-description {
-  max-width: 500px;
-  margin-bottom: 32px;
-  color: #737373;
-  font-size: 15px;
+  max-width: 460px;
+
+  margin-bottom: 30px;
+
+  color: #666;
+
+  font-size: 14px;
   line-height: 1.8;
 }
 
 .hero-actions {
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 /* =========================================================
@@ -431,100 +407,99 @@ p {
    ========================================================= */
 
 .button {
-  display: inline-flex;
   min-height: 48px;
+
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+
   padding: 0 27px;
-  border: 1px solid transparent;
-  font-size: 10px;
+
+  border: 1px solid var(--black);
+
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition:
-    background var(--ease),
-    color var(--ease),
-    border-color var(--ease),
-    transform var(--ease);
-}
 
-.button:hover {
-  transform: translateY(-1px);
+  transition: var(--transition);
 }
 
 .button-dark {
   background: var(--black);
-  border-color: var(--black);
   color: var(--white);
 }
 
 .button-dark:hover {
-  background: #222222;
-  border-color: #222222;
+  background: #2c2c2c;
 }
 
 .button-light {
   background: transparent;
-  border-color: #cfcfcf;
   color: var(--black);
 }
 
 .button-light:hover {
   background: var(--white);
-  border-color: var(--black);
 }
 
 /* =========================================================
-   HERO VISUAL
+   HERO IMAGE
    ========================================================= */
 
 .hero-visual {
-  position: relative;
-  min-height: 650px;
-  background: #eeeeee;
+  min-height: 680px;
+  background: #e9e9e7;
 }
 
 .hero-card {
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  background: #ededed;
 }
 
 .hero-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+
+  transition: transform 0.8s ease;
+}
+
+.hero:hover .hero-card img {
+  transform: scale(1.015);
 }
 
 /* =========================================================
-   SECTIONS
+   GENERAL SECTIONS
    ========================================================= */
 
 .section {
-  padding: 95px 0;
+  padding: 105px 0;
 }
 
 .section-heading {
-  max-width: 680px;
+  max-width: 620px;
   margin-bottom: 45px;
 }
 
 .section-heading h2,
 .section-heading-row h2 {
   margin-bottom: 12px;
+
   color: var(--black);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(2.5rem, 4vw, 4rem);
+
+  font-family: var(--serif);
+  font-size: clamp(2.7rem, 4vw, 4.4rem);
   font-weight: 500;
-  line-height: 0.95;
+  line-height: 0.9;
   letter-spacing: -0.025em;
 }
 
 .section-heading p {
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /* =========================================================
@@ -538,49 +513,55 @@ p {
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
 }
 
 .category-card {
-  min-height: 225px;
-  padding: 31px;
+  min-height: 250px;
+
+  padding: 30px;
+
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+
   background: var(--white);
-  transition:
-    background var(--ease),
-    transform var(--ease),
-    box-shadow var(--ease);
+
+  transition: var(--transition);
 }
 
 .category-card:hover {
-  z-index: 2;
-  background: var(--surface-soft);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
+  background: var(--light);
 }
 
 .category-number {
   display: block;
-  margin-bottom: 52px;
-  color: #999999;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 21px;
+
+  margin-bottom: 70px;
+
+  color: #999;
+
+  font-family: var(--serif);
+  font-size: 19px;
 }
 
 .category-card h3 {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+
   color: var(--black);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 28px;
+
+  font-family: var(--serif);
+  font-size: 29px;
   font-weight: 500;
 }
 
 .category-card p {
   margin: 0;
+
   color: var(--muted);
-  font-size: 12px;
+
+  font-size: 11px;
 }
 
 /* =========================================================
@@ -588,15 +569,17 @@ p {
    ========================================================= */
 
 .products-section {
-  background: var(--surface-soft);
+  background: var(--light);
 }
 
 .section-heading-row {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+
   gap: 25px;
-  margin-bottom: 42px;
+
+  margin-bottom: 40px;
 }
 
 .section-heading-row h2 {
@@ -607,11 +590,14 @@ p {
 .text-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
+
   border: 0;
   background: transparent;
+
   color: var(--black);
-  font-size: 10px;
+
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -620,7 +606,8 @@ p {
 .text-button::after,
 .text-link::after {
   content: "→";
-  transition: transform var(--ease);
+
+  transition: transform var(--transition);
 }
 
 .text-button:hover::after,
@@ -631,6 +618,7 @@ p {
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+
   gap: 20px;
 }
 
@@ -640,70 +628,86 @@ p {
 
 .product-card {
   position: relative;
+
   overflow: hidden;
-  min-width: 0;
+
   background: var(--white);
+
   border: 1px solid var(--line);
+
   transition:
-    transform var(--ease),
-    box-shadow var(--ease);
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
 }
 
 .product-card-image,
 .product-image {
   position: relative;
+
+  min-height: 360px;
+
   display: flex;
-  min-height: 340px;
   align-items: center;
   justify-content: center;
+
   overflow: hidden;
-  background: #f0f0f0;
+
+  background: #eeeeec;
 }
 
 .product-card-image img,
 .product-image img {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
-  transition: transform 500ms ease;
+
+  transition: transform 0.5s ease;
 }
 
 .product-card:hover .product-card-image img,
 .product-card:hover .product-image img {
-  transform: scale(1.035);
+  transform: scale(1.025);
 }
 
 .product-card-content {
-  padding: 20px 18px 22px;
+  padding: 19px 18px 21px;
 }
 
 .product-category {
   margin-bottom: 7px;
-  color: #777777;
-  font-size: 9px;
+
+  color: #858585;
+
+  font-size: 8px;
   font-weight: 600;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
 .product-card h3 {
-  min-height: 43px;
+  min-height: 42px;
+
   margin-bottom: 8px;
+
   color: var(--black);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 22px;
+
+  font-family: var(--serif);
+  font-size: 23px;
   font-weight: 500;
   line-height: 1.05;
 }
 
 .product-price {
   margin-bottom: 16px;
+
   color: var(--black);
+
   font-size: 13px;
   font-weight: 600;
 }
@@ -711,16 +715,18 @@ p {
 .product-card button {
   width: 100%;
   min-height: 42px;
+
   border: 1px solid var(--black);
+
   background: transparent;
   color: var(--black);
+
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition:
-    background var(--ease),
-    color var(--ease);
+
+  transition: var(--transition);
 }
 
 .product-card button:hover {
@@ -730,7 +736,9 @@ p {
 
 .products-loading {
   padding: 45px 20px;
+
   color: var(--muted);
+
   text-align: center;
 }
 
@@ -747,12 +755,12 @@ p {
 }
 
 .promotion-section .section-heading p {
-  color: rgba(255, 255, 255, 0.58);
+  color: #9d9d9d;
 }
 
 .promotion-section .product-card {
-  background: #171717;
-  border-color: #303030;
+  background: #181818;
+  border-color: #2e2e2e;
 }
 
 .promotion-section .product-card h3,
@@ -761,17 +769,17 @@ p {
 }
 
 .promotion-section .product-category {
-  color: #a0a0a0;
+  color: #999;
 }
 
 .promotion-section .product-card button {
-  border-color: #777777;
+  border-color: #777;
   color: var(--white);
 }
 
 .promotion-section .product-card button:hover {
-  border-color: var(--white);
   background: var(--white);
+  border-color: var(--white);
   color: var(--black);
 }
 
@@ -787,9 +795,12 @@ p {
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
+
   gap: 12px;
-  margin-bottom: 36px;
-  padding-bottom: 17px;
+
+  margin-bottom: 38px;
+  padding-bottom: 18px;
+
   border-bottom: 1px solid var(--line);
 }
 
@@ -799,13 +810,18 @@ p {
 }
 
 .shop-toolbar select {
-  min-width: 185px;
+  min-width: 190px;
   height: 43px;
+
   padding: 0 35px 0 12px;
+
   border: 1px solid var(--line);
+
   outline: none;
+
   background: var(--white);
   color: var(--black);
+
   font-size: 11px;
 }
 
@@ -822,62 +838,78 @@ p {
    ========================================================= */
 
 .about-section {
-  background: var(--surface-soft);
+  background: var(--light);
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   align-items: center;
-  gap: clamp(50px, 8vw, 120px);
+
+  gap: 90px;
 }
 
 .about-visual {
-  min-height: 530px;
+  min-height: 560px;
 }
 
 .about-frame {
   position: relative;
+
   width: 88%;
-  height: 500px;
+  height: 520px;
+
   margin-left: auto;
-  background: #e7e7e7;
+
+  background: #e5e5e3;
 }
 
 .about-frame::before {
   position: absolute;
-  top: 25px;
-  left: -25px;
+
+  top: 22px;
+  left: -22px;
+
   width: 100%;
   height: 100%;
-  border: 1px solid #c8c8c8;
+
+  border: 1px solid #cfcfcd;
+
   content: "";
 }
 
 .about-frame img {
   position: relative;
   z-index: 2;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
 }
 
 .about-content {
-  max-width: 580px;
+  max-width: 560px;
 }
 
 .about-content h2 {
-  margin-bottom: 24px;
+  margin-bottom: 25px;
+
   color: var(--black);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(2.8rem, 5vw, 4.6rem);
+
+  font-family: var(--serif);
+  font-size: clamp(3rem, 5vw, 5rem);
   font-weight: 500;
-  line-height: 0.92;
+  line-height: 0.88;
 }
 
 .about-content p {
   margin-bottom: 18px;
+
   color: var(--muted);
+
+  font-size: 13px;
 }
 
 /* =========================================================
@@ -885,41 +917,48 @@ p {
    ========================================================= */
 
 .cta-section {
-  padding: 80px 0;
+  padding: 85px 0;
+
   background: var(--white);
 }
 
 .cta-content {
-  padding: clamp(45px, 7vw, 85px);
+  padding: 85px;
+
   background: var(--black);
   color: var(--white);
 }
 
 .cta-content h2 {
   max-width: 720px;
+
   margin-bottom: 18px;
+
   color: var(--white);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(2.7rem, 5vw, 5rem);
+
+  font-family: var(--serif);
+  font-size: clamp(3rem, 5vw, 5.2rem);
   font-weight: 500;
-  line-height: 0.92;
+  line-height: 0.9;
 }
 
 .cta-content p {
-  max-width: 550px;
+  max-width: 540px;
+
   margin-bottom: 30px;
-  color: rgba(255, 255, 255, 0.6);
+
+  color: #9c9c9c;
 }
 
 .cta-content .button-light {
-  border-color: #666666;
-  color: #ffffff;
+  border-color: #777;
+  color: var(--white);
 }
 
 .cta-content .button-light:hover {
-  border-color: #ffffff;
-  background: #ffffff;
-  color: #000000;
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--black);
 }
 
 /* =========================================================
@@ -927,15 +966,17 @@ p {
    ========================================================= */
 
 .footer {
-  background: #111111;
-  color: rgba(255, 255, 255, 0.68);
+  background: #111;
+  color: #aaa;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 1.5fr repeat(3, 1fr);
-  gap: 55px;
-  padding: 70px 0;
+
+  gap: 60px;
+
+  padding: 75px 0;
 }
 
 .footer-brand .logo-main {
@@ -943,30 +984,38 @@ p {
 }
 
 .footer-brand .logo-sub {
-  color: #a0a0a0;
+  color: #888;
 }
 
 .footer-brand p {
   max-width: 300px;
+
   margin-top: 20px;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 12px;
+
+  color: #777;
+
+  font-size: 11px;
 }
 
 .footer-column h3 {
   margin-bottom: 18px;
+
   color: var(--white);
+
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
 .footer-column a,
 .footer-column p {
   display: block;
+
   margin-bottom: 9px;
-  color: rgba(255, 255, 255, 0.48);
+
+  color: #777;
+
   font-size: 11px;
 }
 
@@ -975,13 +1024,15 @@ p {
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid #292929;
   padding: 20px 0;
 }
 
 .footer-bottom p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.32);
+
+  color: #666;
+
   font-size: 10px;
 }
 
@@ -991,15 +1042,20 @@ p {
 
 .modal-overlay {
   position: fixed;
-  z-index: 1000;
+  z-index: 2000;
+
   inset: 0;
+
   display: none;
+
   align-items: center;
   justify-content: center;
+
   padding: 20px;
-  background: rgba(0, 0, 0, 0.62);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+
+  background: rgba(0, 0, 0, 0.58);
+
+  backdrop-filter: blur(6px);
 }
 
 .modal-overlay.active,
@@ -1010,32 +1066,42 @@ p {
 
 .modal {
   position: relative;
+
   width: min(100%, 620px);
-  max-height: 90dvh;
+  max-height: 90vh;
+
   overflow-y: auto;
+
   background: var(--white);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow-lg);
+
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
 }
 
 .modal h2 {
   margin-bottom: 24px;
+
   color: var(--black);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 35px;
+
+  font-family: var(--serif);
+  font-size: 38px;
   font-weight: 500;
 }
 
 .modal-close {
   position: absolute;
-  z-index: 2;
-  top: 15px;
-  right: 15px;
-  display: grid;
+  z-index: 3;
+
+  top: 14px;
+  right: 14px;
+
   width: 36px;
   height: 36px;
+
+  display: grid;
   place-items: center;
+
   border: 1px solid var(--line);
+
   background: var(--white);
   color: var(--black);
 }
@@ -1061,8 +1127,11 @@ p {
 .cart-item {
   display: grid;
   grid-template-columns: 1fr auto;
+
   gap: 20px;
+
   padding: 18px 0;
+
   border-bottom: 1px solid var(--line);
 }
 
@@ -1073,19 +1142,25 @@ p {
 .cart-summary-row {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+
   margin-bottom: 8px;
+
   color: var(--muted);
+
   font-size: 12px;
 }
 
 .cart-summary-total {
   display: flex;
   justify-content: space-between;
+
   margin-top: 16px;
   padding-top: 16px;
+
   border-top: 1px solid var(--line);
+
   color: var(--black);
+
   font-size: 16px;
   font-weight: 600;
 }
@@ -1120,8 +1195,9 @@ p {
 .form-group label,
 .checkout-modal label,
 #adminLoginForm label {
-  color: var(--ink-soft);
-  font-size: 10px;
+  color: #444;
+
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1136,14 +1212,19 @@ p {
 #adminLoginForm input {
   width: 100%;
   min-height: 46px;
+
   padding: 0 12px;
+
   border: 1px solid var(--line);
+
   outline: none;
+
   border-radius: 0;
+
   background: var(--white);
   color: var(--black);
+
   font-size: 13px;
-  transition: border-color var(--ease);
 }
 
 .form-group textarea,
@@ -1166,10 +1247,13 @@ p {
 #submitOrderButton,
 #adminLoginButton {
   min-height: 48px;
+
   border: 1px solid var(--black);
+
   background: var(--black);
   color: var(--white);
-  font-size: 10px;
+
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1177,13 +1261,15 @@ p {
 
 #submitOrderButton:hover,
 #adminLoginButton:hover {
-  background: #222222;
+  background: #292929;
 }
 
 #checkoutMessage,
 #adminLoginMessage {
   margin-top: 10px;
-  color: var(--danger);
+
+  color: #9b4d4d;
+
   font-size: 12px;
 }
 
@@ -1198,12 +1284,13 @@ p {
 #productModalContent {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   min-height: 480px;
 }
 
 .product-modal-image {
   min-height: 480px;
-  background: #eeeeee;
+  background: #eeeeec;
 }
 
 .product-modal-image img {
@@ -1216,6 +1303,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   padding: 45px;
 }
 
@@ -1233,14 +1321,20 @@ p {
 
 #toast {
   position: fixed;
-  z-index: 2000;
+  z-index: 3000;
+
   right: 20px;
   bottom: 20px;
+
   max-width: min(380px, calc(100% - 40px));
+
   padding: 13px 18px;
+
   background: var(--black);
   color: var(--white);
-  box-shadow: var(--shadow);
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+
   font-size: 11px;
 }
 
@@ -1280,18 +1374,19 @@ p {
 }
 
 /* =========================================================
-   TABLET / MOBILE NAV
+   TABLET / MOBILE
    ========================================================= */
 
 @media (max-width: 800px) {
 
   .section {
-    padding: 70px 0;
+    padding: 75px 0;
   }
 
   .header-inner {
-    display: flex;
     min-height: 70px;
+
+    display: flex;
     align-items: center;
     justify-content: space-between;
   }
@@ -1310,13 +1405,18 @@ p {
 
   .navigation {
     position: absolute;
+
     top: 100%;
     right: 0;
     left: 0;
+
     display: none;
+
     background: var(--white);
+
     border-bottom: 1px solid var(--line);
-    box-shadow: var(--shadow);
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
   }
 
   .navigation.is-open,
@@ -1327,14 +1427,18 @@ p {
 
   .navigation > ul {
     min-height: auto;
+
     flex-direction: column;
     align-items: stretch;
+
     gap: 0;
+
     padding: 5px 24px 15px;
   }
 
   .navigation a {
-    min-height: 49px;
+    min-height: 50px;
+
     border-bottom: 1px solid var(--line);
   }
 
@@ -1347,7 +1451,7 @@ p {
   }
 
   .hero-text {
-    min-height: 510px;
+    min-height: 500px;
     padding: 75px 0;
   }
 
@@ -1380,13 +1484,14 @@ p {
 @media (max-width: 600px) {
 
   .container {
-    width: min(calc(100% - 28px), var(--container));
+    width: calc(100% - 28px);
   }
 
   .topbar p {
     max-width: 95%;
+
     font-size: 8px;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.05em;
   }
 
   .logo-main {
@@ -1394,7 +1499,7 @@ p {
   }
 
   .logo-sub {
-    font-size: 7px;
+    font-size: 6px;
   }
 
   .header-actions {
@@ -1406,7 +1511,7 @@ p {
   }
 
   .section {
-    padding: 60px 0;
+    padding: 62px 0;
   }
 
   .section-heading {
@@ -1427,12 +1532,12 @@ p {
   }
 
   .category-card {
-    min-height: 185px;
+    min-height: 200px;
     padding: 25px;
   }
 
   .category-number {
-    margin-bottom: 35px;
+    margin-bottom: 42px;
   }
 
   .products-grid {
@@ -1458,12 +1563,12 @@ p {
   }
 
   .about-visual {
-    min-height: 380px;
+    min-height: 390px;
   }
 
   .about-frame {
     width: 88%;
-    height: 350px;
+    height: 360px;
   }
 
   .cta-section {
@@ -1471,12 +1576,14 @@ p {
   }
 
   .cta-content {
-    padding: 45px 25px;
+    padding: 48px 25px;
   }
 
   .footer-grid {
     grid-template-columns: 1fr;
+
     gap: 35px;
+
     padding: 55px 0;
   }
 
@@ -1487,7 +1594,7 @@ p {
 
   .modal {
     width: 100%;
-    max-height: 94dvh;
+    max-height: 94vh;
   }
 
   .cart-modal,
@@ -1510,7 +1617,7 @@ p {
 }
 
 /* =========================================================
-   VERY SMALL PHONES
+   SMALL PHONES
    ========================================================= */
 
 @media (max-width: 380px) {
@@ -1529,12 +1636,12 @@ p {
   }
 
   .hero-text {
-    min-height: 470px;
+    min-height: 450px;
     padding: 60px 0;
   }
 
   .hero h1 {
-    font-size: 3.5rem;
+    font-size: 3.4rem;
   }
 
   .hero-description {
@@ -1560,52 +1667,6 @@ p {
 }
 
 /* =========================================================
-   LANDSCAPE MOBILE
-   ========================================================= */
-
-@media (max-height: 560px) and (orientation: landscape) {
-
-  .hero-text {
-    min-height: auto;
-    padding: 50px 0;
-  }
-
-  .hero-visual {
-    min-height: 400px;
-  }
-}
-
-/* =========================================================
-   LARGE DESKTOP
-   ========================================================= */
-
-@media (min-width: 1500px) {
-
-  :root {
-    --container: 1460px;
-  }
-
-  .hero-content {
-    min-height: 720px;
-  }
-
-  .hero-visual {
-    min-height: 720px;
-  }
-}
-
-@media (min-width: 1800px) {
-
-  :root {
-    --container: 1540px;
-  }
-
-  body {
-    font-size: 15px;
-  }
-}
-
-/* =========================================================
    ACCESSIBILITY
    ========================================================= */
 
@@ -1616,11 +1677,13 @@ p {
 
 @media (prefers-reduced-motion: reduce) {
 
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
 }
