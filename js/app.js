@@ -1,4 +1,4 @@
-javascript
+"use strict";
 /* =========================================================
    FENVA BEAUTY
    Frontend application
