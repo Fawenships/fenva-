@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,15 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>FENVA BEAUTY — Beauté & soins</title>
+
   <meta
     name="description"
     content="FENVA BEAUTY — Découvrez notre sélection de produits de beauté, soins du visage, soins du corps, cheveux, parfums et maquillage."
   >
 
   <meta name="theme-color" content="#3b2a20">
-
-  <link rel="icon" href="assets/favicon.png">
-  <link rel="manifest" href="manifest.webmanifest">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,29 +48,46 @@
         class="mobile-menu-button"
         id="mobileMenuButton"
         type="button"
+        data-menu-toggle
         aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="mainNavigation"
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <a href="#accueil" class="logo">
+
+      <a href="#accueil" class="logo" aria-label="FENVA BEAUTY - Accueil">
         <span class="logo-main">FENVA</span>
         <span class="logo-sub">BEAUTY</span>
       </a>
 
+
       <div class="search-box">
+
+        <label class="sr-only" for="searchInput">
+          Rechercher un produit
+        </label>
+
         <input
           type="search"
           id="searchInput"
           placeholder="Rechercher un produit..."
           autocomplete="off"
         >
-        <button id="searchButton" type="button" aria-label="Rechercher">
+
+        <button
+          id="searchButton"
+          type="button"
+          aria-label="Rechercher"
+        >
           Rechercher
         </button>
+
       </div>
+
 
       <div class="header-actions">
 
@@ -79,15 +95,18 @@
           type="button"
           class="admin-button"
           id="adminButton"
+          data-modal-open="adminLoginModal"
         >
           Administration
         </button>
+
 
         <button
           type="button"
           class="cart-button"
           id="cartButton"
           aria-label="Ouvrir le panier"
+          data-modal-open="cartModal"
         >
           Panier
           <span id="cartCount">0</span>
@@ -102,20 +121,34 @@
   <!-- =========================
        NAVIGATION
   ========================== -->
-  <nav class="navigation" id="mainNavigation">
+  <nav
+    class="navigation"
+    id="mainNavigation"
+    aria-label="Navigation principale"
+  >
+
     <div class="container">
 
       <a href="#accueil">Accueil</a>
+
       <a href="#categories">Catégories</a>
+
       <a href="#nouveautes">Nouveautés</a>
+
       <a href="#promotions">Promotions</a>
+
       <a href="#boutique">Boutique</a>
+
       <a href="#contact">Contact</a>
 
     </div>
+
   </nav>
 
 
+  <!-- =========================
+       MAIN
+  ========================== -->
   <main id="accueil">
 
     <!-- =========================
@@ -127,7 +160,9 @@
 
         <div class="hero-text">
 
-          <p class="eyebrow">FENVA BEAUTY</p>
+          <p class="eyebrow">
+            FENVA BEAUTY
+          </p>
 
           <h1>
             Révélez votre
@@ -139,13 +174,20 @@
             pour accompagner votre routine au quotidien.
           </p>
 
+
           <div class="hero-actions">
 
-            <a href="#boutique" class="button button-dark">
+            <a
+              href="#boutique"
+              class="button button-dark"
+            >
               Découvrir la boutique
             </a>
 
-            <a href="#categories" class="button button-light">
+            <a
+              href="#categories"
+              class="button button-light"
+            >
               Explorer les catégories
             </a>
 
@@ -153,12 +195,21 @@
 
         </div>
 
+
         <div class="hero-visual">
+
           <div class="hero-card">
+
             <span>BEAUTY</span>
+
             <strong>FENVA</strong>
-            <small>CARE • BEAUTY • STYLE</small>
+
+            <small>
+              CARE • BEAUTY • STYLE
+            </small>
+
           </div>
+
         </div>
 
       </div>
@@ -169,51 +220,92 @@
     <!-- =========================
          CATEGORIES
     ========================== -->
-    <section class="section categories-section" id="categories">
+    <section
+      class="section categories-section"
+      id="categories"
+    >
 
       <div class="container">
 
         <div class="section-heading">
-          <p class="eyebrow">Explorer</p>
-          <h2>Nos catégories</h2>
+
+          <p class="eyebrow">
+            Explorer
+          </p>
+
+          <h2>
+            Nos catégories
+          </h2>
+
           <p>
             Trouvez facilement les produits adaptés à votre routine beauté.
           </p>
+
         </div>
+
 
         <div class="categories-grid">
 
-          <button class="category-card" data-category="visage">
+          <button
+            class="category-card"
+            type="button"
+            data-category="visage"
+          >
             <span class="category-number">01</span>
             <h3>Soins du visage</h3>
             <span>Découvrir</span>
           </button>
 
-          <button class="category-card" data-category="corps">
+
+          <button
+            class="category-card"
+            type="button"
+            data-category="corps"
+          >
             <span class="category-number">02</span>
             <h3>Soins du corps</h3>
             <span>Découvrir</span>
           </button>
 
-          <button class="category-card" data-category="cheveux">
+
+          <button
+            class="category-card"
+            type="button"
+            data-category="cheveux"
+          >
             <span class="category-number">03</span>
             <h3>Soins des cheveux</h3>
             <span>Découvrir</span>
           </button>
 
-          <button class="category-card" data-category="parfums">
+
+          <button
+            class="category-card"
+            type="button"
+            data-category="parfums"
+          >
             <span class="category-number">04</span>
             <h3>Parfums</h3>
             <span>Découvrir</span>
           </button>
 
-          <button class="category-card" data-category="maquillage">
+
+          <button
+            class="category-card"
+            type="button"
+            data-category="maquillage"
+          >
             <span class="category-number">05</span>
             <h3>Maquillage</h3>
             <span>Découvrir</span>
           </button>
 
-          <button class="category-card" data-category="accessoires">
+
+          <button
+            class="category-card"
+            type="button"
+            data-category="accessoires"
+          >
             <span class="category-number">06</span>
             <h3>Accessoires beauté</h3>
             <span>Découvrir</span>
@@ -229,16 +321,27 @@
     <!-- =========================
          NOUVEAUTÉS
     ========================== -->
-    <section class="section products-section" id="nouveautes">
+    <section
+      class="section products-section"
+      id="nouveautes"
+    >
 
       <div class="container">
 
         <div class="section-heading section-heading-row">
 
           <div>
-            <p class="eyebrow">À découvrir</p>
-            <h2>Nouveautés</h2>
+
+            <p class="eyebrow">
+              À découvrir
+            </p>
+
+            <h2>
+              Nouveautés
+            </h2>
+
           </div>
+
 
           <button
             type="button"
@@ -250,13 +353,17 @@
 
         </div>
 
+
         <div
           class="products-grid"
           id="newProducts"
+          aria-live="polite"
         >
+
           <div class="products-loading">
             Chargement des produits...
           </div>
+
         </div>
 
       </div>
@@ -267,16 +374,27 @@
     <!-- =========================
          PROMOTIONS
     ========================== -->
-    <section class="section promotion-section" id="promotions">
+    <section
+      class="section promotion-section"
+      id="promotions"
+    >
 
       <div class="container">
 
         <div class="section-heading section-heading-row">
 
           <div>
-            <p class="eyebrow">Offres sélectionnées</p>
-            <h2>Promotions</h2>
+
+            <p class="eyebrow">
+              Offres sélectionnées
+            </p>
+
+            <h2>
+              Promotions
+            </h2>
+
           </div>
+
 
           <button
             type="button"
@@ -288,13 +406,17 @@
 
         </div>
 
+
         <div
           class="products-grid"
           id="promotionProducts"
+          aria-live="polite"
         >
+
           <div class="products-loading">
             Chargement des promotions...
           </div>
+
         </div>
 
       </div>
@@ -305,41 +427,110 @@
     <!-- =========================
          BOUTIQUE
     ========================== -->
-    <section class="section products-section shop-section" id="boutique">
+    <section
+      class="section products-section shop-section"
+      id="boutique"
+    >
 
       <div class="container">
 
         <div class="section-heading">
-          <p class="eyebrow">FENVA BEAUTY</p>
-          <h2>La boutique</h2>
+
+          <p class="eyebrow">
+            FENVA BEAUTY
+          </p>
+
+          <h2>
+            La boutique
+          </h2>
+
           <p>
             Découvrez l'ensemble de notre sélection.
           </p>
+
         </div>
 
 
         <div class="shop-toolbar">
 
-          <div class="shop-result-count" id="productResultCount">
+          <div
+            class="shop-result-count"
+            id="productResultCount"
+            aria-live="polite"
+          >
             Produits
           </div>
 
-          <select id="categoryFilter" aria-label="Filtrer par catégorie">
-            <option value="all">Toutes les catégories</option>
-            <option value="visage">Soins du visage</option>
-            <option value="corps">Soins du corps</option>
-            <option value="cheveux">Soins des cheveux</option>
-            <option value="parfums">Parfums</option>
-            <option value="maquillage">Maquillage</option>
-            <option value="accessoires">Accessoires beauté</option>
+
+          <label class="sr-only" for="categoryFilter">
+            Filtrer par catégorie
+          </label>
+
+          <select
+            id="categoryFilter"
+            aria-label="Filtrer par catégorie"
+          >
+
+            <option value="all">
+              Toutes les catégories
+            </option>
+
+            <option value="visage">
+              Soins du visage
+            </option>
+
+            <option value="corps">
+              Soins du corps
+            </option>
+
+            <option value="cheveux">
+              Soins des cheveux
+            </option>
+
+            <option value="parfums">
+              Parfums
+            </option>
+
+            <option value="maquillage">
+              Maquillage
+            </option>
+
+            <option value="accessoires">
+              Accessoires beauté
+            </option>
+
           </select>
 
-          <select id="sortProducts" aria-label="Trier les produits">
-            <option value="default">Trier par</option>
-            <option value="price-asc">Prix croissant</option>
-            <option value="price-desc">Prix décroissant</option>
-            <option value="name">Nom</option>
-            <option value="newest">Nouveautés</option>
+
+          <label class="sr-only" for="sortProducts">
+            Trier les produits
+          </label>
+
+          <select
+            id="sortProducts"
+            aria-label="Trier les produits"
+          >
+
+            <option value="default">
+              Trier par
+            </option>
+
+            <option value="price-asc">
+              Prix croissant
+            </option>
+
+            <option value="price-desc">
+              Prix décroissant
+            </option>
+
+            <option value="name">
+              Nom
+            </option>
+
+            <option value="newest">
+              Nouveautés
+            </option>
+
           </select>
 
         </div>
@@ -348,21 +539,30 @@
         <div
           class="products-grid"
           id="allProducts"
+          aria-live="polite"
         >
+
           <div class="products-loading">
             Chargement de la boutique...
           </div>
+
         </div>
 
 
         <div
           class="empty-state hidden"
           id="noProducts"
+          hidden
         >
-          <h3>Aucun produit trouvé</h3>
+
+          <h3>
+            Aucun produit trouvé
+          </h3>
+
           <p>
             Aucun produit ne correspond à votre recherche.
           </p>
+
           <button
             type="button"
             class="button button-dark"
@@ -370,6 +570,7 @@
           >
             Réinitialiser
           </button>
+
         </div>
 
       </div>
@@ -380,20 +581,31 @@
     <!-- =========================
          À PROPOS
     ========================== -->
-    <section class="section about-section" id="a-propos">
+    <section
+      class="section about-section"
+      id="a-propos"
+    >
 
       <div class="container about-grid">
 
         <div class="about-visual">
+
           <div class="about-frame">
+
             <span>FENVA</span>
+
             <strong>BEAUTY</strong>
+
           </div>
+
         </div>
+
 
         <div class="about-content">
 
-          <p class="eyebrow">Notre univers</p>
+          <p class="eyebrow">
+            Notre univers
+          </p>
 
           <h2>
             La beauté,
@@ -411,7 +623,10 @@
             simple, élégante et accessible.
           </p>
 
-          <a href="#boutique" class="text-link">
+          <a
+            href="#boutique"
+            class="text-link"
+          >
             Explorer la boutique
           </a>
 
@@ -429,14 +644,19 @@
 
       <div class="container cta-content">
 
-        <p class="eyebrow">FENVA BEAUTY</p>
+        <p class="eyebrow">
+          FENVA BEAUTY
+        </p>
 
         <h2>
           Votre routine.
           Votre éclat.
         </h2>
 
-        <a href="#boutique" class="button button-light">
+        <a
+          href="#boutique"
+          class="button button-light"
+        >
           Découvrir les produits
         </a>
 
@@ -450,15 +670,30 @@
   <!-- =========================
        FOOTER
   ========================== -->
-  <footer class="footer" id="contact">
+  <footer
+    class="footer"
+    id="contact"
+  >
 
     <div class="container footer-grid">
 
+
       <div class="footer-brand">
 
-        <a href="#accueil" class="logo footer-logo">
-          <span class="logo-main">FENVA</span>
-          <span class="logo-sub">BEAUTY</span>
+        <a
+          href="#accueil"
+          class="logo footer-logo"
+          aria-label="FENVA BEAUTY - Accueil"
+        >
+
+          <span class="logo-main">
+            FENVA
+          </span>
+
+          <span class="logo-sub">
+            BEAUTY
+          </span>
+
         </a>
 
         <p>
@@ -470,29 +705,51 @@
 
       <div class="footer-column">
 
-        <h3>Boutique</h3>
+        <h3>
+          Boutique
+        </h3>
 
-        <a href="#categories">Catégories</a>
-        <a href="#nouveautes">Nouveautés</a>
-        <a href="#promotions">Promotions</a>
-        <a href="#boutique">Tous les produits</a>
+        <a href="#categories">
+          Catégories
+        </a>
+
+        <a href="#nouveautes">
+          Nouveautés
+        </a>
+
+        <a href="#promotions">
+          Promotions
+        </a>
+
+        <a href="#boutique">
+          Tous les produits
+        </a>
 
       </div>
 
 
       <div class="footer-column">
 
-        <h3>Informations</h3>
+        <h3>
+          Informations
+        </h3>
 
-        <a href="#a-propos">À propos</a>
-        <a href="#contact">Contact</a>
+        <a href="#a-propos">
+          À propos
+        </a>
+
+        <a href="#contact">
+          Contact
+        </a>
 
       </div>
 
 
       <div class="footer-column">
 
-        <h3>Contact</h3>
+        <h3>
+          Contact
+        </h3>
 
         <p id="footerPhone">
           Téléphone : bientôt disponible
@@ -514,7 +771,9 @@
     <div class="container footer-bottom">
 
       <span>
-        © <span id="currentYear"></span> FENVA BEAUTY
+        ©
+        <span id="currentYear"></span>
+        FENVA BEAUTY
       </span>
 
       <span>
@@ -540,20 +799,29 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="cartTitle"
+      tabindex="-1"
     >
 
       <div class="modal-header">
 
         <div>
-          <p class="eyebrow">Votre sélection</p>
-          <h2 id="cartTitle">Panier</h2>
+
+          <p class="eyebrow">
+            Votre sélection
+          </p>
+
+          <h2 id="cartTitle">
+            Panier
+          </h2>
+
         </div>
+
 
         <button
           type="button"
           class="modal-close"
-          data-close-modal="cartModal"
-          aria-label="Fermer"
+          data-modal-close="cartModal"
+          aria-label="Fermer le panier"
         >
           ×
         </button>
@@ -564,28 +832,54 @@
       <div
         class="cart-items"
         id="cartItems"
+        aria-live="polite"
       >
+
         <div class="empty-cart">
           Votre panier est vide.
         </div>
+
       </div>
 
 
       <div class="cart-summary">
 
         <div class="summary-line">
-          <span>Sous-total</span>
-          <strong id="cartSubtotal">0 HTG</strong>
+
+          <span>
+            Sous-total
+          </span>
+
+          <strong id="cartSubtotal">
+            0 HTG
+          </strong>
+
         </div>
+
 
         <div class="summary-line">
-          <span>Livraison</span>
-          <strong id="cartDelivery">À confirmer</strong>
+
+          <span>
+            Livraison
+          </span>
+
+          <strong id="cartDelivery">
+            À confirmer
+          </strong>
+
         </div>
 
+
         <div class="summary-total">
-          <span>Total</span>
-          <strong id="cartTotal">0 HTG</strong>
+
+          <span>
+            Total
+          </span>
+
+          <strong id="cartTotal">
+            0 HTG
+          </strong>
+
         </div>
 
       </div>
@@ -618,20 +912,29 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="checkoutTitle"
+      tabindex="-1"
     >
 
       <div class="modal-header">
 
         <div>
-          <p class="eyebrow">Commande</p>
-          <h2 id="checkoutTitle">Finaliser</h2>
+
+          <p class="eyebrow">
+            Commande
+          </p>
+
+          <h2 id="checkoutTitle">
+            Finaliser
+          </h2>
+
         </div>
+
 
         <button
           type="button"
           class="modal-close"
-          data-close-modal="checkoutModal"
-          aria-label="Fermer"
+          data-modal-close="checkoutModal"
+          aria-label="Fermer la commande"
         >
           ×
         </button>
@@ -644,6 +947,7 @@
         <div class="form-grid">
 
           <div class="form-group">
+
             <label for="customerName">
               Nom complet
             </label>
@@ -655,10 +959,12 @@
               required
               autocomplete="name"
             >
+
           </div>
 
 
           <div class="form-group">
+
             <label for="customerPhone">
               Téléphone
             </label>
@@ -670,6 +976,7 @@
               required
               autocomplete="tel"
             >
+
           </div>
 
         </div>
@@ -703,6 +1010,7 @@
             name="payment_method"
             required
           >
+
             <option value="">
               Sélectionner
             </option>
@@ -727,10 +1035,15 @@
         <div class="checkout-summary">
 
           <div>
-            <span>Total de la commande</span>
+
+            <span>
+              Total de la commande
+            </span>
+
             <strong id="checkoutTotal">
               0 HTG
             </strong>
+
           </div>
 
         </div>
@@ -740,6 +1053,7 @@
           class="form-message hidden"
           id="checkoutMessage"
           role="alert"
+          aria-live="assertive"
         ></div>
 
 
@@ -760,8 +1074,6 @@
 
   <!-- =========================
        ADMIN LOGIN
-       Le mot de passe sera vérifié
-       par le serveur.
   ========================== -->
   <div
     class="modal-overlay"
@@ -774,20 +1086,29 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="adminLoginTitle"
+      tabindex="-1"
     >
 
       <div class="modal-header">
 
         <div>
-          <p class="eyebrow">Espace sécurisé</p>
-          <h2 id="adminLoginTitle">Administration</h2>
+
+          <p class="eyebrow">
+            Espace sécurisé
+          </p>
+
+          <h2 id="adminLoginTitle">
+            Administration
+          </h2>
+
         </div>
+
 
         <button
           type="button"
           class="modal-close"
-          data-close-modal="adminLoginModal"
-          aria-label="Fermer"
+          data-modal-close="adminLoginModal"
+          aria-label="Fermer l'administration"
         >
           ×
         </button>
@@ -835,6 +1156,7 @@
           class="form-message hidden"
           id="adminLoginMessage"
           role="alert"
+          aria-live="assertive"
         ></div>
 
 
@@ -867,18 +1189,23 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="productModalTitle"
+      tabindex="-1"
     >
 
       <button
         type="button"
         class="modal-close"
-        data-close-modal="productModal"
-        aria-label="Fermer"
+        data-modal-close="productModal"
+        aria-label="Fermer le produit"
       >
         ×
       </button>
 
-      <div id="productModalContent"></div>
+
+      <div
+        id="productModalContent"
+        data-product-modal-content
+      ></div>
 
     </div>
 
@@ -897,9 +1224,22 @@
 
 
   <!-- =========================
-       SCRIPTS
+       ACCESSIBILITÉ
   ========================== -->
-  <script src="js/app.js" defer></script>
+  <span
+    class="sr-only"
+    aria-hidden="true"
+  ></span>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+  <script
+    src="js/app.js"
+    defer
+  ></script>
 
 </body>
 </html>
+```
