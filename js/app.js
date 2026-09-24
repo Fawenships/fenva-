@@ -1,3 +1,4 @@
+```javascript
 "use strict";
 
 /* =========================================================
@@ -23,7 +24,7 @@ const API = {
 };
 
 /* =========================================================
-   ÉTAT DE L'APPLICATION
+   ÉTAT
 ========================================================= */
 
 const state = {
@@ -40,15 +41,14 @@ const state = {
 };
 
 /* =========================================================
-   SÉLECTEURS DOM
+   SÉLECTEURS
 ========================================================= */
 
 const $ = (selector) =>
   document.querySelector(selector);
 
-const $$ = (selector) => [
-  ...document.querySelectorAll(selector)
-];
+const $$ = (selector) =>
+  [...document.querySelectorAll(selector)];
 
 /* =========================================================
    INITIALISATION
@@ -73,7 +73,16 @@ async function initializeApp() {
   loadCart();
   renderCart();
 
-  await loadStoreData();
+  /*
+    Le chargement de l'API ne doit jamais empêcher
+    l'affichage de la page d'accueil.
+  */
+  loadStoreData().catch((error) => {
+    console.warn(
+      "Chargement distant indisponible :",
+      error
+    );
+  });
 }
 
 /* =========================================================
@@ -137,68 +146,80 @@ async function loadStoreData() {
 
   showProductsLoading();
 
+  /* -------------------------------------------------------
+     PRODUITS
+  ------------------------------------------------------- */
+
   try {
-    const productResponse =
-      await apiRequest(
-        API.products
-      );
+    const response =
+      await apiRequest(API.products);
 
     state.products =
-      normalizeProducts(
-        productResponse
-      );
-
-    try {
-      const settingsResponse =
-        await apiRequest(
-          API.settings
-        );
-
-      state.settings =
-        settingsResponse?.settings ||
-        settingsResponse ||
-        {};
-
-      applyStoreSettings();
-
-    } catch (error) {
-      console.warn(
-        "Paramètres non disponibles :",
-        error.message
-      );
-    }
-
-    try {
-      const promotionResponse =
-        await apiRequest(
-          API.promotion
-        );
-
-      state.promotion =
-        promotionResponse?.promotion ||
-        promotionResponse ||
-        null;
-
-    } catch (error) {
-      console.warn(
-        "Promotions non disponibles :",
-        error.message
-      );
-    }
-
-    applyFilters();
+      normalizeProducts(response);
 
   } catch (error) {
-    console.error(
-      "Erreur de chargement des produits :",
-      error
+    console.warn(
+      "Serveur des produits indisponible pour le moment :",
+      error.message
     );
 
-    showProductsError();
-
-  } finally {
-    state.isLoadingProducts = false;
+    /*
+      Important :
+      On garde un tableau vide afin que le reste
+      de la page puisse continuer à fonctionner.
+    */
+    state.products = [];
   }
+
+  /* -------------------------------------------------------
+     PARAMÈTRES
+  ------------------------------------------------------- */
+
+  try {
+    const response =
+      await apiRequest(API.settings);
+
+    state.settings =
+      response?.settings ||
+      response ||
+      {};
+
+    applyStoreSettings();
+
+  } catch (error) {
+    console.warn(
+      "Paramètres non disponibles pour le moment :",
+      error.message
+    );
+
+    state.settings = {};
+  }
+
+  /* -------------------------------------------------------
+     PROMOTIONS
+  ------------------------------------------------------- */
+
+  try {
+    const response =
+      await apiRequest(API.promotion);
+
+    state.promotion =
+      response?.promotion ||
+      response ||
+      null;
+
+  } catch (error) {
+    console.warn(
+      "Promotions non disponibles pour le moment :",
+      error.message
+    );
+
+    state.promotion = null;
+  }
+
+  applyFilters();
+
+  state.isLoadingProducts = false;
 }
 
 /* =========================================================
@@ -210,12 +231,10 @@ function normalizeProducts(response) {
 
   if (Array.isArray(response)) {
     products = response;
-
   } else if (
     Array.isArray(response?.products)
   ) {
     products = response.products;
-
   } else if (
     Array.isArray(response?.data)
   ) {
@@ -374,8 +393,21 @@ function setupNavigation() {
   button.addEventListener(
     "click",
     () => {
-      navigation.classList.toggle(
-        "open"
+      const isOpen =
+        navigation.classList.toggle(
+          "open"
+        );
+
+      button.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      button.setAttribute(
+        "aria-label",
+        isOpen
+          ? "Fermer le menu"
+          : "Ouvrir le menu"
       );
     }
   );
@@ -388,9 +420,95 @@ function setupNavigation() {
           navigation.classList.remove(
             "open"
           );
+
+          button.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          button.setAttribute(
+            "aria-label",
+            "Ouvrir le menu"
+          );
         }
       );
     });
+
+  /*
+    Fermer le menu lorsqu'on clique
+    en dehors de la navigation.
+  */
+  document.addEventListener(
+    "click",
+    (event) => {
+      if (
+        !navigation.classList.contains(
+          "open"
+        )
+      ) {
+        return;
+      }
+
+      if (
+        navigation.contains(
+          event.target
+        ) ||
+        button.contains(
+          event.target
+        )
+      ) {
+        return;
+      }
+
+      navigation.classList.remove(
+        "open"
+      );
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      button.setAttribute(
+        "aria-label",
+        "Ouvrir le menu"
+      );
+    }
+  );
+
+  /*
+    Fermer le menu avec Escape.
+  */
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      if (
+        event.key !== "Escape"
+      ) {
+        return;
+      }
+
+      if (
+        navigation.classList.contains(
+          "open"
+        )
+      ) {
+        navigation.classList.remove(
+          "open"
+        );
+
+        button.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        button.setAttribute(
+          "aria-label",
+          "Ouvrir le menu"
+        );
+      }
+    }
+  );
 }
 
 /* =========================================================
@@ -398,18 +516,42 @@ function setupNavigation() {
 ========================================================= */
 
 function setupModals() {
-  $$("[data-close-modal]")
+
+  /*
+    Ouverture des modales
+  */
+  $$("[data-modal-open]")
     .forEach((button) => {
       button.addEventListener(
         "click",
         () => {
-          closeModal(
-            button.dataset.closeModal
-          );
+          const modalId =
+            button.dataset.modalOpen;
+
+          openModal(modalId);
         }
       );
     });
 
+  /*
+    Fermeture des modales
+  */
+  $$("[data-modal-close]")
+    .forEach((button) => {
+      button.addEventListener(
+        "click",
+        () => {
+          const modalId =
+            button.dataset.modalClose;
+
+          closeModal(modalId);
+        }
+      );
+    });
+
+  /*
+    Clic sur l'arrière-plan
+  */
   $$(".modal-overlay")
     .forEach((overlay) => {
       overlay.addEventListener(
@@ -426,6 +568,9 @@ function setupModals() {
       );
     });
 
+  /*
+    Touche Escape
+  */
   document.addEventListener(
     "keydown",
     (event) => {
@@ -455,6 +600,34 @@ function openModal(id) {
     return;
   }
 
+  /*
+    Fermer le menu mobile avant
+    d'ouvrir une modale.
+  */
+  const navigation =
+    $("#mainNavigation");
+
+  const menuButton =
+    $("#mobileMenuButton");
+
+  if (navigation) {
+    navigation.classList.remove(
+      "open"
+    );
+  }
+
+  if (menuButton) {
+    menuButton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    menuButton.setAttribute(
+      "aria-label",
+      "Ouvrir le menu"
+    );
+  }
+
   modal.classList.add("open");
 
   modal.setAttribute(
@@ -465,6 +638,14 @@ function openModal(id) {
   document.body.classList.add(
     "modal-open"
   );
+
+  /*
+    Accessibilité :
+    placer le focus sur la modale.
+  */
+  requestAnimationFrame(() => {
+    modal.focus();
+  });
 }
 
 function closeModal(id) {
@@ -529,6 +710,8 @@ function setupSearch() {
           ?.scrollIntoView({
             behavior: "smooth"
           });
+
+        input.focus();
       }
     );
   }
@@ -610,22 +793,11 @@ function setupFilters() {
             state.category =
               "all";
 
-            state.search = "";
-
-            const searchInput =
-              $("#searchInput");
-
-            if (searchInput) {
-              searchInput.value = "";
-            }
+            state.search =
+              "";
 
             state.sort =
               "newest";
-
-            if (sortProducts) {
-              sortProducts.value =
-                "newest";
-            }
           }
 
           if (
@@ -634,14 +806,32 @@ function setupFilters() {
             state.category =
               "all";
 
-            state.search = "";
+            state.search =
+              "";
+          }
 
-            const searchInput =
-              $("#searchInput");
+          const searchInput =
+            $("#searchInput");
 
-            if (searchInput) {
-              searchInput.value = "";
-            }
+          const categoryFilter =
+            $("#categoryFilter");
+
+          const sortSelect =
+            $("#sortProducts");
+
+          if (searchInput) {
+            searchInput.value =
+              state.search;
+          }
+
+          if (categoryFilter) {
+            categoryFilter.value =
+              state.category;
+          }
+
+          if (sortSelect) {
+            sortSelect.value =
+              state.sort;
           }
 
           applyFilters();
@@ -677,11 +867,13 @@ function resetAllFilters() {
   }
 
   if (categoryFilter) {
-    categoryFilter.value = "all";
+    categoryFilter.value =
+      "all";
   }
 
   if (sortProducts) {
-    sortProducts.value = "default";
+    sortProducts.value =
+      "default";
   }
 
   applyFilters();
@@ -699,6 +891,10 @@ function setupCategories() {
         () => {
           const category =
             card.dataset.category;
+
+          if (!category) {
+            return;
+          }
 
           state.category =
             category;
@@ -726,7 +922,7 @@ function setupCategories() {
 }
 
 /* =========================================================
-   APPLICATION DES FILTRES
+   FILTRAGE
 ========================================================= */
 
 function applyFilters() {
@@ -743,7 +939,10 @@ function applyFilters() {
           const searchable = [
             product.name,
             product.description,
-            product.category
+            product.category,
+            formatCategory(
+              product.category
+            )
           ]
             .join(" ")
             .toLowerCase();
@@ -832,7 +1031,7 @@ function sortProductList(
 }
 
 /* =========================================================
-   AFFICHAGE DES PRODUITS
+   PRODUITS
 ========================================================= */
 
 function renderProducts() {
@@ -852,16 +1051,26 @@ function renderProducts() {
   if (!products.length) {
     container.innerHTML = "";
 
-    emptyState?.classList.remove(
-      "hidden"
-    );
+    if (emptyState) {
+      emptyState.classList.remove(
+        "hidden"
+      );
+
+      emptyState.hidden =
+        false;
+    }
 
     return;
   }
 
-  emptyState?.classList.add(
-    "hidden"
-  );
+  if (emptyState) {
+    emptyState.classList.add(
+      "hidden"
+    );
+
+    emptyState.hidden =
+      true;
+  }
 
   container.innerHTML =
     products
@@ -1020,7 +1229,9 @@ function productCardTemplate(
         <div class="product-price">
 
           <span class="product-price-current">
-            ${formatPrice(product.price)}
+            ${formatPrice(
+              product.price
+            )}
           </span>
 
           ${
@@ -1113,7 +1324,7 @@ function bindProductButtons(
 }
 
 /* =========================================================
-   MODAL PRODUIT
+   MODALE PRODUIT
 ========================================================= */
 
 function openProductModal(
@@ -1298,9 +1509,7 @@ function loadCart() {
     const parsed =
       JSON.parse(saved);
 
-    if (
-      !Array.isArray(parsed)
-    ) {
+    if (!Array.isArray(parsed)) {
       state.cart = [];
       return;
     }
@@ -1363,9 +1572,7 @@ function addToCart(
     return;
   }
 
-  if (
-    product.stock <= 0
-  ) {
+  if (product.stock <= 0) {
     showToast(
       "Ce produit est actuellement indisponible."
     );
@@ -1432,9 +1639,7 @@ function changeCartQuantity(
   const newQuantity =
     item.quantity + change;
 
-  if (
-    newQuantity <= 0
-  ) {
+  if (newQuantity <= 0) {
     removeFromCart(
       productId
     );
@@ -1522,9 +1727,7 @@ function renderCart() {
             )
           );
 
-        if (
-          quantity <= 0
-        ) {
+        if (quantity <= 0) {
           return null;
         }
 
@@ -1556,7 +1759,6 @@ function renderCart() {
         Votre panier est vide.
       </div>
     `;
-
   } else {
     container.innerHTML =
       validItems
@@ -1637,6 +1839,7 @@ function cartItemTemplate(
             type="button"
             data-cart-action="decrease"
             data-product-id="${escapeAttribute(product.id)}"
+            aria-label="Diminuer la quantité"
           >
             −
           </button>
@@ -1649,6 +1852,7 @@ function cartItemTemplate(
             type="button"
             data-cart-action="increase"
             data-product-id="${escapeAttribute(product.id)}"
+            aria-label="Augmenter la quantité"
           >
             +
           </button>
@@ -1756,9 +1960,7 @@ function openCheckout() {
   const total =
     calculateCartTotal();
 
-  if (
-    total <= 0
-  ) {
+  if (total <= 0) {
     showToast(
       "Votre panier ne contient aucun produit disponible."
     );
@@ -1823,9 +2025,7 @@ async function handleCheckoutSubmit(
     return;
   }
 
-  if (
-    !state.cart.length
-  ) {
+  if (!state.cart.length) {
     showFormMessage(
       message,
       "Votre panier est vide."
@@ -1958,22 +2158,8 @@ async function handleCheckoutSubmit(
 ========================================================= */
 
 function setupAdminLogin() {
-  const adminButton =
-    $("#adminButton");
-
   const form =
     $("#adminLoginForm");
-
-  if (adminButton) {
-    adminButton.addEventListener(
-      "click",
-      () => {
-        openModal(
-          "adminLoginModal"
-        );
-      }
-    );
-  }
 
   if (form) {
     form.addEventListener(
@@ -2044,9 +2230,7 @@ async function handleAdminLogin(
         }
       );
 
-    if (
-      response?.token
-    ) {
+    if (response?.token) {
       sessionStorage.setItem(
         "fenva_admin_token",
         response.token
@@ -2146,7 +2330,7 @@ function updateProductCount() {
 }
 
 /* =========================================================
-   CHARGEMENT
+   CHARGEMENT VISUEL
 ========================================================= */
 
 function showProductsLoading() {
@@ -2174,8 +2358,6 @@ function showProductsError() {
   const message = `
     <div class="products-loading">
       Impossible de charger les produits pour le moment.
-      <br>
-      Vérifiez la connexion au serveur.
     </div>
   `;
 
@@ -2205,7 +2387,7 @@ function emptyProductsMessage(
 }
 
 /* =========================================================
-   FORM MESSAGES
+   FORMULAIRES
 ========================================================= */
 
 function showFormMessage(
@@ -2357,13 +2539,11 @@ function escapeHTML(
 function escapeAttribute(
   value
 ) {
-  return escapeHTML(
-    value
-  );
+  return escapeHTML(value);
 }
 
 /* =========================================================
-   EXPOSITION MINIMALE
+   API PUBLIQUE
 ========================================================= */
 
 window.FenvaBeauty = {
@@ -2391,3 +2571,4 @@ window.FenvaBeauty = {
     );
   }
 };
+```
