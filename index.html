@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FENVA BEAUTY — Boutique de cosmétiques</title>
+<meta name="description" content="FENVA BEAUTY — soins du visage, du corps et des cheveux, parfums, maquillage et accessoires beauté.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#faf6f0;--white:#fffdf9;--nude:#eadfd2;--beige:#d9c7b2;--brown:#3b2a20;--muted:#7a6a5d;--gold:#b08d57;--gold-dark:#8a6a36;--line:#e4d8ca;--danger:#9c3d2e;--serif:"Cormorant Garamond",Georgia,serif}
+[hidden]{display:none!important}
+body{font-family:Jost,"Helvetica Neue",Arial,sans-serif;background:var(--cream);color:var(--brown);line-height:1.65}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.topbar{background:var(--brown);color:var(--nude);text-align:center;font-size:13px;padding:8px 16px}
+.header{position:sticky;top:0;z-index:1000;background:rgba(250,246,240,.97);border-bottom:1px solid var(--line)}
+.header-inner{max-width:1200px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:24px}
+.brand{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:.14em;white-space:nowrap}
+.search{flex:1;max-width:400px;margin-left:auto}
+.search input{width:100%;height:42px;border:1px solid var(--line);background:var(--white);border-radius:4px;padding:0 14px;outline:none}
+.search input:focus{border-color:var(--gold)}
+.header-actions{display:flex;align-items:center;gap:12px}
+.link-btn{background:none;border:none;color:var(--muted);font-size:14px;padding:8px 4px}
+.link-btn:hover{color:var(--brown)}
+.cart-btn{display:flex;align-items:center;gap:8px;height:42px;padding:0 16px;border:1px solid var(--brown);background:transparent;border-radius:4px;font-weight:500;transition:background .2s,color .2s}
+.cart-btn:hover{background:var(--brown);color:var(--cream)}
+.cart-count{min-width:22px;height:22px;border-radius:11px;background:var(--gold);color:var(--brown);font-size:12px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;padding:0 6px}
+.nav-inner{max-width:1200px;margin:auto;padding:0 24px;display:flex;gap:28px;overflow-x:auto}
+.nav a{padding:8px 0 10px;font-size:15px;color:var(--muted);white-space:nowrap;border-bottom:2px solid transparent}
+.nav a:hover{color:var(--brown);border-color:var(--gold)}
+
+.btn{border:1px solid var(--brown);border-radius:4px;padding:12px 24px;font-weight:500;background:transparent;transition:background .2s,color .2s}
+.btn-primary{background:var(--brown);color:var(--cream)}
+.btn-primary:hover{background:#231710}
+.btn-outline:hover{background:var(--brown);color:var(--cream)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--brown)}
+.btn-gold:hover{background:#c29f66}
+.btn-block{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+.hero{max-width:1200px;margin:32px auto 0;padding:0 24px}
+.hero-box{background:var(--nude);border-radius:6px;padding:64px;min-height:460px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;overflow:hidden}
+.hero h1{font-size:68px;letter-spacing:.08em;margin-bottom:16px}
+.hero p{font-size:19px;color:var(--muted);max-width:460px;margin-bottom:32px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.arch{justify-self:center;width:min(270px,100%);aspect-ratio:3/4;background:var(--beige);border-radius:135px 135px 0 0;position:relative}
+.arch::after{content:"";position:absolute;inset:14px;border:1px solid var(--gold);border-radius:121px 121px 0 0}
+
+.section{max-width:1200px;margin:80px auto 0;padding:0 24px}
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:28px}
+.section-title{font-size:38px}
+.section-subtitle{color:var(--muted)}
+
+.categories{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.category{background:var(--nude);border:1px solid transparent;border-radius:4px;padding:26px 18px;min-height:140px;display:flex;flex-direction:column;justify-content:flex-end;text-align:left;transition:background .2s,border-color .2s}
+.category:hover{background:var(--beige);border-color:var(--gold)}
+.category h3{font-size:23px}
+.category span{font-size:13px;color:var(--muted)}
+
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 22px}
+.product{display:flex;flex-direction:column}
+.product-image{aspect-ratio:4/5;background:var(--nude);border-radius:4px;overflow:hidden;position:relative}
+.product-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.product:hover .product-image img{transform:scale(1.03)}
+.badges{position:absolute;top:10px;left:10px;display:flex;gap:6px}
+.badge{background:var(--brown);color:var(--cream);font-size:12px;padding:2px 10px;border-radius:2px}
+.badge.gold{background:var(--gold);color:var(--brown)}
+.product-content{display:flex;flex-direction:column;flex:1;padding-top:14px}
+.product-category{font-size:13px;color:var(--gold-dark)}
+.product-name{font-size:22px;margin:2px 0 4px}
+.product-description{color:var(--muted);font-size:14px;flex:1;margin-bottom:10px}
+.product-price{font-weight:500;font-size:17px;margin-bottom:12px}
+.old{color:var(--muted);text-decoration:line-through;font-weight:400;font-size:14px;margin-left:8px}
+.stock-note{font-size:13px;color:var(--danger);margin:-6px 0 10px}
+
+.product-controls{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:28px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{border:1px solid var(--line);background:transparent;border-radius:20px;padding:8px 16px;font-size:14px;transition:background .2s,color .2s}
+.filter-btn:hover{border-color:var(--brown)}
+.filter-btn.active{background:var(--brown);color:var(--cream);border-color:var(--brown)}
+.sort-select{border:1px solid var(--line);background:var(--white);border-radius:4px;padding:8px 12px}
+
+.promo-box{background:var(--brown);color:var(--cream);border-radius:6px;padding:36px 40px;display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:28px}
+.promo-box h2{font-size:34px}
+.promo-box p{color:var(--nude)}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.about p{color:var(--muted);margin-top:14px;max-width:520px}
+.points{display:grid;gap:22px}
+.point{border-left:2px solid var(--gold);padding-left:18px}
+.point h3{font-size:22px}
+.point p{margin:0;font-size:15px}
+
+.cta{background:var(--nude);border-radius:6px;text-align:center;padding:64px 24px}
+.cta h2{font-size:40px;margin-bottom:10px}
+.cta p{color:var(--muted);margin-bottom:26px}
+
+.footer{background:var(--brown);color:var(--nude);margin-top:80px;padding:56px 24px 24px}
+.footer-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.footer h3{font-size:24px;margin-bottom:12px;color:var(--cream)}
+.footer p,.footer button{color:var(--beige);font-size:15px}
+.footer button{display:block;background:none;border:none;padding:2px 0;text-align:left}
+.footer button:hover{color:var(--cream)}
+.footer-bottom{max-width:1200px;margin:36px auto 0;padding-top:20px;border-top:1px solid #5a4536;text-align:center;font-size:13px;color:var(--beige)}
+
+.overlay{position:fixed;inset:0;background:rgba(59,42,32,.55);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
+.overlay.active{display:flex;animation:fade .2s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:var(--white);border-radius:6px;padding:28px;position:relative}
+.modal.large{max-width:1100px}
+.modal h2{font-size:30px;margin-bottom:14px}
+.close-btn{position:absolute;top:12px;right:12px;width:36px;height:36px;border:none;background:var(--nude);border-radius:50%;font-size:20px;line-height:1}
+.cart-item{display:flex;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid var(--line)}
+.cart-item-info{flex:1}
+.quantity-controls{display:flex;align-items:center;gap:8px}
+.quantity-controls button{width:30px;height:30px;border:1px solid var(--line);background:var(--white);border-radius:4px}
+.quantity-controls .remove{width:auto;padding:0 10px;font-size:13px;color:var(--danger)}
+.cart-total{display:flex;justify-content:space-between;font-size:20px;font-weight:500;padding:20px 0}
+.empty{text-align:center;padding:40px 20px;color:var(--muted);grid-column:1/-1}
+
+.form-group{margin-bottom:15px}
+.form-group label{display:block;font-weight:500;margin-bottom:6px;font-size:15px}
+.form-group input,.form-group select,.form-group textarea{width:100%;border:1px solid var(--line);background:var(--white);border-radius:4px;padding:11px;outline:none}
+.form-group input[type=checkbox]{width:auto;margin-right:8px}
+.form-group textarea{min-height:100px;resize:vertical}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
+
+.admin-header{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}
+.admin-header p{color:var(--muted)}
+.admin-security{background:var(--nude);border:1px solid var(--beige);padding:14px;border-radius:4px;margin-bottom:20px;font-size:14px}
+.admin-tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:20px}
+.admin-tab{border:none;background:none;padding:11px 15px;border-bottom:3px solid transparent}
+.admin-tab.active{color:var(--gold-dark);border-bottom-color:var(--gold)}
+.admin-panel{display:none}
+.admin-panel.active{display:block}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}
+.stat{background:var(--cream);border:1px solid var(--line);padding:18px;border-radius:4px}
+.stat-number{font-family:var(--serif);font-size:28px;font-weight:600}
+.stat-label{color:var(--muted);font-size:13px}
+.admin-table{width:100%;border-collapse:collapse}
+.admin-table th,.admin-table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
+.admin-table th{background:var(--cream)}
+.admin-actions{display:flex;gap:6px;flex-wrap:wrap}
+.small-btn{border:none;padding:7px 12px;border-radius:4px;font-size:13px}
+.edit-btn{background:var(--nude)}
+.delete-btn{background:#f1dcd6;color:var(--danger)}
+
+.toast{position:fixed;right:20px;bottom:20px;background:var(--brown);color:var(--cream);padding:13px 18px;border-radius:4px;z-index:5000;display:none;max-width:340px}
+.toast.show{display:block;animation:fade .2s}
+
+@media(max-width:1000px){
+.categories{grid-template-columns:repeat(3,1fr)}
+.products{grid-template-columns:repeat(3,1fr)}
+.hero-box{grid-template-columns:1fr;padding:48px 36px}
+.arch{display:none}
+.stats{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:700px){
+.header-inner{flex-wrap:wrap;gap:12px}
+.brand{font-size:22px}
+.header-actions{margin-left:auto}
+.search{order:3;flex-basis:100%;max-width:none}
+.hero-box{padding:36px 24px;min-height:0}
+.hero h1{font-size:42px}
+.section{margin-top:56px}
+.section-title{font-size:30px}
+.categories,.products{grid-template-columns:repeat(2,1fr)}
+.promo-box{flex-direction:column;align-items:flex-start;padding:28px 24px}
+.about,.footer-inner{grid-template-columns:1fr}
+.stats{grid-template-columns:repeat(2,1fr)}
+.admin-table{display:block;overflow-x:auto}
+}
+@media(max-width:420px){
+.products{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">Paiement par MonCash, NatCash ou à la livraison</div>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="#accueil" class="brand site-name" id="brandName">FENVA BEAUTY</a>
+    <div class="search">
+      <input type="search" id="searchInput" placeholder="Rechercher un produit" aria-label="Rechercher un produit">
+    </div>
+    <div class="header-actions">
+      <button class="link-btn" onclick="openAdminLogin()">Administration</button>
+      <button class="cart-btn" onclick="openCart()" aria-label="Ouvrir le panier">Panier <span class="cart-count" id="cartCount">0</span></button>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#accueil">Accueil</a>
+      <a href="#categories" onclick="goToSection('categories');return false;">Catégories</a>
+      <a href="#nouveautes" onclick="goToSection('nouveautes');return false;">Nouveautés</a>
+      <a href="#promotions" onclick="goToSection('promotions');return false;">Promotions</a>
+      <a href="#boutique" onclick="goToSection('boutique');return false;">Boutique</a>
+      <a href="#contact" onclick="goToSection('contact');return false;">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="accueil">
+  <div class="hero-box">
+    <div>
+      <h1 id="heroTitle">FENVA BEAUTY</h1>
+      <p id="heroDescription">Des soins et des produits de beauté choisis pour révéler votre éclat au quotidien.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary" onclick="goToSection('boutique')">Découvrir les produits</button>
+        <button class="btn btn-outline" onclick="goToSection('categories')">Voir les catégories</button>
+      </div>
+    </div>
+    <div class="arch" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="section" id="categories">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">Nos catégories</h2>
+      <p class="section-subtitle">Trouvez rapidement le soin qui vous convient</p>
+    </div>
+  </div>
+  <div class="categories" id="categoriesGrid"></div>
+</section>
+
+<section class="section" id="populaires" hidden>
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">Produits populaires</h2>
+      <p class="section-subtitle">Les favoris de nos clientes</p>
+    </div>
+    <button class="link-btn" onclick="selectCategory('all')">Voir toute la boutique</button>
+  </div>
+  <div class="products" id="popularGrid"></div>
+</section>
+
+<section class="section" id="nouveautes" hidden>
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">Nouveautés</h2>
+      <p class="section-subtitle">Les dernières arrivées en boutique</p>
+    </div>
+  </div>
+  <div class="products" id="newGrid"></div>
+</section>
+
+<section class="section" id="promotions">
+  <div class="promo-box">
+    <div>
+      <h2 id="promotionTitle">Promotion</h2>
+      <p id="promotionDescription">Découvrez nos offres spéciales.</p>
+    </div>
+    <button class="btn btn-gold" onclick="goToSection('boutique')">Profiter de l'offre</button>
+  </div>
+  <div class="products" id="promoGrid"></div>
+</section>
+
+<section class="section" id="boutique">
+  <div class="section-header">
+    <div>
+      <h2 class="section-title">La boutique</h2>
+      <p class="section-subtitle">Tous nos produits, à filtrer par catégorie</p>
+    </div>
+  </div>
+  <div class="product-controls">
+    <div class="filters" id="filters"></div>
+    <select id="sortSelect" class="sort-select" aria-label="Trier les produits">
+      <option value="default">Trier</option>
+      <option value="priceAsc">Prix croissant</option>
+      <option value="priceDesc">Prix décroissant</option>
+      <option value="name">Nom</option>
+    </select>
+  </div>
+  <div class="products" id="productsContainer"><div class="empty">Chargement des produits...</div></div>
+</section>
+
+<section class="section" id="apropos">
+  <div class="about">
+    <div>
+      <h2 class="section-title">À propos de <span class="site-name">FENVA BEAUTY</span></h2>
+      <p>FENVA BEAUTY réunit des soins du visage, du corps et des cheveux, des parfums, du maquillage et des accessoires. Chaque produit est présenté avec une description claire et un prix affiché, pour choisir sans hésiter.</p>
+    </div>
+    <div class="points">
+      <div class="point"><h3>Une sélection resserrée</h3><p>Six catégories, des produits pensés pour un usage quotidien.</p></div>
+      <div class="point"><h3>Paiement au choix</h3><p>MonCash, NatCash ou paiement à la livraison.</p></div>
+      <div class="point"><h3>Une équipe à l'écoute</h3><p>Écrivez-nous ou appelez-nous pour être conseillée dans votre choix.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="cta">
+    <h2>Prenez soin de vous</h2>
+    <p>Parcourez la boutique et ajoutez vos produits préférés au panier.</p>
+    <button class="btn btn-primary" onclick="goToSection('boutique')">Découvrir les produits</button>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <div class="footer-inner">
+    <div>
+      <h3 class="site-name">FENVA BEAUTY</h3>
+      <p>Soins, parfums et maquillage pour révéler votre beauté.</p>
+    </div>
+    <div>
+      <h3>Navigation</h3>
+      <button onclick="goToSection('accueil')">Accueil</button>
+      <button onclick="goToSection('categories')">Catégories</button>
+      <button onclick="goToSection('promotions')">Promotions</button>
+      <button onclick="goToSection('boutique')">Boutique</button>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p id="contactPhone">Contactez-nous pour plus d'informations.</p>
+      <p id="contactEmail"></p>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; <span id="year"></span> <span class="site-name">FENVA BEAUTY</span>. Tous droits réservés.</div>
+</footer>
+
+<div class="overlay" id="cartOverlay">
+  <div class="modal">
+    <button class="close-btn" onclick="closeCart()" aria-label="Fermer">&times;</button>
+    <h2>Mon panier</h2>
+    <div id="cartItems"></div>
+    <div class="cart-total"><span>Total</span><span id="cartTotal">0 HTG</span></div>
+    <button class="btn btn-primary btn-block" onclick="openCheckout()">Passer la commande</button>
+  </div>
+</div>
+
+<div class="overlay" id="checkoutOverlay">
+  <div class="modal">
+    <button class="close-btn" onclick="closeCheckout()" aria-label="Fermer">&times;</button>
+    <h2>Finaliser la commande</h2>
+    <form id="checkoutForm">
+      <div class="form-group"><label for="customerName">Nom complet</label><input type="text" id="customerName" required></div>
+      <div class="form-group"><label for="customerPhone">Téléphone</label><input type="tel" id="customerPhone" required></div>
+      <div class="form-group"><label for="customerAddress">Adresse de livraison</label><textarea id="customerAddress" required></textarea></div>
+      <div class="form-group">
+        <label for="paymentMethod">Mode de paiement</label>
+        <select id="paymentMethod" required>
+          <option value="">Sélectionner</option>
+          <option value="MonCash">MonCash</option>
+          <option value="NatCash">NatCash</option>
+          <option value="À la livraison">À la livraison</option>
+        </select>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Confirmer la commande</button>
+    </form>
+  </div>
+</div>
+
+<div class="overlay" id="adminLoginOverlay">
+  <div class="modal">
+    <button class="close-btn" onclick="closeAdminLogin()" aria-label="Fermer">&times;</button>
+    <h2>Administration</h2>
+    <p style="color:var(--muted);margin:0 0 20px">Espace réservé à l'entreprise</p>
+    <form id="adminLoginForm">
+      <div class="form-group"><label for="adminUsername">Nom d'utilisateur</label><input type="text" id="adminUsername" value="admin" autocomplete="username" required></div>
+      <div class="form-group"><label for="adminPassword">Mot de passe</label><input type="password" id="adminPassword" autocomplete="current-password" required></div>
+      <button class="btn btn-primary btn-block" type="submit">Se connecter</button>
+    </form>
+  </div>
+</div>
+
+<div class="overlay" id="adminOverlay">
+  <div class="modal large">
+    <button class="close-btn" onclick="closeAdmin()" aria-label="Fermer">&times;</button>
+    <div class="admin-header">
+      <div><h2>Tableau de bord</h2><p>Administration de <span class="site-name">FENVA BEAUTY</span></p></div>
+      <button class="small-btn delete-btn" onclick="adminLogout()">Déconnexion</button>
+    </div>
+    <div class="admin-security">Mode local : les modifications sont enregistrées uniquement dans ce navigateur. Les autres visiteurs ne les voient pas tant que le site n'est pas relié à un serveur.</div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="dashboard" onclick="showAdminTab('dashboard')">Tableau de bord</button>
+      <button class="admin-tab" data-tab="products" onclick="showAdminTab('products')">Produits</button>
+      <button class="admin-tab" data-tab="orders" onclick="showAdminTab('orders')">Commandes</button>
+      <button class="admin-tab" data-tab="promotion" onclick="showAdminTab('promotion')">Promotion</button>
+      <button class="admin-tab" data-tab="settings" onclick="showAdminTab('settings')">Paramètres</button>
+    </div>
+
+    <div class="admin-panel active" id="admin-dashboard">
+      <div class="stats">
+        <div class="stat"><div class="stat-number" id="statProducts">0</div><div class="stat-label">Produits</div></div>
+        <div class="stat"><div class="stat-number" id="statActive">0</div><div class="stat-label">Produits actifs</div></div>
+        <div class="stat"><div class="stat-number" id="statOrders">0</div><div class="stat-label">Commandes</div></div>
+        <div class="stat"><div class="stat-number" id="statRevenue">0 HTG</div><div class="stat-label">Chiffre d'affaires</div></div>
+        <div class="stat"><div class="stat-number" id="statStock">0</div><div class="stat-label">Stock</div></div>
+      </div>
+      <p style="color:var(--muted)">Gérez ici les produits, les commandes, la promotion et les informations affichées sur la boutique.</p>
+    </div>
+
+    <div class="admin-panel" id="admin-products">
+      <div style="margin-bottom:20px"><button class="btn btn-primary" onclick="showProductForm()">Ajouter un produit</button></div>
+      <form id="productForm" style="display:none;margin-bottom:25px">
+        <input type="hidden" id="productId">
+        <div class="form-group"><label for="productName">Nom</label><input type="text" id="productName" required></div>
+        <div class="form-group"><label for="productCategory">Catégorie</label><select id="productCategory" required></select></div>
+        <div class="form-group"><label for="productDescription">Description courte</label><textarea id="productDescription"></textarea></div>
+        <div class="form-group"><label for="productPrice">Prix (HTG)</label><input type="number" id="productPrice" min="0" step="0.01" required></div>
+        <div class="form-group"><label for="productOldPrice">Ancien prix, si promotion (HTG)</label><input type="number" id="productOldPrice" min="0" step="0.01"></div>
+        <div class="form-group"><label for="productStock">Stock</label><input type="number" id="productStock" min="0" required></div>
+        <div class="form-group"><label for="productImage">Image (adresse https)</label><input type="url" id="productImage" placeholder="https://..."></div>
+        <div class="form-group"><label><input type="checkbox" id="productActive" checked>Produit actif</label></div>
+        <div class="form-group"><label><input type="checkbox" id="productPromo">En promotion</label></div>
+        <div class="form-group"><label><input type="checkbox" id="productPopular">Produit populaire</label></div>
+        <div class="form-group"><label><input type="checkbox" id="productNew">Nouveauté</label></div>
+        <div class="admin-actions">
+          <button class="btn btn-primary" type="submit" style="flex:1">Enregistrer</button>
+          <button class="small-btn delete-btn" type="button" onclick="cancelProductForm()">Annuler</button>
+        </div>
+      </form>
+      <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>Produit</th><th>Catégorie</th><th>Prix</th><th>Stock</th><th>Statut</th><th>Actions</th></tr></thead>
+          <tbody id="adminProductsTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-panel" id="admin-orders">
+      <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>ID</th><th>Client</th><th>Téléphone</th><th>Total</th><th>Statut</th><th>Date</th></tr></thead>
+          <tbody id="adminOrdersTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-panel" id="admin-promotion">
+      <form id="promotionForm">
+        <div class="form-group"><label for="promotionTitleInput">Titre</label><input type="text" id="promotionTitleInput"></div>
+        <div class="form-group"><label for="promotionDescriptionInput">Description</label><textarea id="promotionDescriptionInput"></textarea></div>
+        <div class="form-group"><label for="promotionActive">Active</label>
+          <select id="promotionActive"><option value="true">Oui</option><option value="false">Non</option></select>
+        </div>
+        <button class="btn btn-primary" type="submit">Enregistrer la promotion</button>
+      </form>
+    </div>
+
+    <div class="admin-panel" id="admin-settings">
+      <form id="settingsForm">
+        <div class="form-group"><label for="settingSiteName">Nom du site</label><input type="text" id="settingSiteName"></div>
+        <div class="form-group"><label for="settingPhone">Téléphone</label><input type="text" id="settingPhone"></div>
+        <div class="form-group"><label for="settingEmail">Email</label><input type="email" id="settingEmail"></div>
+        <div class="form-group"><label for="settingHeroTitle">Titre principal</label><input type="text" id="settingHeroTitle"></div>
+        <div class="form-group"><label for="settingHeroDescription">Phrase d'accroche</label><textarea id="settingHeroDescription"></textarea></div>
+        <button class="btn btn-primary" type="submit">Enregistrer les paramètres</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const CATS=["Soins du visage","Soins du corps","Soins des cheveux","Parfums","Maquillage","Accessoires beauté"];
+const CAT_TEXT={"Soins du visage":"Sérums et crèmes","Soins du corps":"Hydratation et huiles","Soins des cheveux":"Masques et huiles","Parfums":"Eaux de parfum","Maquillage":"Teint et lèvres","Accessoires beauté":"Pinceaux et outils"};
+const $=id=>document.getElementById(id);
+const safeParse=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+
+let products=[],currentCategory="all",cart=safeParse("fenva_cart",[]),settings={},promotion={},editingProductId=null;
+
+/* =====================================================
+   MODE LOCAL (sans serveur) : localStorage sert de base
+   de données. api() garde la même forme qu'un vrai appel
+   serveur pour pouvoir être remplacée plus tard par fetch.
+===================================================== */
+const ADMIN_USER="admin",ADMIN_PASS="fenva2026",DB_KEY="fenva_local_db",SESSION_KEY="fenva_admin_session";
+
+const P=(id,name,category,description,price,stock,kw,f={})=>({id,name,category,description,price,stock,image:`https://loremflickr.com/600/750/${kw}?lock=${id}`,active:true,promo:false,popular:false,is_new:false,old_price:0,...f});
+
+function defaultDB(){
+  return{
+    nextProductId:11,nextOrderId:1,
+    products:[
+      P(1,"Sérum éclat à la vitamine C","Soins du visage","Un sérum léger pour unifier et illuminer le teint.",2800,20,"skincare,serum",{popular:true,promo:true,old_price:3500}),
+      P(2,"Crème hydratante visage","Soins du visage","Hydratation quotidienne, texture fondante non grasse.",2200,25,"face,cream",{popular:true,is_new:true}),
+      P(3,"Beurre de karité pour le corps","Soins du corps","Nourrit et adoucit les peaux sèches.",1500,30,"body,butter",{popular:true}),
+      P(4,"Huile de massage","Soins du corps","Huile parfumée pour un moment de détente.",1800,15,"massage,oil",{is_new:true}),
+      P(5,"Masque nourrissant cheveux","Soins des cheveux","Redonne souplesse et brillance aux cheveux secs.",1900,18,"hair,mask",{popular:true}),
+      P(6,"Huile capillaire","Soins des cheveux","Protège les pointes et facilite le coiffage.",1600,22,"hair,oil",{is_new:true,promo:true,old_price:2000}),
+      P(7,"Eau de parfum florale, 50 ml","Parfums","Un parfum floral et délicat pour tous les jours.",6500,10,"perfume,bottle",{popular:true,is_new:true}),
+      P(8,"Rouge à lèvres nude","Maquillage","Couleur naturelle, confortable toute la journée.",1400,40,"lipstick,nude",{is_new:true}),
+      P(9,"Fond de teint fluide","Maquillage","Couvrance modulable, fini naturel.",2400,16,"foundation,makeup"),
+      P(10,"Set de pinceaux maquillage","Accessoires beauté","Cinq pinceaux pour le teint et les yeux.",2600,12,"makeup,brushes",{promo:true,old_price:3200})
+    ],
+    orders:[],
+    settings:{site_name:"FENVA BEAUTY",phone:"+509 00 00 0000",email:"",hero_title:"FENVA BEAUTY",hero_description:"Des soins et des produits de beauté choisis pour révéler votre éclat au quotidien."},
+    promotion:{title:"Promotion en cours",description:"Des réductions sur une sélection de soins et d'accessoires.",active:true}
+  };
+}
+function saveDB(db){localStorage.setItem(DB_KEY,JSON.stringify(db))}
+function loadDB(){
+  try{const raw=localStorage.getItem(DB_KEY);if(raw)return JSON.parse(raw)}catch(e){}
+  const d=defaultDB();saveDB(d);return d;
+}
+const isAdmin=()=>sessionStorage.getItem(SESSION_KEY)==="true";
+
+function cleanProduct(b){
+  const price=Number(b.price),stock=Number(b.stock),old=Number(b.old_price);
+  if(!b.name||!CATS.includes(b.category)||!Number.isFinite(price)||price<0||!Number.isInteger(stock)||stock<0)throw new Error("Données du produit invalides.");
+  return{name:b.name,category:b.category,description:b.description||"",price,stock,image:b.image||"",active:b.active!==false,promo:!!b.promo,popular:!!b.popular,is_new:!!b.is_new,old_price:old>0?old:0};
+}
+
+async function api(url,o={}){
+  const m=(o.method||"GET").toUpperCase(),b=o.body?JSON.parse(o.body):{},db=loadDB();let x;
+  if(url.startsWith("/api/admin/")&&url!=="/api/admin/login"&&url!=="/api/admin/logout"&&!isAdmin())throw new Error("Non autorisé. Veuillez vous connecter.");
+
+  if(url==="/api/products"&&m==="GET")return db.products.filter(p=>p.active);
+  if(url==="/api/settings"&&m==="GET")return db.settings;
+  if(url==="/api/promotion"&&m==="GET")return{promotion:db.promotion};
+
+  if(url==="/api/orders"&&m==="POST"){
+    const{customer_name,customer_phone,customer_address,payment_method,items}=b;
+    if(!customer_name||!customer_phone||!customer_address||!payment_method)throw new Error("Veuillez remplir tous les champs du formulaire.");
+    if(!Array.isArray(items)||!items.length)throw new Error("Le panier est vide.");
+    let total=0;
+    for(const i of items){
+      const p=db.products.find(p=>Number(p.id)===Number(i.id));
+      if(!p)throw new Error("Produit introuvable (id "+i.id+").");
+      const q=Number(i.quantity||0);
+      if(q<=0||q>p.stock)throw new Error('Stock insuffisant pour "'+p.name+'".');
+      total+=p.price*q;
+    }
+    items.forEach(i=>{db.products.find(p=>Number(p.id)===Number(i.id)).stock-=Number(i.quantity)});
+    const order={id:db.nextOrderId++,customer_name,customer_phone,customer_address,payment_method,items,total,status:"nouvelle",created_at:new Date().toISOString()};
+    db.orders.push(order);saveDB(db);return{order_id:order.id};
+  }
+
+  if(url==="/api/admin/login"&&m==="POST"){
+    if(b.username===ADMIN_USER&&b.password===ADMIN_PASS){sessionStorage.setItem(SESSION_KEY,"true");return{ok:true}}
+    throw new Error("Nom d'utilisateur ou mot de passe incorrect.");
+  }
+  if(url==="/api/admin/me"&&m==="GET")return{ok:true,username:ADMIN_USER};
+  if(url==="/api/admin/logout"&&m==="POST"){sessionStorage.removeItem(SESSION_KEY);return{ok:true}}
+
+  if(url==="/api/admin/stats"&&m==="GET"){
+    return{
+      products:{total:db.products.length,active:db.products.filter(p=>p.active).length,stock:db.products.reduce((s,p)=>s+Number(p.stock||0),0)},
+      orders:{total_orders:db.orders.length,revenue:db.orders.filter(o=>o.status!=="annulee").reduce((s,o)=>s+Number(o.total||0),0)}
+    };
+  }
+
+  if(url==="/api/admin/products"&&m==="GET")return db.products;
+  if(url==="/api/admin/products"&&m==="POST"){
+    const product={id:db.nextProductId++,...cleanProduct(b)};
+    db.products.push(product);saveDB(db);return{ok:true,product};
+  }
+  if((x=url.match(/^\/api\/admin\/products\/(\d+)$/))&&m==="PUT"){
+    const p=db.products.find(p=>p.id===Number(x[1]));
+    if(!p)throw new Error("Produit introuvable.");
+    Object.assign(p,cleanProduct(b));saveDB(db);return{ok:true,product:p};
+  }
+  if((x=url.match(/^\/api\/admin\/products\/(\d+)$/))&&m==="DELETE"){
+    const i=db.products.findIndex(p=>p.id===Number(x[1]));
+    if(i===-1)throw new Error("Produit introuvable.");
+    db.products.splice(i,1);saveDB(db);return{ok:true};
+  }
+
+  if(url==="/api/admin/orders"&&m==="GET")return[...db.orders].sort((a,b)=>b.id-a.id);
+  if((x=url.match(/^\/api\/admin\/orders\/(\d+)\/status$/))&&m==="PATCH"){
+    const o=db.orders.find(o=>o.id===Number(x[1]));
+    if(!o)throw new Error("Commande introuvable.");
+    if(!["nouvelle","confirmee","expediee","livree","annulee"].includes(b.status))throw new Error("Statut invalide.");
+    o.status=b.status;saveDB(db);return{ok:true,order:o};
+  }
+
+  if(url==="/api/admin/promotion"&&m==="PUT"){
+    db.promotion={title:b.title||"",description:b.description||"",active:b.active!==false};
+    saveDB(db);return{ok:true,promotion:db.promotion};
+  }
+  if(url==="/api/admin/settings"&&m==="PUT"){
+    db.settings={site_name:b.site_name||db.settings.site_name,phone:b.phone||"",email:b.email||"",hero_title:b.hero_title||db.settings.hero_title,hero_description:b.hero_description||db.settings.hero_description};
+    saveDB(db);return{ok:true,settings:db.settings};
+  }
+  throw new Error("Route inconnue (mode local) : "+m+" "+url);
+}
+
+/* ---------- Utilitaires ---------- */
+const money=v=>Number(v||0).toLocaleString("fr-FR")+" HTG";
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+function showToast(msg){
+  const t=$("toast");t.textContent=msg;t.classList.add("show");
+  clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove("show"),3000);
+}
+function goToSection(id){
+  const el=$(id);if(!el)return;
+  window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-110,left:0,behavior:"auto"});
+}
+
+/* ---------- Catégories et filtres ---------- */
+function buildCategories(){
+  $("categoriesGrid").innerHTML=CATS.map(c=>`<button class="category" onclick="selectCategory('${c}')"><h3>${c}</h3><span>${CAT_TEXT[c]}</span></button>`).join("");
+  $("filters").innerHTML=["all",...CATS].map(c=>`<button class="filter-btn${c===currentCategory?" active":""}" data-category="${c}" onclick="selectCategory('${c}')">${c==="all"?"Tous":c}</button>`).join("");
+  $("productCategory").innerHTML=CATS.map(c=>`<option value="${c}">${c}</option>`).join("");
+}
+function selectCategory(category){
+  currentCategory=category;
+  document.querySelectorAll(".filter-btn").forEach(b=>b.classList.toggle("active",b.dataset.category===category));
+  renderProducts();goToSection("boutique");
+}
+
+/* ---------- Produits ---------- */
+async function loadProducts(){
+  try{
+    const data=await api("/api/products");
+    products=Array.isArray(data)?data:data.products||[];
+    const before=cart.length;
+    cart=cart.filter(i=>products.some(p=>Number(p.id)===Number(i.id)));
+    cart.forEach(i=>{const p=products.find(p=>Number(p.id)===Number(i.id));i.quantity=Math.min(i.quantity,Number(p.stock))});
+    cart=cart.filter(i=>i.quantity>0);
+    if(before!==cart.length)saveCart();
+    renderProducts();renderHome();
+  }catch(e){
+    console.error("Erreur produits :",e);
+    $("productsContainer").innerHTML='<div class="empty">Impossible de charger les produits.</div>';
+  }
+}
+
+function card(p){
+  const s=Number(p.stock||0);
+  return`<article class="product">
+    <div class="product-image">${p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onerror="this.remove()">`:""}
+      <div class="badges">${p.promo?'<span class="badge">Promo</span>':""}${p.is_new?'<span class="badge gold">Nouveau</span>':""}</div>
+    </div>
+    <div class="product-content">
+      <div class="product-category">${esc(p.category)}</div>
+      <h3 class="product-name">${esc(p.name)}</h3>
+      <p class="product-description">${esc(p.description)}</p>
+      <div class="product-price">${money(p.price)}${Number(p.old_price)>Number(p.price)?`<span class="old">${money(p.old_price)}</span>`:""}</div>
+      ${s>0&&s<=5?`<div class="stock-note">Plus que ${s} en stock</div>`:""}
+      <button class="btn btn-primary btn-block" onclick="addToCart(${Number(p.id)})" ${s<=0?"disabled":""}>${s<=0?"Rupture de stock":"Ajouter au panier"}</button>
+    </div>
+  </article>`;
+}
+
+function fill(gridId,list,sectionId){
+  $(gridId).innerHTML=list.slice(0,4).map(card).join("");
+  if(sectionId)$(sectionId).hidden=!list.length;
+}
+function renderHome(){
+  fill("popularGrid",products.filter(p=>p.popular),"populaires");
+  fill("newGrid",products.filter(p=>p.is_new),"nouveautes");
+  fill("promoGrid",products.filter(p=>p.promo));
+}
+
+function renderProducts(){
+  const c=$("productsContainer");if(!c)return;
+  let list=[...products];
+  if(currentCategory!=="all")list=list.filter(p=>p.category===currentCategory);
+  const q=$("searchInput").value.trim().toLowerCase();
+  if(q)list=list.filter(p=>String(p.name||"").toLowerCase().includes(q)||String(p.description||"").toLowerCase().includes(q));
+  const sort=$("sortSelect").value;
+  if(sort==="priceAsc")list.sort((a,b)=>a.price-b.price);
+  if(sort==="priceDesc")list.sort((a,b)=>b.price-a.price);
+  if(sort==="name")list.sort((a,b)=>String(a.name).localeCompare(String(b.name),"fr"));
+  c.innerHTML=list.length?list.map(card).join(""):'<div class="empty">Aucun produit trouvé.</div>';
+}
+
+/* ---------- Panier ---------- */
+function saveCart(){localStorage.setItem("fenva_cart",JSON.stringify(cart));updateCartCount()}
+function updateCartCount(){$("cartCount").textContent=cart.reduce((t,i)=>t+Number(i.quantity||0),0)}
+function addToCart(id){
+  const p=products.find(p=>Number(p.id)===Number(id));if(!p)return;
+  const s=Number(p.stock||0);
+  if(s<=0){showToast("Ce produit est en rupture de stock.");return}
+  const e=cart.find(i=>Number(i.id)===Number(id));
+  if(e){if(e.quantity>=s){showToast("Stock disponible insuffisant.");return}e.quantity++}
+  else cart.push({id:p.id,name:p.name,price:Number(p.price),quantity:1});
+  saveCart();showToast("Produit ajouté au panier.");
+}
+function removeFromCart(id){cart=cart.filter(i=>Number(i.id)!==Number(id));saveCart();renderCart()}
+function changeQuantity(id,n){
+  const i=cart.find(i=>Number(i.id)===Number(id));if(!i)return;
+  const p=products.find(p=>Number(p.id)===Number(id));
+  i.quantity+=n;
+  if(i.quantity<=0){removeFromCart(id);return}
+  if(p&&i.quantity>Number(p.stock))i.quantity=Number(p.stock);
+  saveCart();renderCart();
+}
+function openCart(){renderCart();$("cartOverlay").classList.add("active")}
+function closeCart(){$("cartOverlay").classList.remove("active")}
+function renderCart(){
+  const c=$("cartItems");
+  if(!cart.length){c.innerHTML='<div class="empty">Votre panier est vide.</div>';$("cartTotal").textContent=money(0);return}
+  let total=0;
+  c.innerHTML=cart.map(i=>{
+    total+=Number(i.price)*Number(i.quantity);
+    return`<div class="cart-item">
+      <div class="cart-item-info"><strong>${esc(i.name)}</strong><div>${money(i.price)}</div></div>
+      <div class="quantity-controls">
+        <button onclick="changeQuantity(${Number(i.id)},-1)" aria-label="Diminuer">&minus;</button>
+        <span>${Number(i.quantity)}</span>
+        <button onclick="changeQuantity(${Number(i.id)},1)" aria-label="Augmenter">+</button>
+        <button class="remove" onclick="removeFromCart(${Number(i.id)})">Retirer</button>
+      </div></div>`;
+  }).join("");
+  $("cartTotal").textContent=money(total);
+}
+function openCheckout(){
+  if(!cart.length){showToast("Votre panier est vide.");return}
+  closeCart();$("checkoutOverlay").classList.add("active");
+}
+function closeCheckout(){$("checkoutOverlay").classList.remove("active")}
+async function checkout(ev){
+  ev.preventDefault();
+  if(!cart.length){showToast("Votre panier est vide.");return}
+  const btn=ev.target.querySelector("button[type='submit']");btn.disabled=true;
+  try{
+    const data=await api("/api/orders",{method:"POST",body:JSON.stringify({
+      customer_name:$("customerName").value.trim(),customer_phone:$("customerPhone").value.trim(),
+      customer_address:$("customerAddress").value.trim(),payment_method:$("paymentMethod").value,items:cart})});
+    cart=[];saveCart();$("checkoutForm").reset();closeCheckout();
+    showToast("Commande #"+data.order_id+" enregistrée avec succès.");
+    await loadProducts();
+  }catch(e){showToast(e.message)}finally{btn.disabled=false}
+}
+
+/* ---------- Paramètres et promotion ---------- */
+async function loadSettings(){
+  try{
+    settings=(await api("/api/settings"))||{};
+    applySettings(settings);fillSettingsForm(settings);
+  }catch(e){console.error("Erreur settings :",e)}
+}
+function applySettings(d){
+  settings=d||{};
+  if(d.site_name){
+    document.title=d.site_name+" — Boutique de cosmétiques";
+    document.querySelectorAll(".site-name").forEach(el=>el.textContent=d.site_name);
+  }
+  if(d.hero_title)$("heroTitle").textContent=d.hero_title;
+  if(d.hero_description)$("heroDescription").textContent=d.hero_description;
+  $("contactPhone").textContent=d.phone||"Contactez-nous pour plus d'informations.";
+  $("contactEmail").textContent=d.email||"";
+}
+function fillSettingsForm(d){
+  $("settingSiteName").value=d.site_name||"";$("settingPhone").value=d.phone||"";$("settingEmail").value=d.email||"";
+  $("settingHeroTitle").value=d.hero_title||"";$("settingHeroDescription").value=d.hero_description||"";
+}
+async function loadPromotion(){
+  try{const d=await api("/api/promotion");promotion=d.promotion||d||{};applyPromotion(promotion)}
+  catch(e){console.error("Erreur promotion :",e)}
+}
+function applyPromotion(d){
+  if(!d)return;
+  const off=d.active===false;
+  $("promotionTitle").textContent=off?"Promotion":(d.title||"Promotion");
+  $("promotionDescription").textContent=off?"Découvrez nos offres spéciales.":(d.description||"Découvrez nos offres spéciales.");
+}
+
+/* ---------- Administration ---------- */
+function openAdminLogin(){$("adminLoginOverlay").classList.add("active")}
+function closeAdminLogin(){$("adminLoginOverlay").classList.remove("active")}
+async function adminLogin(ev){
+  ev.preventDefault();
+  const btn=ev.target.querySelector("button[type='submit']");btn.disabled=true;
+  try{
+    await api("/api/admin/login",{method:"POST",body:JSON.stringify({username:$("adminUsername").value.trim(),password:$("adminPassword").value})});
+    closeAdminLogin();$("adminPassword").value="";await openAdmin();
+  }catch(e){showToast(e.message)}finally{btn.disabled=false}
+}
+async function openAdmin(){
+  try{await api("/api/admin/me");$("adminOverlay").classList.add("active");await loadAdmin()}
+  catch(e){openAdminLogin()}
+}
+function closeAdmin(){$("adminOverlay").classList.remove("active")}
+async function adminLogout(){
+  try{await api("/api/admin/logout",{method:"POST"});closeAdmin();showToast("Déconnexion réussie.")}
+  catch(e){showToast(e.message)}
+}
+async function loadAdmin(){
+  try{await Promise.all([loadStats(),loadAdminProducts(),loadAdminOrders(),loadAdminPromotion(),loadAdminSettings()])}
+  catch(e){console.error("Erreur chargement admin :",e)}
+}
+function showAdminTab(tab){
+  document.querySelectorAll(".admin-tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+  document.querySelectorAll(".admin-panel").forEach(p=>p.classList.toggle("active",p.id==="admin-"+tab));
+}
+async function loadStats(){
+  try{
+    const d=await api("/api/admin/stats");
+    $("statProducts").textContent=d.products?.total??0;
+    $("statActive").textContent=d.products?.active??0;
+    $("statOrders").textContent=d.orders?.total_orders??0;
+    $("statRevenue").textContent=money(d.orders?.revenue??0);
+    $("statStock").textContent=(d.products?.stock??0)+" unité(s)";
+  }catch(e){console.error("Erreur statistiques :",e)}
+}
+async function loadAdminProducts(){
+  try{
+    const d=await api("/api/admin/products"),list=Array.isArray(d)?d:d.products||[],tb=$("adminProductsTable");
+    if(!list.length){tb.innerHTML='<tr><td colspan="6"><div class="empty">Aucun produit.</div></td></tr>';return}
+    tb.innerHTML=list.map(p=>`<tr>
+      <td>${esc(p.name)}</td><td>${esc(p.category)}</td><td>${money(p.price)}</td><td>${Number(p.stock||0)}</td>
+      <td>${p.active?"Actif":"Masqué"}</td>
+      <td><div class="admin-actions">
+        <button class="small-btn edit-btn" onclick="editProduct(${Number(p.id)})">Modifier</button>
+        <button class="small-btn delete-btn" onclick="deleteProduct(${Number(p.id)})">Supprimer</button>
+      </div></td></tr>`).join("");
+  }catch(e){console.error("Erreur produits admin :",e)}
+}
+function showProductForm(){
+  editingProductId=null;const f=$("productForm");f.reset();f.style.display="block";
+  $("productActive").checked=true;$("productId").value="";
+}
+function cancelProductForm(){editingProductId=null;const f=$("productForm");f.reset();f.style.display="none"}
+async function editProduct(id){
+  try{
+    const d=await api("/api/admin/products"),list=Array.isArray(d)?d:d.products||[];
+    const p=list.find(p=>Number(p.id)===Number(id));
+    if(!p){showToast("Produit introuvable.");return}
+    editingProductId=Number(id);$("productForm").style.display="block";
+    $("productId").value=p.id;$("productName").value=p.name||"";
+    $("productCategory").value=p.category||CATS[0];$("productDescription").value=p.description||"";
+    $("productPrice").value=p.price||0;$("productOldPrice").value=p.old_price||"";
+    $("productStock").value=p.stock||0;$("productImage").value=p.image||"";
+    $("productActive").checked=!!p.active;$("productPromo").checked=!!p.promo;
+    $("productPopular").checked=!!p.popular;$("productNew").checked=!!p.is_new;
+  }catch(e){showToast(e.message)}
+}
+async function saveProduct(ev){
+  ev.preventDefault();
+  const payload={
+    name:$("productName").value.trim(),category:$("productCategory").value,description:$("productDescription").value.trim(),
+    price:Number($("productPrice").value),old_price:Number($("productOldPrice").value||0),stock:Number($("productStock").value),
+    image:$("productImage").value.trim(),active:$("productActive").checked,promo:$("productPromo").checked,
+    popular:$("productPopular").checked,is_new:$("productNew").checked
+  };
+  if(!payload.name||!Number.isFinite(payload.price)||payload.price<0||!Number.isInteger(payload.stock)||payload.stock<0){
+    showToast("Veuillez vérifier les informations du produit.");return;
+  }
+  const btn=ev.target.querySelector("button[type='submit']");btn.disabled=true;
+  try{
+    if(editingProductId)await api("/api/admin/products/"+editingProductId,{method:"PUT",body:JSON.stringify(payload)});
+    else await api("/api/admin/products",{method:"POST",body:JSON.stringify(payload)});
+    editingProductId=null;$("productForm").style.display="none";
+    await loadProducts();await loadAdminProducts();await loadStats();
+    showToast("Produit enregistré.");
+  }catch(e){showToast(e.message)}finally{btn.disabled=false}
+}
+async function deleteProduct(id){
+  if(!confirm("Voulez-vous vraiment supprimer ce produit ?"))return;
+  try{
+    await api("/api/admin/products/"+id,{method:"DELETE"});
+    await loadProducts();await loadAdminProducts();await loadStats();
+    showToast("Produit supprimé.");
+  }catch(e){showToast(e.message)}
+}
+function formatDate(d){
+  if(!d)return"";
+  try{return new Date(d).toLocaleString("fr-FR")}catch{return String(d)}
+}
+async function loadAdminOrders(){
+  try{
+    const d=await api("/api/admin/orders"),list=Array.isArray(d)?d:d.orders||[],tb=$("adminOrdersTable");
+    if(!list.length){tb.innerHTML='<tr><td colspan="6"><div class="empty">Aucune commande.</div></td></tr>';return}
+    const st=[["nouvelle","Nouvelle"],["confirmee","Confirmée"],["expediee","Expédiée"],["livree","Livrée"],["annulee","Annulée"]];
+    tb.innerHTML=list.map(o=>`<tr>
+      <td>#${Number(o.id)}</td><td>${esc(o.customer_name||"")}</td><td>${esc(o.customer_phone||"")}</td><td>${money(o.total)}</td>
+      <td><select onchange="updateOrderStatus(${Number(o.id)},this.value)">${st.map(([v,l])=>`<option value="${v}"${o.status===v?" selected":""}>${l}</option>`).join("")}</select></td>
+      <td>${formatDate(o.created_at)}</td></tr>`).join("");
+  }catch(e){console.error("Erreur commandes admin :",e)}
+}
+async function updateOrderStatus(id,status){
+  try{
+    await api("/api/admin/orders/"+id+"/status",{method:"PATCH",body:JSON.stringify({status})});
+    showToast("Statut de la commande mis à jour.");await loadAdminOrders();await loadStats();
+  }catch(e){showToast(e.message)}
+}
+async function loadAdminPromotion(){
+  try{
+    const d=await api("/api/promotion"),p=d.promotion||d||{};
+    $("promotionTitleInput").value=p.title||"";$("promotionDescriptionInput").value=p.description||"";
+    $("promotionActive").value=String(p.active!==false);
+  }catch(e){console.error("Erreur promotion admin :",e)}
+}
+async function savePromotion(ev){
+  ev.preventDefault();
+  const btn=ev.target.querySelector("button[type='submit']");btn.disabled=true;
+  try{
+    const d=await api("/api/admin/promotion",{method:"PUT",body:JSON.stringify({
+      title:$("promotionTitleInput").value.trim(),description:$("promotionDescriptionInput").value.trim(),
+      active:$("promotionActive").value==="true"})});
+    promotion=d.promotion||d||{};applyPromotion(promotion);
+    showToast("Promotion mise à jour.");
+  }catch(e){showToast(e.message)}finally{btn.disabled=false}
+}
+async function loadAdminSettings(){
+  try{fillSettingsForm((await api("/api/settings"))||{})}
+  catch(e){console.error("Erreur paramètres admin :",e)}
+}
+async function saveSettings(ev){
+  ev.preventDefault();
+  const btn=ev.target.querySelector("button[type='submit']");btn.disabled=true;
+  try{
+    await api("/api/admin/settings",{method:"PUT",body:JSON.stringify({
+      site_name:$("settingSiteName").value.trim(),phone:$("settingPhone").value.trim(),email:$("settingEmail").value.trim(),
+      hero_title:$("settingHeroTitle").value.trim(),hero_description:$("settingHeroDescription").value.trim()})});
+    await loadSettings();showToast("Paramètres enregistrés.");
+  }catch(e){showToast(e.message)}finally{btn.disabled=false}
+}
+
+/* ---------- Initialisation ---------- */
+async function initialize(){
+  $("year").textContent=new Date().getFullYear();
+  buildCategories();updateCartCount();
+  await Promise.all([loadProducts(),loadSettings(),loadPromotion()]);
+}
+
+$("searchInput").addEventListener("input",()=>{renderProducts();if($("searchInput").value.trim())goToSection("boutique")});
+$("sortSelect").addEventListener("change",renderProducts);
+$("checkoutForm").addEventListener("submit",checkout);
+$("adminLoginForm").addEventListener("submit",adminLogin);
+$("productForm").addEventListener("submit",saveProduct);
+$("promotionForm").addEventListener("submit",savePromotion);
+$("settingsForm").addEventListener("submit",saveSettings);
+document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("active")}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeCheckout();closeAdminLogin();closeAdmin()}});
+
+initialize();
+</script>
+</body>
+</html>
