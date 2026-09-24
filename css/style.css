@@ -5,6 +5,7 @@
    Mobile-first / Responsive
 ========================================================= */
 
+
 /* =========================================================
    VARIABLES
 ========================================================= */
@@ -113,6 +114,80 @@ h3 {
 ::selection {
   background: var(--brown);
   color: var(--white);
+}
+
+
+/* =========================================================
+   ACCESSIBILITÉ
+========================================================= */
+
+/*
+  Texte visible uniquement pour les lecteurs d'écran.
+  Utilisé pour les labels qui ne doivent pas apparaître
+  visuellement.
+*/
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+
+/*
+  Focus clavier visible.
+  Important pour les utilisateurs qui naviguent
+  avec Tab / Shift + Tab.
+*/
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gold-dark);
+  outline-offset: 3px;
+}
+
+
+/*
+  Focus spécifique des éléments de navigation.
+*/
+
+.navigation a:focus-visible,
+.footer-column a:focus-visible,
+.text-link:focus-visible,
+.logo:focus-visible {
+  border-radius: 4px;
+}
+
+
+/*
+  Empêche l'affichage d'un élément possédant
+  l'attribut HTML hidden.
+*/
+
+[hidden] {
+  display: none !important;
+}
+
+
+/*
+  Éléments désactivés.
+*/
+
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 
@@ -316,6 +391,31 @@ h3 {
   width: 21px;
   height: 1px;
   background: var(--brown);
+
+  transition:
+    transform var(--transition),
+    opacity var(--transition);
+}
+
+
+/*
+  Animation du bouton hamburger lorsqu'il est ouvert.
+*/
+
+.mobile-menu-button[aria-expanded="true"] {
+  background: var(--cream);
+}
+
+.mobile-menu-button[aria-expanded="true"] span:first-child {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.mobile-menu-button[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-button[aria-expanded="true"] span:last-child {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 
@@ -371,7 +471,11 @@ h3 {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 80% 15%, rgba(176, 141, 87, 0.12), transparent 30%),
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(176, 141, 87, 0.12),
+      transparent 30%
+    ),
     var(--cream);
 }
 
@@ -475,7 +579,11 @@ h3 {
   justify-content: center;
   position: relative;
   background:
-    linear-gradient(145deg, rgba(255,255,255,.85), rgba(234,223,210,.7));
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.85),
+      rgba(234,223,210,.7)
+    );
   border: 1px solid rgba(176, 141, 87, 0.3);
   box-shadow: var(--shadow-lg);
 }
@@ -1069,6 +1177,11 @@ h3 {
   background: var(--white);
   box-shadow: var(--shadow-lg);
   padding: 25px;
+}
+
+.modal:focus-visible {
+  outline: 2px solid var(--gold-dark);
+  outline-offset: -2px;
 }
 
 .modal-header {
