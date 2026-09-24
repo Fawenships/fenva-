@@ -4,69 +4,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#241d19">
+
+<meta
+name="description"
+content="Espace administration FENVA BEAUTY"
+
+>
+
+<meta
+name="theme-color"
+content="#2b2026"
+
+>
+
   <title>FENVA BEAUTY — Administration</title>
 
-  <link rel="stylesheet" href="./css/admin.css">
+  <link
+    rel="stylesheet"
+    href="./css/admin.css"
+  >
 </head>
 
 <body>
 
-  <div class="admin-app">
+  <div class="admin-layout">
 
 ```
+<!-- SIDEBAR -->
+
 <aside class="sidebar">
 
-  <div class="sidebar-brand">
-    <a href="./index.html" class="brand">
-      <span class="brand-name">FENVA</span>
-      <span class="brand-sub">BEAUTY</span>
+  <div class="sidebar-top">
+
+    <a
+      href="./index.html"
+      class="brand"
+    >
+      <span class="brand-name">
+        FENVA
+      </span>
+
+      <span class="brand-beauty">
+        BEAUTY
+      </span>
     </a>
 
-    <span class="brand-label">ESPACE ADMINISTRATION</span>
+
+    <div class="sidebar-title">
+      ADMINISTRATION
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+      <button
+        type="button"
+        class="nav-item active"
+        data-section="dashboard"
+      >
+        <span class="nav-dot"></span>
+        <span>Tableau de bord</span>
+      </button>
+
+
+      <button
+        type="button"
+        class="nav-item"
+        data-section="products"
+      >
+        <span class="nav-dot"></span>
+        <span>Produits</span>
+      </button>
+
+
+      <button
+        type="button"
+        class="nav-item"
+        data-section="orders"
+      >
+        <span class="nav-dot"></span>
+        <span>Commandes</span>
+      </button>
+
+
+      <button
+        type="button"
+        class="nav-item"
+        data-section="promotions"
+      >
+        <span class="nav-dot"></span>
+        <span>Promotions</span>
+      </button>
+
+
+      <button
+        type="button"
+        class="nav-item"
+        data-section="settings"
+      >
+        <span class="nav-dot"></span>
+        <span>Boutique</span>
+      </button>
+
+    </nav>
+
   </div>
 
-  <nav class="sidebar-nav">
-
-    <button type="button" class="nav-item active" data-section="dashboard">
-      <span class="nav-mark"></span>
-      <span>Tableau de bord</span>
-    </button>
-
-    <button type="button" class="nav-item" data-section="products">
-      <span class="nav-mark"></span>
-      <span>Produits</span>
-    </button>
-
-    <button type="button" class="nav-item" data-section="orders">
-      <span class="nav-mark"></span>
-      <span>Commandes</span>
-    </button>
-
-    <button type="button" class="nav-item" data-section="promotions">
-      <span class="nav-mark"></span>
-      <span>Promotions</span>
-    </button>
-
-    <button type="button" class="nav-item" data-section="settings">
-      <span class="nav-mark"></span>
-      <span>Boutique</span>
-    </button>
-
-  </nav>
 
   <div class="sidebar-bottom">
 
     <div class="admin-profile">
-      <div class="profile-avatar">F</div>
 
-      <div class="profile-info">
-        <strong>Administrateur</strong>
-        <span>FENVA BEAUTY</span>
+      <div class="profile-avatar">
+        F
       </div>
+
+
+      <div class="profile-text">
+
+        <strong>
+          Administrateur
+        </strong>
+
+        <span>
+          FENVA BEAUTY
+        </span>
+
+      </div>
+
     </div>
 
-    <button type="button" id="logoutBtn" class="logout-btn">
+
+    <button
+      type="button"
+      id="logoutBtn"
+      class="logout-btn"
+    >
       Déconnexion
     </button>
 
@@ -75,38 +148,67 @@
 </aside>
 
 
+<!-- MAIN -->
+
 <main class="main-content">
 
   <header class="main-header">
 
-    <div class="header-title">
-      <span class="header-kicker">FENVA BEAUTY</span>
-      <h1 id="pageTitle">Tableau de bord</h1>
+    <div class="header-left">
+
+      <span class="header-kicker">
+        FENVA BEAUTY
+      </span>
+
+      <h1 id="pageTitle">
+        Tableau de bord
+      </h1>
+
     </div>
 
-    <a href="./index.html" class="store-btn">
-      Voir la boutique
-    </a>
+
+    <div class="header-right">
+
+      <a
+        href="./index.html"
+        class="store-link"
+      >
+        Voir la boutique
+      </a>
+
+    </div>
 
   </header>
 
 
-  <div class="content">
+  <div class="page-content">
+
 
     <!-- DASHBOARD -->
 
-    <section id="dashboardSection" class="admin-section active">
+    <section
+      id="dashboardSection"
+      class="admin-section active"
+    >
 
-      <div class="intro">
+      <div class="welcome-block">
 
         <div>
-          <span class="eyebrow">ADMINISTRATION</span>
-          <h2>Vue d’ensemble</h2>
+
+          <span class="section-kicker">
+            ESPACE ADMINISTRATEUR
+          </span>
+
+          <h2>
+            Vue d’ensemble
+          </h2>
+
         </div>
+
 
         <p>
           Gérez les produits, les commandes et les informations
-          de votre boutique FENVA BEAUTY.
+          de votre boutique FENVA BEAUTY depuis un seul espace.
         </p>
 
       </div>
@@ -114,77 +216,164 @@
 
       <div class="stats-grid">
 
-        <div class="stat-card">
-          <span class="stat-label">Produits</span>
-          <strong id="statProducts">0</strong>
-          <span class="stat-note">Produits actifs</span>
-        </div>
 
-        <div class="stat-card">
-          <span class="stat-label">Commandes</span>
-          <strong id="statOrders">0</strong>
-          <span class="stat-note">Commandes reçues</span>
-        </div>
+        <article class="stat-card">
 
-        <div class="stat-card">
-          <span class="stat-label">En attente</span>
-          <strong id="statPending">0</strong>
-          <span class="stat-note">À traiter</span>
-        </div>
+          <span class="stat-title">
+            Produits
+          </span>
 
-        <div class="stat-card stat-card-dark">
-          <span class="stat-label">Chiffre d’affaires</span>
-          <strong id="statRevenue">0 HTG</strong>
-          <span class="stat-note">Montant enregistré</span>
-        </div>
+          <strong id="statProducts">
+            0
+          </strong>
+
+          <span class="stat-description">
+            Produits actifs
+          </span>
+
+        </article>
+
+
+        <article class="stat-card">
+
+          <span class="stat-title">
+            Commandes
+          </span>
+
+          <strong id="statOrders">
+            0
+          </strong>
+
+          <span class="stat-description">
+            Commandes reçues
+          </span>
+
+        </article>
+
+
+        <article class="stat-card">
+
+          <span class="stat-title">
+            En attente
+          </span>
+
+          <strong id="statPending">
+            0
+          </strong>
+
+          <span class="stat-description">
+            À traiter
+          </span>
+
+        </article>
+
+
+        <article class="stat-card stat-card-dark">
+
+          <span class="stat-title">
+            Chiffre d’affaires
+          </span>
+
+          <strong id="statRevenue">
+            0 HTG
+          </strong>
+
+          <span class="stat-description">
+            Total enregistré
+          </span>
+
+        </article>
+
 
       </div>
 
 
       <div class="dashboard-grid">
 
-        <div class="panel">
 
-          <div class="panel-header">
+        <article class="content-card">
+
+          <div class="card-header">
+
             <div>
-              <span class="panel-kicker">ACTIVITÉ</span>
-              <h3>Commandes récentes</h3>
+
+              <span class="section-kicker">
+                ACTIVITÉ
+              </span>
+
+              <h3>
+                Commandes récentes
+              </h3>
+
             </div>
 
-            <button type="button" class="text-button" data-go-section="orders">
+
+            <button
+              type="button"
+              class="text-btn"
+              data-go-section="orders"
+            >
               Voir tout
             </button>
+
           </div>
 
-          <div id="recentOrders">
+
+          <div
+            id="recentOrders"
+            class="recent-orders"
+          >
+
             <div class="empty-state">
               Aucune commande récente.
             </div>
+
           </div>
 
-        </div>
+        </article>
 
 
-        <div class="panel">
+        <article class="content-card">
 
-          <div class="panel-header">
+          <div class="card-header">
+
             <div>
-              <span class="panel-kicker">INVENTAIRE</span>
-              <h3>Stock faible</h3>
+
+              <span class="section-kicker">
+                INVENTAIRE
+              </span>
+
+              <h3>
+                Stock faible
+              </h3>
+
             </div>
 
-            <button type="button" class="text-button" data-go-section="products">
+
+            <button
+              type="button"
+              class="text-btn"
+              data-go-section="products"
+            >
               Produits
             </button>
+
           </div>
 
-          <div id="lowStockList">
+
+          <div
+            id="lowStockList"
+            class="low-stock-list"
+          >
+
             <div class="empty-state">
               Aucun produit en stock faible.
             </div>
+
           </div>
 
-        </div>
+        </article>
+
 
       </div>
 
@@ -193,45 +382,96 @@
 
     <!-- PRODUITS -->
 
-    <section id="productsSection" class="admin-section">
+    <section
+      id="productsSection"
+      class="admin-section"
+    >
 
-      <div class="section-head">
+      <div class="section-header">
 
         <div>
-          <span class="eyebrow">CATALOGUE</span>
-          <h2>Produits</h2>
-          <p>Gérez les produits affichés dans votre boutique.</p>
+
+          <span class="section-kicker">
+            CATALOGUE
+          </span>
+
+          <h2>
+            Produits
+          </h2>
+
+          <p>
+            Gérez les produits disponibles dans votre boutique.
+          </p>
+
         </div>
 
-        <button type="button" id="addProductBtn" class="primary-btn">
+
+        <button
+          type="button"
+          id="addProductBtn"
+          class="primary-btn"
+        >
           Ajouter un produit
         </button>
 
       </div>
 
 
-      <div class="filter-bar">
+      <div class="filters-card">
 
-        <div class="filter-item">
-          <label for="productSearch">Rechercher</label>
+        <div class="search-box">
+
+          <label for="productSearch">
+            Rechercher
+          </label>
+
           <input
             type="search"
             id="productSearch"
             placeholder="Nom du produit..."
           >
+
         </div>
 
-        <div class="filter-item filter-category">
-          <label for="productCategoryFilter">Catégorie</label>
 
-          <select id="productCategoryFilter">
-            <option value="">Toutes les catégories</option>
-            <option value="visage">Soins du visage</option>
-            <option value="corps">Soins du corps</option>
-            <option value="cheveux">Soins des cheveux</option>
-            <option value="parfums">Parfums</option>
-            <option value="maquillage">Maquillage</option>
-            <option value="accessoires">Accessoires beauté</option>
+        <div class="select-box">
+
+          <label for="productCategoryFilter">
+            Catégorie
+          </label>
+
+          <select
+            id="productCategoryFilter"
+          >
+
+            <option value="">
+              Toutes les catégories
+            </option>
+
+            <option value="visage">
+              Soins du visage
+            </option>
+
+            <option value="corps">
+              Soins du corps
+            </option>
+
+            <option value="cheveux">
+              Soins des cheveux
+            </option>
+
+            <option value="parfums">
+              Parfums
+            </option>
+
+            <option value="maquillage">
+              Maquillage
+            </option>
+
+            <option value="accessoires">
+              Accessoires beauté
+            </option>
+
           </select>
 
         </div>
@@ -239,49 +479,95 @@
       </div>
 
 
-      <div id="productsGrid" class="products-grid"></div>
+      <div
+        id="productsGrid"
+        class="products-grid"
+      ></div>
 
     </section>
 
 
     <!-- COMMANDES -->
 
-    <section id="ordersSection" class="admin-section">
+    <section
+      id="ordersSection"
+      class="admin-section"
+    >
 
-      <div class="section-head">
+      <div class="section-header">
 
         <div>
-          <span class="eyebrow">VENTES</span>
-          <h2>Commandes</h2>
-          <p>Consultez les commandes de vos clients.</p>
+
+          <span class="section-kicker">
+            VENTES
+          </span>
+
+          <h2>
+            Commandes
+          </h2>
+
+          <p>
+            Consultez et gérez les commandes de vos clientes et clients.
+          </p>
+
         </div>
 
       </div>
 
 
-      <div class="filter-bar">
+      <div class="filters-card">
 
-        <div class="filter-item">
-          <label for="orderSearch">Rechercher</label>
+        <div class="search-box">
+
+          <label for="orderSearch">
+            Rechercher
+          </label>
+
           <input
             type="search"
             id="orderSearch"
             placeholder="Commande, client ou téléphone..."
           >
+
         </div>
 
-        <div class="filter-item filter-category">
 
-          <label for="orderStatusFilter">Statut</label>
+        <div class="select-box">
+
+          <label for="orderStatusFilter">
+            Statut
+          </label>
 
           <select id="orderStatusFilter">
-            <option value="">Tous les statuts</option>
-            <option value="pending">En attente</option>
-            <option value="confirmed">Confirmée</option>
-            <option value="processing">En préparation</option>
-            <option value="shipped">Expédiée</option>
-            <option value="completed">Terminée</option>
-            <option value="cancelled">Annulée</option>
+
+            <option value="">
+              Tous les statuts
+            </option>
+
+            <option value="pending">
+              En attente
+            </option>
+
+            <option value="confirmed">
+              Confirmée
+            </option>
+
+            <option value="processing">
+              En préparation
+            </option>
+
+            <option value="shipped">
+              Expédiée
+            </option>
+
+            <option value="completed">
+              Terminée
+            </option>
+
+            <option value="cancelled">
+              Annulée
+            </option>
+
           </select>
 
         </div>
@@ -289,45 +575,73 @@
       </div>
 
 
-      <div class="panel table-panel">
-        <div id="ordersTableContainer" class="table-scroll"></div>
-      </div>
+      <article class="content-card table-card">
+
+        <div
+          id="ordersTableContainer"
+          class="table-scroll"
+        ></div>
+
+      </article>
 
     </section>
 
 
     <!-- PROMOTIONS -->
 
-    <section id="promotionsSection" class="admin-section">
+    <section
+      id="promotionsSection"
+      class="admin-section"
+    >
 
-      <div class="section-head">
+      <div class="section-header">
 
         <div>
-          <span class="eyebrow">OFFRES</span>
-          <h2>Promotions</h2>
-          <p>Configurez les offres de la boutique.</p>
+
+          <span class="section-kicker">
+            OFFRES
+          </span>
+
+          <h2>
+            Promotions
+          </h2>
+
+          <p>
+            Configurez les offres visibles sur la boutique.
+          </p>
+
         </div>
 
       </div>
 
 
-      <div class="form-panel">
+      <div class="form-card">
 
         <form id="promotionForm">
 
           <div class="form-grid">
 
-            <div class="field full">
-              <label for="promotionTitle">Titre</label>
+            <div class="field field-full">
+
+              <label for="promotionTitle">
+                Titre
+              </label>
+
               <input
                 type="text"
                 id="promotionTitle"
                 placeholder="Titre de la promotion"
               >
+
             </div>
 
+
             <div class="field">
-              <label for="promotionDiscount">Réduction (%)</label>
+
+              <label for="promotionDiscount">
+                Réduction (%)
+              </label>
+
               <input
                 type="number"
                 id="promotionDiscount"
@@ -335,32 +649,57 @@
                 max="100"
                 placeholder="0"
               >
+
             </div>
+
 
             <div class="field">
-              <label for="promotionActive">Statut</label>
+
+              <label for="promotionActive">
+                Statut
+              </label>
 
               <select id="promotionActive">
-                <option value="true">Active</option>
-                <option value="false">Désactivée</option>
+
+                <option value="true">
+                  Active
+                </option>
+
+                <option value="false">
+                  Désactivée
+                </option>
+
               </select>
+
             </div>
 
-            <div class="field full">
-              <label for="promotionText">Description</label>
+
+            <div class="field field-full">
+
+              <label for="promotionText">
+                Description
+              </label>
+
               <textarea
                 id="promotionText"
                 rows="6"
                 placeholder="Description de la promotion..."
               ></textarea>
+
             </div>
 
           </div>
 
+
           <div class="form-actions">
-            <button type="submit" class="primary-btn">
+
+            <button
+              type="submit"
+              class="primary-btn"
+            >
               Enregistrer
             </button>
+
           </div>
 
         </form>
@@ -372,76 +711,124 @@
 
     <!-- BOUTIQUE -->
 
-    <section id="settingsSection" class="admin-section">
+    <section
+      id="settingsSection"
+      class="admin-section"
+    >
 
-      <div class="section-head">
+      <div class="section-header">
 
         <div>
-          <span class="eyebrow">BOUTIQUE</span>
-          <h2>Paramètres</h2>
-          <p>Gérez les informations de FENVA BEAUTY.</p>
+
+          <span class="section-kicker">
+            BOUTIQUE
+          </span>
+
+          <h2>
+            Paramètres
+          </h2>
+
+          <p>
+            Gérez les informations générales de FENVA BEAUTY.
+          </p>
+
         </div>
 
       </div>
 
 
-      <div class="form-panel">
+      <div class="form-card">
 
         <form id="settingsForm">
 
           <div class="form-grid">
 
             <div class="field">
-              <label for="storeName">Nom</label>
+
+              <label for="storeName">
+                Nom de la boutique
+              </label>
+
               <input
                 type="text"
                 id="storeName"
                 placeholder="FENVA BEAUTY"
               >
+
             </div>
 
+
             <div class="field">
-              <label for="storePhone">Téléphone</label>
+
+              <label for="storePhone">
+                Téléphone
+              </label>
+
               <input
                 type="tel"
                 id="storePhone"
                 placeholder="+509..."
               >
+
             </div>
 
+
             <div class="field">
-              <label for="storeWhatsapp">WhatsApp</label>
+
+              <label for="storeWhatsapp">
+                WhatsApp
+              </label>
+
               <input
                 type="tel"
                 id="storeWhatsapp"
                 placeholder="+509..."
               >
+
             </div>
 
+
             <div class="field">
-              <label for="storeAddress">Adresse</label>
+
+              <label for="storeAddress">
+                Adresse
+              </label>
+
               <input
                 type="text"
                 id="storeAddress"
                 placeholder="Adresse de la boutique"
               >
+
             </div>
 
-            <div class="field full">
-              <label for="storeDescription">Description</label>
+
+            <div class="field field-full">
+
+              <label for="storeDescription">
+                Description
+              </label>
+
               <textarea
                 id="storeDescription"
                 rows="6"
-                placeholder="Description de FENVA BEAUTY..."
+                placeholder="Présentation de FENVA BEAUTY..."
               ></textarea>
+
             </div>
 
           </div>
 
+
           <div class="form-actions">
-            <button type="submit" class="primary-btn">
+
+            <button
+              type="submit"
+              class="primary-btn"
+            >
               Enregistrer
             </button>
+
           </div>
 
         </form>
@@ -459,19 +846,32 @@
 
   <!-- MODAL PRODUIT -->
 
-  <div id="productModal" class="modal" aria-hidden="true">
+  <div
+    id="productModal"
+    class="modal"
+    aria-hidden="true"
+  >
 
 ```
 <div class="modal-overlay"></div>
 
-<div class="modal-box">
+
+<div class="modal-container">
 
   <div class="modal-header">
 
     <div>
-      <span class="eyebrow">CATALOGUE</span>
-      <h2 id="productModalTitle">Ajouter un produit</h2>
+
+      <span class="section-kicker">
+        CATALOGUE
+      </span>
+
+      <h2 id="productModalTitle">
+        Ajouter un produit
+      </h2>
+
     </div>
+
 
     <button
       type="button"
@@ -487,47 +887,131 @@
 
   <form id="productForm">
 
-    <input type="hidden" id="productId">
+    <input
+      type="hidden"
+      id="productId"
+    >
+
 
     <div class="form-grid">
 
       <div class="field">
-        <label for="productName">Nom du produit</label>
-        <input type="text" id="productName" required>
+
+        <label for="productName">
+          Nom du produit
+        </label>
+
+        <input
+          type="text"
+          id="productName"
+          required
+        >
+
       </div>
 
-      <div class="field">
-        <label for="productCategory">Catégorie</label>
 
-        <select id="productCategory" required>
-          <option value="">Sélectionner</option>
-          <option value="visage">Soins du visage</option>
-          <option value="corps">Soins du corps</option>
-          <option value="cheveux">Soins des cheveux</option>
-          <option value="parfums">Parfums</option>
-          <option value="maquillage">Maquillage</option>
-          <option value="accessoires">Accessoires beauté</option>
+      <div class="field">
+
+        <label for="productCategory">
+          Catégorie
+        </label>
+
+        <select
+          id="productCategory"
+          required
+        >
+
+          <option value="">
+            Sélectionner
+          </option>
+
+          <option value="visage">
+            Soins du visage
+          </option>
+
+          <option value="corps">
+            Soins du corps
+          </option>
+
+          <option value="cheveux">
+            Soins des cheveux
+          </option>
+
+          <option value="parfums">
+            Parfums
+          </option>
+
+          <option value="maquillage">
+            Maquillage
+          </option>
+
+          <option value="accessoires">
+            Accessoires beauté
+          </option>
+
         </select>
+
       </div>
+
 
       <div class="field">
-        <label for="productPrice">Prix</label>
-        <input type="number" id="productPrice" min="0" required>
+
+        <label for="productPrice">
+          Prix
+        </label>
+
+        <input
+          type="number"
+          id="productPrice"
+          min="0"
+          required
+        >
+
       </div>
+
 
       <div class="field">
-        <label for="productStock">Stock</label>
-        <input type="number" id="productStock" min="0" required>
+
+        <label for="productStock">
+          Stock
+        </label>
+
+        <input
+          type="number"
+          id="productStock"
+          min="0"
+          required
+        >
+
       </div>
 
-      <div class="field full">
-        <label for="productImage">URL de l’image</label>
-        <input type="url" id="productImage" placeholder="https://...">
+
+      <div class="field field-full">
+
+        <label for="productImage">
+          URL de l’image
+        </label>
+
+        <input
+          type="url"
+          id="productImage"
+          placeholder="https://..."
+        >
+
       </div>
 
-      <div class="field full">
-        <label for="productDescription">Description</label>
-        <textarea id="productDescription" rows="5"></textarea>
+
+      <div class="field field-full">
+
+        <label for="productDescription">
+          Description
+        </label>
+
+        <textarea
+          id="productDescription"
+          rows="5"
+        ></textarea>
+
       </div>
 
     </div>
@@ -536,22 +1020,38 @@
     <div class="check-options">
 
       <label>
-        <input type="checkbox" id="productActive" checked>
+        <input
+          type="checkbox"
+          id="productActive"
+          checked
+        >
         <span>Actif</span>
       </label>
 
+
       <label>
-        <input type="checkbox" id="productPopular">
+        <input
+          type="checkbox"
+          id="productPopular"
+        >
         <span>Populaire</span>
       </label>
 
+
       <label>
-        <input type="checkbox" id="productNew">
+        <input
+          type="checkbox"
+          id="productNew"
+        >
         <span>Nouveau</span>
       </label>
 
+
       <label>
-        <input type="checkbox" id="productPromo">
+        <input
+          type="checkbox"
+          id="productPromo"
+        >
         <span>Promotion</span>
       </label>
 
@@ -568,7 +1068,11 @@
         Annuler
       </button>
 
-      <button type="submit" class="primary-btn">
+
+      <button
+        type="submit"
+        class="primary-btn"
+      >
         Enregistrer
       </button>
 
@@ -583,19 +1087,32 @@
 
   <!-- MODAL COMMANDE -->
 
-  <div id="orderModal" class="modal" aria-hidden="true">
+  <div
+    id="orderModal"
+    class="modal"
+    aria-hidden="true"
+  >
 
 ```
 <div class="modal-overlay"></div>
 
-<div class="modal-box">
+
+<div class="modal-container">
 
   <div class="modal-header">
 
     <div>
-      <span class="eyebrow">COMMANDE</span>
-      <h2>Détails de la commande</h2>
+
+      <span class="section-kicker">
+        COMMANDE
+      </span>
+
+      <h2>
+        Détails de la commande
+      </h2>
+
     </div>
+
 
     <button
       type="button"
@@ -608,16 +1125,27 @@
 
   </div>
 
-  <div id="orderDetails" class="order-details"></div>
+
+  <div
+    id="orderDetails"
+    class="order-details"
+  ></div>
 
 </div>
 ```
 
   </div>
 
-  <div id="toast" class="toast"></div>
+  <div
+    id="toast"
+    class="toast"
+    aria-live="polite"
+  ></div>
 
-  <script src="./js/admin.js" defer></script>
+  <script
+    src="./js/admin.js"
+    defer
+  ></script>
 
 </body>
 </html>
