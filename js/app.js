@@ -1,4 +1,4 @@
-```javascript
+javascript
 /* =========================================================
    FENVA BEAUTY
    Frontend application
@@ -3096,4 +3096,3 @@ window.FenvaBeauty = {
   }
 
 };
-```
