@@ -16,15 +16,15 @@ const API_BASE_URL =
   "https://fenva-beauty-api.onrender.com";
 
 const API = {
-  products: `${API_BASE_URL}/api/products`,
-  orders: `${API_BASE_URL}/api/orders`,
-  settings: `${API_BASE_URL}/api/settings`,
-  promotion: `${API_BASE_URL}/api/promotion`,
-  adminLogin: `${API_BASE_URL}/api/admin/login`
+  products: API_BASE_URL + "/api/products",
+  orders: API_BASE_URL + "/api/orders",
+  settings: API_BASE_URL + "/api/settings",
+  promotion: API_BASE_URL + "/api/promotion",
+  adminLogin: API_BASE_URL + "/api/admin/login"
 };
 
 /* =========================================================
-   ÉTAT
+   ÉTAT DE L'APPLICATION
 ========================================================= */
 
 const state = {
@@ -41,14 +41,15 @@ const state = {
 };
 
 /* =========================================================
-   SÉLECTEURS
+   SÉLECTEURS DOM
 ========================================================= */
 
 const $ = (selector) =>
   document.querySelector(selector);
 
-const $$ = (selector) =>
-  [...document.querySelectorAll(selector)];
+const $$ = (selector) => [
+  ...document.querySelectorAll(selector)
+];
 
 /* =========================================================
    INITIALISATION
@@ -73,10 +74,6 @@ async function initializeApp() {
   loadCart();
   renderCart();
 
-  /*
-    Le chargement de l'API ne doit jamais empêcher
-    l'affichage de la page d'accueil.
-  */
   loadStoreData().catch((error) => {
     console.warn(
       "Chargement distant indisponible :",
@@ -129,7 +126,9 @@ async function apiRequest(
     const message =
       data?.message ||
       data?.error ||
-      `Erreur serveur (${response.status})`;
+      "Erreur serveur (" +
+        response.status +
+        ")";
 
     throw new Error(message);
   }
@@ -151,11 +150,15 @@ async function loadStoreData() {
   ------------------------------------------------------- */
 
   try {
-    const response =
-      await apiRequest(API.products);
+    const productResponse =
+      await apiRequest(
+        API.products
+      );
 
     state.products =
-      normalizeProducts(response);
+      normalizeProducts(
+        productResponse
+      );
 
   } catch (error) {
     console.warn(
@@ -163,11 +166,6 @@ async function loadStoreData() {
       error.message
     );
 
-    /*
-      Important :
-      On garde un tableau vide afin que le reste
-      de la page puisse continuer à fonctionner.
-    */
     state.products = [];
   }
 
@@ -176,12 +174,14 @@ async function loadStoreData() {
   ------------------------------------------------------- */
 
   try {
-    const response =
-      await apiRequest(API.settings);
+    const settingsResponse =
+      await apiRequest(
+        API.settings
+      );
 
     state.settings =
-      response?.settings ||
-      response ||
+      settingsResponse?.settings ||
+      settingsResponse ||
       {};
 
     applyStoreSettings();
@@ -200,12 +200,14 @@ async function loadStoreData() {
   ------------------------------------------------------- */
 
   try {
-    const response =
-      await apiRequest(API.promotion);
+    const promotionResponse =
+      await apiRequest(
+        API.promotion
+      );
 
     state.promotion =
-      response?.promotion ||
-      response ||
+      promotionResponse?.promotion ||
+      promotionResponse ||
       null;
 
   } catch (error) {
@@ -231,10 +233,12 @@ function normalizeProducts(response) {
 
   if (Array.isArray(response)) {
     products = response;
+
   } else if (
     Array.isArray(response?.products)
   ) {
     products = response.products;
+
   } else if (
     Array.isArray(response?.data)
   ) {
@@ -345,7 +349,7 @@ function applyStoreSettings() {
 
     if (element) {
       element.textContent =
-        `Téléphone : ${phone}`;
+        "Téléphone : " + phone;
     }
   }
 
@@ -355,7 +359,7 @@ function applyStoreSettings() {
 
     if (element) {
       element.textContent =
-        `WhatsApp : ${whatsapp}`;
+        "WhatsApp : " + whatsapp;
     }
   }
 
@@ -371,7 +375,8 @@ function applyStoreSettings() {
 
   if (storeName) {
     document.title =
-      `${storeName} — Beauté & soins`;
+      storeName +
+      " — Beauté & soins";
   }
 }
 
@@ -402,13 +407,6 @@ function setupNavigation() {
         "aria-expanded",
         String(isOpen)
       );
-
-      button.setAttribute(
-        "aria-label",
-        isOpen
-          ? "Fermer le menu"
-          : "Ouvrir le menu"
-      );
     }
   );
 
@@ -425,72 +423,19 @@ function setupNavigation() {
             "aria-expanded",
             "false"
           );
-
-          button.setAttribute(
-            "aria-label",
-            "Ouvrir le menu"
-          );
         }
       );
     });
 
-  /*
-    Fermer le menu lorsqu'on clique
-    en dehors de la navigation.
-  */
   document.addEventListener(
     "click",
     (event) => {
       if (
-        !navigation.classList.contains(
-          "open"
-        )
-      ) {
-        return;
-      }
-
-      if (
-        navigation.contains(
+        !navigation.contains(
           event.target
-        ) ||
-        button.contains(
+        ) &&
+        !button.contains(
           event.target
-        )
-      ) {
-        return;
-      }
-
-      navigation.classList.remove(
-        "open"
-      );
-
-      button.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-
-      button.setAttribute(
-        "aria-label",
-        "Ouvrir le menu"
-      );
-    }
-  );
-
-  /*
-    Fermer le menu avec Escape.
-  */
-  document.addEventListener(
-    "keydown",
-    (event) => {
-      if (
-        event.key !== "Escape"
-      ) {
-        return;
-      }
-
-      if (
-        navigation.classList.contains(
-          "open"
         )
       ) {
         navigation.classList.remove(
@@ -501,10 +446,23 @@ function setupNavigation() {
           "aria-expanded",
           "false"
         );
+      }
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      if (
+        event.key === "Escape"
+      ) {
+        navigation.classList.remove(
+          "open"
+        );
 
         button.setAttribute(
-          "aria-label",
-          "Ouvrir le menu"
+          "aria-expanded",
+          "false"
         );
       }
     }
@@ -516,42 +474,30 @@ function setupNavigation() {
 ========================================================= */
 
 function setupModals() {
-
-  /*
-    Ouverture des modales
-  */
   $$("[data-modal-open]")
     .forEach((button) => {
       button.addEventListener(
         "click",
         () => {
-          const modalId =
-            button.dataset.modalOpen;
-
-          openModal(modalId);
+          openModal(
+            button.dataset.modalOpen
+          );
         }
       );
     });
 
-  /*
-    Fermeture des modales
-  */
   $$("[data-modal-close]")
     .forEach((button) => {
       button.addEventListener(
         "click",
         () => {
-          const modalId =
-            button.dataset.modalClose;
-
-          closeModal(modalId);
+          closeModal(
+            button.dataset.modalClose
+          );
         }
       );
     });
 
-  /*
-    Clic sur l'arrière-plan
-  */
   $$(".modal-overlay")
     .forEach((overlay) => {
       overlay.addEventListener(
@@ -568,9 +514,6 @@ function setupModals() {
       );
     });
 
-  /*
-    Touche Escape
-  */
   document.addEventListener(
     "keydown",
     (event) => {
@@ -600,52 +543,22 @@ function openModal(id) {
     return;
   }
 
-  /*
-    Fermer le menu mobile avant
-    d'ouvrir une modale.
-  */
-  const navigation =
-    $("#mainNavigation");
-
-  const menuButton =
-    $("#mobileMenuButton");
-
-  if (navigation) {
-    navigation.classList.remove(
-      "open"
-    );
-  }
-
-  if (menuButton) {
-    menuButton.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
-    menuButton.setAttribute(
-      "aria-label",
-      "Ouvrir le menu"
-    );
-  }
-
-  modal.classList.add("open");
+  modal.classList.add(
+    "open"
+  );
 
   modal.setAttribute(
     "aria-hidden",
     "false"
   );
 
+  modal.removeAttribute(
+    "hidden"
+  );
+
   document.body.classList.add(
     "modal-open"
   );
-
-  /*
-    Accessibilité :
-    placer le focus sur la modale.
-  */
-  requestAnimationFrame(() => {
-    modal.focus();
-  });
 }
 
 function closeModal(id) {
@@ -656,7 +569,9 @@ function closeModal(id) {
     return;
   }
 
-  modal.classList.remove("open");
+  modal.classList.remove(
+    "open"
+  );
 
   modal.setAttribute(
     "aria-hidden",
@@ -710,8 +625,6 @@ function setupSearch() {
           ?.scrollIntoView({
             behavior: "smooth"
           });
-
-        input.focus();
       }
     );
   }
@@ -793,11 +706,23 @@ function setupFilters() {
             state.category =
               "all";
 
-            state.search =
-              "";
+            state.search = "";
+
+            const searchInput =
+              $("#searchInput");
+
+            if (searchInput) {
+              searchInput.value =
+                "";
+            }
 
             state.sort =
               "newest";
+
+            if (sortProducts) {
+              sortProducts.value =
+                "newest";
+            }
           }
 
           if (
@@ -806,32 +731,15 @@ function setupFilters() {
             state.category =
               "all";
 
-            state.search =
-              "";
-          }
+            state.search = "";
 
-          const searchInput =
-            $("#searchInput");
+            const searchInput =
+              $("#searchInput");
 
-          const categoryFilter =
-            $("#categoryFilter");
-
-          const sortSelect =
-            $("#sortProducts");
-
-          if (searchInput) {
-            searchInput.value =
-              state.search;
-          }
-
-          if (categoryFilter) {
-            categoryFilter.value =
-              state.category;
-          }
-
-          if (sortSelect) {
-            sortSelect.value =
-              state.sort;
+            if (searchInput) {
+              searchInput.value =
+                "";
+            }
           }
 
           applyFilters();
@@ -892,10 +800,6 @@ function setupCategories() {
           const category =
             card.dataset.category;
 
-          if (!category) {
-            return;
-          }
-
           state.category =
             category;
 
@@ -922,7 +826,7 @@ function setupCategories() {
 }
 
 /* =========================================================
-   FILTRAGE
+   APPLICATION DES FILTRES
 ========================================================= */
 
 function applyFilters() {
@@ -939,10 +843,7 @@ function applyFilters() {
           const searchable = [
             product.name,
             product.description,
-            product.category,
-            formatCategory(
-              product.category
-            )
+            product.category
           ]
             .join(" ")
             .toLowerCase();
@@ -1031,7 +932,7 @@ function sortProductList(
 }
 
 /* =========================================================
-   PRODUITS
+   AFFICHAGE DES PRODUITS
 ========================================================= */
 
 function renderProducts() {
@@ -1056,8 +957,7 @@ function renderProducts() {
         "hidden"
       );
 
-      emptyState.hidden =
-        false;
+      emptyState.hidden = false;
     }
 
     return;
@@ -1068,8 +968,7 @@ function renderProducts() {
       "hidden"
     );
 
-    emptyState.hidden =
-      true;
+    emptyState.hidden = true;
   }
 
   container.innerHTML =
@@ -1175,15 +1074,15 @@ function productCardTemplate(
 
   const badge =
     promotion
-      ? `<span class="product-badge promotion">Promotion</span>`
+      ? '<span class="product-badge promotion">Promotion</span>'
       : product.isNew
-        ? `<span class="product-badge">Nouveau</span>`
+        ? '<span class="product-badge">Nouveau</span>'
         : "";
 
   const stockText =
     product.stock > 0
       ? ""
-      : `<span class="stock-empty">Rupture de stock</span>`;
+      : '<span class="stock-empty">Rupture de stock</span>';
 
   return `
     <article
@@ -1229,9 +1128,7 @@ function productCardTemplate(
         <div class="product-price">
 
           <span class="product-price-current">
-            ${formatPrice(
-              product.price
-            )}
+            ${formatPrice(product.price)}
           </span>
 
           ${
@@ -1324,7 +1221,7 @@ function bindProductButtons(
 }
 
 /* =========================================================
-   MODALE PRODUIT
+   MODAL PRODUIT
 ========================================================= */
 
 function openProductModal(
@@ -1408,7 +1305,8 @@ function openProductModal(
         <p>
           ${
             product.stock > 0
-              ? `${product.stock} disponible(s)`
+              ? product.stock +
+                " disponible(s)"
               : "Produit actuellement indisponible"
           }
         </p>
@@ -1509,7 +1407,9 @@ function loadCart() {
     const parsed =
       JSON.parse(saved);
 
-    if (!Array.isArray(parsed)) {
+    if (
+      !Array.isArray(parsed)
+    ) {
       state.cart = [];
       return;
     }
@@ -1572,7 +1472,9 @@ function addToCart(
     return;
   }
 
-  if (product.stock <= 0) {
+  if (
+    product.stock <= 0
+  ) {
     showToast(
       "Ce produit est actuellement indisponible."
     );
@@ -1639,7 +1541,9 @@ function changeCartQuantity(
   const newQuantity =
     item.quantity + change;
 
-  if (newQuantity <= 0) {
+  if (
+    newQuantity <= 0
+  ) {
     removeFromCart(
       productId
     );
@@ -1727,7 +1631,9 @@ function renderCart() {
             )
           );
 
-        if (quantity <= 0) {
+        if (
+          quantity <= 0
+        ) {
           return null;
         }
 
@@ -1759,6 +1665,7 @@ function renderCart() {
         Votre panier est vide.
       </div>
     `;
+
   } else {
     container.innerHTML =
       validItems
@@ -1839,7 +1746,6 @@ function cartItemTemplate(
             type="button"
             data-cart-action="decrease"
             data-product-id="${escapeAttribute(product.id)}"
-            aria-label="Diminuer la quantité"
           >
             −
           </button>
@@ -1852,7 +1758,6 @@ function cartItemTemplate(
             type="button"
             data-cart-action="increase"
             data-product-id="${escapeAttribute(product.id)}"
-            aria-label="Augmenter la quantité"
           >
             +
           </button>
@@ -1960,7 +1865,9 @@ function openCheckout() {
   const total =
     calculateCartTotal();
 
-  if (total <= 0) {
+  if (
+    total <= 0
+  ) {
     showToast(
       "Votre panier ne contient aucun produit disponible."
     );
@@ -2025,7 +1932,9 @@ async function handleCheckoutSubmit(
     return;
   }
 
-  if (!state.cart.length) {
+  if (
+    !state.cart.length
+  ) {
     showFormMessage(
       message,
       "Votre panier est vide."
@@ -2230,7 +2139,9 @@ async function handleAdminLogin(
         }
       );
 
-    if (response?.token) {
+    if (
+      response?.token
+    ) {
       sessionStorage.setItem(
         "fenva_admin_token",
         response.token
@@ -2326,11 +2237,12 @@ function updateProductCount() {
   element.textContent =
     count === 1
       ? "1 produit"
-      : `${count} produits`;
+      : count +
+        " produits";
 }
 
 /* =========================================================
-   CHARGEMENT VISUEL
+   CHARGEMENT
 ========================================================= */
 
 function showProductsLoading() {
@@ -2358,6 +2270,8 @@ function showProductsError() {
   const message = `
     <div class="products-loading">
       Impossible de charger les produits pour le moment.
+      <br>
+      Vérifiez la connexion au serveur.
     </div>
   `;
 
@@ -2387,7 +2301,7 @@ function emptyProductsMessage(
 }
 
 /* =========================================================
-   FORMULAIRES
+   FORM MESSAGES
 ========================================================= */
 
 function showFormMessage(
@@ -2469,9 +2383,12 @@ function formatPrice(
   const number =
     Number(value || 0);
 
-  return `${new Intl.NumberFormat(
-    "fr-FR"
-  ).format(number)} HTG`;
+  return (
+    new Intl.NumberFormat(
+      "fr-FR"
+    ).format(number) +
+    " HTG"
+  );
 }
 
 function formatCategory(
@@ -2539,11 +2456,13 @@ function escapeHTML(
 function escapeAttribute(
   value
 ) {
-  return escapeHTML(value);
+  return escapeHTML(
+    value
+  );
 }
 
 /* =========================================================
-   API PUBLIQUE
+   EXPOSITION MINIMALE
 ========================================================= */
 
 window.FenvaBeauty = {
