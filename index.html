@@ -210,9 +210,58 @@
 <footer>
   <div class="wrap">
     <span>Fenva Beauty</span>
-    <span>© 2026</span>
+    <span>© 2026 · <a href="#" id="adminLink" style="opacity:.6;">Administration</a></span>
   </div>
 </footer>
+
+<div id="adminOverlay" style="display:none;position:fixed;inset:0;background:var(--cream);z-index:50;overflow-y:auto;">
+  <div id="adminLock" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;">
+    <div style="text-align:center;max-width:320px;width:100%;">
+      <h2 style="font-size:28px;margin-bottom:4px;">Administration</h2>
+      <p style="opacity:.6;font-size:14px;margin-bottom:20px;">Fenva Beauty</p>
+      <input id="adminCode" type="password" placeholder="Code d'accès"
+        style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:4px;background:var(--white);font-family:'Jost',sans-serif;font-size:14px;text-align:center;">
+      <button id="adminUnlock" class="btn" style="width:100%;margin-top:14px;border:none;cursor:pointer;">Entrer</button>
+      <div id="adminMsg" style="font-size:13px;color:var(--gold);margin-top:10px;min-height:16px;"></div>
+      <a href="#" id="adminClose1" style="display:inline-block;margin-top:18px;font-size:13px;opacity:.6;">Fermer</a>
+    </div>
+  </div>
+
+  <div id="adminPanel" style="display:none;padding:48px 24px 80px;max-width:720px;margin:0 auto;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+      <h2 style="font-size:28px;">Gestion des produits</h2>
+      <a href="#" id="adminClose2" style="font-size:13px;opacity:.6;">Fermer</a>
+    </div>
+    <p style="opacity:.6;font-size:14px;margin-bottom:30px;">Les produits ajoutés ici apparaissent sur la boutique, dans ce même navigateur.</p>
+
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:24px;margin-bottom:26px;">
+      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Nom du produit</label>
+      <input id="pname" type="text" placeholder="Ex. Sérum Éclat"
+        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;">
+      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">Prix</label>
+      <input id="pprice" type="text" placeholder="Ex. 1 200 HTG"
+        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;">
+      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">Catégorie</label>
+      <select id="pcat" style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;">
+        <option>Soins du visage</option>
+        <option>Soins du corps</option>
+        <option>Soins des cheveux</option>
+        <option>Parfums</option>
+        <option>Maquillage</option>
+        <option>Accessoires</option>
+      </select>
+      <button id="addProductBtn" class="btn" style="margin-top:18px;border:none;cursor:pointer;">Ajouter le produit</button>
+      <div id="formMsg" style="font-size:13px;color:var(--gold);margin-top:8px;min-height:16px;"></div>
+    </div>
+
+    <h3 style="font-size:18px;margin-bottom:14px;">Produits actuels</h3>
+    <div id="productList" style="display:flex;flex-direction:column;gap:10px;"></div>
+    <p style="font-size:13px;opacity:.6;margin-top:20px;line-height:1.5;">
+      Stockage local à ce navigateur : pour que les produits soient visibles par tous les visiteurs,
+      il faudra brancher une vraie base de données.
+    </p>
+  </div>
+</div>
 
 <a class="wa-float" href="https://wa.me/50955744295?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande" target="_blank" rel="noopener" aria-label="Commander sur WhatsApp">
   <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
@@ -248,6 +297,66 @@
   }
   render();
   window.addEventListener('storage', function(e){ if(e.key===KEY) render(); });
+
+  // --- Administration (intégrée à la page) ---
+  var ADMIN_CODE = 'fenva2026';
+  var overlay = document.getElementById('adminOverlay');
+  var lockView = document.getElementById('adminLock');
+  var panelView = document.getElementById('adminPanel');
+
+  function openAdmin(){ overlay.style.display = 'block'; document.body.style.overflow='hidden'; }
+  function closeAdmin(){
+    overlay.style.display = 'none'; document.body.style.overflow='';
+    lockView.style.display='flex'; panelView.style.display='none';
+    document.getElementById('adminCode').value='';
+  }
+  function renderAdminList(){
+    var products = load();
+    var list = document.getElementById('productList');
+    if(!products.length){ list.innerHTML = '<p style="opacity:.6;font-size:14px;">Aucun produit pour l\'instant.</p>'; return; }
+    list.innerHTML = products.map(function(p){
+      return '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:var(--white);">'+
+        '<div style="font-size:14px;"><b>'+esc(p.name)+'</b> — '+esc(p.price)+
+        '<div style="font-size:12px;opacity:.6;">'+esc(p.cat||'')+'</div></div>'+
+        '<button data-id="'+p.id+'" class="adminDelBtn" style="background:#B4453A;color:#fff;border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;">Supprimer</button></div>';
+    }).join('');
+    Array.prototype.forEach.call(list.querySelectorAll('.adminDelBtn'), function(btn){
+      btn.addEventListener('click', function(){
+        var id = Number(btn.getAttribute('data-id'));
+        var next = load().filter(function(p){ return p.id !== id; });
+        localStorage.setItem(KEY, JSON.stringify(next));
+        renderAdminList(); render();
+      });
+    });
+  }
+
+  document.getElementById('adminLink').addEventListener('click', function(e){ e.preventDefault(); openAdmin(); });
+  document.getElementById('adminClose1').addEventListener('click', function(e){ e.preventDefault(); closeAdmin(); });
+  document.getElementById('adminClose2').addEventListener('click', function(e){ e.preventDefault(); closeAdmin(); });
+  document.getElementById('adminUnlock').addEventListener('click', function(){
+    var val = document.getElementById('adminCode').value.trim();
+    if(val === ADMIN_CODE){
+      lockView.style.display='none'; panelView.style.display='block'; renderAdminList();
+    } else {
+      document.getElementById('adminMsg').textContent = 'Code incorrect.';
+    }
+  });
+  document.getElementById('adminCode').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') document.getElementById('adminUnlock').click();
+  });
+  document.getElementById('addProductBtn').addEventListener('click', function(){
+    var name = document.getElementById('pname').value.trim();
+    var price = document.getElementById('pprice').value.trim();
+    var cat = document.getElementById('pcat').value;
+    var msg = document.getElementById('formMsg');
+    if(!name || !price){ msg.textContent = 'Nom et prix sont requis.'; return; }
+    var products = load();
+    products.push({ id: Date.now(), name: name, price: price, cat: cat });
+    localStorage.setItem(KEY, JSON.stringify(products));
+    msg.textContent = 'Produit ajouté.';
+    document.getElementById('pname').value=''; document.getElementById('pprice').value='';
+    renderAdminList(); render();
+  });
 })();
 </script>
 
