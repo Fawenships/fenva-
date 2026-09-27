@@ -314,11 +314,22 @@
     overflow:hidden;
   }
 
+  .card .thumb img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    position:relative;
+    z-index:1;
+  }
+
   .card .thumb::after{
     content:"";
     position:absolute;
     inset:0;
     background:linear-gradient(160deg,transparent 60%,rgba(59,42,32,.06));
+    z-index:2;
+    pointer-events:none;
   }
 
   .card h4{
@@ -675,7 +686,7 @@
     </div>
 
     <p style="opacity:.6;font-size:14px;margin-bottom:30px;">
-      Les produits ajoutés ici apparaissent sur la boutique, dans ce même navigateur.
+      Les produits ajoutés ici apparaissent sur la boutique.
     </p>
 
     <div
@@ -719,6 +730,38 @@
         <option>Maquillage</option>
         <option>Accessoires</option>
       </select>
+
+      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">
+        Image du produit
+      </label>
+
+      <input
+        id="pimage"
+        type="file"
+        accept="image/*"
+        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;"
+      >
+
+      <div
+        id="imagePreviewBox"
+        style="display:none;margin-top:14px;"
+      >
+
+        <img
+          id="imagePreview"
+          alt="Aperçu du produit"
+          style="display:block;width:140px;height:140px;object-fit:cover;border-radius:6px;border:1px solid var(--line);"
+        >
+
+        <button
+          id="removeImageBtn"
+          type="button"
+          style="margin-top:8px;background:transparent;color:var(--brown);border:1px solid var(--line);border-radius:4px;padding:7px 12px;font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;"
+        >
+          Retirer l'image
+        </button>
+
+      </div>
 
       <button
         id="addProductBtn"
@@ -776,6 +819,8 @@
 
   var TABLE = 'produits';
 
+  var STORAGE_BUCKET = 'produits';
+
   var accessToken = null;
 
 
@@ -793,7 +838,7 @@
 
   function esc(s){
 
-    return String(s).replace(/[&<>"]/g,function(c){
+    return String(s == null ? '' : s).replace(/[&<>"]/g,function(c){
 
       return {
         '&':'&amp;',
@@ -881,14 +926,34 @@
       grid.innerHTML =
         products.map(function(p){
 
+          var imageHTML = '';
+
+          if(p.image_url){
+
+            imageHTML =
+              '<img src="' +
+              esc(p.image_url) +
+              '" alt="' +
+              esc(p.name) +
+              '">';
+
+          }
+
+
           return '<div class="card">' +
-            '<div class="thumb"></div>' +
+
+            '<div class="thumb">' +
+              imageHTML +
+            '</div>' +
+
             '<h4>' +
             esc(p.name) +
             '</h4>' +
+
             '<div class="price">' +
             esc(p.price) +
             '</div>' +
+
             '</div>';
 
         }).join('');
@@ -939,6 +1004,8 @@
       document.getElementById('adminMsg').textContent = '';
 
       document.getElementById('formMsg').textContent = '';
+
+      clearImageSelection();
 
     });
 
@@ -1035,6 +1102,258 @@
   }
 
 
+  function uploadProductImage(file){
+
+    if(!accessToken){
+
+      return Promise.reject(
+        new Error('Vous devez être connecté.')
+      );
+
+    }
+
+
+    if(!file){
+
+      return Promise.resolve(null);
+
+    }
+
+
+    if(!file.type || file.type.indexOf('image/') !== 0){
+
+      return Promise.reject(
+        new Error('Le fichier sélectionné doit être une image.')
+      );
+
+    }
+
+
+    if(file.size > 50 * 1024 * 1024){
+
+      return Promise.reject(
+        new Error('L’image est trop grande. Taille maximale : 50 MB.')
+      );
+
+    }
+
+
+    var extension = '';
+
+    var originalName =
+      file.name || 'image';
+
+
+    var lastDot =
+      originalName.lastIndexOf('.');
+
+
+    if(lastDot !== -1){
+
+      extension =
+        originalName
+          .substring(lastDot)
+          .toLowerCase();
+
+    }
+
+
+    if(!extension){
+
+      if(file.type === 'image/jpeg'){
+        extension = '.jpg';
+      }
+      else if(file.type === 'image/png'){
+        extension = '.png';
+      }
+      else if(file.type === 'image/webp'){
+        extension = '.webp';
+      }
+      else if(file.type === 'image/gif'){
+        extension = '.gif';
+      }
+      else{
+
+        extension = '.img';
+
+      }
+
+    }
+
+
+    var fileName =
+      'produit-' +
+      Date.now() +
+      '-' +
+      Math.random()
+        .toString(36)
+        .substring(2,10) +
+      extension;
+
+
+    var storagePath =
+      fileName;
+
+
+    return fetch(
+      SUPABASE_URL +
+      '/storage/v1/object/' +
+      STORAGE_BUCKET +
+      '/' +
+      encodeURIComponent(storagePath),
+      {
+        method:'POST',
+
+        headers:{
+          'apikey':SUPABASE_KEY,
+          'Authorization':'Bearer ' + accessToken,
+          'Content-Type':file.type,
+          'x-upsert':'false'
+        },
+
+        body:file
+
+      }
+    )
+
+    .then(function(r){
+
+      return r.text().then(function(text){
+
+        var data = null;
+
+        try{
+
+          data =
+            text ? JSON.parse(text) : null;
+
+        }catch(e){
+
+          data = null;
+
+        }
+
+
+        if(!r.ok){
+
+          throw new Error(
+            data &&
+            (
+              data.message ||
+              data.error ||
+              data.statusCode
+            )
+            ||
+            'Impossible d’envoyer l’image.'
+          );
+
+        }
+
+
+        return {
+          path:storagePath,
+
+          url:
+            SUPABASE_URL +
+            '/storage/v1/object/public/' +
+            STORAGE_BUCKET +
+            '/' +
+            encodeURIComponent(storagePath)
+
+        };
+
+      });
+
+    });
+
+  }
+
+
+  function deleteStorageImage(imageUrl){
+
+    if(!accessToken || !imageUrl){
+
+      return Promise.resolve(true);
+
+    }
+
+
+    var marker =
+      '/storage/v1/object/public/' +
+      STORAGE_BUCKET +
+      '/';
+
+
+    var index =
+      imageUrl.indexOf(marker);
+
+
+    if(index === -1){
+
+      return Promise.resolve(true);
+
+    }
+
+
+    var path =
+      imageUrl.substring(
+        index + marker.length
+      );
+
+
+    try{
+
+      path =
+        decodeURIComponent(path);
+
+    }catch(e){}
+
+
+    if(!path){
+
+      return Promise.resolve(true);
+
+    }
+
+
+    return fetch(
+      SUPABASE_URL +
+      '/storage/v1/object/' +
+      STORAGE_BUCKET +
+      '/' +
+      path
+        .split('/')
+        .map(function(part){
+          return encodeURIComponent(part);
+        })
+        .join('/'),
+
+      {
+        method:'DELETE',
+
+        headers:{
+          'apikey':SUPABASE_KEY,
+          'Authorization':'Bearer ' + accessToken
+        }
+
+      }
+    )
+
+    .then(function(r){
+
+      return r.ok;
+
+    })
+
+    .catch(function(){
+
+      return false;
+
+    });
+
+  }
+
+
   function createProduct(product){
 
     if(!accessToken){
@@ -1065,7 +1384,28 @@
 
     .then(function(r){
 
-      return r.ok;
+      return r.json().then(function(data){
+
+        return {
+          ok:r.ok,
+          data:data
+        };
+
+      });
+
+    })
+
+    .then(function(result){
+
+      if(!result.ok){
+
+        return false;
+
+      }
+
+      return result.data && result.data[0]
+        ? result.data[0]
+        : true;
 
     })
 
@@ -1086,21 +1426,78 @@
 
     }
 
+
     return fetch(
       SUPABASE_URL +
       '/rest/v1/' +
       TABLE +
       '?id=eq.' +
-      encodeURIComponent(id),
+      encodeURIComponent(id) +
+      '&select=*',
       {
-        method:'DELETE',
         headers:getHeaders()
       }
     )
 
     .then(function(r){
 
-      return r.ok;
+      if(!r.ok){
+
+        throw new Error(
+          'Impossible de récupérer le produit.'
+        );
+
+      }
+
+      return r.json();
+
+    })
+
+    .then(function(products){
+
+      var product =
+        products && products.length
+          ? products[0]
+          : null;
+
+
+      return fetch(
+        SUPABASE_URL +
+        '/rest/v1/' +
+        TABLE +
+        '?id=eq.' +
+        encodeURIComponent(id),
+        {
+          method:'DELETE',
+          headers:getHeaders()
+        }
+      )
+
+      .then(function(r){
+
+        if(!r.ok){
+
+          return false;
+
+        }
+
+
+        if(product && product.image_url){
+
+          return deleteStorageImage(
+            product.image_url
+          ).then(function(){
+
+            return true;
+
+          });
+
+        }
+
+
+        return true;
+
+      });
 
     })
 
@@ -1147,19 +1544,47 @@
       list.innerHTML =
         products.map(function(p){
 
+          var imageHTML =
+            '<div style="width:64px;height:64px;flex:0 0 64px;background:var(--beige);border-radius:5px;overflow:hidden;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;">' +
+
+              (
+                p.image_url
+
+                ?
+
+                '<img src="' +
+                esc(p.image_url) +
+                '" alt="' +
+                esc(p.name) +
+                '" style="width:100%;height:100%;object-fit:cover;">'
+
+                :
+
+                '<span style="font-size:10px;opacity:.5;text-align:center;padding:4px;">Aucune image</span>'
+              )
+
+            +'</div>';
+
+
           return (
 
             '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:var(--white);">' +
 
-              '<div style="font-size:14px;">' +
+              '<div style="display:flex;align-items:center;gap:12px;min-width:0;">' +
 
-                '<b>' +
-                esc(p.name) +
-                '</b> — ' +
-                esc(p.price) +
+                imageHTML +
 
-                '<div style="font-size:12px;opacity:.6;">' +
-                esc(p.cat || '') +
+                '<div style="font-size:14px;min-width:0;">' +
+
+                  '<b>' +
+                  esc(p.name) +
+                  '</b> — ' +
+                  esc(p.price) +
+
+                  '<div style="font-size:12px;opacity:.6;">' +
+                  esc(p.cat || '') +
+                  '</div>' +
+
                 '</div>' +
 
               '</div>' +
@@ -1167,7 +1592,7 @@
               '<button ' +
                 'data-id="' + p.id + '" ' +
                 'class="adminDelBtn" ' +
-                'style="background:#B4453A;color:#fff;border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;">' +
+                'style="background:#B4453A;color:#fff;border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;flex-shrink:0;">' +
                 'Supprimer' +
               '</button>' +
 
@@ -1203,6 +1628,9 @@
                 '...';
 
 
+              btn.disabled = true;
+
+
               deleteProduct(id)
                 .then(function(ok){
 
@@ -1210,6 +1638,8 @@
 
                     btn.textContent =
                       'Erreur';
+
+                    btn.disabled = false;
 
                     return;
 
@@ -1231,6 +1661,127 @@
     });
 
   }
+
+
+  var imageInput =
+    document.getElementById('pimage');
+
+  var imagePreviewBox =
+    document.getElementById('imagePreviewBox');
+
+  var imagePreview =
+    document.getElementById('imagePreview');
+
+  var removeImageBtn =
+    document.getElementById('removeImageBtn');
+
+
+  function clearImageSelection(){
+
+    if(imageInput){
+
+      imageInput.value = '';
+
+    }
+
+
+    if(imagePreview){
+
+      imagePreview.removeAttribute('src');
+
+    }
+
+
+    if(imagePreviewBox){
+
+      imagePreviewBox.style.display = 'none';
+
+    }
+
+  }
+
+
+  imageInput.addEventListener(
+    'change',
+    function(){
+
+      var file =
+        imageInput.files &&
+        imageInput.files[0];
+
+
+      if(!file){
+
+        clearImageSelection();
+
+        return;
+
+      }
+
+
+      if(!file.type || file.type.indexOf('image/') !== 0){
+
+        document
+          .getElementById('formMsg')
+          .textContent =
+            'Veuillez sélectionner une image.';
+
+        clearImageSelection();
+
+        return;
+
+      }
+
+
+      if(file.size > 50 * 1024 * 1024){
+
+        document
+          .getElementById('formMsg')
+          .textContent =
+            'L’image est trop grande. Taille maximale : 50 MB.';
+
+        clearImageSelection();
+
+        return;
+
+      }
+
+
+      var objectUrl =
+        URL.createObjectURL(file);
+
+
+      imagePreview.src =
+        objectUrl;
+
+
+      imagePreviewBox.style.display =
+        'block';
+
+
+      imagePreview.onload =
+        function(){
+
+          URL.revokeObjectURL(objectUrl);
+
+        };
+
+    }
+  );
+
+
+  removeImageBtn.addEventListener(
+    'click',
+    function(){
+
+      clearImageSelection();
+
+      document
+        .getElementById('formMsg')
+        .textContent = '';
+
+    }
+  );
 
 
   document
@@ -1421,6 +1972,15 @@
             .value;
 
 
+        var imageFile =
+          document
+            .getElementById('pimage')
+            .files &&
+          document
+            .getElementById('pimage')
+            .files[0];
+
+
         var msg =
           document.getElementById('formMsg');
 
@@ -1435,43 +1995,159 @@
         }
 
 
-        msg.textContent =
-          'Ajout en cours…';
+        if(imageFile){
 
-
-        createProduct({
-          name:name,
-          price:price,
-          cat:cat
-        })
-
-        .then(function(ok){
-
-          if(ok){
+          if(
+            !imageFile.type ||
+            imageFile.type.indexOf('image/') !== 0
+          ){
 
             msg.textContent =
-              'Produit ajouté.';
+              'Le fichier sélectionné doit être une image.';
+
+            return;
+
+          }
+
+
+          if(imageFile.size > 50 * 1024 * 1024){
+
+            msg.textContent =
+              'L’image est trop grande. Taille maximale : 50 MB.';
+
+            return;
+
+          }
+
+        }
+
+
+        var addButton =
+          document.getElementById('addProductBtn');
+
+
+        addButton.disabled =
+          true;
+
+
+        addButton.style.opacity =
+          '.6';
+
+
+        msg.textContent =
+          imageFile
+            ? 'Envoi de l’image…'
+            : 'Ajout du produit…';
+
+
+        var uploadedImage =
+          null;
+
+
+        uploadProductImage(imageFile)
+
+          .then(function(uploadResult){
+
+            uploadedImage =
+              uploadResult;
+
+
+            msg.textContent =
+              'Enregistrement du produit…';
+
+
+            return createProduct({
+
+              name:name,
+
+              price:price,
+
+              cat:cat,
+
+              image_url:
+                uploadedImage
+                  ? uploadedImage.url
+                  : null
+
+            });
+
+          })
+
+          .then(function(result){
+
+            if(!result){
+
+              if(
+                uploadedImage &&
+                uploadedImage.url
+              ){
+
+                return deleteStorageImage(
+                  uploadedImage.url
+                ).then(function(){
+
+                  throw new Error(
+                    'Le produit n’a pas pu être enregistré.'
+                  );
+
+                });
+
+              }
+
+
+              throw new Error(
+                'Le produit n’a pas pu être enregistré.'
+              );
+
+            }
+
+
+            msg.textContent =
+              'Produit ajouté avec succès.';
+
 
             document
               .getElementById('pname')
               .value = '';
 
+
             document
               .getElementById('pprice')
               .value = '';
+
+
+            clearImageSelection();
+
 
             renderAdminList();
 
             render();
 
-          }else{
+          })
+
+          .catch(function(error){
+
+            console.error(
+              'ERREUR AJOUT PRODUIT :',
+              error
+            );
+
 
             msg.textContent =
-              'Erreur : vérifie la connexion à la base.';
+              error.message ||
+              'Erreur lors de l’ajout du produit.';
 
-          }
+          })
 
-        });
+          .then(function(){
+
+            addButton.disabled =
+              false;
+
+            addButton.style.opacity =
+              '';
+
+          });
 
       }
     );
