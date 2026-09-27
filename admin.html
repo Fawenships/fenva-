@@ -222,6 +222,10 @@
 
 <body>
 
+<script>
+alert("JAVASCRIPT FENVA FONCTIONNE");
+</script>
+
 <!-- CONNEXION -->
 
 <div id="lockScreen" class="locked">
@@ -385,10 +389,6 @@
 
 <script>
 
-/* =========================================================
-   CONFIGURATION SUPABASE
-========================================================= */
-
 var SUPABASE_URL =
   'https://pgiualcqiiilgmjqdwlfq.supabase.co';
 
@@ -399,10 +399,6 @@ var TABLE = 'produits';
 
 var accessToken = null;
 
-
-/* =========================================================
-   HEADERS
-========================================================= */
 
 function getHeaders(){
 
@@ -415,10 +411,6 @@ function getHeaders(){
 
 }
 
-
-/* =========================================================
-   ECHAPPEMENT HTML
-========================================================= */
 
 function esc(s){
 
@@ -439,10 +431,6 @@ function esc(s){
 
 }
 
-
-/* =========================================================
-   CONNEXION SUPABASE
-========================================================= */
 
 function loginAdmin(email,password){
 
@@ -514,10 +502,6 @@ function loginAdmin(email,password){
 }
 
 
-/* =========================================================
-   DECONNEXION
-========================================================= */
-
 function logoutAdmin(){
 
   if(!accessToken){
@@ -547,10 +531,6 @@ function logoutAdmin(){
 
 }
 
-
-/* =========================================================
-   CHARGER LES PRODUITS
-========================================================= */
 
 function fetchProducts(){
 
@@ -592,10 +572,6 @@ function fetchProducts(){
 
 }
 
-
-/* =========================================================
-   AFFICHER LES PRODUITS
-========================================================= */
 
 function renderList(){
 
@@ -661,10 +637,6 @@ function renderList(){
 
 }
 
-
-/* =========================================================
-   AJOUT PRODUIT
-========================================================= */
 
 function addProduct(){
 
@@ -800,10 +772,6 @@ function addProduct(){
 }
 
 
-/* =========================================================
-   SUPPRIMER
-========================================================= */
-
 function removeProduct(id){
 
   if(!accessToken){
@@ -874,10 +842,6 @@ function removeProduct(id){
 
 }
 
-
-/* =========================================================
-   CONNEXION — TEST DU BOUTON
-========================================================= */
 
 document
   .getElementById('loginBtn')
@@ -960,10 +924,6 @@ document
   );
 
 
-/* =========================================================
-   ENTER EMAIL
-========================================================= */
-
 document
   .getElementById('emailInput')
   .addEventListener(
@@ -981,10 +941,6 @@ document
     }
   );
 
-
-/* =========================================================
-   ENTER PASSWORD
-========================================================= */
 
 document
   .getElementById('passwordInput')
@@ -1004,10 +960,6 @@ document
   );
 
 
-/* =========================================================
-   AJOUT
-========================================================= */
-
 document
   .getElementById('addProductBtn')
   .addEventListener(
@@ -1015,10 +967,6 @@ document
     addProduct
   );
 
-
-/* =========================================================
-   DECONNEXION
-========================================================= */
 
 document
   .getElementById('logoutBtn')
@@ -1058,10 +1006,6 @@ document
     }
   );
 
-
-/* =========================================================
-   EXPORT
-========================================================= */
 
 window.removeProduct =
   removeProduct;
