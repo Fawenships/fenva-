@@ -4,166 +4,1069 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FENVA BEAUTY — Administration</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
   :root{
-    --cream:#F7F4EE; --beige:#E9E3D8; --nude:#1F6F64; --brown:#262322; --gold:#2F8577; --white:#FFFFFF; --line:#E1DACB;
-    box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+    --cream:#F7F4EE;
+    --beige:#E9E3D8;
+    --nude:#1F6F64;
+    --brown:#262322;
+    --gold:#2F8577;
+    --white:#FFFFFF;
+    --line:#E1DACB;
+
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
   }
+
   @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){ --cream:#1B1A18; --beige:#242220; --nude:#5FBFAE; --brown:#EDE8E0; --gold:#4FA695; --white:#211F1D; --line:#33312D; }
+    :root:not([data-theme="light"]){
+      --cream:#1B1A18;
+      --beige:#242220;
+      --nude:#5FBFAE;
+      --brown:#EDE8E0;
+      --gold:#4FA695;
+      --white:#211F1D;
+      --line:#33312D;
+    }
   }
-  :root[data-theme="dark"]{ --cream:#1B1A18; --beige:#242220; --nude:#5FBFAE; --brown:#EDE8E0; --gold:#4FA695; --white:#211F1D; --line:#33312D; }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--cream);color:var(--brown);font-family:'Jost',sans-serif;font-weight:300;min-height:100%;}
-  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
-  h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:32px;margin-bottom:6px;}
-  .sub{opacity:.6;font-size:14px;margin-bottom:36px;}
-  .card{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:26px;margin-bottom:26px;}
-  label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;}
-  label:first-child{margin-top:0;}
+
+  :root[data-theme="dark"]{
+    --cream:#1B1A18;
+    --beige:#242220;
+    --nude:#5FBFAE;
+    --brown:#EDE8E0;
+    --gold:#4FA695;
+    --white:#211F1D;
+    --line:#33312D;
+  }
+
+  *{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+  }
+
+  body{
+    background:var(--cream);
+    color:var(--brown);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    min-height:100%;
+  }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:48px 24px 80px;
+  }
+
+  h1{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    font-size:32px;
+    margin-bottom:6px;
+  }
+
+  .sub{
+    opacity:.6;
+    font-size:14px;
+    margin-bottom:36px;
+  }
+
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:26px;
+    margin-bottom:26px;
+  }
+
+  label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin:14px 0 6px;
+  }
+
+  label:first-child{
+    margin-top:0;
+  }
+
   input,select,textarea{
-    width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;
-    background:var(--cream);color:var(--brown);font-family:'Jost',sans-serif;font-size:14px;
+    width:100%;
+    padding:11px 14px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    background:var(--cream);
+    color:var(--brown);
+    font-family:'Jost',sans-serif;
+    font-size:14px;
   }
-  textarea{resize:vertical;min-height:70px;}
+
+  textarea{
+    resize:vertical;
+    min-height:70px;
+  }
+
   .btn{
-    display:inline-block;background:var(--gold);color:#fff;border:none;border-radius:4px;
-    padding:13px 28px;font-size:14px;font-weight:600;cursor:pointer;margin-top:18px;
+    display:inline-block;
+    background:var(--gold);
+    color:#fff;
+    border:none;
+    border-radius:4px;
+    padding:13px 28px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:18px;
   }
-  .btn:hover{opacity:.92;}
-  .btn-danger{background:#B4453A;color:#fff;border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;}
-  .list{display:flex;flex-direction:column;gap:10px;}
+
+  .btn:hover{
+    opacity:.92;
+  }
+
+  .btn-danger{
+    background:#B4453A;
+    color:#fff;
+    border:none;
+    border-radius:4px;
+    padding:8px 14px;
+    font-size:13px;
+    cursor:pointer;
+  }
+
+  .btn-logout{
+    background:transparent;
+    color:var(--brown);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:9px 16px;
+    font-size:13px;
+    cursor:pointer;
+  }
+
+  .list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
   .item{
-    display:flex;align-items:center;justify-content:space-between;gap:12px;
-    border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:var(--white);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:12px 16px;
+    background:var(--white);
   }
-  .item .info{font-size:14px;}
-  .item .info b{font-weight:600;}
-  .item .cat-tag{font-size:12px;opacity:.6;}
-  .locked{display:flex;align-items:center;justify-content:center;min-height:70vh;}
-  .locked-box{text-align:center;max-width:320px;}
-  .locked input{margin-top:16px;text-align:center;}
-  .msg{font-size:13px;color:var(--gold);margin-top:8px;min-height:16px;}
-  .note{font-size:13px;opacity:.6;margin-top:10px;line-height:1.5;}
+
+  .item .info{
+    font-size:14px;
+  }
+
+  .item .info b{
+    font-weight:600;
+  }
+
+  .item .cat-tag{
+    font-size:12px;
+    opacity:.6;
+    margin-top:3px;
+  }
+
+  .locked{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:70vh;
+  }
+
+  .locked-box{
+    text-align:center;
+    max-width:320px;
+    width:100%;
+  }
+
+  .locked input{
+    margin-top:16px;
+    text-align:center;
+  }
+
+  .locked input + input{
+    margin-top:10px;
+  }
+
+  .msg{
+    font-size:13px;
+    color:var(--gold);
+    margin-top:8px;
+    min-height:16px;
+  }
+
+  .note{
+    font-size:13px;
+    opacity:.6;
+    margin-top:10px;
+    line-height:1.5;
+  }
+
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:36px;
+  }
+
+  .topbar .sub{
+    margin-bottom:0;
+  }
+
+  @media(max-width:520px){
+    .topbar{
+      align-items:flex-start;
+      flex-direction:column;
+    }
+
+    .item{
+      align-items:flex-start;
+      flex-direction:column;
+    }
+
+    .btn-danger{
+      width:100%;
+    }
+  }
 </style>
 </head>
+
 <body>
 
+<!-- =========================
+     CONNEXION ADMIN
+========================= -->
+
 <div id="lockScreen" class="locked">
+
   <div class="locked-box">
+
     <h1>Administration</h1>
+
     <p class="sub">FENVA BEAUTY</p>
-    <label for="codeInput">Code d'accès</label>
-    <input id="codeInput" type="password" placeholder="Entrer le code">
-    <button class="btn" onclick="tryUnlock()">Entrer</button>
+
+    <label for="emailInput">Adresse e-mail</label>
+
+    <input
+      id="emailInput"
+      type="email"
+      placeholder="Adresse e-mail"
+      autocomplete="username"
+    >
+
+    <label for="passwordInput">Mot de passe</label>
+
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="Mot de passe"
+      autocomplete="current-password"
+    >
+
+    <button class="btn" id="loginBtn">
+      Se connecter
+    </button>
+
     <div class="msg" id="lockMsg"></div>
+
   </div>
+
 </div>
+
+
+<!-- =========================
+     ADMINISTRATION
+========================= -->
 
 <div id="adminScreen" class="wrap" style="display:none;">
-  <h1>Gestion des produits</h1>
-  <p class="sub">Les produits ajoutés ici apparaissent sur la boutique, dans ce même navigateur.</p>
 
-  <div class="card">
-    <label for="pname">Nom du produit</label>
-    <input id="pname" type="text" placeholder="Ex. Sérum Éclat">
-    <label for="pprice">Prix</label>
-    <input id="pprice" type="text" placeholder="Ex. 1 200 HTG">
-    <label for="pcat">Catégorie</label>
-    <select id="pcat">
-      <option>Soins du visage</option>
-      <option>Soins du corps</option>
-      <option>Soins des cheveux</option>
-      <option>Parfums</option>
-      <option>Maquillage</option>
-      <option>Accessoires</option>
-    </select>
-    <label for="pdesc">Description (optionnel)</label>
-    <textarea id="pdesc" placeholder="Courte description du produit"></textarea>
-    <button class="btn" onclick="addProduct()">Ajouter le produit</button>
-    <div class="msg" id="formMsg"></div>
+  <div class="topbar">
+
+    <div>
+      <h1>Gestion des produits</h1>
+      <p class="sub">
+        Administration FENVA BEAUTY
+      </p>
+    </div>
+
+    <button class="btn-logout" id="logoutBtn">
+      Déconnexion
+    </button>
+
   </div>
 
-  <h1 style="font-size:22px;margin-bottom:16px;">Produits actuels</h1>
+
+  <!-- AJOUT PRODUIT -->
+
+  <div class="card">
+
+    <label for="pname">
+      Nom du produit
+    </label>
+
+    <input
+      id="pname"
+      type="text"
+      placeholder="Ex. Sérum Éclat"
+    >
+
+
+    <label for="pprice">
+      Prix
+    </label>
+
+    <input
+      id="pprice"
+      type="text"
+      placeholder="Ex. 1 200 HTG"
+    >
+
+
+    <label for="pcat">
+      Catégorie
+    </label>
+
+    <select id="pcat">
+
+      <option>Soins du visage</option>
+
+      <option>Soins du corps</option>
+
+      <option>Soins des cheveux</option>
+
+      <option>Parfums</option>
+
+      <option>Maquillage</option>
+
+      <option>Accessoires</option>
+
+    </select>
+
+
+    <label for="pdesc">
+      Description (optionnel)
+    </label>
+
+    <textarea
+      id="pdesc"
+      placeholder="Courte description du produit"
+    ></textarea>
+
+
+    <button class="btn" id="addProductBtn">
+      Ajouter le produit
+    </button>
+
+    <div class="msg" id="formMsg"></div>
+
+  </div>
+
+
+  <!-- LISTE PRODUITS -->
+
+  <h1 style="font-size:22px;margin-bottom:16px;">
+    Produits actuels
+  </h1>
+
   <div class="list" id="productList"></div>
-  <p class="note">Ces produits sont enregistrés dans ce navigateur (localStorage). Pour qu'ils apparaissent chez tous les visiteurs, il faudra brancher une vraie base de données plus tard.</p>
+
+  <p class="note">
+    Les produits sont maintenant enregistrés dans Supabase.
+    Ils peuvent donc être accessibles depuis les différents appareils
+    qui utilisent la boutique.
+  </p>
+
 </div>
 
-<script>
-  var CODE = 'fenva2026';
-  var KEY = 'fenvaProducts';
 
-  function tryUnlock(){
-    var val = document.getElementById('codeInput').value.trim();
-    if(val === CODE){
-      document.getElementById('lockScreen').style.display = 'none';
-      document.getElementById('adminScreen').style.display = 'block';
-      renderList();
-    } else {
-      document.getElementById('lockMsg').textContent = 'Code incorrect.';
+<script>
+
+/* =========================================================
+   CONFIGURATION SUPABASE
+========================================================= */
+
+var SUPABASE_URL =
+  'https://pgiualcqiiilgmjqdwlfq.supabase.co';
+
+var SUPABASE_KEY =
+  'sb_publishable_KCYLHW-qWK7QVmLyNw5DlA_KRvSmNtB';
+
+var TABLE = 'produits';
+
+var accessToken = null;
+
+
+/* =========================================================
+   HEADERS SUPABASE
+========================================================= */
+
+function getHeaders(){
+
+  return {
+    'apikey': SUPABASE_KEY,
+    'Authorization':
+      'Bearer ' + (accessToken || SUPABASE_KEY),
+    'Content-Type':'application/json'
+  };
+
+}
+
+
+/* =========================================================
+   ECHAPPEMENT HTML
+========================================================= */
+
+function esc(s){
+
+  return String(s).replace(
+    /[&<>"]/g,
+    function(c){
+
+      return {
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;'
+
+      }[c];
+
     }
-  }
-  document.getElementById('codeInput').addEventListener('keydown', function(e){
-    if(e.key === 'Enter') tryUnlock();
+  );
+
+}
+
+
+/* =========================================================
+   CONNEXION SUPABASE AUTH
+========================================================= */
+
+function loginAdmin(email,password){
+
+  return fetch(
+    SUPABASE_URL +
+    '/auth/v1/token?grant_type=password',
+    {
+
+      method:'POST',
+
+      headers:{
+        'apikey':SUPABASE_KEY,
+        'Content-Type':'application/json'
+      },
+
+      body:JSON.stringify({
+        email:email,
+        password:password
+      })
+
+    }
+  )
+
+  .then(function(r){
+
+    return r.text().then(function(raw){
+
+      var data = {};
+
+      try{
+        data = JSON.parse(raw);
+      }catch(e){}
+
+      if(!r.ok){
+
+        throw new Error(
+          'Supabase ' +
+          r.status +
+          ': ' +
+          (
+            data.error_description ||
+            data.msg ||
+            data.message ||
+            raw ||
+            'Erreur inconnue'
+          )
+        );
+
+      }
+
+      if(!data.access_token){
+
+        throw new Error(
+          'Supabase : aucun access_token reçu.'
+        );
+
+      }
+
+      accessToken = data.access_token;
+
+      return true;
+
+    });
+
   });
 
-  function load(){
-    try{
-      var raw = localStorage.getItem(KEY);
-      return raw ? JSON.parse(raw) : [];
-    }catch(e){ return []; }
-  }
-  function save(products){
-    try{ localStorage.setItem(KEY, JSON.stringify(products)); return true; }
-    catch(e){ return false; }
-  }
-  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+}
 
-  function addProduct(){
-    var name = document.getElementById('pname').value.trim();
-    var price = document.getElementById('pprice').value.trim();
-    var cat = document.getElementById('pcat').value;
-    var desc = document.getElementById('pdesc').value.trim();
-    var msg = document.getElementById('formMsg');
-    if(!name || !price){
-      msg.textContent = 'Nom et prix sont requis.';
-      return;
+
+/* =========================================================
+   DECONNEXION
+========================================================= */
+
+function logoutAdmin(){
+
+  if(!accessToken){
+
+    return Promise.resolve();
+
+  }
+
+  var token = accessToken;
+
+  accessToken = null;
+
+  return fetch(
+    SUPABASE_URL +
+    '/auth/v1/logout',
+    {
+
+      method:'POST',
+
+      headers:{
+        'apikey':SUPABASE_KEY,
+        'Authorization':'Bearer ' + token
+      }
+
     }
-    var products = load();
-    products.push({ id: Date.now(), name: name, price: price, cat: cat, desc: desc });
-    if(save(products)){
-      msg.textContent = 'Produit ajouté.';
-      document.getElementById('pname').value = '';
-      document.getElementById('pprice').value = '';
-      document.getElementById('pdesc').value = '';
-      renderList();
-    } else {
-      msg.textContent = 'Erreur : impossible d\'enregistrer.';
+  ).catch(function(){});
+
+}
+
+
+/* =========================================================
+   RECUPERER LES PRODUITS
+========================================================= */
+
+function fetchProducts(){
+
+  return fetch(
+    SUPABASE_URL +
+    '/rest/v1/' +
+    TABLE +
+    '?select=*&order=created_at.desc',
+    {
+      headers:getHeaders()
     }
-  }
+  )
 
-  function removeProduct(id){
-    var products = load().filter(function(p){ return p.id !== id; });
-    save(products);
-    renderList();
-  }
+  .then(function(r){
 
-  function renderList(){
-    var products = load();
-    var list = document.getElementById('productList');
+    if(!r.ok){
+
+      throw new Error(
+        'Impossible de charger les produits.'
+      );
+
+    }
+
+    return r.json();
+
+  })
+
+  .catch(function(error){
+
+    console.error(
+      'Erreur chargement produits:',
+      error
+    );
+
+    return [];
+
+  });
+
+}
+
+
+/* =========================================================
+   AFFICHER LES PRODUITS
+========================================================= */
+
+function renderList(){
+
+  var list =
+    document.getElementById('productList');
+
+  list.innerHTML =
+    '<p class="sub">Chargement...</p>';
+
+  fetchProducts().then(function(products){
+
     if(!products.length){
-      list.innerHTML = '<p class="sub">Aucun produit pour l\'instant.</p>';
+
+      list.innerHTML =
+        '<p class="sub">Aucun produit pour l\'instant.</p>';
+
       return;
+
     }
-    list.innerHTML = products.map(function(p){
-      return '<div class="item"><div class="info"><b>'+esc(p.name)+'</b> — '+esc(p.price)+
-        '<div class="cat-tag">'+esc(p.cat||'')+'</div></div>' +
-        '<button class="btn-danger" onclick="removeProduct('+p.id+')">Supprimer</button></div>';
-    }).join('');
+
+    list.innerHTML =
+      products.map(function(p){
+
+        return (
+
+          '<div class="item">' +
+
+            '<div class="info">' +
+
+              '<b>' +
+              esc(p.name) +
+              '</b>' +
+
+              ' — ' +
+
+              esc(p.price) +
+
+              '<div class="cat-tag">' +
+              esc(p.cat || '') +
+              '</div>' +
+
+            '</div>' +
+
+            '<button ' +
+            'class="btn-danger" ' +
+            'onclick="removeProduct(' +
+            Number(p.id) +
+            ')">' +
+
+            'Supprimer' +
+
+            '</button>' +
+
+          '</div>'
+
+        );
+
+      }).join('');
+
+  });
+
+}
+
+
+/* =========================================================
+   AJOUTER UN PRODUIT
+========================================================= */
+
+function addProduct(){
+
+  var name =
+    document.getElementById('pname')
+    .value.trim();
+
+  var price =
+    document.getElementById('pprice')
+    .value.trim();
+
+  var cat =
+    document.getElementById('pcat')
+    .value;
+
+  var desc =
+    document.getElementById('pdesc')
+    .value.trim();
+
+  var msg =
+    document.getElementById('formMsg');
+
+
+  if(!name || !price){
+
+    msg.textContent =
+      'Nom et prix sont requis.';
+
+    return;
+
   }
 
-  window.removeProduct = removeProduct;
+
+  if(!accessToken){
+
+    msg.textContent =
+      'Votre session administrateur a expiré.';
+
+    return;
+
+  }
+
+
+  msg.textContent =
+    'Ajout en cours…';
+
+
+  var product = {
+
+    name:name,
+
+    price:price,
+
+    cat:cat,
+
+    desc:desc
+
+  };
+
+
+  fetch(
+    SUPABASE_URL +
+    '/rest/v1/' +
+    TABLE,
+    {
+
+      method:'POST',
+
+      headers:Object.assign(
+        {},
+        getHeaders(),
+        {
+          'Prefer':'return=representation'
+        }
+      ),
+
+      body:JSON.stringify(product)
+
+    }
+  )
+
+  .then(function(r){
+
+    if(!r.ok){
+
+      return r.text().then(function(raw){
+
+        throw new Error(
+          raw ||
+          'Impossible d\'ajouter le produit.'
+        );
+
+      });
+
+    }
+
+    return r.json();
+
+  })
+
+  .then(function(){
+
+    msg.textContent =
+      'Produit ajouté.';
+
+
+    document.getElementById('pname')
+      .value = '';
+
+    document.getElementById('pprice')
+      .value = '';
+
+    document.getElementById('pdesc')
+      .value = '';
+
+
+    renderList();
+
+  })
+
+  .catch(function(error){
+
+    console.error(
+      'Erreur ajout produit:',
+      error
+    );
+
+    msg.textContent =
+      'Erreur : ' + error.message;
+
+  });
+
+}
+
+
+/* =========================================================
+   SUPPRIMER UN PRODUIT
+========================================================= */
+
+function removeProduct(id){
+
+  if(!accessToken){
+
+    alert(
+      'Votre session administrateur a expiré.'
+    );
+
+    return;
+
+  }
+
+
+  if(!confirm(
+    'Supprimer ce produit ?'
+  )){
+
+    return;
+
+  }
+
+
+  fetch(
+    SUPABASE_URL +
+    '/rest/v1/' +
+    TABLE +
+    '?id=eq.' +
+    encodeURIComponent(id),
+    {
+
+      method:'DELETE',
+
+      headers:getHeaders()
+
+    }
+  )
+
+  .then(function(r){
+
+    if(!r.ok){
+
+      return r.text().then(function(raw){
+
+        throw new Error(
+          raw ||
+          'Impossible de supprimer le produit.'
+        );
+
+      });
+
+    }
+
+    renderList();
+
+  })
+
+  .catch(function(error){
+
+    console.error(
+      'Erreur suppression:',
+      error
+    );
+
+    alert(
+      'Erreur : ' +
+      error.message
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   EVENEMENT CONNEXION
+========================================================= */
+
+document
+  .getElementById('loginBtn')
+  .addEventListener(
+    'click',
+    function(){
+
+      var email =
+        document
+        .getElementById('emailInput')
+        .value
+        .trim();
+
+      var password =
+        document
+        .getElementById('passwordInput')
+        .value;
+
+      var msg =
+        document
+        .getElementById('lockMsg');
+
+
+      if(!email || !password){
+
+        msg.textContent =
+          'E-mail et mot de passe sont requis.';
+
+        return;
+
+      }
+
+
+      msg.textContent =
+        'Connexion en cours…';
+
+
+      loginAdmin(
+        email,
+        password
+      )
+
+      .then(function(){
+
+        msg.textContent = '';
+
+        document
+          .getElementById('lockScreen')
+          .style.display = 'none';
+
+        document
+          .getElementById('adminScreen')
+          .style.display = 'block';
+
+        renderList();
+
+      })
+
+      .catch(function(error){
+
+        accessToken = null;
+
+        console.error(
+          'Erreur Supabase Auth:',
+          error
+        );
+
+        msg.textContent =
+          error.message ||
+          'Erreur de connexion à Supabase.';
+
+      });
+
+    }
+  );
+
+
+/* =========================================================
+   ENTER SUR EMAIL
+========================================================= */
+
+document
+  .getElementById('emailInput')
+  .addEventListener(
+    'keydown',
+    function(e){
+
+      if(e.key === 'Enter'){
+
+        document
+          .getElementById('passwordInput')
+          .focus();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   ENTER SUR MOT DE PASSE
+========================================================= */
+
+document
+  .getElementById('passwordInput')
+  .addEventListener(
+    'keydown',
+    function(e){
+
+      if(e.key === 'Enter'){
+
+        document
+          .getElementById('loginBtn')
+          .click();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   BOUTON AJOUT
+========================================================= */
+
+document
+  .getElementById('addProductBtn')
+  .addEventListener(
+    'click',
+    addProduct
+  );
+
+
+/* =========================================================
+   DECONNEXION
+========================================================= */
+
+document
+  .getElementById('logoutBtn')
+  .addEventListener(
+    'click',
+    function(){
+
+      logoutAdmin().then(function(){
+
+        document
+          .getElementById('adminScreen')
+          .style.display = 'none';
+
+        document
+          .getElementById('lockScreen')
+          .style.display = 'flex';
+
+        document
+          .getElementById('emailInput')
+          .value = '';
+
+        document
+          .getElementById('passwordInput')
+          .value = '';
+
+        document
+          .getElementById('lockMsg')
+          .textContent = '';
+
+        document
+          .getElementById('formMsg')
+          .textContent = '';
+
+      });
+
+    }
+  );
+
+
+/* =========================================================
+   EXPORT POUR LES BOUTONS SUPPRIMER
+========================================================= */
+
+window.removeProduct = removeProduct;
+
 </script>
 
 </body>
