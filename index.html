@@ -1,1243 +1,226 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FENVA BEAUTY</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F4EE;
+    --beige:#E9E3D8;
+    --nude:#1F6F64;
+    --brown:#262322;
+    --gold:#2F8577;
+    --white:#FFFFFF;
+    --line:#E1DACB;
+    --whatsapp:#25D366;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --cream:#1B1A18; --beige:#242220; --nude:#5FBFAE; --brown:#EDE8E0; --gold:#4FA695; --white:#211F1D; --line:#33312D;
+    }
+  }
+  :root[data-theme="dark"]{
+    --cream:#1B1A18; --beige:#242220; --nude:#5FBFAE; --brown:#EDE8E0; --gold:#4FA695; --white:#211F1D; --line:#33312D;
+  }
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--cream);
+    color:var(--brown);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:700;letter-spacing:.01em;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
 
-  <title>FENVA BEAUTY — Beauté & soins</title>
+  header{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
+    background:var(--cream);border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 32px;max-width:1120px;margin:0 auto;}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;font-style:italic;letter-spacing:.03em;}
+  .navlinks{display:flex;gap:36px;font-size:14px;}
+  .navlinks a{opacity:.75;transition:opacity .2s;}
+  .navlinks a:hover{opacity:1;}
+  .cart{font-size:14px;border:1px solid var(--brown);border-radius:2px;padding:8px 18px;}
 
-  <meta
-    name="description"
-    content="FENVA BEAUTY — Découvrez notre sélection de produits de beauté, soins du visage, soins du corps, cheveux, parfums et maquillage."
-  >
+  .hero{padding:44px 0 8px;}
+  .hero .wrap{text-align:center;}
+  .hero-eyebrow{font-size:13px;color:var(--nude);margin-bottom:10px;}
+  .hero h1{font-size:clamp(28px,4vw,40px);line-height:1.1;max-width:20ch;margin:0 auto;}
+  .btn{
+    display:inline-block;background:var(--brown);color:var(--cream);
+    padding:15px 34px;font-size:14px;font-weight:600;letter-spacing:.02em;border-radius:2px;
+    transition:transform .25s ease, background .25s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-ghost{background:transparent;color:var(--brown);border:1px solid var(--brown);margin-left:14px;}
 
-  <meta name="theme-color" content="#3b2a20">
+  section{padding:80px 0;}
+  .cats{border-top:1px solid var(--line);padding-top:56px;}
+  .cats-head{text-align:center;margin-bottom:40px;}
+  .cats-head h2{font-size:clamp(30px,3.5vw,42px);}
+  .cats-head p{opacity:.65;font-size:15px;margin-top:10px;}
+  .catgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .cat{
+    background:var(--beige);border-radius:6px;padding:0;aspect-ratio:3/4;
+    display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;
+    transition:transform .25s ease;
+  }
+  .cat:hover{transform:translateY(-4px);}
+  .cat::before{
+    content:"";position:absolute;top:24px;left:24px;width:34px;height:34px;
+    border:1px solid var(--gold);border-radius:50%;
+  }
+  .cat .catbody{padding:26px 26px 30px;background:linear-gradient(0deg,var(--cream) 0%,transparent 100%);}
+  .cat h3{font-size:24px;font-weight:700;font-style:italic;}
+  .cat p{font-size:13px;opacity:.65;margin-top:6px;}
+  .cat.big{grid-column:span 1;}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  .story{border-top:1px solid var(--line);}
+  .story .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center;}
+  .story-panel{aspect-ratio:1/1;background:var(--beige);border-radius:4px;}
+  .story h2{font-size:clamp(30px,3.5vw,42px);max-width:14ch;margin-bottom:22px;}
+  .story p{max-width:48ch;opacity:.8;font-size:16px;}
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  >
+  .products{border-top:1px solid var(--line);}
+  .prod-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:44px;}
+  .prod-head h2{font-size:clamp(28px,3.5vw,38px);}
+  .prod-head a{font-size:13px;border-bottom:1px solid var(--brown);padding-bottom:3px;}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  .card{}
+  .card .thumb{aspect-ratio:3/4;background:var(--beige);border-radius:3px;margin-bottom:16px;position:relative;overflow:hidden;}
+  .card .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,transparent 60%,rgba(59,42,32,.06));}
+  .card h4{font-size:15px;font-weight:600;margin-bottom:4px;}
+  .card .price{font-size:14px;font-weight:600;color:var(--nude);}
 
-  <link rel="stylesheet" href="css/style.css">
+  .cta{border-top:1px solid var(--line);text-align:center;padding:100px 0;}
+  .cta h2{font-size:clamp(32px,4vw,46px);max-width:16ch;margin:0 auto 30px;}
+
+  footer{border-top:1px solid var(--line);padding:50px 0;font-size:13px;opacity:.65;}
+  footer .wrap{display:flex;justify-content:space-between;}
+
+  .wa-note{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:13px;color:var(--nude);}
+  .wa-float{
+    position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom,0px));
+    width:58px;height:58px;border-radius:50%;background:var(--whatsapp);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.18);
+    z-index:20;transition:transform .2s ease;
+  }
+  .wa-float:hover{transform:scale(1.06);}
+  .wa-float svg{width:28px;height:28px;}
+
+  @media (max-width:860px){
+    .nav{padding:18px 22px;}
+    .navlinks{display:none;}
+    .wrap{padding:0 22px;}
+    .hero{padding:64px 0 56px;}
+    .hero .wrap{grid-template-columns:1fr;gap:36px;}
+    .hero-visual{order:-1;aspect-ratio:16/10;}
+    .catgrid{grid-template-columns:repeat(2,1fr);}
+    .story .wrap{grid-template-columns:1fr;}
+    .story-panel{order:-1;aspect-ratio:16/9;}
+    .grid{grid-template-columns:repeat(2,1fr);gap:20px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .btn,.cat{transition:none;}
+  }
+</style>
 </head>
-
 <body>
 
-  <!-- =========================
-       TOPBAR
-  ========================== -->
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <span>Paiement par MonCash, NatCash ou à la livraison</span>
-      <span>FENVA BEAUTY</span>
+<header>
+  <nav class="nav">
+    <div class="logo">Fenva Beauty</div>
+    <div class="navlinks">
+      <a href="#cats">Catégories</a>
+      <a href="#products">Nouveautés</a>
+      <a href="#story">La marque</a>
     </div>
-  </div>
-
-
-  <!-- =========================
-       HEADER
-  ========================== -->
-  <header class="header">
-    <div class="container header-inner">
-
-      <button
-        class="mobile-menu-button"
-        id="mobileMenuButton"
-        type="button"
-        data-menu-toggle
-        aria-label="Ouvrir le menu"
-        aria-expanded="false"
-        aria-controls="mainNavigation"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-
-      <a href="#accueil" class="logo" aria-label="FENVA BEAUTY - Accueil">
-        <span class="logo-main">FENVA</span>
-        <span class="logo-sub">BEAUTY</span>
-      </a>
-
-
-      <div class="search-box">
-
-        <label class="sr-only" for="searchInput">
-          Rechercher un produit
-        </label>
-
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="Rechercher un produit..."
-          autocomplete="off"
-        >
-
-        <button
-          id="searchButton"
-          type="button"
-          aria-label="Rechercher"
-        >
-          Rechercher
-        </button>
-
-      </div>
-
-
-      <div class="header-actions">
-
-        <button
-          type="button"
-          class="admin-button"
-          id="adminButton"
-          data-modal-open="adminLoginModal"
-        >
-          Administration
-        </button>
-
-
-        <button
-          type="button"
-          class="cart-button"
-          id="cartButton"
-          aria-label="Ouvrir le panier"
-          data-modal-open="cartModal"
-        >
-          Panier
-          <span id="cartCount">0</span>
-        </button>
-
-      </div>
-
-    </div>
-  </header>
-
-
-  <!-- =========================
-       NAVIGATION
-  ========================== -->
-  <nav
-    class="navigation"
-    id="mainNavigation"
-    aria-label="Navigation principale"
-  >
-
-    <div class="container">
-
-      <a href="#accueil">Accueil</a>
-
-      <a href="#categories">Catégories</a>
-
-      <a href="#nouveautes">Nouveautés</a>
-
-      <a href="#promotions">Promotions</a>
-
-      <a href="#boutique">Boutique</a>
-
-      <a href="#contact">Contact</a>
-
-    </div>
-
+    <a class="cart" href="#">Panier (0)</a>
   </nav>
+</header>
 
-
-  <!-- =========================
-       MAIN
-  ========================== -->
-  <main id="accueil">
-
-    <!-- =========================
-         HERO
-    ========================== -->
-    <section class="hero">
-
-      <div class="container hero-content">
-
-        <div class="hero-text">
-
-          <p class="eyebrow">
-            FENVA BEAUTY
-          </p>
-
-          <h1>
-            Révélez votre
-            <span>éclat.</span>
-          </h1>
-
-          <p class="hero-description">
-            Des soins et des produits de beauté soigneusement sélectionnés
-            pour accompagner votre routine au quotidien.
-          </p>
-
-
-          <div class="hero-actions">
-
-            <a
-              href="#boutique"
-              class="button button-dark"
-            >
-              Découvrir la boutique
-            </a>
-
-            <a
-              href="#categories"
-              class="button button-light"
-            >
-              Explorer les catégories
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <div class="hero-visual">
-
-          <div class="hero-card">
-
-            <span>BEAUTY</span>
-
-            <strong>FENVA</strong>
-
-            <small>
-              CARE • BEAUTY • STYLE
-            </small>
-
-          </div>
-
-        </div>
-
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-eyebrow">Cosmétiques premium</div>
+      <h1>Le soin devient un rituel.</h1>
+      <div class="wa-note">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--whatsapp)"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
+        Commandes prises sur WhatsApp — livraison disponible
       </div>
-
-    </section>
-
-
-    <!-- =========================
-         CATEGORIES
-    ========================== -->
-    <section
-      class="section categories-section"
-      id="categories"
-    >
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <p class="eyebrow">
-            Explorer
-          </p>
-
-          <h2>
-            Nos catégories
-          </h2>
-
-          <p>
-            Trouvez facilement les produits adaptés à votre routine beauté.
-          </p>
-
-        </div>
-
-
-        <div class="categories-grid">
-
-          <button
-            class="category-card"
-            type="button"
-            data-category="visage"
-          >
-            <span class="category-number">01</span>
-            <h3>Soins du visage</h3>
-            <span>Découvrir</span>
-          </button>
-
-
-          <button
-            class="category-card"
-            type="button"
-            data-category="corps"
-          >
-            <span class="category-number">02</span>
-            <h3>Soins du corps</h3>
-            <span>Découvrir</span>
-          </button>
-
-
-          <button
-            class="category-card"
-            type="button"
-            data-category="cheveux"
-          >
-            <span class="category-number">03</span>
-            <h3>Soins des cheveux</h3>
-            <span>Découvrir</span>
-          </button>
-
-
-          <button
-            class="category-card"
-            type="button"
-            data-category="parfums"
-          >
-            <span class="category-number">04</span>
-            <h3>Parfums</h3>
-            <span>Découvrir</span>
-          </button>
-
-
-          <button
-            class="category-card"
-            type="button"
-            data-category="maquillage"
-          >
-            <span class="category-number">05</span>
-            <h3>Maquillage</h3>
-            <span>Découvrir</span>
-          </button>
-
-
-          <button
-            class="category-card"
-            type="button"
-            data-category="accessoires"
-          >
-            <span class="category-number">06</span>
-            <h3>Accessoires beauté</h3>
-            <span>Découvrir</span>
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         NOUVEAUTÉS
-    ========================== -->
-    <section
-      class="section products-section"
-      id="nouveautes"
-    >
-
-      <div class="container">
-
-        <div class="section-heading section-heading-row">
-
-          <div>
-
-            <p class="eyebrow">
-              À découvrir
-            </p>
-
-            <h2>
-              Nouveautés
-            </h2>
-
-          </div>
-
-
-          <button
-            type="button"
-            class="text-button"
-            data-filter="new"
-          >
-            Voir tout
-          </button>
-
-        </div>
-
-
-        <div
-          class="products-grid"
-          id="newProducts"
-          aria-live="polite"
-        >
-
-          <div class="products-loading">
-            Chargement des produits...
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         PROMOTIONS
-    ========================== -->
-    <section
-      class="section promotion-section"
-      id="promotions"
-    >
-
-      <div class="container">
-
-        <div class="section-heading section-heading-row">
-
-          <div>
-
-            <p class="eyebrow">
-              Offres sélectionnées
-            </p>
-
-            <h2>
-              Promotions
-            </h2>
-
-          </div>
-
-
-          <button
-            type="button"
-            class="text-button"
-            data-filter="promotion"
-          >
-            Voir tout
-          </button>
-
-        </div>
-
-
-        <div
-          class="products-grid"
-          id="promotionProducts"
-          aria-live="polite"
-        >
-
-          <div class="products-loading">
-            Chargement des promotions...
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         BOUTIQUE
-    ========================== -->
-    <section
-      class="section products-section shop-section"
-      id="boutique"
-    >
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <p class="eyebrow">
-            FENVA BEAUTY
-          </p>
-
-          <h2>
-            La boutique
-          </h2>
-
-          <p>
-            Découvrez l'ensemble de notre sélection.
-          </p>
-
-        </div>
-
-
-        <div class="shop-toolbar">
-
-          <div
-            class="shop-result-count"
-            id="productResultCount"
-            aria-live="polite"
-          >
-            Produits
-          </div>
-
-
-          <label class="sr-only" for="categoryFilter">
-            Filtrer par catégorie
-          </label>
-
-          <select
-            id="categoryFilter"
-            aria-label="Filtrer par catégorie"
-          >
-
-            <option value="all">
-              Toutes les catégories
-            </option>
-
-            <option value="visage">
-              Soins du visage
-            </option>
-
-            <option value="corps">
-              Soins du corps
-            </option>
-
-            <option value="cheveux">
-              Soins des cheveux
-            </option>
-
-            <option value="parfums">
-              Parfums
-            </option>
-
-            <option value="maquillage">
-              Maquillage
-            </option>
-
-            <option value="accessoires">
-              Accessoires beauté
-            </option>
-
-          </select>
-
-
-          <label class="sr-only" for="sortProducts">
-            Trier les produits
-          </label>
-
-          <select
-            id="sortProducts"
-            aria-label="Trier les produits"
-          >
-
-            <option value="default">
-              Trier par
-            </option>
-
-            <option value="price-asc">
-              Prix croissant
-            </option>
-
-            <option value="price-desc">
-              Prix décroissant
-            </option>
-
-            <option value="name">
-              Nom
-            </option>
-
-            <option value="newest">
-              Nouveautés
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div
-          class="products-grid"
-          id="allProducts"
-          aria-live="polite"
-        >
-
-          <div class="products-loading">
-            Chargement de la boutique...
-          </div>
-
-        </div>
-
-
-        <div
-          class="empty-state hidden"
-          id="noProducts"
-          hidden
-        >
-
-          <h3>
-            Aucun produit trouvé
-          </h3>
-
-          <p>
-            Aucun produit ne correspond à votre recherche.
-          </p>
-
-          <button
-            type="button"
-            class="button button-dark"
-            id="resetFilters"
-          >
-            Réinitialiser
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         À PROPOS
-    ========================== -->
-    <section
-      class="section about-section"
-      id="a-propos"
-    >
-
-      <div class="container about-grid">
-
-        <div class="about-visual">
-
-          <div class="about-frame">
-
-            <span>FENVA</span>
-
-            <strong>BEAUTY</strong>
-
-          </div>
-
-        </div>
-
-
-        <div class="about-content">
-
-          <p class="eyebrow">
-            Notre univers
-          </p>
-
-          <h2>
-            La beauté,
-            <span>avec simplicité.</span>
-          </h2>
-
-          <p>
-            FENVA BEAUTY propose une sélection de produits dédiés
-            aux soins, à la beauté et au bien-être quotidien.
-          </p>
-
-          <p>
-            Notre objectif est de vous permettre de trouver facilement
-            des produits adaptés à votre routine, dans une expérience
-            simple, élégante et accessible.
-          </p>
-
-          <a
-            href="#boutique"
-            class="text-link"
-          >
-            Explorer la boutique
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         CTA
-    ========================== -->
-    <section class="cta-section">
-
-      <div class="container cta-content">
-
-        <p class="eyebrow">
-          FENVA BEAUTY
-        </p>
-
-        <h2>
-          Votre routine.
-          Votre éclat.
-        </h2>
-
-        <a
-          href="#boutique"
-          class="button button-light"
-        >
-          Découvrir les produits
-        </a>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-  <footer
-    class="footer"
-    id="contact"
-  >
-
-    <div class="container footer-grid">
-
-
-      <div class="footer-brand">
-
-        <a
-          href="#accueil"
-          class="logo footer-logo"
-          aria-label="FENVA BEAUTY - Accueil"
-        >
-
-          <span class="logo-main">
-            FENVA
-          </span>
-
-          <span class="logo-sub">
-            BEAUTY
-          </span>
-
-        </a>
-
-        <p>
-          Beauté, soins et élégance au quotidien.
-        </p>
-
-      </div>
-
-
-      <div class="footer-column">
-
-        <h3>
-          Boutique
-        </h3>
-
-        <a href="#categories">
-          Catégories
-        </a>
-
-        <a href="#nouveautes">
-          Nouveautés
-        </a>
-
-        <a href="#promotions">
-          Promotions
-        </a>
-
-        <a href="#boutique">
-          Tous les produits
-        </a>
-
-      </div>
-
-
-      <div class="footer-column">
-
-        <h3>
-          Informations
-        </h3>
-
-        <a href="#a-propos">
-          À propos
-        </a>
-
-        <a href="#contact">
-          Contact
-        </a>
-
-      </div>
-
-
-      <div class="footer-column">
-
-        <h3>
-          Contact
-        </h3>
-
-        <p id="footerPhone">
-          Téléphone : bientôt disponible
-        </p>
-
-        <p id="footerWhatsapp">
-          WhatsApp : bientôt disponible
-        </p>
-
-        <p id="footerAddress">
-          Haïti
-        </p>
-
-      </div>
-
     </div>
+  </section>
 
-
-    <div class="container footer-bottom">
-
-      <span>
-        ©
-        <span id="currentYear"></span>
-        FENVA BEAUTY
-      </span>
-
-      <span>
-        Tous droits réservés.
-      </span>
-
+  <section class="cats" id="cats">
+    <div class="wrap">
+      <div class="cats-head">
+        <h2>Explorer par catégorie</h2>
+        <p>Six univers, une même exigence de qualité.</p>
+      </div>
+      <div class="catgrid">
+        <a class="cat" href="#products"><div class="catbody"><h3>Soins du visage</h3><p>Nettoyants, sérums, crèmes</p></div></a>
+        <a class="cat" href="#products"><div class="catbody"><h3>Soins du corps</h3><p>Baumes, huiles, gommages</p></div></a>
+        <a class="cat" href="#products"><div class="catbody"><h3>Soins des cheveux</h3><p>Shampoings, masques, huiles</p></div></a>
+        <a class="cat" href="#products"><div class="catbody"><h3>Parfums</h3><p>Eaux de parfum & extraits</p></div></a>
+        <a class="cat" href="#products"><div class="catbody"><h3>Maquillage</h3><p>Teint, lèvres, regard</p></div></a>
+        <a class="cat" href="#products"><div class="catbody"><h3>Accessoires</h3><p>Pinceaux, trousses, miroirs</p></div></a>
+      </div>
     </div>
+  </section>
 
-  </footer>
-
-
-  <!-- =========================
-       PANIER
-  ========================== -->
-  <div
-    class="modal-overlay"
-    id="cartModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal cart-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="cartTitle"
-      tabindex="-1"
-    >
-
-      <div class="modal-header">
-
-        <div>
-
-          <p class="eyebrow">
-            Votre sélection
-          </p>
-
-          <h2 id="cartTitle">
-            Panier
-          </h2>
-
-        </div>
-
-
-        <button
-          type="button"
-          class="modal-close"
-          data-modal-close="cartModal"
-          aria-label="Fermer le panier"
-        >
-          ×
-        </button>
-
+  <section class="products" id="products">
+    <div class="wrap">
+      <div class="prod-head">
+        <h2>Nouveautés</h2>
+        <a href="#">Voir tout</a>
       </div>
-
-
-      <div
-        class="cart-items"
-        id="cartItems"
-        aria-live="polite"
-      >
-
-        <div class="empty-cart">
-          Votre panier est vide.
-        </div>
-
+      <div class="grid">
+        <div class="card"><div class="thumb"></div><h4>Sérum Éclat</h4><div class="price">1 200 HTG</div></div>
+        <div class="card"><div class="thumb"></div><h4>Baume Nourrissant</h4><div class="price">950 HTG</div></div>
+        <div class="card"><div class="thumb"></div><h4>Eau de Parfum Ambre</h4><div class="price">2 400 HTG</div></div>
+        <div class="card"><div class="thumb"></div><h4>Rouge Velours</h4><div class="price">700 HTG</div></div>
       </div>
-
-
-      <div class="cart-summary">
-
-        <div class="summary-line">
-
-          <span>
-            Sous-total
-          </span>
-
-          <strong id="cartSubtotal">
-            0 HTG
-          </strong>
-
-        </div>
-
-
-        <div class="summary-line">
-
-          <span>
-            Livraison
-          </span>
-
-          <strong id="cartDelivery">
-            À confirmer
-          </strong>
-
-        </div>
-
-
-        <div class="summary-total">
-
-          <span>
-            Total
-          </span>
-
-          <strong id="cartTotal">
-            0 HTG
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <button
-        type="button"
-        class="button button-dark button-full"
-        id="checkoutButton"
-      >
-        Passer la commande
-      </button>
-
     </div>
+  </section>
 
+  <section class="story" id="story">
+    <div class="wrap">
+      <div class="story-panel"></div>
+      <div>
+        <h2>Une beauté sans artifice.</h2>
+        <p>Fenva Beauty sélectionne des produits simples, efficaces, formulés pour être utilisés au quotidien. Chaque référence est choisie avec la même exigence : la qualité avant la quantité.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>Prête à commencer votre rituel ?</h2>
+      <a class="btn" href="#products">Voir la boutique</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Fenva Beauty</span>
+    <span>© 2026</span>
   </div>
-
-
-  <!-- =========================
-       CHECKOUT
-  ========================== -->
-  <div
-    class="modal-overlay"
-    id="checkoutModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal checkout-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="checkoutTitle"
-      tabindex="-1"
-    >
-
-      <div class="modal-header">
-
-        <div>
-
-          <p class="eyebrow">
-            Commande
-          </p>
-
-          <h2 id="checkoutTitle">
-            Finaliser
-          </h2>
-
-        </div>
-
-
-        <button
-          type="button"
-          class="modal-close"
-          data-modal-close="checkoutModal"
-          aria-label="Fermer la commande"
-        >
-          ×
-        </button>
-
-      </div>
-
-
-      <form id="checkoutForm">
-
-        <div class="form-grid">
-
-          <div class="form-group">
-
-            <label for="customerName">
-              Nom complet
-            </label>
-
-            <input
-              type="text"
-              id="customerName"
-              name="name"
-              required
-              autocomplete="name"
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="customerPhone">
-              Téléphone
-            </label>
-
-            <input
-              type="tel"
-              id="customerPhone"
-              name="phone"
-              required
-              autocomplete="tel"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label for="customerAddress">
-            Adresse
-          </label>
-
-          <textarea
-            id="customerAddress"
-            name="address"
-            rows="3"
-            required
-            autocomplete="street-address"
-          ></textarea>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label for="paymentMethod">
-            Mode de paiement
-          </label>
-
-          <select
-            id="paymentMethod"
-            name="payment_method"
-            required
-          >
-
-            <option value="">
-              Sélectionner
-            </option>
-
-            <option value="moncash">
-              MonCash
-            </option>
-
-            <option value="natcash">
-              NatCash
-            </option>
-
-            <option value="delivery">
-              Paiement à la livraison
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="checkout-summary">
-
-          <div>
-
-            <span>
-              Total de la commande
-            </span>
-
-            <strong id="checkoutTotal">
-              0 HTG
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="form-message hidden"
-          id="checkoutMessage"
-          role="alert"
-          aria-live="assertive"
-        ></div>
-
-
-        <button
-          type="submit"
-          class="button button-dark button-full"
-          id="submitOrderButton"
-        >
-          Confirmer la commande
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       ADMIN LOGIN
-  ========================== -->
-  <div
-    class="modal-overlay"
-    id="adminLoginModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal admin-login-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="adminLoginTitle"
-      tabindex="-1"
-    >
-
-      <div class="modal-header">
-
-        <div>
-
-          <p class="eyebrow">
-            Espace sécurisé
-          </p>
-
-          <h2 id="adminLoginTitle">
-            Administration
-          </h2>
-
-        </div>
-
-
-        <button
-          type="button"
-          class="modal-close"
-          data-modal-close="adminLoginModal"
-          aria-label="Fermer l'administration"
-        >
-          ×
-        </button>
-
-      </div>
-
-
-      <form id="adminLoginForm">
-
-        <div class="form-group">
-
-          <label for="adminUsername">
-            Identifiant
-          </label>
-
-          <input
-            type="text"
-            id="adminUsername"
-            name="username"
-            required
-            autocomplete="username"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label for="adminPassword">
-            Mot de passe
-          </label>
-
-          <input
-            type="password"
-            id="adminPassword"
-            name="password"
-            required
-            autocomplete="current-password"
-          >
-
-        </div>
-
-
-        <div
-          class="form-message hidden"
-          id="adminLoginMessage"
-          role="alert"
-          aria-live="assertive"
-        ></div>
-
-
-        <button
-          type="submit"
-          class="button button-dark button-full"
-          id="adminLoginButton"
-        >
-          Se connecter
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       PRODUCT QUICK VIEW
-  ========================== -->
-  <div
-    class="modal-overlay"
-    id="productModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal product-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="productModalTitle"
-      tabindex="-1"
-    >
-
-      <button
-        type="button"
-        class="modal-close"
-        data-modal-close="productModal"
-        aria-label="Fermer le produit"
-      >
-        ×
-      </button>
-
-
-      <div
-        id="productModalContent"
-        data-product-modal-content
-      ></div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       TOAST
-  ========================== -->
-  <div
-    class="toast"
-    id="toast"
-    role="status"
-    aria-live="polite"
-  ></div>
-
-
-  <!-- =========================
-       ACCESSIBILITÉ
-  ========================== -->
-  <span
-    class="sr-only"
-    aria-hidden="true"
-  ></span>
-
-
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
-  <script
-    src="js/app.js"
-    defer
-  ></script>
+</footer>
+
+<a class="wa-float" href="https://wa.me/50955744295?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande" target="_blank" rel="noopener" aria-label="Commander sur WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
+</a>
 
 </body>
 </html>
