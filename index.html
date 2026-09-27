@@ -184,12 +184,8 @@
         <h2>Nouveautés</h2>
         <a href="#">Voir tout</a>
       </div>
-      <div class="grid">
-        <div class="card"><div class="thumb"></div><h4>Sérum Éclat</h4><div class="price">1 200 HTG</div></div>
-        <div class="card"><div class="thumb"></div><h4>Baume Nourrissant</h4><div class="price">950 HTG</div></div>
-        <div class="card"><div class="thumb"></div><h4>Eau de Parfum Ambre</h4><div class="price">2 400 HTG</div></div>
-        <div class="card"><div class="thumb"></div><h4>Rouge Velours</h4><div class="price">700 HTG</div></div>
-      </div>
+      <div class="grid" id="productGrid"></div>
+      <p id="emptyMsg" style="display:none;text-align:center;opacity:.6;font-size:14px;">Aucun produit pour l'instant.</p>
     </div>
   </section>
 
@@ -221,6 +217,39 @@
 <a class="wa-float" href="https://wa.me/50955744295?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande" target="_blank" rel="noopener" aria-label="Commander sur WhatsApp">
   <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
 </a>
+
+<script>
+(function(){
+  var KEY = 'fenvaProducts';
+  var defaults = [
+    {id:1,name:'Sérum Éclat',price:'1 200 HTG',cat:'Soins du visage'},
+    {id:2,name:'Baume Nourrissant',price:'950 HTG',cat:'Soins du corps'},
+    {id:3,name:'Eau de Parfum Ambre',price:'2 400 HTG',cat:'Parfums'},
+    {id:4,name:'Rouge Velours',price:'700 HTG',cat:'Maquillage'}
+  ];
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw){ localStorage.setItem(KEY, JSON.stringify(defaults)); return defaults; }
+      return JSON.parse(raw);
+    }catch(e){ return defaults; }
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function render(){
+    var products = load();
+    var grid = document.getElementById('productGrid');
+    var empty = document.getElementById('emptyMsg');
+    if(!grid) return;
+    if(!products.length){ grid.innerHTML=''; if(empty) empty.style.display='block'; return; }
+    if(empty) empty.style.display='none';
+    grid.innerHTML = products.map(function(p){
+      return '<div class="card"><div class="thumb"></div><h4>'+esc(p.name)+'</h4><div class="price">'+esc(p.price)+'</div></div>';
+    }).join('');
+  }
+  render();
+  window.addEventListener('storage', function(e){ if(e.key===KEY) render(); });
+})();
+</script>
 
 </body>
 </html>
