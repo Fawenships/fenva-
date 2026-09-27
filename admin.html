@@ -16,32 +16,6 @@
     --gold:#2F8577;
     --white:#FFFFFF;
     --line:#E1DACB;
-
-    box-sizing:border-box;
-    padding-top:env(safe-area-inset-top,0px);
-    padding-bottom:env(safe-area-inset-bottom,0px);
-  }
-
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --cream:#1B1A18;
-      --beige:#242220;
-      --nude:#5FBFAE;
-      --brown:#EDE8E0;
-      --gold:#4FA695;
-      --white:#211F1D;
-      --line:#33312D;
-    }
-  }
-
-  :root[data-theme="dark"]{
-    --cream:#1B1A18;
-    --beige:#242220;
-    --nude:#5FBFAE;
-    --brown:#EDE8E0;
-    --gold:#4FA695;
-    --white:#211F1D;
-    --line:#33312D;
   }
 
   *{
@@ -248,9 +222,7 @@
 
 <body>
 
-<!-- =========================
-     CONNEXION ADMIN
-========================= -->
+<!-- CONNEXION -->
 
 <div id="lockScreen" class="locked">
 
@@ -260,7 +232,9 @@
 
     <p class="sub">FENVA BEAUTY</p>
 
-    <label for="emailInput">Adresse e-mail</label>
+    <label for="emailInput">
+      Adresse e-mail
+    </label>
 
     <input
       id="emailInput"
@@ -269,7 +243,9 @@
       autocomplete="username"
     >
 
-    <label for="passwordInput">Mot de passe</label>
+    <label for="passwordInput">
+      Mot de passe
+    </label>
 
     <input
       id="passwordInput"
@@ -278,40 +254,54 @@
       autocomplete="current-password"
     >
 
-    <button class="btn" id="loginBtn">
+    <button
+      class="btn"
+      id="loginBtn"
+      type="button"
+    >
       Se connecter
     </button>
 
-    <div class="msg" id="lockMsg"></div>
+    <div
+      class="msg"
+      id="lockMsg"
+    ></div>
 
   </div>
 
 </div>
 
 
-<!-- =========================
-     ADMINISTRATION
-========================= -->
+<!-- ADMINISTRATION -->
 
-<div id="adminScreen" class="wrap" style="display:none;">
+<div
+  id="adminScreen"
+  class="wrap"
+  style="display:none;"
+>
 
   <div class="topbar">
 
     <div>
+
       <h1>Gestion des produits</h1>
+
       <p class="sub">
         Administration FENVA BEAUTY
       </p>
+
     </div>
 
-    <button class="btn-logout" id="logoutBtn">
+    <button
+      class="btn-logout"
+      id="logoutBtn"
+      type="button"
+    >
       Déconnexion
     </button>
 
   </div>
 
-
-  <!-- AJOUT PRODUIT -->
 
   <div class="card">
 
@@ -325,7 +315,6 @@
       placeholder="Ex. Sérum Éclat"
     >
 
-
     <label for="pprice">
       Prix
     </label>
@@ -336,7 +325,6 @@
       placeholder="Ex. 1 200 HTG"
     >
 
-
     <label for="pcat">
       Catégorie
     </label>
@@ -344,19 +332,13 @@
     <select id="pcat">
 
       <option>Soins du visage</option>
-
       <option>Soins du corps</option>
-
       <option>Soins des cheveux</option>
-
       <option>Parfums</option>
-
       <option>Maquillage</option>
-
       <option>Accessoires</option>
 
     </select>
-
 
     <label for="pdesc">
       Description (optionnel)
@@ -367,23 +349,30 @@
       placeholder="Courte description du produit"
     ></textarea>
 
-
-    <button class="btn" id="addProductBtn">
+    <button
+      class="btn"
+      id="addProductBtn"
+      type="button"
+    >
       Ajouter le produit
     </button>
 
-    <div class="msg" id="formMsg"></div>
+    <div
+      class="msg"
+      id="formMsg"
+    ></div>
 
   </div>
 
-
-  <!-- LISTE PRODUITS -->
 
   <h1 style="font-size:22px;margin-bottom:16px;">
     Produits actuels
   </h1>
 
-  <div class="list" id="productList"></div>
+  <div
+    class="list"
+    id="productList"
+  ></div>
 
   <p class="note">
     Les produits sont maintenant enregistrés dans Supabase.
@@ -412,7 +401,7 @@ var accessToken = null;
 
 
 /* =========================================================
-   HEADERS SUPABASE
+   HEADERS
 ========================================================= */
 
 function getHeaders(){
@@ -452,7 +441,7 @@ function esc(s){
 
 
 /* =========================================================
-   CONNEXION SUPABASE AUTH
+   CONNEXION SUPABASE
 ========================================================= */
 
 function loginAdmin(email,password){
@@ -461,7 +450,6 @@ function loginAdmin(email,password){
     SUPABASE_URL +
     '/auth/v1/token?grant_type=password',
     {
-
       method:'POST',
 
       headers:{
@@ -473,25 +461,27 @@ function loginAdmin(email,password){
         email:email,
         password:password
       })
-
     }
   )
 
-  .then(function(r){
+  .then(function(response){
 
-    return r.text().then(function(raw){
+    return response.text().then(function(raw){
 
       var data = {};
 
       try{
         data = JSON.parse(raw);
-      }catch(e){}
+      }
+      catch(error){
+        data = {};
+      }
 
-      if(!r.ok){
+      if(!response.ok){
 
         throw new Error(
           'Supabase ' +
-          r.status +
+          response.status +
           ': ' +
           (
             data.error_description ||
@@ -512,7 +502,8 @@ function loginAdmin(email,password){
 
       }
 
-      accessToken = data.access_token;
+      accessToken =
+        data.access_token;
 
       return true;
 
@@ -535,7 +526,8 @@ function logoutAdmin(){
 
   }
 
-  var token = accessToken;
+  var token =
+    accessToken;
 
   accessToken = null;
 
@@ -543,14 +535,13 @@ function logoutAdmin(){
     SUPABASE_URL +
     '/auth/v1/logout',
     {
-
       method:'POST',
 
       headers:{
         'apikey':SUPABASE_KEY,
-        'Authorization':'Bearer ' + token
+        'Authorization':
+          'Bearer ' + token
       }
-
     }
   ).catch(function(){});
 
@@ -558,7 +549,7 @@ function logoutAdmin(){
 
 
 /* =========================================================
-   RECUPERER LES PRODUITS
+   CHARGER LES PRODUITS
 ========================================================= */
 
 function fetchProducts(){
@@ -569,13 +560,14 @@ function fetchProducts(){
     TABLE +
     '?select=*&order=created_at.desc',
     {
+      method:'GET',
       headers:getHeaders()
     }
   )
 
-  .then(function(r){
+  .then(function(response){
 
-    if(!r.ok){
+    if(!response.ok){
 
       throw new Error(
         'Impossible de charger les produits.'
@@ -583,7 +575,7 @@ function fetchProducts(){
 
     }
 
-    return r.json();
+    return response.json();
 
   })
 
@@ -608,90 +600,100 @@ function fetchProducts(){
 function renderList(){
 
   var list =
-    document.getElementById('productList');
+    document.getElementById(
+      'productList'
+    );
 
   list.innerHTML =
     '<p class="sub">Chargement...</p>';
 
-  fetchProducts().then(function(products){
+  fetchProducts()
+    .then(function(products){
 
-    if(!products.length){
+      if(!products.length){
+
+        list.innerHTML =
+          '<p class="sub">Aucun produit pour l\'instant.</p>';
+
+        return;
+
+      }
 
       list.innerHTML =
-        '<p class="sub">Aucun produit pour l\'instant.</p>';
+        products.map(function(product){
 
-      return;
+          return (
+            '<div class="item">' +
 
-    }
+              '<div class="info">' +
 
-    list.innerHTML =
-      products.map(function(p){
+                '<b>' +
+                esc(product.name) +
+                '</b>' +
 
-        return (
+                ' — ' +
 
-          '<div class="item">' +
+                esc(product.price) +
 
-            '<div class="info">' +
+                '<div class="cat-tag">' +
+                esc(product.cat || '') +
+                '</div>' +
 
-              '<b>' +
-              esc(p.name) +
-              '</b>' +
-
-              ' — ' +
-
-              esc(p.price) +
-
-              '<div class="cat-tag">' +
-              esc(p.cat || '') +
               '</div>' +
 
-            '</div>' +
+              '<button ' +
+              'class="btn-danger" ' +
+              'type="button" ' +
+              'onclick="removeProduct(' +
+              Number(product.id) +
+              ')">' +
 
-            '<button ' +
-            'class="btn-danger" ' +
-            'onclick="removeProduct(' +
-            Number(p.id) +
-            ')">' +
+              'Supprimer' +
 
-            'Supprimer' +
+              '</button>' +
 
-            '</button>' +
+            '</div>'
+          );
 
-          '</div>'
+        }).join('');
 
-        );
-
-      }).join('');
-
-  });
+    });
 
 }
 
 
 /* =========================================================
-   AJOUTER UN PRODUIT
+   AJOUT PRODUIT
 ========================================================= */
 
 function addProduct(){
 
   var name =
-    document.getElementById('pname')
-    .value.trim();
+    document
+    .getElementById('pname')
+    .value
+    .trim();
 
   var price =
-    document.getElementById('pprice')
-    .value.trim();
+    document
+    .getElementById('pprice')
+    .value
+    .trim();
 
   var cat =
-    document.getElementById('pcat')
+    document
+    .getElementById('pcat')
     .value;
 
   var desc =
-    document.getElementById('pdesc')
-    .value.trim();
+    document
+    .getElementById('pdesc')
+    .value
+    .trim();
 
   var msg =
-    document.getElementById('formMsg');
+    document
+    .getElementById('formMsg');
 
 
   if(!name || !price){
@@ -718,25 +720,11 @@ function addProduct(){
     'Ajout en cours…';
 
 
-  var product = {
-
-    name:name,
-
-    price:price,
-
-    cat:cat,
-
-    desc:desc
-
-  };
-
-
   fetch(
     SUPABASE_URL +
     '/rest/v1/' +
     TABLE,
     {
-
       method:'POST',
 
       headers:Object.assign(
@@ -747,27 +735,31 @@ function addProduct(){
         }
       ),
 
-      body:JSON.stringify(product)
-
+      body:JSON.stringify({
+        name:name,
+        price:price,
+        cat:cat
+      })
     }
   )
 
-  .then(function(r){
+  .then(function(response){
 
-    if(!r.ok){
+    return response.text()
+      .then(function(raw){
 
-      return r.text().then(function(raw){
+        if(!response.ok){
 
-        throw new Error(
-          raw ||
-          'Impossible d\'ajouter le produit.'
-        );
+          throw new Error(
+            raw ||
+            'Impossible d\'ajouter le produit.'
+          );
+
+        }
+
+        return raw;
 
       });
-
-    }
-
-    return r.json();
 
   })
 
@@ -776,16 +768,17 @@ function addProduct(){
     msg.textContent =
       'Produit ajouté.';
 
-
-    document.getElementById('pname')
+    document
+      .getElementById('pname')
       .value = '';
 
-    document.getElementById('pprice')
+    document
+      .getElementById('pprice')
       .value = '';
 
-    document.getElementById('pdesc')
+    document
+      .getElementById('pdesc')
       .value = '';
-
 
     renderList();
 
@@ -799,7 +792,8 @@ function addProduct(){
     );
 
     msg.textContent =
-      'Erreur : ' + error.message;
+      'Erreur : ' +
+      error.message;
 
   });
 
@@ -807,7 +801,7 @@ function addProduct(){
 
 
 /* =========================================================
-   SUPPRIMER UN PRODUIT
+   SUPPRIMER
 ========================================================= */
 
 function removeProduct(id){
@@ -839,26 +833,24 @@ function removeProduct(id){
     '?id=eq.' +
     encodeURIComponent(id),
     {
-
       method:'DELETE',
-
       headers:getHeaders()
-
     }
   )
 
-  .then(function(r){
+  .then(function(response){
 
-    if(!r.ok){
+    if(!response.ok){
 
-      return r.text().then(function(raw){
+      return response.text()
+        .then(function(raw){
 
-        throw new Error(
-          raw ||
-          'Impossible de supprimer le produit.'
-        );
+          throw new Error(
+            raw ||
+            'Impossible de supprimer le produit.'
+          );
 
-      });
+        });
 
     }
 
@@ -884,7 +876,7 @@ function removeProduct(id){
 
 
 /* =========================================================
-   EVENEMENT CONNEXION
+   CONNEXION — TEST DU BOUTON
 ========================================================= */
 
 document
@@ -892,6 +884,11 @@ document
   .addEventListener(
     'click',
     function(){
+
+      alert(
+        'LE BOUTON DE CONNEXION FONCTIONNE'
+      );
+
 
       var email =
         document
@@ -964,16 +961,16 @@ document
 
 
 /* =========================================================
-   ENTER SUR EMAIL
+   ENTER EMAIL
 ========================================================= */
 
 document
   .getElementById('emailInput')
   .addEventListener(
     'keydown',
-    function(e){
+    function(event){
 
-      if(e.key === 'Enter'){
+      if(event.key === 'Enter'){
 
         document
           .getElementById('passwordInput')
@@ -986,16 +983,16 @@ document
 
 
 /* =========================================================
-   ENTER SUR MOT DE PASSE
+   ENTER PASSWORD
 ========================================================= */
 
 document
   .getElementById('passwordInput')
   .addEventListener(
     'keydown',
-    function(e){
+    function(event){
 
-      if(e.key === 'Enter'){
+      if(event.key === 'Enter'){
 
         document
           .getElementById('loginBtn')
@@ -1008,7 +1005,7 @@ document
 
 
 /* =========================================================
-   BOUTON AJOUT
+   AJOUT
 ========================================================= */
 
 document
@@ -1029,43 +1026,45 @@ document
     'click',
     function(){
 
-      logoutAdmin().then(function(){
+      logoutAdmin()
+        .then(function(){
 
-        document
-          .getElementById('adminScreen')
-          .style.display = 'none';
+          document
+            .getElementById('adminScreen')
+            .style.display = 'none';
 
-        document
-          .getElementById('lockScreen')
-          .style.display = 'flex';
+          document
+            .getElementById('lockScreen')
+            .style.display = 'flex';
 
-        document
-          .getElementById('emailInput')
-          .value = '';
+          document
+            .getElementById('emailInput')
+            .value = '';
 
-        document
-          .getElementById('passwordInput')
-          .value = '';
+          document
+            .getElementById('passwordInput')
+            .value = '';
 
-        document
-          .getElementById('lockMsg')
-          .textContent = '';
+          document
+            .getElementById('lockMsg')
+            .textContent = '';
 
-        document
-          .getElementById('formMsg')
-          .textContent = '';
+          document
+            .getElementById('formMsg')
+            .textContent = '';
 
-      });
+        });
 
     }
   );
 
 
 /* =========================================================
-   EXPORT POUR LES BOUTONS SUPPRIMER
+   EXPORT
 ========================================================= */
 
-window.removeProduct = removeProduct;
+window.removeProduct =
+  removeProduct;
 
 </script>
 
