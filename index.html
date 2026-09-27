@@ -257,8 +257,7 @@
     <h3 style="font-size:18px;margin-bottom:14px;">Produits actuels</h3>
     <div id="productList" style="display:flex;flex-direction:column;gap:10px;"></div>
     <p style="font-size:13px;opacity:.6;margin-top:20px;line-height:1.5;">
-      Stockage local à ce navigateur : pour que les produits soient visibles par tous les visiteurs,
-      il faudra brancher une vraie base de données.
+      Les produits sont enregistrés dans la base Supabase de la boutique et visibles par tous les visiteurs.
     </p>
   </div>
 </div>
@@ -269,34 +268,53 @@
 
 <script>
 (function(){
-  var KEY = 'fenvaProducts';
-  var defaults = [
-    {id:1,name:'Sérum Éclat',price:'1 200 HTG',cat:'Soins du visage'},
-    {id:2,name:'Baume Nourrissant',price:'950 HTG',cat:'Soins du corps'},
-    {id:3,name:'Eau de Parfum Ambre',price:'2 400 HTG',cat:'Parfums'},
-    {id:4,name:'Rouge Velours',price:'700 HTG',cat:'Maquillage'}
-  ];
-  function load(){
-    try{
-      var raw = localStorage.getItem(KEY);
-      if(!raw){ localStorage.setItem(KEY, JSON.stringify(defaults)); return defaults; }
-      return JSON.parse(raw);
-    }catch(e){ return defaults; }
-  }
+  var SUPABASE_URL = 'https://pgiualcqiiilgmjqdwlfq.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_KCYLHW-qWK7QVmLyNw5DlA_KRvSmNtB';
+  var TABLE = 'produits';
+  var headers = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_KEY,
+    'Content-Type': 'application/json'
+  };
+
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function fetchProducts(){
+    return fetch(SUPABASE_URL + '/rest/v1/' + TABLE + '?select=*&order=created_at.desc', { headers: headers })
+      .then(function(r){ if(!r.ok) throw new Error('fetch failed'); return r.json(); })
+      .catch(function(){ return null; });
+  }
+  function createProduct(p){
+    return fetch(SUPABASE_URL + '/rest/v1/' + TABLE, {
+      method: 'POST',
+      headers: Object.assign({}, headers, { 'Prefer': 'return=representation' }),
+      body: JSON.stringify([p])
+    }).then(function(r){ return r.ok; }).catch(function(){ return false; });
+  }
+  function deleteProduct(id){
+    return fetch(SUPABASE_URL + '/rest/v1/' + TABLE + '?id=eq.' + id, {
+      method: 'DELETE',
+      headers: headers
+    }).then(function(r){ return r.ok; }).catch(function(){ return false; });
+  }
+
   function render(){
-    var products = load();
     var grid = document.getElementById('productGrid');
     var empty = document.getElementById('emptyMsg');
     if(!grid) return;
-    if(!products.length){ grid.innerHTML=''; if(empty) empty.style.display='block'; return; }
-    if(empty) empty.style.display='none';
-    grid.innerHTML = products.map(function(p){
-      return '<div class="card"><div class="thumb"></div><h4>'+esc(p.name)+'</h4><div class="price">'+esc(p.price)+'</div></div>';
-    }).join('');
+    fetchProducts().then(function(products){
+      if(products === null){
+        grid.innerHTML = '<p style="opacity:.6;font-size:14px;">Connexion à la base impossible pour le moment.</p>';
+        return;
+      }
+      if(!products.length){ grid.innerHTML=''; if(empty) empty.style.display='block'; return; }
+      if(empty) empty.style.display='none';
+      grid.innerHTML = products.map(function(p){
+        return '<div class="card"><div class="thumb"></div><h4>'+esc(p.name)+'</h4><div class="price">'+esc(p.price)+'</div></div>';
+      }).join('');
+    });
   }
   render();
-  window.addEventListener('storage', function(e){ if(e.key===KEY) render(); });
 
   // --- Administration (intégrée à la page) ---
   var ADMIN_CODE = 'fenva2026';
@@ -311,21 +329,26 @@
     document.getElementById('adminCode').value='';
   }
   function renderAdminList(){
-    var products = load();
     var list = document.getElementById('productList');
-    if(!products.length){ list.innerHTML = '<p style="opacity:.6;font-size:14px;">Aucun produit pour l\'instant.</p>'; return; }
-    list.innerHTML = products.map(function(p){
-      return '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:var(--white);">'+
-        '<div style="font-size:14px;"><b>'+esc(p.name)+'</b> — '+esc(p.price)+
-        '<div style="font-size:12px;opacity:.6;">'+esc(p.cat||'')+'</div></div>'+
-        '<button data-id="'+p.id+'" class="adminDelBtn" style="background:#B4453A;color:#fff;border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;">Supprimer</button></div>';
-    }).join('');
-    Array.prototype.forEach.call(list.querySelectorAll('.adminDelBtn'), function(btn){
-      btn.addEventListener('click', function(){
-        var id = Number(btn.getAttribute('data-id'));
-        var next = load().filter(function(p){ return p.id !== id; });
-        localStorage.setItem(KEY, JSON.stringify(next));
-        renderAdminList(); render();
+    list.innerHTML = '<p style="opacity:.6;font-size:14px;">Chargement…</p>';
+    fetchProducts().then(function(products){
+      if(products === null){
+        list.innerHTML = '<p style="opacity:.6;font-size:14px;">Connexion à la base impossible.</p>';
+        return;
+      }
+      if(!products.length){ list.innerHTML = '<p style="opacity:.6;font-size:14px;">Aucun produit pour l\'instant.</p>'; return; }
+      list.innerHTML = products.map(function(p){
+        return '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:var(--white);">'+
+          '<div style="font-size:14px;"><b>'+esc(p.name)+'</b> — '+esc(p.price)+
+          '<div style="font-size:12px;opacity:.6;">'+esc(p.cat||'')+'</div></div>'+
+          '<button data-id="'+p.id+'" class="adminDelBtn" style="background:#B4453A;color:#fff;border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;">Supprimer</button></div>';
+      }).join('');
+      Array.prototype.forEach.call(list.querySelectorAll('.adminDelBtn'), function(btn){
+        btn.addEventListener('click', function(){
+          var id = btn.getAttribute('data-id');
+          btn.textContent = '...';
+          deleteProduct(id).then(function(){ renderAdminList(); render(); });
+        });
       });
     });
   }
@@ -350,12 +373,14 @@
     var cat = document.getElementById('pcat').value;
     var msg = document.getElementById('formMsg');
     if(!name || !price){ msg.textContent = 'Nom et prix sont requis.'; return; }
-    var products = load();
-    products.push({ id: Date.now(), name: name, price: price, cat: cat });
-    localStorage.setItem(KEY, JSON.stringify(products));
-    msg.textContent = 'Produit ajouté.';
-    document.getElementById('pname').value=''; document.getElementById('pprice').value='';
-    renderAdminList(); render();
+    msg.textContent = 'Ajout en cours…';
+    createProduct({ name: name, price: price, cat: cat }).then(function(ok){
+      msg.textContent = ok ? 'Produit ajouté.' : 'Erreur : vérifie la connexion à la base.';
+      if(ok){
+        document.getElementById('pname').value=''; document.getElementById('pprice').value='';
+        renderAdminList(); render();
+      }
+    });
   });
 })();
 </script>
