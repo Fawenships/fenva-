@@ -2,2157 +2,2992 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>FENVA BEAUTY</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FENVA BEAUTY — Cosmétiques premium</title>
+
+<meta name="description"
+      content="FENVA BEAUTY — Cosmétiques premium, soins du visage, du corps, des cheveux, parfums et maquillage.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --cream:#F7F4EE;
-    --beige:#E9E3D8;
-    --nude:#1F6F64;
-    --brown:#262322;
-    --gold:#2F8577;
-    --white:#FFFFFF;
-    --line:#E1DACB;
-    --whatsapp:#25D366;
-    box-sizing:border-box;
-    padding-top:env(safe-area-inset-top,0px);
-    padding-bottom:env(safe-area-inset-bottom,0px);
+
+:root{
+  --cream:#F7F4EE;
+  --beige:#E9E3D8;
+  --nude:#1F6F64;
+  --brown:#262322;
+  --gold:#2F8577;
+  --white:#FFFFFF;
+  --line:#E1DACB;
+  --whatsapp:#25D366;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--cream);
+  color:var(--brown);
+  line-height:1.6;
+}
+
+button,
+input,
+select{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(247,244,238,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+
+.header-inner{
+  max-width:1250px;
+  margin:auto;
+  min-height:82px;
+  padding:0 30px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:34px;
+  font-weight:600;
+  letter-spacing:3px;
+  color:var(--brown);
+}
+
+.logo span{
+  color:var(--nude);
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:30px;
+}
+
+nav a{
+  font-size:14px;
+  letter-spacing:.5px;
+  transition:.2s;
+}
+
+nav a:hover{
+  color:var(--nude);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:650px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:80px 25px;
+
+  background:
+    linear-gradient(
+      rgba(247,244,238,.72),
+      rgba(247,244,238,.72)
+    );
+}
+
+.hero-content{
+  max-width:850px;
+}
+
+.hero-small{
+  text-transform:uppercase;
+  letter-spacing:4px;
+  font-size:13px;
+  color:var(--nude);
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:76px;
+  line-height:1;
+  font-weight:500;
+  margin-bottom:25px;
+}
+
+.hero p{
+  max-width:650px;
+  margin:0 auto 30px;
+  font-size:18px;
+  color:#5d5752;
+}
+
+.hero-note{
+  font-size:13px;
+  color:#777;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+  padding:90px 25px;
+}
+
+.section-inner{
+  max-width:1250px;
+  margin:auto;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.section-title span{
+  display:block;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:var(--nude);
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.section-title h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;
+  font-weight:500;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories{
+  background:var(--white);
+}
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.category-card{
+  min-height:220px;
+  padding:35px;
+
+  display:flex;
+  align-items:flex-end;
+
+  background:var(--beige);
+  border:1px solid var(--line);
+
+  transition:.25s;
+}
+
+.category-card:hover{
+  transform:translateY(-4px);
+}
+
+.category-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;
+  font-weight:500;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products{
+  background:var(--cream);
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+}
+
+.card{
+  background:var(--white);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+
+.card .thumb{
+  width:100%;
+  height:320px;
+  overflow:hidden;
+  background:var(--beige);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card .thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.card h4{
+  padding:18px 18px 5px;
+
+  font-family:'Cormorant Garamond',serif;
+  font-size:25px;
+  font-weight:500;
+}
+
+.card .price{
+  padding:0 18px 20px;
+  color:var(--nude);
+  font-size:15px;
+  font-weight:500;
+}
+
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  padding:60px 20px;
+  color:#777;
+}
+
+/* =========================
+   STORY
+========================= */
+
+.story{
+  background:var(--white);
+}
+
+.story-grid{
+  max-width:1000px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.story-label{
+  color:var(--nude);
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.story h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:50px;
+  font-weight:500;
+  line-height:1.05;
+  margin-bottom:25px;
+}
+
+.story p{
+  color:#666;
+  margin-bottom:15px;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+  background:var(--beige);
+  text-align:center;
+}
+
+.cta h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;
+  font-weight:500;
+  margin-bottom:15px;
+}
+
+.cta p{
+  color:#666;
+  margin-bottom:25px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  padding:50px 25px;
+  background:var(--brown);
+  color:var(--white);
+}
+
+.footer-inner{
+  max-width:1250px;
+  margin:auto;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+}
+
+.footer-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;
+  letter-spacing:3px;
+}
+
+.footer-admin{
+  font-size:13px;
+  opacity:.7;
+  cursor:pointer;
+}
+
+.footer-admin:hover{
+  opacity:1;
+}
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.whatsapp{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+
+  width:55px;
+  height:55px;
+  border-radius:50%;
+
+  background:var(--whatsapp);
+  color:white;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:22px;
+  z-index:90;
+
+  box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+/* =========================
+   ADMIN OVERLAY
+========================= */
+
+.admin-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+
+  background:rgba(0,0,0,.55);
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+}
+
+.admin-overlay.active{
+  display:flex;
+}
+
+.admin-box{
+  width:100%;
+  max-width:850px;
+  max-height:90vh;
+  overflow:auto;
+
+  background:var(--white);
+  padding:35px;
+
+  border-radius:4px;
+}
+
+.admin-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+
+  margin-bottom:30px;
+}
+
+.admin-title h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:38px;
+  font-weight:500;
+}
+
+.close-admin{
+  border:0;
+  background:none;
+  font-size:25px;
+  color:#555;
+}
+
+.admin-login{
+  max-width:450px;
+  margin:auto;
+}
+
+.admin-field{
+  margin-bottom:16px;
+}
+
+.admin-field label{
+  display:block;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+.admin-field input,
+.admin-field select{
+  width:100%;
+  padding:13px 14px;
+
+  border:1px solid var(--line);
+  background:var(--cream);
+  outline:none;
+}
+
+.admin-field input:focus,
+.admin-field select:focus{
+  border-color:var(--nude);
+}
+
+.admin-button{
+  border:0;
+  background:var(--nude);
+  color:white;
+
+  padding:13px 22px;
+
+  font-size:14px;
+}
+
+.admin-button:hover{
+  opacity:.9;
+}
+
+.admin-message{
+  margin-top:12px;
+  font-size:13px;
+  color:#777;
+}
+
+/* =========================
+   ADMIN PANEL
+========================= */
+
+.admin-panel{
+  display:none;
+}
+
+.admin-panel.active{
+  display:block;
+}
+
+.admin-form{
+  border:1px solid var(--line);
+  padding:25px;
+  margin-bottom:30px;
+}
+
+.admin-form h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;
+  margin-bottom:20px;
+}
+
+.image-preview-box{
+  width:150px;
+  height:150px;
+
+  background:var(--beige);
+  border:1px solid var(--line);
+
+  margin-top:10px;
+  margin-bottom:12px;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+}
+
+.image-preview-box.active{
+  display:flex;
+}
+
+.image-preview-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.remove-image{
+  display:none;
+  border:1px solid var(--line);
+  background:white;
+  padding:8px 12px;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.remove-image.active{
+  display:inline-block;
+}
+
+.admin-products{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.admin-product{
+  display:flex;
+  align-items:center;
+  gap:15px;
+
+  padding:12px;
+
+  border:1px solid var(--line);
+  background:var(--cream);
+}
+
+.admin-product-image{
+  width:64px;
+  height:64px;
+
+  flex-shrink:0;
+
+  background:var(--beige);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  font-size:10px;
+  color:#777;
+  text-align:center;
+}
+
+.admin-product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.admin-product-info{
+  flex:1;
+}
+
+.admin-product-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+}
+
+.admin-product-meta{
+  font-size:12px;
+  color:#777;
+}
+
+.delete-button{
+  border:1px solid #d6c9c3;
+  background:white;
+  color:#9b4d4d;
+  padding:9px 13px;
+  font-size:12px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:950px){
+
+  .product-grid{
+    grid-template-columns:repeat(3,1fr);
   }
 
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --cream:#1B1A18;
-      --beige:#242220;
-      --nude:#5FBFAE;
-      --brown:#EDE8E0;
-      --gold:#4FA695;
-      --white:#211F1D;
-      --line:#33312D;
-    }
+  .category-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  :root[data-theme="dark"]{
-    --cream:#1B1A18;
-    --beige:#242220;
-    --nude:#5FBFAE;
-    --brown:#EDE8E0;
-    --gold:#4FA695;
-    --white:#211F1D;
-    --line:#33312D;
-  }
+}
 
-  html{
-    scroll-padding-top:env(safe-area-inset-top,0px);
-  }
+@media(max-width:700px){
 
-  *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-  }
-
-  body{
-    background:var(--cream);
-    color:var(--brown);
-    font-family:'Jost',sans-serif;
-    font-weight:300;
-    line-height:1.6;
-    overflow-x:hidden;
-  }
-
-  h1,h2,h3{
-    font-family:'Cormorant Garamond',serif;
-    font-weight:700;
-    letter-spacing:.01em;
-  }
-
-  a{
-    color:inherit;
-    text-decoration:none;
-  }
-
-  .wrap{
-    max-width:1120px;
-    margin:0 auto;
-    padding:0 32px;
-  }
-
-  header{
-    position:sticky;
-    top:env(safe-area-inset-top,0px);
-    z-index:10;
-    background:var(--cream);
-    border-bottom:1px solid var(--line);
-  }
-
-  .nav{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:22px 32px;
-    max-width:1120px;
-    margin:0 auto;
+  .header-inner{
+    min-height:70px;
+    padding:0 18px;
   }
 
   .logo{
-    font-family:'Cormorant Garamond',serif;
-    font-size:26px;
-    font-weight:700;
-    font-style:italic;
-    letter-spacing:.03em;
+    font-size:27px;
   }
 
-  .navlinks{
-    display:flex;
-    gap:36px;
-    font-size:14px;
+  nav{
+    gap:12px;
   }
 
-  .navlinks a{
-    opacity:.75;
-    transition:opacity .2s;
-  }
-
-  .navlinks a:hover{
-    opacity:1;
-  }
-
-  .cart{
-    font-size:14px;
-    border:1px solid var(--brown);
-    border-radius:2px;
-    padding:8px 18px;
+  nav a{
+    font-size:11px;
   }
 
   .hero{
-    padding:44px 0 8px;
-  }
-
-  .hero .wrap{
-    text-align:center;
-  }
-
-  .hero-eyebrow{
-    font-size:13px;
-    color:var(--nude);
-    margin-bottom:10px;
+    min-height:550px;
   }
 
   .hero h1{
-    font-size:clamp(28px,4vw,40px);
-    line-height:1.1;
-    max-width:20ch;
-    margin:0 auto;
+    font-size:52px;
   }
 
-  .btn{
-    display:inline-block;
-    background:var(--brown);
-    color:var(--cream);
-    padding:15px 34px;
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:.02em;
-    border-radius:2px;
-    transition:transform .25s ease,background .25s ease;
-  }
-
-  .btn:hover{
-    transform:translateY(-2px);
-  }
-
-  .btn-ghost{
-    background:transparent;
-    color:var(--brown);
-    border:1px solid var(--brown);
-    margin-left:14px;
-  }
-
-  section{
-    padding:80px 0;
-  }
-
-  .cats{
-    border-top:1px solid var(--line);
-    padding-top:56px;
-  }
-
-  .cats-head{
-    text-align:center;
-    margin-bottom:40px;
-  }
-
-  .cats-head h2{
-    font-size:clamp(30px,3.5vw,42px);
-  }
-
-  .cats-head p{
-    opacity:.65;
-    font-size:15px;
-    margin-top:10px;
-  }
-
-  .catgrid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-  }
-
-  .cat{
-    background:var(--beige);
-    border-radius:6px;
-    padding:0;
-    aspect-ratio:3/4;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    position:relative;
-    overflow:hidden;
-    transition:transform .25s ease;
-  }
-
-  .cat:hover{
-    transform:translateY(-4px);
-  }
-
-  .cat::before{
-    content:"";
-    position:absolute;
-    top:24px;
-    left:24px;
-    width:34px;
-    height:34px;
-    border:1px solid var(--gold);
-    border-radius:50%;
-  }
-
-  .cat .catbody{
-    padding:26px 26px 30px;
-    background:linear-gradient(0deg,var(--cream) 0%,transparent 100%);
-  }
-
-  .cat h3{
-    font-size:24px;
-    font-weight:700;
-    font-style:italic;
-  }
-
-  .cat p{
-    font-size:13px;
-    opacity:.65;
-    margin-top:6px;
-  }
-
-  .cat.big{
-    grid-column:span 1;
-  }
-
-  .story{
-    border-top:1px solid var(--line);
-  }
-
-  .story .wrap{
-    display:grid;
-    grid-template-columns:.85fr 1.15fr;
-    gap:64px;
-    align-items:center;
-  }
-
-  .story-panel{
-    aspect-ratio:1/1;
-    background:var(--beige);
-    border-radius:4px;
-  }
-
-  .story h2{
-    font-size:clamp(30px,3.5vw,42px);
-    max-width:14ch;
-    margin-bottom:22px;
-  }
-
-  .story p{
-    max-width:48ch;
-    opacity:.8;
+  .hero p{
     font-size:16px;
   }
 
-  .products{
-    border-top:1px solid var(--line);
+  section{
+    padding:65px 18px;
   }
 
-  .prod-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    margin-bottom:44px;
+  .section-title h2{
+    font-size:40px;
   }
 
-  .prod-head h2{
-    font-size:clamp(28px,3.5vw,38px);
+  .category-grid{
+    grid-template-columns:1fr;
   }
 
-  .prod-head a{
-    font-size:13px;
-    border-bottom:1px solid var(--brown);
-    padding-bottom:3px;
-  }
-
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:28px;
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
   }
 
   .card .thumb{
-    aspect-ratio:3/4;
-    background:var(--beige);
-    border-radius:3px;
-    margin-bottom:16px;
-    position:relative;
-    overflow:hidden;
-  }
-
-  .card .thumb img{
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;
-    position:relative;
-    z-index:1;
-  }
-
-  .card .thumb::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(160deg,transparent 60%,rgba(59,42,32,.06));
-    z-index:2;
-    pointer-events:none;
+    height:240px;
   }
 
   .card h4{
-    font-size:15px;
-    font-weight:600;
-    margin-bottom:4px;
+    font-size:21px;
+    padding:13px 12px 4px;
   }
 
   .card .price{
-    font-size:14px;
-    font-weight:600;
-    color:var(--nude);
+    padding:0 12px 15px;
   }
 
-  .cta{
-    border-top:1px solid var(--line);
-    text-align:center;
-    padding:100px 0;
+  .story-grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+
+  .story h2{
+    font-size:42px;
   }
 
   .cta h2{
-    font-size:clamp(32px,4vw,46px);
-    max-width:16ch;
-    margin:0 auto 30px;
+    font-size:42px;
   }
 
-  footer{
-    border-top:1px solid var(--line);
-    padding:50px 0;
-    font-size:13px;
-    opacity:.65;
+  .footer-inner{
+    flex-direction:column;
+    text-align:center;
   }
 
-  footer .wrap{
-    display:flex;
-    justify-content:space-between;
+  .admin-box{
+    padding:22px;
   }
 
-  .wa-note{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    margin-top:16px;
-    font-size:13px;
-    color:var(--nude);
+}
+
+@media(max-width:430px){
+
+  .product-grid{
+    grid-template-columns:1fr;
   }
 
-  .wa-float{
-    position:fixed;
-    right:22px;
-    bottom:calc(22px + env(safe-area-inset-bottom,0px));
-    width:58px;
-    height:58px;
-    border-radius:50%;
-    background:var(--whatsapp);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 6px 18px rgba(0,0,0,.18);
-    z-index:20;
-    transition:transform .2s ease;
+  .card .thumb{
+    height:330px;
   }
 
-  .wa-float:hover{
-    transform:scale(1.06);
+  nav a:nth-child(2),
+  nav a:nth-child(3){
+    display:none;
   }
 
-  .wa-float svg{
-    width:28px;
-    height:28px;
-  }
+}
 
-  @media (max-width:860px){
-    .nav{
-      padding:18px 22px;
-    }
-
-    .navlinks{
-      display:none;
-    }
-
-    .wrap{
-      padding:0 22px;
-    }
-
-    .hero{
-      padding:64px 0 56px;
-    }
-
-    .hero .wrap{
-      grid-template-columns:1fr;
-      gap:36px;
-    }
-
-    .hero-visual{
-      order:-1;
-      aspect-ratio:16/10;
-    }
-
-    .catgrid{
-      grid-template-columns:repeat(2,1fr);
-    }
-
-    .story .wrap{
-      grid-template-columns:1fr;
-    }
-
-    .story-panel{
-      order:-1;
-      aspect-ratio:16/9;
-    }
-
-    .grid{
-      grid-template-columns:repeat(2,1fr);
-      gap:20px;
-    }
-  }
-
-  @media (prefers-reduced-motion:reduce){
-    .btn,.cat{
-      transition:none;
-    }
-  }
 </style>
 </head>
 
 <body>
 
-<header>
-  <nav class="nav">
-    <div class="logo">Fenva Beauty</div>
+<!-- =========================
+     HEADER
+========================= -->
 
-    <div class="navlinks">
-      <a href="#cats">Catégories</a>
+<header>
+
+  <div class="header-inner">
+
+    <a href="#" class="logo">
+      FENVA <span>BEAUTY</span>
+    </a>
+
+    <nav>
+      <a href="#categories">Catégories</a>
       <a href="#products">Nouveautés</a>
       <a href="#story">La marque</a>
-    </div>
+      <a href="#products">Panier</a>
+    </nav>
 
-    <a class="cart" href="#">Panier (0)</a>
-  </nav>
+  </div>
+
 </header>
 
-<main>
 
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-eyebrow">Cosmétiques premium</div>
+<!-- =========================
+     HERO
+========================= -->
 
-      <h1>Le soin devient un rituel.</h1>
+<section class="hero">
 
-      <div class="wa-note">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--whatsapp)">
-          <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-2-2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/>
-        </svg>
+  <div class="hero-content">
 
-        Commandes prises sur WhatsApp — livraison disponible
-      </div>
+    <div class="hero-small">
+      Cosmétiques premium
     </div>
-  </section>
 
-  <section class="cats" id="cats">
-    <div class="wrap">
+    <h1>
+      Le soin devient<br>
+      un rituel.
+    </h1>
 
-      <div class="cats-head">
-        <h2>Explorer par catégorie</h2>
-        <p>Six univers, une même exigence de qualité.</p>
-      </div>
+    <p>
+      Découvrez une sélection de produits de beauté
+      pensée pour accompagner chaque moment de votre routine.
+    </p>
 
-      <div class="catgrid">
-
-        <a class="cat" href="#products">
-          <div class="catbody">
-            <h3>Soins du visage</h3>
-            <p>Nettoyants, sérums, crèmes</p>
-          </div>
-        </a>
-
-        <a class="cat" href="#products">
-          <div class="catbody">
-            <h3>Soins du corps</h3>
-            <p>Baumes, huiles, gommages</p>
-          </div>
-        </a>
-
-        <a class="cat" href="#products">
-          <div class="catbody">
-            <h3>Soins des cheveux</h3>
-            <p>Shampoings, masques, huiles</p>
-          </div>
-        </a>
-
-        <a class="cat" href="#products">
-          <div class="catbody">
-            <h3>Parfums</h3>
-            <p>Eaux de parfum & extraits</p>
-          </div>
-        </a>
-
-        <a class="cat" href="#products">
-          <div class="catbody">
-            <h3>Maquillage</h3>
-            <p>Teint, lèvres, regard</p>
-          </div>
-        </a>
-
-        <a class="cat" href="#products">
-          <div class="catbody">
-            <h3>Accessoires</h3>
-            <p>Pinceaux, trousses, miroirs</p>
-          </div>
-        </a>
-
-      </div>
+    <div class="hero-note">
+      Commandes et informations disponibles par WhatsApp.
     </div>
-  </section>
 
-  <section class="products" id="products">
-    <div class="wrap">
+  </div>
 
-      <div class="prod-head">
-        <h2>Nouveautés</h2>
-        <a href="#">Voir tout</a>
-      </div>
+</section>
 
-      <div class="grid" id="productGrid"></div>
 
-      <p id="emptyMsg" style="display:none;text-align:center;opacity:.6;font-size:14px;">
-        Aucun produit pour l'instant.
-      </p>
+<!-- =========================
+     CATEGORIES
+========================= -->
+
+<section class="categories" id="categories">
+
+  <div class="section-inner">
+
+    <div class="section-title">
+
+      <span>
+        Explorer
+      </span>
+
+      <h2>
+        Nos catégories
+      </h2>
 
     </div>
-  </section>
 
-  <section class="story" id="story">
-    <div class="wrap">
+    <div class="category-grid">
 
-      <div class="story-panel"></div>
+      <a href="#products" class="category-card">
+        <h3>
+          Soins du visage
+        </h3>
+      </a>
+
+      <a href="#products" class="category-card">
+        <h3>
+          Soins du corps
+        </h3>
+      </a>
+
+      <a href="#products" class="category-card">
+        <h3>
+          Soins des cheveux
+        </h3>
+      </a>
+
+      <a href="#products" class="category-card">
+        <h3>
+          Parfums
+        </h3>
+      </a>
+
+      <a href="#products" class="category-card">
+        <h3>
+          Maquillage
+        </h3>
+      </a>
+
+      <a href="#products" class="category-card">
+        <h3>
+          Accessoires
+        </h3>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section class="products" id="products">
+
+  <div class="section-inner">
+
+    <div class="section-title">
+
+      <span>
+        Sélection
+      </span>
+
+      <h2>
+        Nos produits
+      </h2>
+
+    </div>
+
+    <div id="productGrid" class="product-grid">
+
+      <div class="empty">
+        Chargement des produits...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     STORY
+========================= -->
+
+<section class="story" id="story">
+
+  <div class="section-inner">
+
+    <div class="story-grid">
 
       <div>
-        <h2>Une beauté sans artifice.</h2>
+
+        <div class="story-label">
+          La marque
+        </div>
+
+        <h2>
+          La beauté dans les détails.
+        </h2>
+
+      </div>
+
+      <div>
 
         <p>
-          Fenva Beauty sélectionne des produits simples, efficaces,
-          formulés pour être utilisés au quotidien. Chaque référence
-          est choisie avec la même exigence : la qualité avant la quantité.
+          FENVA BEAUTY propose une sélection de produits
+          cosmétiques choisis avec attention.
         </p>
+
+        <p>
+          Notre objectif est de créer une expérience simple,
+          élégante et accessible autour de la beauté.
+        </p>
+
       </div>
 
     </div>
-  </section>
 
-  <section class="cta">
-    <div class="wrap">
+  </div>
 
-      <h2>Prête à commencer votre rituel ?</h2>
+</section>
 
-      <a class="btn" href="#products">
-        Voir la boutique
-      </a>
 
-    </div>
-  </section>
+<!-- =========================
+     CTA
+========================= -->
 
-</main>
+<section class="cta">
+
+  <div class="section-inner">
+
+    <h2>
+      Votre prochain rituel commence ici.
+    </h2>
+
+    <p>
+      Découvrez nos produits et contactez-nous pour commander.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
-  <div class="wrap">
-    <span>Fenva Beauty</span>
 
-    <span>
-      © 2026 ·
-      <a href="#" id="adminLink" style="opacity:.6;">
-        Administration
-      </a>
-    </span>
+  <div class="footer-inner">
+
+    <div class="footer-logo">
+      FENVA BEAUTY
+    </div>
+
+    <div>
+      © 2026 FENVA BEAUTY
+    </div>
+
+    <div
+      class="footer-admin"
+      id="openAdmin">
+      Administration
+    </div>
+
   </div>
+
 </footer>
 
-<div id="adminOverlay"
-     style="display:none;position:fixed;inset:0;background:var(--cream);z-index:50;overflow-y:auto;">
 
-  <div id="adminLock"
-       style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;">
+<!-- =========================
+     WHATSAPP
+========================= -->
 
-    <div style="text-align:center;max-width:320px;width:100%;">
+<a
+  class="whatsapp"
+  href="https://wa.me/"
+  target="_blank"
+  aria-label="WhatsApp">
+  W
+</a>
 
-      <h2 style="font-size:28px;margin-bottom:4px;">
+
+<!-- =========================
+     ADMIN OVERLAY
+========================= -->
+
+<div
+  class="admin-overlay"
+  id="adminOverlay">
+
+  <div class="admin-box">
+
+    <div class="admin-title">
+
+      <h2>
         Administration
       </h2>
 
-      <p style="opacity:.6;font-size:14px;margin-bottom:20px;">
-        Fenva Beauty
-      </p>
+      <button
+        class="close-admin"
+        id="closeAdmin">
+        ×
+      </button>
 
-      <input
-        id="adminEmail"
-        type="email"
-        placeholder="Adresse e-mail"
-        autocomplete="username"
-        style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:4px;background:var(--white);font-family:'Jost',sans-serif;font-size:14px;text-align:center;"
-      >
+    </div>
 
-      <input
-        id="adminPassword"
-        type="password"
-        placeholder="Mot de passe"
-        autocomplete="current-password"
-        style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:4px;background:var(--white);font-family:'Jost',sans-serif;font-size:14px;text-align:center;margin-top:10px;"
-      >
+
+    <!-- LOGIN -->
+
+    <div
+      class="admin-login"
+      id="adminLogin">
+
+      <div class="admin-field">
+
+        <label for="adminEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="adminEmail"
+          placeholder="Votre email">
+
+      </div>
+
+
+      <div class="admin-field">
+
+        <label for="adminPassword">
+          Mot de passe
+        </label>
+
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Votre mot de passe">
+
+      </div>
+
 
       <button
-        id="adminUnlock"
-        class="btn"
-        style="width:100%;margin-top:14px;border:none;cursor:pointer;"
-      >
+        class="admin-button"
+        id="adminUnlock">
         Se connecter
       </button>
 
       <div
-        id="adminMsg"
-        style="font-size:13px;color:var(--gold);margin-top:10px;min-height:16px;"
-      ></div>
-
-      <a
-        href="#"
-        id="adminClose1"
-        style="display:inline-block;margin-top:18px;font-size:13px;opacity:.6;"
-      >
-        Fermer
-      </a>
-
-    </div>
-  </div>
-
-  <div
-    id="adminPanel"
-    style="display:none;padding:48px 24px 80px;max-width:720px;margin:0 auto;"
-  >
-
-    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
-
-      <h2 style="font-size:28px;">
-        Gestion des produits
-      </h2>
-
-      <a
-        href="#"
-        id="adminClose2"
-        style="font-size:13px;opacity:.6;"
-      >
-        Fermer
-      </a>
+        class="admin-message"
+        id="adminMsg">
+      </div>
 
     </div>
 
-    <p style="opacity:.6;font-size:14px;margin-bottom:30px;">
-      Les produits ajoutés ici apparaissent sur la boutique.
-    </p>
+
+    <!-- PANEL -->
 
     <div
-      style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:24px;margin-bottom:26px;"
-    >
+      class="admin-panel"
+      id="adminPanel">
 
-      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">
-        Nom du produit
-      </label>
 
-      <input
-        id="pname"
-        type="text"
-        placeholder="Ex. Sérum Éclat"
-        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;"
-      >
+      <!-- ADD PRODUCT -->
 
-      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">
-        Prix
-      </label>
+      <div class="admin-form">
 
-      <input
-        id="pprice"
-        type="text"
-        placeholder="Ex. 1 200 HTG"
-        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;"
-      >
+        <h3>
+          Ajouter un produit
+        </h3>
 
-      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">
-        Catégorie
-      </label>
 
-      <select
-        id="pcat"
-        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;"
-      >
-        <option>Soins du visage</option>
-        <option>Soins du corps</option>
-        <option>Soins des cheveux</option>
-        <option>Parfums</option>
-        <option>Maquillage</option>
-        <option>Accessoires</option>
-      </select>
+        <div class="admin-field">
 
-      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">
-        Image du produit
-      </label>
+          <label for="pname">
+            Nom du produit
+          </label>
 
-      <input
-        id="pimage"
-        type="file"
-        accept="image/*"
-        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;"
-      >
+          <input
+            type="text"
+            id="pname"
+            placeholder="Ex : Sérum visage">
 
-      <div
-        id="imagePreviewBox"
-        style="display:none;margin-top:14px;"
-      >
+        </div>
 
-        <img
-          id="imagePreview"
-          alt="Aperçu du produit"
-          style="display:block;width:140px;height:140px;object-fit:cover;border-radius:6px;border:1px solid var(--line);"
-        >
+
+        <div class="admin-field">
+
+          <label for="pprice">
+            Prix
+          </label>
+
+          <input
+            type="text"
+            id="pprice"
+            placeholder="Ex : 1 500 HTG">
+
+        </div>
+
+
+        <div class="admin-field">
+
+          <label for="pcat">
+            Catégorie
+          </label>
+
+          <select id="pcat">
+
+            <option value="">
+              Sélectionner une catégorie
+            </option>
+
+            <option value="Soins du visage">
+              Soins du visage
+            </option>
+
+            <option value="Soins du corps">
+              Soins du corps
+            </option>
+
+            <option value="Soins des cheveux">
+              Soins des cheveux
+            </option>
+
+            <option value="Parfums">
+              Parfums
+            </option>
+
+            <option value="Maquillage">
+              Maquillage
+            </option>
+
+            <option value="Accessoires">
+              Accessoires
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="admin-field">
+
+          <label for="pimage">
+            Image du produit
+          </label>
+
+          <input
+            type="file"
+            id="pimage"
+            accept="image/*">
+
+        </div>
+
+
+        <div
+          class="image-preview-box"
+          id="imagePreviewBox">
+
+          <img
+            id="imagePreview"
+            src=""
+            alt="Aperçu">
+
+        </div>
+
 
         <button
-          id="removeImageBtn"
           type="button"
-          style="margin-top:8px;background:transparent;color:var(--brown);border:1px solid var(--line);border-radius:4px;padding:7px 12px;font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;"
-        >
+          class="remove-image"
+          id="removeImageBtn">
           Retirer l'image
+        </button>
+
+
+        <button
+          class="admin-button"
+          id="addProductBtn">
+          Ajouter le produit
+        </button>
+
+
+        <div
+          class="admin-message"
+          id="formMsg">
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT LIST -->
+
+      <div>
+
+        <h3
+          style="
+            font-family:'Cormorant Garamond',serif;
+            font-size:30px;
+            margin-bottom:20px;
+          ">
+          Produits
+        </h3>
+
+        <div
+          class="admin-products"
+          id="productList">
+        </div>
+
+      </div>
+
+
+      <div
+        style="
+          margin-top:25px;
+          text-align:right;
+        ">
+
+        <button
+          class="admin-button"
+          id="logoutAdmin">
+          Se déconnecter
         </button>
 
       </div>
 
-      <button
-        id="addProductBtn"
-        class="btn"
-        style="margin-top:18px;border:none;cursor:pointer;"
-      >
-        Ajouter le produit
-      </button>
-
-      <div
-        id="formMsg"
-        style="font-size:13px;color:var(--gold);margin-top:8px;min-height:16px;"
-      ></div>
-
     </div>
 
-    <h3 style="font-size:18px;margin-bottom:14px;">
-      Produits actuels
-    </h3>
-
-    <div
-      id="productList"
-      style="display:flex;flex-direction:column;gap:10px;"
-    ></div>
-
-    <p style="font-size:13px;opacity:.6;margin-top:20px;line-height:1.5;">
-      Les produits sont enregistrés dans la base Supabase de la boutique et visibles par tous les visiteurs.
-    </p>
-
   </div>
+
 </div>
 
-<a
-  class="wa-float"
-  href="https://wa.me/50955744295?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande"
-  target="_blank"
-  rel="noopener"
-  aria-label="Commander sur WhatsApp"
->
-
-  <svg viewBox="0 0 24 24" fill="#FFFFFF">
-    <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-2-2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/>
-  </svg>
-
-</a>
 
 <script>
-(function(){
 
-  var SUPABASE_URL =
-    'https://pgiualcqiilgmjqdwlfq.supabase.co';
+/* =========================================
+   SUPABASE CONFIGURATION
+========================================= */
 
-  var SUPABASE_KEY =
-    'sb_publishable_KCYLHW-qWK7QVmLyNw5DlA_KRvSmNtB';
+var SUPABASE_URL =
+  'https://pgiualcqiilgmjqdwlfq.supabase.co';
 
-  var TABLE = 'produits';
+var SUPABASE_KEY =
+  'sb_publishable_KCYLHW-qWK7QVmLyNw5DlA_KRvSmNtB';
 
-  var STORAGE_BUCKET = 'produits';
+var TABLE =
+  'produits';
 
-  var accessToken = null;
+var STORAGE_BUCKET =
+  'produits';
+
+var accessToken =
+  null;
 
 
-  function getHeaders(){
+/* =========================================
+   ELEMENTS
+========================================= */
 
-    return {
-      'apikey': SUPABASE_KEY,
-      'Authorization':
-        'Bearer ' + (accessToken || SUPABASE_KEY),
-      'Content-Type': 'application/json'
-    };
+var adminOverlay =
+  document.getElementById('adminOverlay');
 
+var openAdmin =
+  document.getElementById('openAdmin');
+
+var closeAdmin =
+  document.getElementById('closeAdmin');
+
+var adminLogin =
+  document.getElementById('adminLogin');
+
+var adminPanel =
+  document.getElementById('adminPanel');
+
+var adminUnlock =
+  document.getElementById('adminUnlock');
+
+var logoutAdmin =
+  document.getElementById('logoutAdmin');
+
+var adminMsg =
+  document.getElementById('adminMsg');
+
+var adminEmail =
+  document.getElementById('adminEmail');
+
+var adminPassword =
+  document.getElementById('adminPassword');
+
+var pname =
+  document.getElementById('pname');
+
+var pprice =
+  document.getElementById('pprice');
+
+var pcat =
+  document.getElementById('pcat');
+
+var pimage =
+  document.getElementById('pimage');
+
+var addProductBtn =
+  document.getElementById('addProductBtn');
+
+var formMsg =
+  document.getElementById('formMsg');
+
+var productGrid =
+  document.getElementById('productGrid');
+
+var productList =
+  document.getElementById('productList');
+
+var imagePreviewBox =
+  document.getElementById('imagePreviewBox');
+
+var imagePreview =
+  document.getElementById('imagePreview');
+
+var removeImageBtn =
+  document.getElementById('removeImageBtn');
+
+var selectedImageFile =
+  null;
+
+var previewObjectUrl =
+  null;
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function esc(value){
+
+  if(value === null || value === undefined){
+    return '';
   }
 
-
-  function esc(s){
-
-    return String(s == null ? '' : s).replace(/[&<>"]/g,function(c){
-
-      return {
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;'
-      }[c];
-
-    });
-
-  }
+  return String(value)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+}
 
 
-  function fetchProducts(){
+/* =========================================
+   HEADERS
+========================================= */
 
-    return fetch(
-      SUPABASE_URL +
-      '/rest/v1/' +
-      TABLE +
-      '?select=*&order=created_at.desc',
-      {
-        headers:getHeaders()
-      }
-    )
+function getHeaders(){
 
-    .then(function(r){
+  return {
 
-      if(!r.ok){
-        throw new Error('fetch failed');
-      }
+    'apikey':
+      SUPABASE_KEY,
 
-      return r.json();
+    'Authorization':
+      'Bearer ' +
+      (accessToken || SUPABASE_KEY),
 
-    })
+    'Content-Type':
+      'application/json'
 
-    .catch(function(){
+  };
 
-      return null;
-
-    });
-
-  }
+}
 
 
-  function render(){
+/* =========================================
+   FETCH PRODUCTS
+========================================= */
 
-    var grid =
-      document.getElementById('productGrid');
+function fetchProducts(){
 
-    var empty =
-      document.getElementById('emptyMsg');
+  return fetch(
 
-    if(!grid){
-      return;
+    SUPABASE_URL +
+    '/rest/v1/' +
+    TABLE +
+    '?select=*&order=created_at.desc',
+
+    {
+      headers:getHeaders()
     }
 
-    fetchProducts().then(function(products){
+  )
 
-      if(products === null){
+  .then(function(response){
 
-        grid.innerHTML =
-          '<p style="opacity:.6;font-size:14px;">Connexion à la base impossible pour le moment.</p>';
+    if(!response.ok){
 
-        return;
-      }
+      return response.text()
+        .then(function(text){
 
+          throw new Error(
+            'Erreur produits : ' +
+            text
+          );
 
-      if(!products.length){
+        });
 
-        grid.innerHTML = '';
+    }
 
-        if(empty){
-          empty.style.display = 'block';
-        }
+    return response.json();
 
-        return;
-      }
+  })
 
+  .catch(function(error){
 
-      if(empty){
-        empty.style.display = 'none';
-      }
+    console.error(
+      error
+    );
 
+    return null;
 
-      grid.innerHTML =
-        products.map(function(p){
+  });
 
-          var imageHTML = '';
-
-          if(p.image_url){
-
-            imageHTML =
-              '<img src="' +
-              esc(p.image_url) +
-              '" alt="' +
-              esc(p.name) +
-              '">';
-
-          }
+}
 
 
-          return '<div class="card">' +
+/* =========================================
+   PUBLIC IMAGE URL
+========================================= */
 
-            '<div class="thumb">' +
-              imageHTML +
-            '</div>' +
+function getPublicImageUrl(path){
 
-            '<h4>' +
-            esc(p.name) +
-            '</h4>' +
+  if(!path){
+    return '';
+  }
 
-            '<div class="price">' +
-            esc(p.price) +
-            '</div>' +
+  return (
+    SUPABASE_URL +
+    '/storage/v1/object/public/' +
+    STORAGE_BUCKET +
+    '/' +
+    path
+      .split('/')
+      .map(function(part){
+        return encodeURIComponent(part);
+      })
+      .join('/')
+  );
 
-            '</div>';
+}
 
-        }).join('');
 
-    });
+/* =========================================
+   RENDER PRODUCTS
+========================================= */
 
+function renderProducts(products){
+
+  if(!products || !products.length){
+
+    productGrid.innerHTML =
+      '<div class="empty">' +
+      'Aucun produit disponible pour le moment.' +
+      '</div>';
+
+    return;
   }
 
 
-  render();
+  productGrid.innerHTML =
+    products.map(function(p){
+
+      var imageUrl =
+        p.image_url || '';
 
 
-  var overlay =
-    document.getElementById('adminOverlay');
-
-  var lockView =
-    document.getElementById('adminLock');
-
-  var panelView =
-    document.getElementById('adminPanel');
-
-
-  function openAdmin(){
-
-    overlay.style.display = 'block';
-
-    document.body.style.overflow = 'hidden';
-
-  }
-
-
-  function closeAdmin(){
-
-    logoutAdmin().then(function(){
-
-      overlay.style.display = 'none';
-
-      document.body.style.overflow = '';
-
-      lockView.style.display = 'flex';
-
-      panelView.style.display = 'none';
-
-      document.getElementById('adminEmail').value = '';
-
-      document.getElementById('adminPassword').value = '';
-
-      document.getElementById('adminMsg').textContent = '';
-
-      document.getElementById('formMsg').textContent = '';
-
-      clearImageSelection();
-
-    });
-
-  }
-
-
-  function loginAdmin(email,password){
-
-    return fetch(
-      SUPABASE_URL +
-      '/auth/v1/token?grant_type=password',
-      {
-        method:'POST',
-
-        headers:{
-          'apikey':SUPABASE_KEY,
-          'Content-Type':'application/json'
-        },
-
-        body:JSON.stringify({
-          email:email,
-          password:password
-        })
-
-      }
-    )
-
-    .then(function(r){
-
-      return r.json().then(function(data){
-
-        return {
-          ok:r.ok,
-          data:data
-        };
-
-      });
-
-    })
-
-    .then(function(result){
+      /*
+       * Si image_url contient déjà
+       * une URL complète, on l'utilise.
+       *
+       * Sinon, on construit l'URL
+       * publique Supabase.
+       */
 
       if(
-        !result.ok ||
-        !result.data.access_token
+        imageUrl &&
+        imageUrl.indexOf('http') !== 0
       ){
 
-        throw new Error(
-          result.data.error_description ||
-          result.data.msg ||
-          'Connexion impossible.'
+        imageUrl =
+          getPublicImageUrl(
+            imageUrl
+          );
+
+      }
+
+
+      var imageHTML = '';
+
+
+      if(imageUrl){
+
+        imageHTML =
+          '<img' +
+          ' src="' +
+          esc(imageUrl) +
+          '"' +
+          ' alt="' +
+          esc(p.name) +
+          '"' +
+          ' loading="lazy"' +
+          ' onerror="imageLoadError(this)">' ;
+
+      }
+
+
+      return (
+
+        '<div class="card">' +
+
+          '<div class="thumb">' +
+
+            (
+              imageHTML ||
+              '<span style="color:#888;font-size:13px;">' +
+              'Aucune image' +
+              '</span>'
+            ) +
+
+          '</div>' +
+
+          '<h4>' +
+            esc(p.name) +
+          '</h4>' +
+
+          '<div class="price">' +
+            esc(p.price) +
+          '</div>' +
+
+        '</div>'
+
+      );
+
+    }).join('');
+
+}
+
+
+/* =========================================
+   IMAGE ERROR
+========================================= */
+
+function imageLoadError(img){
+
+  console.error(
+    'Impossible de charger cette image :',
+    img.src
+  );
+
+  img.style.display =
+    'none';
+
+  if(
+    img.parentElement
+  ){
+
+    img.parentElement.innerHTML =
+      '<span style="color:#888;font-size:13px;">' +
+      'Image indisponible' +
+      '</span>';
+
+  }
+
+}
+
+
+/* =========================================
+   RENDER ADMIN PRODUCTS
+========================================= */
+
+function renderAdminProducts(products){
+
+  if(!products || !products.length){
+
+    productList.innerHTML =
+      '<div style="color:#777;">' +
+      'Aucun produit.' +
+      '</div>';
+
+    return;
+  }
+
+
+  productList.innerHTML =
+    products.map(function(p){
+
+      var imageUrl =
+        p.image_url || '';
+
+
+      if(
+        imageUrl &&
+        imageUrl.indexOf('http') !== 0
+      ){
+
+        imageUrl =
+          getPublicImageUrl(
+            imageUrl
+          );
+
+      }
+
+
+      var imageHTML =
+        imageUrl
+
+        ?
+
+        '<img src="' +
+        esc(imageUrl) +
+        '" alt="' +
+        esc(p.name) +
+        '">' 
+
+        :
+
+        '<span>Aucune image</span>';
+
+
+      return (
+
+        '<div class="admin-product">' +
+
+          '<div class="admin-product-image">' +
+            imageHTML +
+          '</div>' +
+
+          '<div class="admin-product-info">' +
+
+            '<div class="admin-product-name">' +
+              esc(p.name) +
+            '</div>' +
+
+            '<div class="admin-product-meta">' +
+              esc(p.price) +
+
+              (
+                p.cat
+                ?
+                ' · ' + esc(p.cat)
+                :
+                ''
+              ) +
+
+            '</div>' +
+
+          '</div>' +
+
+          '<button' +
+          ' class="delete-button"' +
+          ' onclick="handleDeleteProduct(' +
+          p.id +
+          ')">' +
+
+            'Supprimer' +
+
+          '</button>' +
+
+        '</div>'
+
+      );
+
+    }).join('');
+
+}
+
+
+/* =========================================
+   REFRESH PRODUCTS
+========================================= */
+
+function refreshProducts(){
+
+  return fetchProducts()
+
+    .then(function(products){
+
+      if(!products){
+        return;
+      }
+
+      renderProducts(
+        products
+      );
+
+      if(
+        accessToken
+      ){
+
+        renderAdminProducts(
+          products
         );
 
       }
 
-      accessToken =
-        result.data.access_token;
-
-      return true;
-
     });
 
+}
+
+
+/* =========================================
+   LOGIN ADMIN
+========================================= */
+
+function loginAdmin(
+  email,
+  password
+){
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/auth/v1/token?grant_type=password',
+
+    {
+
+      method:'POST',
+
+      headers:{
+
+        'apikey':
+          SUPABASE_KEY,
+
+        'Content-Type':
+          'application/json'
+
+      },
+
+      body:JSON.stringify({
+
+        email:
+          email,
+
+        password:
+          password
+
+      })
+
+    }
+
+  )
+
+  .then(function(response){
+
+    return response.json()
+      .then(function(data){
+
+        return {
+
+          ok:
+            response.ok,
+
+          data:
+            data
+
+        };
+
+      });
+
+  })
+
+  .then(function(result){
+
+    if(
+      !result.ok ||
+      !result.data.access_token
+    ){
+
+      throw new Error(
+
+        result.data.error_description ||
+        result.data.msg ||
+        'Connexion impossible.'
+
+      );
+
+    }
+
+
+    accessToken =
+      result.data.access_token;
+
+
+    return true;
+
+  });
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logoutAdminUser(){
+
+  if(!accessToken){
+
+    return Promise.resolve();
+
   }
 
 
-  function logoutAdmin(){
+  var token =
+    accessToken;
 
-    if(!accessToken){
 
-      return Promise.resolve();
+  accessToken =
+    null;
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/auth/v1/logout',
+
+    {
+
+      method:'POST',
+
+      headers:{
+
+        'apikey':
+          SUPABASE_KEY,
+
+        'Authorization':
+          'Bearer ' +
+          token
+
+      }
 
     }
 
-    var token =
-      accessToken;
+  )
 
-    accessToken = null;
+  .catch(function(){});
 
-    return fetch(
-      SUPABASE_URL +
-      '/auth/v1/logout',
-      {
-        method:'POST',
+}
 
-        headers:{
-          'apikey':SUPABASE_KEY,
-          'Authorization':'Bearer ' + token
-        }
-      }
-    )
 
-    .catch(function(){});
+/* =========================================
+   UPLOAD IMAGE
+========================================= */
+
+function uploadProductImage(file){
+
+  if(!accessToken){
+
+    return Promise.reject(
+      new Error(
+        'Vous devez être connecté.'
+      )
+    );
 
   }
 
 
-  function uploadProductImage(file){
+  if(!file){
 
-    if(!accessToken){
+    return Promise.reject(
+      new Error(
+        'Aucune image sélectionnée.'
+      )
+    );
 
-      return Promise.reject(
-        new Error('Vous devez être connecté.')
-      );
+  }
+
+
+  var maxSize =
+    50 * 1024 * 1024;
+
+
+  if(file.size > maxSize){
+
+    return Promise.reject(
+      new Error(
+        'L’image dépasse la limite de 50 MB.'
+      )
+    );
+
+  }
+
+
+  var extension =
+    'jpg';
+
+
+  if(
+    file.name &&
+    file.name.indexOf('.') !== -1
+  ){
+
+    extension =
+      file.name
+        .split('.')
+        .pop()
+        .toLowerCase();
+
+  }
+
+
+  var randomPart =
+    Math.random()
+      .toString(36)
+      .substring(2,10);
+
+
+  var storagePath =
+    'produit-' +
+    Date.now() +
+    '-' +
+    randomPart +
+    '.' +
+    extension;
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/storage/v1/object/' +
+    STORAGE_BUCKET +
+    '/' +
+    encodeURIComponent(
+      storagePath
+    ),
+
+    {
+
+      method:'POST',
+
+      headers:{
+
+        'apikey':
+          SUPABASE_KEY,
+
+        'Authorization':
+          'Bearer ' +
+          accessToken,
+
+        'Content-Type':
+          file.type ||
+          'application/octet-stream',
+
+        'x-upsert':
+          'false'
+
+      },
+
+      body:file
 
     }
 
+  )
 
-    if(!file){
+  .then(function(response){
 
-      return Promise.resolve(null);
-
-    }
-
-
-    if(!file.type || file.type.indexOf('image/') !== 0){
-
-      return Promise.reject(
-        new Error('Le fichier sélectionné doit être une image.')
-      );
-
-    }
-
-
-    if(file.size > 50 * 1024 * 1024){
-
-      return Promise.reject(
-        new Error('L’image est trop grande. Taille maximale : 50 MB.')
-      );
-
-    }
-
-
-    var extension = '';
-
-    var originalName =
-      file.name || 'image';
-
-
-    var lastDot =
-      originalName.lastIndexOf('.');
-
-
-    if(lastDot !== -1){
-
-      extension =
-        originalName
-          .substring(lastDot)
-          .toLowerCase();
-
-    }
-
-
-    if(!extension){
-
-      if(file.type === 'image/jpeg'){
-        extension = '.jpg';
-      }
-      else if(file.type === 'image/png'){
-        extension = '.png';
-      }
-      else if(file.type === 'image/webp'){
-        extension = '.webp';
-      }
-      else if(file.type === 'image/gif'){
-        extension = '.gif';
-      }
-      else{
-
-        extension = '.img';
-
-      }
-
-    }
-
-
-    var fileName =
-      'produit-' +
-      Date.now() +
-      '-' +
-      Math.random()
-        .toString(36)
-        .substring(2,10) +
-      extension;
-
-
-    var storagePath =
-      fileName;
-
-
-    return fetch(
-      SUPABASE_URL +
-      '/storage/v1/object/' +
-      STORAGE_BUCKET +
-      '/' +
-      encodeURIComponent(storagePath),
-      {
-        method:'POST',
-
-        headers:{
-          'apikey':SUPABASE_KEY,
-          'Authorization':'Bearer ' + accessToken,
-          'Content-Type':file.type,
-          'x-upsert':'false'
-        },
-
-        body:file
-
-      }
-    )
-
-    .then(function(r){
-
-      return r.text().then(function(text){
+    return response.text()
+      .then(function(text){
 
         var data = null;
 
         try{
 
           data =
-            text ? JSON.parse(text) : null;
+            text
+              ?
+              JSON.parse(text)
+              :
+              null;
 
-        }catch(e){
-
-          data = null;
-
-        }
+        }catch(error){}
 
 
-        if(!r.ok){
+        if(!response.ok){
+
+          console.error(
+            'Erreur upload image:',
+            data || text
+          );
 
           throw new Error(
-            data &&
+
             (
-              data.message ||
-              data.error ||
-              data.statusCode
+              data &&
+              (
+                data.message ||
+                data.error ||
+                data.msg
+              )
             )
+
             ||
+
             'Impossible d’envoyer l’image.'
+
           );
 
         }
 
 
         return {
-          path:storagePath,
+
+          path:
+            storagePath,
 
           url:
-            SUPABASE_URL +
-            '/storage/v1/object/public/' +
-            STORAGE_BUCKET +
-            '/' +
-            encodeURIComponent(storagePath)
+            getPublicImageUrl(
+              storagePath
+            )
 
         };
 
       });
 
-    });
+  });
+
+}
+
+
+/* =========================================
+   DELETE STORAGE IMAGE
+========================================= */
+
+function deleteStorageImage(
+  imageUrl
+){
+
+  if(
+    !imageUrl ||
+    !accessToken
+  ){
+
+    return Promise.resolve(
+      true
+    );
 
   }
 
 
-  function deleteStorageImage(imageUrl){
-
-    if(!accessToken || !imageUrl){
-
-      return Promise.resolve(true);
-
-    }
+  var marker =
+    '/storage/v1/object/public/' +
+    STORAGE_BUCKET +
+    '/';
 
 
-    var marker =
-      '/storage/v1/object/public/' +
-      STORAGE_BUCKET +
-      '/';
+  var index =
+    imageUrl.indexOf(
+      marker
+    );
 
 
-    var index =
-      imageUrl.indexOf(marker);
+  if(index === -1){
+
+    return Promise.resolve(
+      true
+    );
+
+  }
 
 
-    if(index === -1){
-
-      return Promise.resolve(true);
-
-    }
-
-
-    var path =
-      imageUrl.substring(
-        index + marker.length
-      );
+  var path =
+    imageUrl.substring(
+      index +
+      marker.length
+    );
 
 
-    try{
+  path =
+    path
+      .split('/')
+      .map(function(part){
 
-      path =
-        decodeURIComponent(path);
+        try{
 
-    }catch(e){}
+          return decodeURIComponent(
+            part
+          );
 
+        }catch(error){
 
-    if(!path){
+          return part;
 
-      return Promise.resolve(true);
-
-    }
-
-
-    return fetch(
-      SUPABASE_URL +
-      '/storage/v1/object/' +
-      STORAGE_BUCKET +
-      '/' +
-      path
-        .split('/')
-        .map(function(part){
-          return encodeURIComponent(part);
-        })
-        .join('/'),
-
-      {
-        method:'DELETE',
-
-        headers:{
-          'apikey':SUPABASE_KEY,
-          'Authorization':'Bearer ' + accessToken
         }
 
-      }
-    )
-
-    .then(function(r){
-
-      return r.ok;
-
-    })
-
-    .catch(function(){
-
-      return false;
-
-    });
-
-  }
+      })
+      .join('/');
 
 
-  function createProduct(product){
+  return fetch(
 
-    if(!accessToken){
+    SUPABASE_URL +
+    '/storage/v1/object/' +
+    STORAGE_BUCKET +
+    '/' +
+    path
+      .split('/')
+      .map(function(part){
 
-      return Promise.resolve(false);
-
-    }
-
-    return fetch(
-      SUPABASE_URL +
-      '/rest/v1/' +
-      TABLE,
-      {
-        method:'POST',
-
-        headers:Object.assign(
-          {},
-          getHeaders(),
-          {
-            'Prefer':'return=representation'
-          }
-        ),
-
-        body:JSON.stringify([product])
-
-      }
-    )
-
-    .then(function(r){
-
-      return r.json().then(function(data){
-
-        return {
-          ok:r.ok,
-          data:data
-        };
-
-      });
-
-    })
-
-    .then(function(result){
-
-      if(!result.ok){
-
-        return false;
-
-      }
-
-      return result.data && result.data[0]
-        ? result.data[0]
-        : true;
-
-    })
-
-    .catch(function(){
-
-      return false;
-
-    });
-
-  }
-
-
-  function deleteProduct(id){
-
-    if(!accessToken){
-
-      return Promise.resolve(false);
-
-    }
-
-
-    return fetch(
-      SUPABASE_URL +
-      '/rest/v1/' +
-      TABLE +
-      '?id=eq.' +
-      encodeURIComponent(id) +
-      '&select=*',
-      {
-        headers:getHeaders()
-      }
-    )
-
-    .then(function(r){
-
-      if(!r.ok){
-
-        throw new Error(
-          'Impossible de récupérer le produit.'
+        return encodeURIComponent(
+          part
         );
 
+      })
+      .join('/'),
+
+    {
+
+      method:'DELETE',
+
+      headers:{
+
+        'apikey':
+          SUPABASE_KEY,
+
+        'Authorization':
+          'Bearer ' +
+          accessToken
+
       }
 
-      return r.json();
+    }
 
-    })
+  )
 
-    .then(function(products){
+  .then(function(response){
 
-      var product =
-        products && products.length
-          ? products[0]
-          : null;
+    if(!response.ok){
+
+      console.warn(
+        'Impossible de supprimer l’image du Storage.'
+      );
+
+    }
+
+    return true;
+
+  })
+
+  .catch(function(){
+
+    return true;
+
+  });
+
+}
 
 
-      return fetch(
-        SUPABASE_URL +
-        '/rest/v1/' +
-        TABLE +
-        '?id=eq.' +
-        encodeURIComponent(id),
+/* =========================================
+   CREATE PRODUCT
+========================================= */
+
+function createProduct(
+  product
+){
+
+  if(!accessToken){
+
+    return Promise.resolve(
+      false
+    );
+
+  }
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/rest/v1/' +
+    TABLE,
+
+    {
+
+      method:'POST',
+
+      headers:Object.assign(
+
+        {},
+
+        getHeaders(),
+
         {
-          method:'DELETE',
-          headers:getHeaders()
+          'Prefer':
+            'return=representation'
         }
-      )
 
-      .then(function(r){
+      ),
 
-        if(!r.ok){
+      body:JSON.stringify([
+        product
+      ])
+
+    }
+
+  )
+
+  .then(function(response){
+
+    return response.text()
+      .then(function(text){
+
+        if(!response.ok){
+
+          console.error(
+            'Erreur création produit:',
+            text
+          );
 
           return false;
 
         }
 
 
-        if(product && product.image_url){
+        try{
+
+          var data =
+            JSON.parse(text);
+
+          return data &&
+                 data.length
+            ?
+              data[0]
+            :
+              false;
+
+        }catch(error){
+
+          return false;
+
+        }
+
+      });
+
+  })
+
+  .catch(function(error){
+
+    console.error(
+      error
+    );
+
+    return false;
+
+  });
+
+}
+
+
+/* =========================================
+   DELETE PRODUCT
+========================================= */
+
+function deleteProduct(
+  id
+){
+
+  if(!accessToken){
+
+    return Promise.resolve(
+      false
+    );
+
+  }
+
+
+  /*
+   * On récupère d'abord
+   * le produit pour connaître
+   * son image.
+   */
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/rest/v1/' +
+    TABLE +
+    '?id=eq.' +
+    encodeURIComponent(id) +
+    '&select=*',
+
+    {
+
+      headers:
+        getHeaders()
+
+    }
+
+  )
+
+  .then(function(response){
+
+    if(!response.ok){
+
+      throw new Error(
+        'Impossible de récupérer le produit.'
+      );
+
+    }
+
+    return response.json();
+
+  })
+
+  .then(function(products){
+
+    var product =
+      products &&
+      products.length
+      ?
+        products[0]
+      :
+        null;
+
+
+    return fetch(
+
+      SUPABASE_URL +
+      '/rest/v1/' +
+      TABLE +
+      '?id=eq.' +
+      encodeURIComponent(id),
+
+      {
+
+        method:'DELETE',
+
+        headers:
+          getHeaders()
+
+      }
+
+    )
+
+    .then(function(response){
+
+      if(!response.ok){
+
+        throw new Error(
+          'Impossible de supprimer le produit.'
+        );
+
+      }
+
+
+      return product;
+
+    });
+
+  })
+
+  .then(function(product){
+
+    if(
+      product &&
+      product.image_url
+    ){
+
+      return deleteStorageImage(
+        product.image_url
+      );
+
+    }
+
+    return true;
+
+  })
+
+  .then(function(){
+
+    return true;
+
+  })
+
+  .catch(function(error){
+
+    console.error(
+      error
+    );
+
+    return false;
+
+  });
+
+}
+
+
+/* =========================================
+   DELETE PRODUCT HANDLER
+========================================= */
+
+function handleDeleteProduct(
+  id
+){
+
+  if(
+    !confirm(
+      'Voulez-vous vraiment supprimer ce produit ?'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  deleteProduct(
+    id
+  )
+
+  .then(function(success){
+
+    if(!success){
+
+      alert(
+        'La suppression a échoué.'
+      );
+
+      return;
+
+    }
+
+
+    refreshProducts();
+
+  });
+
+}
+
+
+/* =========================================
+   OPEN ADMIN
+========================================= */
+
+openAdmin.addEventListener(
+  'click',
+  function(){
+
+    adminOverlay.classList.add(
+      'active'
+    );
+
+  }
+);
+
+
+/* =========================================
+   CLOSE ADMIN
+========================================= */
+
+closeAdmin.addEventListener(
+  'click',
+  function(){
+
+    adminOverlay.classList.remove(
+      'active'
+    );
+
+  }
+);
+
+
+/* =========================================
+   CLOSE BY CLICKING OUTSIDE
+========================================= */
+
+adminOverlay.addEventListener(
+  'click',
+  function(event){
+
+    if(
+      event.target ===
+      adminOverlay
+    ){
+
+      adminOverlay.classList.remove(
+        'active'
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+adminUnlock.addEventListener(
+  'click',
+  function(){
+
+    var email =
+      adminEmail.value.trim();
+
+    var password =
+      adminPassword.value;
+
+
+    adminMsg.textContent =
+      'Connexion en cours...';
+
+
+    loginAdmin(
+      email,
+      password
+    )
+
+    .then(function(){
+
+      adminMsg.textContent =
+        '';
+
+      adminLogin.style.display =
+        'none';
+
+      adminPanel.classList.add(
+        'active'
+      );
+
+
+      refreshProducts();
+
+    })
+
+    .catch(function(error){
+
+      console.error(
+        error
+      );
+
+      adminMsg.textContent =
+        error.message ||
+        'Connexion impossible.';
+
+    });
+
+  }
+);
+
+
+/* =========================================
+   LOGOUT BUTTON
+========================================= */
+
+logoutAdmin.addEventListener(
+  'click',
+  function(){
+
+    logoutAdminUser()
+      .then(function(){
+
+        adminPanel.classList.remove(
+          'active'
+        );
+
+        adminLogin.style.display =
+          'block';
+
+        adminEmail.value =
+          '';
+
+        adminPassword.value =
+          '';
+
+        adminMsg.textContent =
+          '';
+
+      });
+
+  }
+);
+
+
+/* =========================================
+   IMAGE SELECT
+========================================= */
+
+pimage.addEventListener(
+  'change',
+  function(){
+
+    var file =
+      pimage.files &&
+      pimage.files[0];
+
+
+    if(
+      previewObjectUrl
+    ){
+
+      URL.revokeObjectURL(
+        previewObjectUrl
+      );
+
+      previewObjectUrl =
+        null;
+
+    }
+
+
+    selectedImageFile =
+      null;
+
+
+    imagePreviewBox.classList.remove(
+      'active'
+    );
+
+    removeImageBtn.classList.remove(
+      'active'
+    );
+
+
+    if(!file){
+
+      return;
+
+    }
+
+
+    if(
+      !file.type ||
+      file.type.indexOf(
+        'image/'
+      ) !== 0
+    ){
+
+      formMsg.textContent =
+        'Veuillez sélectionner une image.';
+
+      pimage.value =
+        '';
+
+      return;
+
+    }
+
+
+    var maxSize =
+      50 * 1024 * 1024;
+
+
+    if(file.size > maxSize){
+
+      formMsg.textContent =
+        'L’image dépasse la limite de 50 MB.';
+
+      pimage.value =
+        '';
+
+      return;
+
+    }
+
+
+    selectedImageFile =
+      file;
+
+
+    previewObjectUrl =
+      URL.createObjectURL(
+        file
+      );
+
+
+    imagePreview.src =
+      previewObjectUrl;
+
+
+    imagePreviewBox.classList.add(
+      'active'
+    );
+
+    removeImageBtn.classList.add(
+      'active'
+    );
+
+    formMsg.textContent =
+      '';
+
+  }
+);
+
+
+/* =========================================
+   REMOVE IMAGE
+========================================= */
+
+removeImageBtn.addEventListener(
+  'click',
+  function(){
+
+    pimage.value =
+      '';
+
+    selectedImageFile =
+      null;
+
+
+    if(
+      previewObjectUrl
+    ){
+
+      URL.revokeObjectURL(
+        previewObjectUrl
+      );
+
+      previewObjectUrl =
+        null;
+
+    }
+
+
+    imagePreview.src =
+      '';
+
+    imagePreviewBox.classList.remove(
+      'active'
+    );
+
+    removeImageBtn.classList.remove(
+      'active'
+    );
+
+  }
+);
+
+
+/* =========================================
+   ADD PRODUCT
+========================================= */
+
+addProductBtn.addEventListener(
+  'click',
+  function(){
+
+    var name =
+      pname.value.trim();
+
+    var price =
+      pprice.value.trim();
+
+    var cat =
+      pcat.value.trim();
+
+    var file =
+      selectedImageFile;
+
+
+    formMsg.textContent =
+      '';
+
+
+    if(!name){
+
+      formMsg.textContent =
+        'Veuillez entrer le nom du produit.';
+
+      return;
+
+    }
+
+
+    if(!price){
+
+      formMsg.textContent =
+        'Veuillez entrer le prix.';
+
+      return;
+
+    }
+
+
+    if(!file){
+
+      formMsg.textContent =
+        'Veuillez sélectionner une image.';
+
+      return;
+
+    }
+
+
+    addProductBtn.disabled =
+      true;
+
+    addProductBtn.textContent =
+      'Envoi en cours...';
+
+
+    /*
+     * 1. Upload de l'image
+     */
+
+    uploadProductImage(
+      file
+    )
+
+    .then(function(uploaded){
+
+      /*
+       * 2. Création du produit
+       * avec l'URL de l'image
+       */
+
+      return createProduct({
+
+        name:
+          name,
+
+        price:
+          price,
+
+        cat:
+          cat,
+
+        image_url:
+          uploaded.url
+
+      })
+
+      .then(function(product){
+
+        if(!product){
+
+          /*
+           * Si le produit n'a pas pu
+           * être créé dans la base,
+           * on supprime l'image
+           * qu'on vient d'envoyer.
+           */
 
           return deleteStorageImage(
-            product.image_url
-          ).then(function(){
+            uploaded.url
+          )
 
-            return true;
+          .then(function(){
+
+            throw new Error(
+              'Le produit n’a pas pu être enregistré dans la base de données.'
+            );
 
           });
 
         }
 
 
-        return true;
+        return product;
 
       });
 
     })
 
-    .catch(function(){
+    .then(function(){
 
-      return false;
+      pname.value =
+        '';
 
-    });
+      pprice.value =
+        '';
 
-  }
+      pcat.value =
+        '';
 
+      pimage.value =
+        '';
 
-  function renderAdminList(){
-
-    var list =
-      document.getElementById('productList');
-
-    list.innerHTML =
-      '<p style="opacity:.6;font-size:14px;">Chargement…</p>';
-
-
-    fetchProducts().then(function(products){
-
-      if(products === null){
-
-        list.innerHTML =
-          '<p style="opacity:.6;font-size:14px;">Connexion à la base impossible.</p>';
-
-        return;
-
-      }
+      selectedImageFile =
+        null;
 
 
-      if(!products.length){
+      if(
+        previewObjectUrl
+      ){
 
-        list.innerHTML =
-          '<p style="opacity:.6;font-size:14px;">Aucun produit pour l\'instant.</p>';
+        URL.revokeObjectURL(
+          previewObjectUrl
+        );
 
-        return;
+        previewObjectUrl =
+          null;
 
       }
-
-
-      list.innerHTML =
-        products.map(function(p){
-
-          var imageHTML =
-            '<div style="width:64px;height:64px;flex:0 0 64px;background:var(--beige);border-radius:5px;overflow:hidden;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;">' +
-
-              (
-                p.image_url
-
-                ?
-
-                '<img src="' +
-                esc(p.image_url) +
-                '" alt="' +
-                esc(p.name) +
-                '" style="width:100%;height:100%;object-fit:cover;">'
-
-                :
-
-                '<span style="font-size:10px;opacity:.5;text-align:center;padding:4px;">Aucune image</span>'
-              )
-
-            +'</div>';
-
-
-          return (
-
-            '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:var(--white);">' +
-
-              '<div style="display:flex;align-items:center;gap:12px;min-width:0;">' +
-
-                imageHTML +
-
-                '<div style="font-size:14px;min-width:0;">' +
-
-                  '<b>' +
-                  esc(p.name) +
-                  '</b> — ' +
-                  esc(p.price) +
-
-                  '<div style="font-size:12px;opacity:.6;">' +
-                  esc(p.cat || '') +
-                  '</div>' +
-
-                '</div>' +
-
-              '</div>' +
-
-              '<button ' +
-                'data-id="' + p.id + '" ' +
-                'class="adminDelBtn" ' +
-                'style="background:#B4453A;color:#fff;border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;flex-shrink:0;">' +
-                'Supprimer' +
-              '</button>' +
-
-            '</div>'
-
-          );
-
-        }).join('');
-
-
-      Array.prototype.forEach.call(
-
-        list.querySelectorAll('.adminDelBtn'),
-
-        function(btn){
-
-          btn.addEventListener(
-            'click',
-            function(){
-
-              if(!accessToken){
-
-                return;
-
-              }
-
-
-              var id =
-                btn.getAttribute('data-id');
-
-
-              btn.textContent =
-                '...';
-
-
-              btn.disabled = true;
-
-
-              deleteProduct(id)
-                .then(function(ok){
-
-                  if(!ok){
-
-                    btn.textContent =
-                      'Erreur';
-
-                    btn.disabled = false;
-
-                    return;
-
-                  }
-
-                  renderAdminList();
-
-                  render();
-
-                });
-
-            }
-          );
-
-        }
-
-      );
-
-    });
-
-  }
-
-
-  var imageInput =
-    document.getElementById('pimage');
-
-  var imagePreviewBox =
-    document.getElementById('imagePreviewBox');
-
-  var imagePreview =
-    document.getElementById('imagePreview');
-
-  var removeImageBtn =
-    document.getElementById('removeImageBtn');
-
-
-  function clearImageSelection(){
-
-    if(imageInput){
-
-      imageInput.value = '';
-
-    }
-
-
-    if(imagePreview){
-
-      imagePreview.removeAttribute('src');
-
-    }
-
-
-    if(imagePreviewBox){
-
-      imagePreviewBox.style.display = 'none';
-
-    }
-
-  }
-
-
-  imageInput.addEventListener(
-    'change',
-    function(){
-
-      var file =
-        imageInput.files &&
-        imageInput.files[0];
-
-
-      if(!file){
-
-        clearImageSelection();
-
-        return;
-
-      }
-
-
-      if(!file.type || file.type.indexOf('image/') !== 0){
-
-        document
-          .getElementById('formMsg')
-          .textContent =
-            'Veuillez sélectionner une image.';
-
-        clearImageSelection();
-
-        return;
-
-      }
-
-
-      if(file.size > 50 * 1024 * 1024){
-
-        document
-          .getElementById('formMsg')
-          .textContent =
-            'L’image est trop grande. Taille maximale : 50 MB.';
-
-        clearImageSelection();
-
-        return;
-
-      }
-
-
-      var objectUrl =
-        URL.createObjectURL(file);
 
 
       imagePreview.src =
-        objectUrl;
+        '';
 
+      imagePreviewBox.classList.remove(
+        'active'
+      );
 
-      imagePreviewBox.style.display =
-        'block';
+      removeImageBtn.classList.remove(
+        'active'
+      );
 
 
-      imagePreview.onload =
-        function(){
+      formMsg.textContent =
+        'Produit ajouté avec succès.';
 
-          URL.revokeObjectURL(objectUrl);
 
-        };
+      return refreshProducts();
 
-    }
-  );
+    })
 
+    .catch(function(error){
 
-  removeImageBtn.addEventListener(
-    'click',
-    function(){
+      console.error(
+        error
+      );
 
-      clearImageSelection();
+      formMsg.textContent =
+        error.message ||
+        'Une erreur est survenue.';
 
-      document
-        .getElementById('formMsg')
-        .textContent = '';
+    })
 
-    }
-  );
+    .finally(function(){
 
+      addProductBtn.disabled =
+        false;
 
-  document
-    .getElementById('adminLink')
-    .addEventListener(
-      'click',
-      function(e){
+      addProductBtn.textContent =
+        'Ajouter le produit';
 
-        e.preventDefault();
+    });
 
-        openAdmin();
+  }
+);
 
-      }
-    );
 
+/* =========================================
+   INITIAL LOAD
+========================================= */
 
-  document
-    .getElementById('adminClose1')
-    .addEventListener(
-      'click',
-      function(e){
+refreshProducts();
 
-        e.preventDefault();
-
-        closeAdmin();
-
-      }
-    );
-
-
-  document
-    .getElementById('adminClose2')
-    .addEventListener(
-      'click',
-      function(e){
-
-        e.preventDefault();
-
-        closeAdmin();
-
-      }
-    );
-
-
-  document
-    .getElementById('adminUnlock')
-    .addEventListener(
-      'click',
-      function(){
-
-        console.log('CLIC LOGIN');
-
-        var email =
-          document
-            .getElementById('adminEmail')
-            .value
-            .trim();
-
-
-        var password =
-          document
-            .getElementById('adminPassword')
-            .value;
-
-
-        var msg =
-          document.getElementById('adminMsg');
-
-
-        if(!email || !password){
-
-          msg.textContent =
-            'E-mail et mot de passe sont requis.';
-
-          return;
-
-        }
-
-
-        msg.textContent =
-          'Connexion en cours…';
-
-
-        loginAdmin(email,password)
-
-          .then(function(){
-
-            msg.textContent = '';
-
-            lockView.style.display = 'none';
-
-            panelView.style.display = 'block';
-
-            renderAdminList();
-
-          })
-
-          .catch(function(error){
-
-            accessToken = null;
-
-            console.error(
-              'ERREUR SUPABASE AUTH :',
-              error
-            );
-
-            msg.textContent =
-              error.message ||
-              'Erreur de connexion Supabase.';
-
-          });
-
-      }
-    );
-
-
-  document
-    .getElementById('adminEmail')
-    .addEventListener(
-      'keydown',
-      function(e){
-
-        if(e.key === 'Enter'){
-
-          document
-            .getElementById('adminPassword')
-            .focus();
-
-        }
-
-      }
-    );
-
-
-  document
-    .getElementById('adminPassword')
-    .addEventListener(
-      'keydown',
-      function(e){
-
-        if(e.key === 'Enter'){
-
-          document
-            .getElementById('adminUnlock')
-            .click();
-
-        }
-
-      }
-    );
-
-
-  document
-    .getElementById('addProductBtn')
-    .addEventListener(
-      'click',
-      function(){
-
-        if(!accessToken){
-
-          document
-            .getElementById('formMsg')
-            .textContent =
-              'Veuillez vous connecter.';
-
-          return;
-
-        }
-
-
-        var name =
-          document
-            .getElementById('pname')
-            .value
-            .trim();
-
-
-        var price =
-          document
-            .getElementById('pprice')
-            .value
-            .trim();
-
-
-        var cat =
-          document
-            .getElementById('pcat')
-            .value;
-
-
-        var imageFile =
-          document
-            .getElementById('pimage')
-            .files &&
-          document
-            .getElementById('pimage')
-            .files[0];
-
-
-        var msg =
-          document.getElementById('formMsg');
-
-
-        if(!name || !price){
-
-          msg.textContent =
-            'Nom et prix sont requis.';
-
-          return;
-
-        }
-
-
-        if(imageFile){
-
-          if(
-            !imageFile.type ||
-            imageFile.type.indexOf('image/') !== 0
-          ){
-
-            msg.textContent =
-              'Le fichier sélectionné doit être une image.';
-
-            return;
-
-          }
-
-
-          if(imageFile.size > 50 * 1024 * 1024){
-
-            msg.textContent =
-              'L’image est trop grande. Taille maximale : 50 MB.';
-
-            return;
-
-          }
-
-        }
-
-
-        var addButton =
-          document.getElementById('addProductBtn');
-
-
-        addButton.disabled =
-          true;
-
-
-        addButton.style.opacity =
-          '.6';
-
-
-        msg.textContent =
-          imageFile
-            ? 'Envoi de l’image…'
-            : 'Ajout du produit…';
-
-
-        var uploadedImage =
-          null;
-
-
-        uploadProductImage(imageFile)
-
-          .then(function(uploadResult){
-
-            uploadedImage =
-              uploadResult;
-
-
-            msg.textContent =
-              'Enregistrement du produit…';
-
-
-            return createProduct({
-
-              name:name,
-
-              price:price,
-
-              cat:cat,
-
-              image_url:
-                uploadedImage
-                  ? uploadedImage.url
-                  : null
-
-            });
-
-          })
-
-          .then(function(result){
-
-            if(!result){
-
-              if(
-                uploadedImage &&
-                uploadedImage.url
-              ){
-
-                return deleteStorageImage(
-                  uploadedImage.url
-                ).then(function(){
-
-                  throw new Error(
-                    'Le produit n’a pas pu être enregistré.'
-                  );
-
-                });
-
-              }
-
-
-              throw new Error(
-                'Le produit n’a pas pu être enregistré.'
-              );
-
-            }
-
-
-            msg.textContent =
-              'Produit ajouté avec succès.';
-
-
-            document
-              .getElementById('pname')
-              .value = '';
-
-
-            document
-              .getElementById('pprice')
-              .value = '';
-
-
-            clearImageSelection();
-
-
-            renderAdminList();
-
-            render();
-
-          })
-
-          .catch(function(error){
-
-            console.error(
-              'ERREUR AJOUT PRODUIT :',
-              error
-            );
-
-
-            msg.textContent =
-              error.message ||
-              'Erreur lors de l’ajout du produit.';
-
-          })
-
-          .then(function(){
-
-            addButton.disabled =
-              false;
-
-            addButton.style.opacity =
-              '';
-
-          });
-
-      }
-    );
-
-})();
 </script>
 
 </body>
