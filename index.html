@@ -206,17 +206,41 @@ section{padding:90px 25px;}
   padding:35px;
   display:flex;
   align-items:flex-end;
+  position:relative;
+  overflow:hidden;
   background:var(--beige);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
   border:1px solid var(--line);
   transition:.25s;
 }
 
-.category-card:hover{transform:translateY(-4px);}
+.category-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.62),
+    rgba(0,0,0,.08)
+  );
+  z-index:1;
+  pointer-events:none;
+}
+
+.category-card:hover{
+  transform:translateY(-4px);
+}
 
 .category-card h3{
+  position:relative;
+  z-index:2;
   font-family:'Cormorant Garamond',serif;
   font-size:30px;
   font-weight:500;
+  color:white;
+  text-shadow:0 2px 8px rgba(0,0,0,.4);
 }
 
 /* PRODUCTS */
@@ -749,6 +773,31 @@ footer{
   font-size:12px;
 }
 
+/* CATEGORY ADMIN */
+
+.category-admin-preview{
+  width:180px;
+  height:120px;
+  background:var(--beige);
+  border:1px solid var(--line);
+  margin-top:10px;
+  margin-bottom:12px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.category-admin-preview.active{
+  display:flex;
+}
+
+.category-admin-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
 /* RESPONSIVE */
 
 @media(max-width:950px){
@@ -939,31 +988,13 @@ footer{
 
     </div>
 
-    <div class="category-grid">
+    <div
+      class="category-grid"
+      id="categoryGrid">
 
-      <a href="#products" class="category-card">
-        <h3>Soins du visage</h3>
-      </a>
-
-      <a href="#products" class="category-card">
-        <h3>Soins du corps</h3>
-      </a>
-
-      <a href="#products" class="category-card">
-        <h3>Soins des cheveux</h3>
-      </a>
-
-      <a href="#products" class="category-card">
-        <h3>Parfums</h3>
-      </a>
-
-      <a href="#products" class="category-card">
-        <h3>Maquillage</h3>
-      </a>
-
-      <a href="#products" class="category-card">
-        <h3>Accessoires</h3>
-      </a>
+      <div class="empty">
+        Chargement des catégories...
+      </div>
 
     </div>
 
@@ -1240,6 +1271,121 @@ footer{
     <div
       class="admin-panel"
       id="adminPanel">
+
+
+      <!-- =====================================
+           MANAGE CATEGORY IMAGES
+      ====================================== -->
+
+      <div class="admin-form">
+
+        <h3>
+          Images des catégories
+        </h3>
+
+
+        <div class="admin-field">
+
+          <label for="categorySelect">
+            Catégorie
+          </label>
+
+          <select id="categorySelect">
+
+            <option value="">
+              Sélectionner une catégorie
+            </option>
+
+            <option value="Soins du visage">
+              Soins du visage
+            </option>
+
+            <option value="Soins du corps">
+              Soins du corps
+            </option>
+
+            <option value="Soins des cheveux">
+              Soins des cheveux
+            </option>
+
+            <option value="Parfums">
+              Parfums
+            </option>
+
+            <option value="Maquillage">
+              Maquillage
+            </option>
+
+            <option value="Accessoires">
+              Accessoires
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div
+          class="category-admin-preview"
+          id="categoryAdminPreview">
+
+          <img
+            id="categoryAdminPreviewImage"
+            src=""
+            alt="Image actuelle de la catégorie">
+
+        </div>
+
+
+        <div class="admin-field">
+
+          <label for="categoryImage">
+            Image de la catégorie
+          </label>
+
+          <input
+            type="file"
+            id="categoryImage"
+            accept="image/*">
+
+        </div>
+
+
+        <div
+          class="image-preview-box"
+          id="categoryImagePreviewBox">
+
+          <img
+            id="categoryImagePreview"
+            src=""
+            alt="Aperçu">
+
+        </div>
+
+
+        <button
+          type="button"
+          class="remove-image"
+          id="removeCategoryImageBtn">
+          Retirer l'image
+        </button>
+
+
+        <button
+          type="button"
+          class="admin-button"
+          id="saveCategoryBtn">
+          Enregistrer l'image
+        </button>
+
+
+        <div
+          class="admin-message"
+          id="categoryMsg">
+        </div>
+
+      </div>
+
 
       <!-- ADD PRODUCT -->
 
@@ -1549,6 +1695,50 @@ var previewObjectUrl =
 
 
 /* =========================================
+   CATEGORY ELEMENTS
+========================================= */
+
+var categoryGrid =
+  document.getElementById('categoryGrid');
+
+var categorySelect =
+  document.getElementById('categorySelect');
+
+var categoryImage =
+  document.getElementById('categoryImage');
+
+var categoryImagePreviewBox =
+  document.getElementById('categoryImagePreviewBox');
+
+var categoryImagePreview =
+  document.getElementById('categoryImagePreview');
+
+var removeCategoryImageBtn =
+  document.getElementById('removeCategoryImageBtn');
+
+var saveCategoryBtn =
+  document.getElementById('saveCategoryBtn');
+
+var categoryMsg =
+  document.getElementById('categoryMsg');
+
+var categoryAdminPreview =
+  document.getElementById('categoryAdminPreview');
+
+var categoryAdminPreviewImage =
+  document.getElementById('categoryAdminPreviewImage');
+
+var selectedCategoryImageFile =
+  null;
+
+var categoryPreviewObjectUrl =
+  null;
+
+var currentCategories =
+  [];
+
+
+/* =========================================
    ESCAPE HTML
 ========================================= */
 
@@ -1847,7 +2037,7 @@ function renderCart(){
         esc(imageUrl) +
         '" alt="' +
         esc(item.name) +
-        '">'
+        '">' 
 
         :
 
@@ -2363,7 +2553,7 @@ function renderAdminProducts(products){
         esc(imageUrl) +
         '" alt="' +
         esc(p.name) +
-        '">'
+        '">' 
 
         :
 
@@ -2447,6 +2637,776 @@ function refreshProducts(){
     });
 
 }
+
+
+/* =========================================
+   FETCH CATEGORIES
+========================================= */
+
+function fetchCategories(){
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/rest/v1/categories?select=*&order=id.asc',
+
+    {
+      headers:getHeaders()
+    }
+
+  )
+
+  .then(function(response){
+
+    if(!response.ok){
+
+      return response.text()
+        .then(function(text){
+
+          throw new Error(
+            'Erreur catégories : ' +
+            text
+          );
+
+        });
+
+    }
+
+    return response.json();
+
+  })
+
+  .catch(function(error){
+
+    console.error(error);
+
+    return [];
+
+  });
+
+}
+
+
+/* =========================================
+   RENDER CATEGORIES
+========================================= */
+
+function renderCategories(categories){
+
+  currentCategories =
+    categories || [];
+
+
+  if(
+    !categories ||
+    !categories.length
+  ){
+
+    categoryGrid.innerHTML =
+      '<div class="empty">' +
+      'Aucune catégorie disponible.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  categoryGrid.innerHTML =
+    categories.map(function(category){
+
+      var imageUrl =
+        category.image_url || '';
+
+
+      if(
+        imageUrl &&
+        imageUrl.indexOf('http') !== 0
+      ){
+
+        imageUrl =
+          getPublicImageUrl(
+            imageUrl
+          );
+
+      }
+
+
+      var style =
+        imageUrl
+
+        ?
+
+        ' style="background-image:url(\'' +
+        esc(imageUrl) +
+        '\');"'
+
+        :
+
+        '';
+
+
+      return (
+
+        '<a' +
+        ' href="#products"' +
+        ' class="category-card"' +
+        style +
+        '>' +
+
+          '<h3>' +
+            esc(category.name) +
+          '</h3>' +
+
+        '</a>'
+
+      );
+
+    }).join('');
+
+}
+
+
+/* =========================================
+   REFRESH CATEGORIES
+========================================= */
+
+function refreshCategories(){
+
+  return fetchCategories()
+
+    .then(function(categories){
+
+      renderCategories(
+        categories
+      );
+
+    });
+
+}
+
+
+/* =========================================
+   SHOW CURRENT CATEGORY IMAGE
+========================================= */
+
+function showSelectedCategoryImage(){
+
+  var categoryName =
+    categorySelect.value.trim();
+
+
+  categoryAdminPreview.classList.remove(
+    'active'
+  );
+
+  categoryAdminPreviewImage.src =
+    '';
+
+
+  if(!categoryName){
+    return;
+  }
+
+
+  var category =
+    currentCategories.find(function(item){
+
+      return item.name === categoryName;
+
+    });
+
+
+  if(
+    !category ||
+    !category.image_url
+  ){
+
+    return;
+
+  }
+
+
+  var imageUrl =
+    category.image_url;
+
+
+  if(
+    imageUrl &&
+    imageUrl.indexOf('http') !== 0
+  ){
+
+    imageUrl =
+      getPublicImageUrl(
+        imageUrl
+      );
+
+  }
+
+
+  if(!imageUrl){
+    return;
+  }
+
+
+  categoryAdminPreviewImage.src =
+    imageUrl;
+
+  categoryAdminPreview.classList.add(
+    'active'
+  );
+
+}
+
+
+/* =========================================
+   UPLOAD CATEGORY IMAGE
+========================================= */
+
+function uploadCategoryImage(file){
+
+  if(!accessToken){
+
+    return Promise.reject(
+      new Error(
+        'Vous devez être connecté.'
+      )
+    );
+
+  }
+
+
+  if(!file){
+
+    return Promise.reject(
+      new Error(
+        'Aucune image sélectionnée.'
+      )
+    );
+
+  }
+
+
+  if(
+    !file.type ||
+    file.type.indexOf('image/') !== 0
+  ){
+
+    return Promise.reject(
+      new Error(
+        'Veuillez sélectionner une image.'
+      )
+    );
+
+  }
+
+
+  var maxSize =
+    50 * 1024 * 1024;
+
+
+  if(file.size > maxSize){
+
+    return Promise.reject(
+      new Error(
+        'L’image dépasse la limite de 50 MB.'
+      )
+    );
+
+  }
+
+
+  var extension =
+    'jpg';
+
+
+  if(
+    file.name &&
+    file.name.indexOf('.') !== -1
+  ){
+
+    extension =
+      file.name
+        .split('.')
+        .pop()
+        .toLowerCase();
+
+  }
+
+
+  var randomPart =
+    Math.random()
+      .toString(36)
+      .substring(2,10);
+
+
+  var storagePath =
+    'categorie-' +
+    Date.now() +
+    '-' +
+    randomPart +
+    '.' +
+    extension;
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/storage/v1/object/' +
+    STORAGE_BUCKET +
+    '/' +
+    encodeURIComponent(
+      storagePath
+    ),
+
+    {
+
+      method:'POST',
+
+      headers:{
+
+        'apikey':
+          SUPABASE_KEY,
+
+        'Authorization':
+          'Bearer ' +
+          accessToken,
+
+        'Content-Type':
+          file.type,
+
+        'x-upsert':
+          'false'
+
+      },
+
+      body:file
+
+    }
+
+  )
+
+  .then(function(response){
+
+    return response.text()
+      .then(function(text){
+
+        var data = null;
+
+
+        try{
+
+          data =
+            text
+              ?
+              JSON.parse(text)
+              :
+              null;
+
+        }catch(error){}
+
+
+        if(!response.ok){
+
+          throw new Error(
+
+            (
+              data &&
+              (
+                data.message ||
+                data.error ||
+                data.msg
+              )
+            )
+
+            ||
+
+            'Impossible d’envoyer l’image.'
+
+          );
+
+        }
+
+
+        return {
+
+          path:
+            storagePath,
+
+          url:
+            getPublicImageUrl(
+              storagePath
+            )
+
+        };
+
+      });
+
+  });
+
+}
+
+
+/* =========================================
+   SAVE CATEGORY
+========================================= */
+
+function saveCategory(){
+
+  var categoryName =
+    categorySelect.value.trim();
+
+  var file =
+    selectedCategoryImageFile;
+
+
+  categoryMsg.textContent =
+    '';
+
+
+  if(!categoryName){
+
+    categoryMsg.textContent =
+      'Veuillez sélectionner une catégorie.';
+
+    return;
+
+  }
+
+
+  if(!file){
+
+    categoryMsg.textContent =
+      'Veuillez sélectionner une image.';
+
+    return;
+
+  }
+
+
+  saveCategoryBtn.disabled =
+    true;
+
+  saveCategoryBtn.textContent =
+    'Enregistrement...';
+
+
+  uploadCategoryImage(file)
+
+    .then(function(uploaded){
+
+      return fetch(
+
+        SUPABASE_URL +
+        '/rest/v1/categories' +
+        '?name=eq.' +
+        encodeURIComponent(
+          categoryName
+        ),
+
+        {
+
+          method:'PATCH',
+
+          headers:Object.assign(
+
+            {},
+
+            getHeaders(),
+
+            {
+
+              'Prefer':
+                'return=representation'
+
+            }
+
+          ),
+
+          body:JSON.stringify({
+
+            image_url:
+              uploaded.url
+
+          })
+
+        }
+
+      )
+
+      .then(function(response){
+
+        return response.text()
+          .then(function(text){
+
+            if(!response.ok){
+
+              throw new Error(
+
+                text ||
+
+                'Impossible d’enregistrer la catégorie.'
+
+              );
+
+            }
+
+
+            return true;
+
+          });
+
+      });
+
+    })
+
+    .then(function(){
+
+      categoryMsg.textContent =
+        'Image de la catégorie enregistrée avec succès.';
+
+
+      categoryImage.value =
+        '';
+
+      selectedCategoryImageFile =
+        null;
+
+
+      if(categoryPreviewObjectUrl){
+
+        URL.revokeObjectURL(
+          categoryPreviewObjectUrl
+        );
+
+        categoryPreviewObjectUrl =
+          null;
+
+      }
+
+
+      categoryImagePreview.src =
+        '';
+
+      categoryImagePreviewBox.classList.remove(
+        'active'
+      );
+
+      removeCategoryImageBtn.classList.remove(
+        'active'
+      );
+
+
+      return refreshCategories();
+
+    })
+
+    .then(function(){
+
+      showSelectedCategoryImage();
+
+    })
+
+    .catch(function(error){
+
+      console.error(error);
+
+      categoryMsg.textContent =
+        error.message ||
+        'Une erreur est survenue.';
+
+    })
+
+    .finally(function(){
+
+      saveCategoryBtn.disabled =
+        false;
+
+      saveCategoryBtn.textContent =
+        'Enregistrer l’image';
+
+    });
+
+}
+
+
+/* =========================================
+   CATEGORY SELECT
+========================================= */
+
+categorySelect.addEventListener(
+  'change',
+  function(){
+
+    categoryMsg.textContent =
+      '';
+
+    showSelectedCategoryImage();
+
+  }
+);
+
+
+/* =========================================
+   CATEGORY IMAGE SELECT
+========================================= */
+
+categoryImage.addEventListener(
+  'change',
+  function(){
+
+    var file =
+      categoryImage.files &&
+      categoryImage.files[0];
+
+
+    if(categoryPreviewObjectUrl){
+
+      URL.revokeObjectURL(
+        categoryPreviewObjectUrl
+      );
+
+      categoryPreviewObjectUrl =
+        null;
+
+    }
+
+
+    selectedCategoryImageFile =
+      null;
+
+
+    categoryImagePreviewBox.classList.remove(
+      'active'
+    );
+
+    removeCategoryImageBtn.classList.remove(
+      'active'
+    );
+
+
+    if(!file){
+
+      return;
+
+    }
+
+
+    if(
+      !file.type ||
+      file.type.indexOf('image/') !== 0
+    ){
+
+      categoryMsg.textContent =
+        'Veuillez sélectionner une image.';
+
+      categoryImage.value =
+        '';
+
+      return;
+
+    }
+
+
+    var maxSize =
+      50 * 1024 * 1024;
+
+
+    if(file.size > maxSize){
+
+      categoryMsg.textContent =
+        'L’image dépasse la limite de 50 MB.';
+
+      categoryImage.value =
+        '';
+
+      return;
+
+    }
+
+
+    selectedCategoryImageFile =
+      file;
+
+
+    categoryPreviewObjectUrl =
+      URL.createObjectURL(file);
+
+
+    categoryImagePreview.src =
+      categoryPreviewObjectUrl;
+
+
+    categoryImagePreviewBox.classList.add(
+      'active'
+    );
+
+    removeCategoryImageBtn.classList.add(
+      'active'
+    );
+
+
+    categoryMsg.textContent =
+      '';
+
+  }
+);
+
+
+/* =========================================
+   REMOVE CATEGORY IMAGE PREVIEW
+========================================= */
+
+removeCategoryImageBtn.addEventListener(
+  'click',
+  function(){
+
+    categoryImage.value =
+      '';
+
+    selectedCategoryImageFile =
+      null;
+
+
+    if(categoryPreviewObjectUrl){
+
+      URL.revokeObjectURL(
+        categoryPreviewObjectUrl
+      );
+
+      categoryPreviewObjectUrl =
+        null;
+
+    }
+
+
+    categoryImagePreview.src =
+      '';
+
+    categoryImagePreviewBox.classList.remove(
+      'active'
+    );
+
+    removeCategoryImageBtn.classList.remove(
+      'active'
+    );
+
+  }
+);
+
+
+/* =========================================
+   SAVE CATEGORY BUTTON
+========================================= */
+
+saveCategoryBtn.addEventListener(
+  'click',
+  function(){
+
+    saveCategory();
+
+  }
+);
 
 
 /* =========================================
@@ -2922,8 +3882,10 @@ function createProduct(
         getHeaders(),
 
         {
+
           'Prefer':
             'return=representation'
+
         }
 
       ),
@@ -3246,6 +4208,8 @@ adminUnlock.addEventListener(
 
 
       refreshProducts();
+
+      refreshCategories();
 
     })
 
@@ -3635,6 +4599,8 @@ updateCartCount();
 renderCart();
 
 refreshProducts();
+
+refreshCategories();
 
 </script>
 
