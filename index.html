@@ -19,16 +19,39 @@
     padding-top:env(safe-area-inset-top,0px);
     padding-bottom:env(safe-area-inset-bottom,0px);
   }
+
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --cream:#1B1A18; --beige:#242220; --nude:#5FBFAE; --brown:#EDE8E0; --gold:#4FA695; --white:#211F1D; --line:#33312D;
+      --cream:#1B1A18;
+      --beige:#242220;
+      --nude:#5FBFAE;
+      --brown:#EDE8E0;
+      --gold:#4FA695;
+      --white:#211F1D;
+      --line:#33312D;
     }
   }
+
   :root[data-theme="dark"]{
-    --cream:#1B1A18; --beige:#242220; --nude:#5FBFAE; --brown:#EDE8E0; --gold:#4FA695; --white:#211F1D; --line:#33312D;
+    --cream:#1B1A18;
+    --beige:#242220;
+    --nude:#5FBFAE;
+    --brown:#EDE8E0;
+    --gold:#4FA695;
+    --white:#211F1D;
+    --line:#33312D;
   }
-  html{scroll-padding-top:env(safe-area-inset-top,0px);}
-  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{
+    scroll-padding-top:env(safe-area-inset-top,0px);
+  }
+
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
   body{
     background:var(--cream);
     color:var(--brown);
@@ -37,125 +60,421 @@
     line-height:1.6;
     overflow-x:hidden;
   }
-  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:700;letter-spacing:.01em;}
-  a{color:inherit;text-decoration:none;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  h1,h2,h3{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    letter-spacing:.01em;
+  }
+
+  a{
+    color:inherit;
+    text-decoration:none;
+  }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
 
   header{
-    position:sticky;top:env(safe-area-inset-top,0px);z-index:10;
-    background:var(--cream);border-bottom:1px solid var(--line);
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    z-index:10;
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 32px;max-width:1120px;margin:0 auto;}
-  .logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;font-style:italic;letter-spacing:.03em;}
-  .navlinks{display:flex;gap:36px;font-size:14px;}
-  .navlinks a{opacity:.75;transition:opacity .2s;}
-  .navlinks a:hover{opacity:1;}
-  .cart{font-size:14px;border:1px solid var(--brown);border-radius:2px;padding:8px 18px;}
 
-  .hero{padding:44px 0 8px;}
-  .hero .wrap{text-align:center;}
-  .hero-eyebrow{font-size:13px;color:var(--nude);margin-bottom:10px;}
-  .hero h1{font-size:clamp(28px,4vw,40px);line-height:1.1;max-width:20ch;margin:0 auto;}
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 32px;
+    max-width:1120px;
+    margin:0 auto;
+  }
+
+  .logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px;
+    font-weight:700;
+    font-style:italic;
+    letter-spacing:.03em;
+  }
+
+  .navlinks{
+    display:flex;
+    gap:36px;
+    font-size:14px;
+  }
+
+  .navlinks a{
+    opacity:.75;
+    transition:opacity .2s;
+  }
+
+  .navlinks a:hover{
+    opacity:1;
+  }
+
+  .cart{
+    font-size:14px;
+    border:1px solid var(--brown);
+    border-radius:2px;
+    padding:8px 18px;
+  }
+
+  .hero{
+    padding:44px 0 8px;
+  }
+
+  .hero .wrap{
+    text-align:center;
+  }
+
+  .hero-eyebrow{
+    font-size:13px;
+    color:var(--nude);
+    margin-bottom:10px;
+  }
+
+  .hero h1{
+    font-size:clamp(28px,4vw,40px);
+    line-height:1.1;
+    max-width:20ch;
+    margin:0 auto;
+  }
+
   .btn{
-    display:inline-block;background:var(--brown);color:var(--cream);
-    padding:15px 34px;font-size:14px;font-weight:600;letter-spacing:.02em;border-radius:2px;
-    transition:transform .25s ease, background .25s ease;
+    display:inline-block;
+    background:var(--brown);
+    color:var(--cream);
+    padding:15px 34px;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:.02em;
+    border-radius:2px;
+    transition:transform .25s ease,background .25s ease;
   }
-  .btn:hover{transform:translateY(-2px);}
-  .btn-ghost{background:transparent;color:var(--brown);border:1px solid var(--brown);margin-left:14px;}
 
-  section{padding:80px 0;}
-  .cats{border-top:1px solid var(--line);padding-top:56px;}
-  .cats-head{text-align:center;margin-bottom:40px;}
-  .cats-head h2{font-size:clamp(30px,3.5vw,42px);}
-  .cats-head p{opacity:.65;font-size:15px;margin-top:10px;}
-  .catgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .btn:hover{
+    transform:translateY(-2px);
+  }
+
+  .btn-ghost{
+    background:transparent;
+    color:var(--brown);
+    border:1px solid var(--brown);
+    margin-left:14px;
+  }
+
+  section{
+    padding:80px 0;
+  }
+
+  .cats{
+    border-top:1px solid var(--line);
+    padding-top:56px;
+  }
+
+  .cats-head{
+    text-align:center;
+    margin-bottom:40px;
+  }
+
+  .cats-head h2{
+    font-size:clamp(30px,3.5vw,42px);
+  }
+
+  .cats-head p{
+    opacity:.65;
+    font-size:15px;
+    margin-top:10px;
+  }
+
+  .catgrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+
   .cat{
-    background:var(--beige);border-radius:6px;padding:0;aspect-ratio:3/4;
-    display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;
+    background:var(--beige);
+    border-radius:6px;
+    padding:0;
+    aspect-ratio:3/4;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    position:relative;
+    overflow:hidden;
     transition:transform .25s ease;
   }
-  .cat:hover{transform:translateY(-4px);}
+
+  .cat:hover{
+    transform:translateY(-4px);
+  }
+
   .cat::before{
-    content:"";position:absolute;top:24px;left:24px;width:34px;height:34px;
-    border:1px solid var(--gold);border-radius:50%;
+    content:"";
+    position:absolute;
+    top:24px;
+    left:24px;
+    width:34px;
+    height:34px;
+    border:1px solid var(--gold);
+    border-radius:50%;
   }
-  .cat .catbody{padding:26px 26px 30px;background:linear-gradient(0deg,var(--cream) 0%,transparent 100%);}
-  .cat h3{font-size:24px;font-weight:700;font-style:italic;}
-  .cat p{font-size:13px;opacity:.65;margin-top:6px;}
-  .cat.big{grid-column:span 1;}
 
-  .story{border-top:1px solid var(--line);}
-  .story .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center;}
-  .story-panel{aspect-ratio:1/1;background:var(--beige);border-radius:4px;}
-  .story h2{font-size:clamp(30px,3.5vw,42px);max-width:14ch;margin-bottom:22px;}
-  .story p{max-width:48ch;opacity:.8;font-size:16px;}
+  .cat .catbody{
+    padding:26px 26px 30px;
+    background:linear-gradient(0deg,var(--cream) 0%,transparent 100%);
+  }
 
-  .products{border-top:1px solid var(--line);}
-  .prod-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:44px;}
-  .prod-head h2{font-size:clamp(28px,3.5vw,38px);}
-  .prod-head a{font-size:13px;border-bottom:1px solid var(--brown);padding-bottom:3px;}
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  .cat h3{
+    font-size:24px;
+    font-weight:700;
+    font-style:italic;
+  }
+
+  .cat p{
+    font-size:13px;
+    opacity:.65;
+    margin-top:6px;
+  }
+
+  .cat.big{
+    grid-column:span 1;
+  }
+
+  .story{
+    border-top:1px solid var(--line);
+  }
+
+  .story .wrap{
+    display:grid;
+    grid-template-columns:.85fr 1.15fr;
+    gap:64px;
+    align-items:center;
+  }
+
+  .story-panel{
+    aspect-ratio:1/1;
+    background:var(--beige);
+    border-radius:4px;
+  }
+
+  .story h2{
+    font-size:clamp(30px,3.5vw,42px);
+    max-width:14ch;
+    margin-bottom:22px;
+  }
+
+  .story p{
+    max-width:48ch;
+    opacity:.8;
+    font-size:16px;
+  }
+
+  .products{
+    border-top:1px solid var(--line);
+  }
+
+  .prod-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:44px;
+  }
+
+  .prod-head h2{
+    font-size:clamp(28px,3.5vw,38px);
+  }
+
+  .prod-head a{
+    font-size:13px;
+    border-bottom:1px solid var(--brown);
+    padding-bottom:3px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:28px;
+  }
+
   .card{}
-  .card .thumb{aspect-ratio:3/4;background:var(--beige);border-radius:3px;margin-bottom:16px;position:relative;overflow:hidden;}
-  .card .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,transparent 60%,rgba(59,42,32,.06));}
-  .card h4{font-size:15px;font-weight:600;margin-bottom:4px;}
-  .card .price{font-size:14px;font-weight:600;color:var(--nude);}
 
-  .cta{border-top:1px solid var(--line);text-align:center;padding:100px 0;}
-  .cta h2{font-size:clamp(32px,4vw,46px);max-width:16ch;margin:0 auto 30px;}
-
-  footer{border-top:1px solid var(--line);padding:50px 0;font-size:13px;opacity:.65;}
-  footer .wrap{display:flex;justify-content:space-between;}
-
-  .wa-note{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:13px;color:var(--nude);}
-  .wa-float{
-    position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom,0px));
-    width:58px;height:58px;border-radius:50%;background:var(--whatsapp);
-    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.18);
-    z-index:20;transition:transform .2s ease;
+  .card .thumb{
+    aspect-ratio:3/4;
+    background:var(--beige);
+    border-radius:3px;
+    margin-bottom:16px;
+    position:relative;
+    overflow:hidden;
   }
-  .wa-float:hover{transform:scale(1.06);}
-  .wa-float svg{width:28px;height:28px;}
+
+  .card .thumb::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg,transparent 60%,rgba(59,42,32,.06));
+  }
+
+  .card h4{
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+
+  .card .price{
+    font-size:14px;
+    font-weight:600;
+    color:var(--nude);
+  }
+
+  .cta{
+    border-top:1px solid var(--line);
+    text-align:center;
+    padding:100px 0;
+  }
+
+  .cta h2{
+    font-size:clamp(32px,4vw,46px);
+    max-width:16ch;
+    margin:0 auto 30px;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:50px 0;
+    font-size:13px;
+    opacity:.65;
+  }
+
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+  }
+
+  .wa-note{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:16px;
+    font-size:13px;
+    color:var(--nude);
+  }
+
+  .wa-float{
+    position:fixed;
+    right:22px;
+    bottom:calc(22px + env(safe-area-inset-bottom,0px));
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    background:var(--whatsapp);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.18);
+    z-index:20;
+    transition:transform .2s ease;
+  }
+
+  .wa-float:hover{
+    transform:scale(1.06);
+  }
+
+  .wa-float svg{
+    width:28px;
+    height:28px;
+  }
 
   @media (max-width:860px){
-    .nav{padding:18px 22px;}
-    .navlinks{display:none;}
-    .wrap{padding:0 22px;}
-    .hero{padding:64px 0 56px;}
-    .hero .wrap{grid-template-columns:1fr;gap:36px;}
-    .hero-visual{order:-1;aspect-ratio:16/10;}
-    .catgrid{grid-template-columns:repeat(2,1fr);}
-    .story .wrap{grid-template-columns:1fr;}
-    .story-panel{order:-1;aspect-ratio:16/9;}
-    .grid{grid-template-columns:repeat(2,1fr);gap:20px;}
+    .nav{
+      padding:18px 22px;
+    }
+
+    .navlinks{
+      display:none;
+    }
+
+    .wrap{
+      padding:0 22px;
+    }
+
+    .hero{
+      padding:64px 0 56px;
+    }
+
+    .hero .wrap{
+      grid-template-columns:1fr;
+      gap:36px;
+    }
+
+    .hero-visual{
+      order:-1;
+      aspect-ratio:16/10;
+    }
+
+    .catgrid{
+      grid-template-columns:repeat(2,1fr);
+    }
+
+    .story .wrap{
+      grid-template-columns:1fr;
+    }
+
+    .story-panel{
+      order:-1;
+      aspect-ratio:16/9;
+    }
+
+    .grid{
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+    }
   }
+
   @media (prefers-reduced-motion:reduce){
-    .btn,.cat{transition:none;}
+    .btn,.cat{
+      transition:none;
+    }
   }
 </style>
 </head>
+
 <body>
 
 <header>
   <nav class="nav">
     <div class="logo">Fenva Beauty</div>
+
     <div class="navlinks">
       <a href="#cats">Catégories</a>
       <a href="#products">Nouveautés</a>
       <a href="#story">La marque</a>
     </div>
+
     <a class="cart" href="#">Panier (0)</a>
   </nav>
 </header>
 
 <main>
+
   <section class="hero">
     <div class="wrap">
       <div class="hero-eyebrow">Cosmétiques premium</div>
+
       <h1>Le soin devient un rituel.</h1>
+
       <div class="wa-note">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--whatsapp)"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--whatsapp)">
+          <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/>
+        </svg>
+
         Commandes prises sur WhatsApp — livraison disponible
       </div>
     </div>
@@ -163,86 +482,240 @@
 
   <section class="cats" id="cats">
     <div class="wrap">
+
       <div class="cats-head">
         <h2>Explorer par catégorie</h2>
         <p>Six univers, une même exigence de qualité.</p>
       </div>
+
       <div class="catgrid">
-        <a class="cat" href="#products"><div class="catbody"><h3>Soins du visage</h3><p>Nettoyants, sérums, crèmes</p></div></a>
-        <a class="cat" href="#products"><div class="catbody"><h3>Soins du corps</h3><p>Baumes, huiles, gommages</p></div></a>
-        <a class="cat" href="#products"><div class="catbody"><h3>Soins des cheveux</h3><p>Shampoings, masques, huiles</p></div></a>
-        <a class="cat" href="#products"><div class="catbody"><h3>Parfums</h3><p>Eaux de parfum & extraits</p></div></a>
-        <a class="cat" href="#products"><div class="catbody"><h3>Maquillage</h3><p>Teint, lèvres, regard</p></div></a>
-        <a class="cat" href="#products"><div class="catbody"><h3>Accessoires</h3><p>Pinceaux, trousses, miroirs</p></div></a>
+
+        <a class="cat" href="#products">
+          <div class="catbody">
+            <h3>Soins du visage</h3>
+            <p>Nettoyants, sérums, crèmes</p>
+          </div>
+        </a>
+
+        <a class="cat" href="#products">
+          <div class="catbody">
+            <h3>Soins du corps</h3>
+            <p>Baumes, huiles, gommages</p>
+          </div>
+        </a>
+
+        <a class="cat" href="#products">
+          <div class="catbody">
+            <h3>Soins des cheveux</h3>
+            <p>Shampoings, masques, huiles</p>
+          </div>
+        </a>
+
+        <a class="cat" href="#products">
+          <div class="catbody">
+            <h3>Parfums</h3>
+            <p>Eaux de parfum & extraits</p>
+          </div>
+        </a>
+
+        <a class="cat" href="#products">
+          <div class="catbody">
+            <h3>Maquillage</h3>
+            <p>Teint, lèvres, regard</p>
+          </div>
+        </a>
+
+        <a class="cat" href="#products">
+          <div class="catbody">
+            <h3>Accessoires</h3>
+            <p>Pinceaux, trousses, miroirs</p>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
 
   <section class="products" id="products">
     <div class="wrap">
+
       <div class="prod-head">
         <h2>Nouveautés</h2>
         <a href="#">Voir tout</a>
       </div>
+
       <div class="grid" id="productGrid"></div>
-      <p id="emptyMsg" style="display:none;text-align:center;opacity:.6;font-size:14px;">Aucun produit pour l'instant.</p>
+
+      <p id="emptyMsg" style="display:none;text-align:center;opacity:.6;font-size:14px;">
+        Aucun produit pour l'instant.
+      </p>
+
     </div>
   </section>
 
   <section class="story" id="story">
     <div class="wrap">
+
       <div class="story-panel"></div>
+
       <div>
         <h2>Une beauté sans artifice.</h2>
-        <p>Fenva Beauty sélectionne des produits simples, efficaces, formulés pour être utilisés au quotidien. Chaque référence est choisie avec la même exigence : la qualité avant la quantité.</p>
+
+        <p>
+          Fenva Beauty sélectionne des produits simples, efficaces,
+          formulés pour être utilisés au quotidien. Chaque référence
+          est choisie avec la même exigence : la qualité avant la quantité.
+        </p>
       </div>
+
     </div>
   </section>
 
   <section class="cta">
     <div class="wrap">
+
       <h2>Prête à commencer votre rituel ?</h2>
-      <a class="btn" href="#products">Voir la boutique</a>
+
+      <a class="btn" href="#products">
+        Voir la boutique
+      </a>
+
     </div>
   </section>
+
 </main>
 
 <footer>
   <div class="wrap">
     <span>Fenva Beauty</span>
-    <span>© 2026 · <a href="#" id="adminLink" style="opacity:.6;">Administration</a></span>
+
+    <span>
+      © 2026 ·
+      <a href="#" id="adminLink" style="opacity:.6;">
+        Administration
+      </a>
+    </span>
   </div>
 </footer>
 
-<div id="adminOverlay" style="display:none;position:fixed;inset:0;background:var(--cream);z-index:50;overflow-y:auto;">
-  <div id="adminLock" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;">
+<div id="adminOverlay"
+     style="display:none;position:fixed;inset:0;background:var(--cream);z-index:50;overflow-y:auto;">
+
+  <!-- CONNEXION ADMIN -->
+  <div id="adminLock"
+       style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;">
+
     <div style="text-align:center;max-width:320px;width:100%;">
-      <h2 style="font-size:28px;margin-bottom:4px;">Administration</h2>
-      <p style="opacity:.6;font-size:14px;margin-bottom:20px;">Fenva Beauty</p>
-      <input id="adminCode" type="password" placeholder="Code d'accès"
-        style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:4px;background:var(--white);font-family:'Jost',sans-serif;font-size:14px;text-align:center;">
-      <button id="adminUnlock" class="btn" style="width:100%;margin-top:14px;border:none;cursor:pointer;">Entrer</button>
-      <div id="adminMsg" style="font-size:13px;color:var(--gold);margin-top:10px;min-height:16px;"></div>
-      <a href="#" id="adminClose1" style="display:inline-block;margin-top:18px;font-size:13px;opacity:.6;">Fermer</a>
+
+      <h2 style="font-size:28px;margin-bottom:4px;">
+        Administration
+      </h2>
+
+      <p style="opacity:.6;font-size:14px;margin-bottom:20px;">
+        Fenva Beauty
+      </p>
+
+      <input
+        id="adminEmail"
+        type="email"
+        placeholder="Adresse e-mail"
+        autocomplete="username"
+        style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:4px;background:var(--white);font-family:'Jost',sans-serif;font-size:14px;text-align:center;"
+      >
+
+      <input
+        id="adminPassword"
+        type="password"
+        placeholder="Mot de passe"
+        autocomplete="current-password"
+        style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:4px;background:var(--white);font-family:'Jost',sans-serif;font-size:14px;text-align:center;margin-top:10px;"
+      >
+
+      <button
+        id="adminUnlock"
+        class="btn"
+        style="width:100%;margin-top:14px;border:none;cursor:pointer;"
+      >
+        Se connecter
+      </button>
+
+      <div
+        id="adminMsg"
+        style="font-size:13px;color:var(--gold);margin-top:10px;min-height:16px;"
+      ></div>
+
+      <a
+        href="#"
+        id="adminClose1"
+        style="display:inline-block;margin-top:18px;font-size:13px;opacity:.6;"
+      >
+        Fermer
+      </a>
+
     </div>
   </div>
 
-  <div id="adminPanel" style="display:none;padding:48px 24px 80px;max-width:720px;margin:0 auto;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
-      <h2 style="font-size:28px;">Gestion des produits</h2>
-      <a href="#" id="adminClose2" style="font-size:13px;opacity:.6;">Fermer</a>
-    </div>
-    <p style="opacity:.6;font-size:14px;margin-bottom:30px;">Les produits ajoutés ici apparaissent sur la boutique, dans ce même navigateur.</p>
 
-    <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:24px;margin-bottom:26px;">
-      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Nom du produit</label>
-      <input id="pname" type="text" placeholder="Ex. Sérum Éclat"
-        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;">
-      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">Prix</label>
-      <input id="pprice" type="text" placeholder="Ex. 1 200 HTG"
-        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;">
-      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">Catégorie</label>
-      <select id="pcat" style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;">
+  <!-- PANNEAU ADMIN -->
+  <div
+    id="adminPanel"
+    style="display:none;padding:48px 24px 80px;max-width:720px;margin:0 auto;"
+  >
+
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+
+      <h2 style="font-size:28px;">
+        Gestion des produits
+      </h2>
+
+      <a
+        href="#"
+        id="adminClose2"
+        style="font-size:13px;opacity:.6;"
+      >
+        Fermer
+      </a>
+
+    </div>
+
+    <p style="opacity:.6;font-size:14px;margin-bottom:30px;">
+      Les produits ajoutés ici apparaissent sur la boutique, dans ce même navigateur.
+    </p>
+
+    <div
+      style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:24px;margin-bottom:26px;"
+    >
+
+      <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">
+        Nom du produit
+      </label>
+
+      <input
+        id="pname"
+        type="text"
+        placeholder="Ex. Sérum Éclat"
+        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;"
+      >
+
+      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">
+        Prix
+      </label>
+
+      <input
+        id="pprice"
+        type="text"
+        placeholder="Ex. 1 200 HTG"
+        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;"
+      >
+
+      <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 6px;">
+        Catégorie
+      </label>
+
+      <select
+        id="pcat"
+        style="width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:4px;background:var(--cream);font-family:'Jost',sans-serif;font-size:14px;"
+      >
         <option>Soins du visage</option>
         <option>Soins du corps</option>
         <option>Soins des cheveux</option>
@@ -250,138 +723,813 @@
         <option>Maquillage</option>
         <option>Accessoires</option>
       </select>
-      <button id="addProductBtn" class="btn" style="margin-top:18px;border:none;cursor:pointer;">Ajouter le produit</button>
-      <div id="formMsg" style="font-size:13px;color:var(--gold);margin-top:8px;min-height:16px;"></div>
+
+      <button
+        id="addProductBtn"
+        class="btn"
+        style="margin-top:18px;border:none;cursor:pointer;"
+      >
+        Ajouter le produit
+      </button>
+
+      <div
+        id="formMsg"
+        style="font-size:13px;color:var(--gold);margin-top:8px;min-height:16px;"
+      ></div>
+
     </div>
 
-    <h3 style="font-size:18px;margin-bottom:14px;">Produits actuels</h3>
-    <div id="productList" style="display:flex;flex-direction:column;gap:10px;"></div>
+    <h3 style="font-size:18px;margin-bottom:14px;">
+      Produits actuels
+    </h3>
+
+    <div
+      id="productList"
+      style="display:flex;flex-direction:column;gap:10px;"
+    ></div>
+
     <p style="font-size:13px;opacity:.6;margin-top:20px;line-height:1.5;">
       Les produits sont enregistrés dans la base Supabase de la boutique et visibles par tous les visiteurs.
     </p>
+
   </div>
 </div>
 
-<a class="wa-float" href="https://wa.me/50955744295?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande" target="_blank" rel="noopener" aria-label="Commander sur WhatsApp">
-  <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
+
+<a
+  class="wa-float"
+  href="https://wa.me/50955744295?text=Bonjour%2C%20je%20souhaite%20passer%20une%20commande"
+  target="_blank"
+  rel="noopener"
+  aria-label="Commander sur WhatsApp"
+>
+
+  <svg viewBox="0 0 24 24" fill="#FFFFFF">
+    <path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-1.3-.6-2.1-1.1-3-2.5-.2-.4.2-.4.5-1.2.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/>
+  </svg>
+
 </a>
+
 
 <script>
 (function(){
-  var SUPABASE_URL = 'https://pgiualcqiiilgmjqdwlfq.supabase.co';
-  var SUPABASE_KEY = 'sb_publishable_KCYLHW-qWK7QVmLyNw5DlA_KRvSmNtB';
-  var TABLE = 'produits';
-  var headers = {
-    'apikey': SUPABASE_KEY,
-    'Authorization': 'Bearer ' + SUPABASE_KEY,
-    'Content-Type': 'application/json'
-  };
 
-  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  var SUPABASE_URL =
+    'https://pgiualcqiiilgmjqdwlfq.supabase.co';
+
+  var SUPABASE_KEY =
+    'sb_publishable_KCYLHW-qWK7QVmLyNw5DlA_KRvSmNtB';
+
+  var TABLE = 'produits';
+
+  /*
+   * Le token est conservé uniquement en mémoire
+   * pendant la session de cette page.
+   */
+  var accessToken = null;
+
+
+  function getHeaders(){
+
+    return {
+      'apikey': SUPABASE_KEY,
+      'Authorization':
+        'Bearer ' + (accessToken || SUPABASE_KEY),
+      'Content-Type': 'application/json'
+    };
+
+  }
+
+
+  function esc(s){
+
+    return String(s).replace(/[&<>"]/g,function(c){
+
+      return {
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;'
+      }[c];
+
+    });
+
+  }
+
+
+  /* =========================
+     PRODUITS PUBLICS
+     ========================= */
 
   function fetchProducts(){
-    return fetch(SUPABASE_URL + '/rest/v1/' + TABLE + '?select=*&order=created_at.desc', { headers: headers })
-      .then(function(r){ if(!r.ok) throw new Error('fetch failed'); return r.json(); })
-      .catch(function(){ return null; });
+
+    return fetch(
+      SUPABASE_URL +
+      '/rest/v1/' +
+      TABLE +
+      '?select=*&order=created_at.desc',
+      {
+        headers:getHeaders()
+      }
+    )
+
+    .then(function(r){
+
+      if(!r.ok){
+        throw new Error('fetch failed');
+      }
+
+      return r.json();
+
+    })
+
+    .catch(function(){
+
+      return null;
+
+    });
+
   }
-  function createProduct(p){
-    return fetch(SUPABASE_URL + '/rest/v1/' + TABLE, {
-      method: 'POST',
-      headers: Object.assign({}, headers, { 'Prefer': 'return=representation' }),
-      body: JSON.stringify([p])
-    }).then(function(r){ return r.ok; }).catch(function(){ return false; });
-  }
-  function deleteProduct(id){
-    return fetch(SUPABASE_URL + '/rest/v1/' + TABLE + '?id=eq.' + id, {
-      method: 'DELETE',
-      headers: headers
-    }).then(function(r){ return r.ok; }).catch(function(){ return false; });
-  }
+
 
   function render(){
-    var grid = document.getElementById('productGrid');
-    var empty = document.getElementById('emptyMsg');
-    if(!grid) return;
+
+    var grid =
+      document.getElementById('productGrid');
+
+    var empty =
+      document.getElementById('emptyMsg');
+
+    if(!grid){
+      return;
+    }
+
     fetchProducts().then(function(products){
+
       if(products === null){
-        grid.innerHTML = '<p style="opacity:.6;font-size:14px;">Connexion à la base impossible pour le moment.</p>';
+
+        grid.innerHTML =
+          '<p style="opacity:.6;font-size:14px;">Connexion à la base impossible pour le moment.</p>';
+
         return;
       }
-      if(!products.length){ grid.innerHTML=''; if(empty) empty.style.display='block'; return; }
-      if(empty) empty.style.display='none';
-      grid.innerHTML = products.map(function(p){
-        return '<div class="card"><div class="thumb"></div><h4>'+esc(p.name)+'</h4><div class="price">'+esc(p.price)+'</div></div>';
-      }).join('');
+
+
+      if(!products.length){
+
+        grid.innerHTML = '';
+
+        if(empty){
+          empty.style.display = 'block';
+        }
+
+        return;
+      }
+
+
+      if(empty){
+        empty.style.display = 'none';
+      }
+
+
+      grid.innerHTML =
+        products.map(function(p){
+
+          return '<div class="card">' +
+            '<div class="thumb"></div>' +
+            '<h4>' +
+            esc(p.name) +
+            '</h4>' +
+            '<div class="price">' +
+            esc(p.price) +
+            '</div>' +
+            '</div>';
+
+        }).join('');
+
     });
+
   }
+
+
   render();
 
-  // --- Administration (intégrée à la page) ---
-  var ADMIN_CODE = 'fenva2026';
-  var overlay = document.getElementById('adminOverlay');
-  var lockView = document.getElementById('adminLock');
-  var panelView = document.getElementById('adminPanel');
 
-  function openAdmin(){ overlay.style.display = 'block'; document.body.style.overflow='hidden'; }
+  /* =========================
+     ADMINISTRATION
+     ========================= */
+
+  var overlay =
+    document.getElementById('adminOverlay');
+
+  var lockView =
+    document.getElementById('adminLock');
+
+  var panelView =
+    document.getElementById('adminPanel');
+
+
+  function openAdmin(){
+
+    overlay.style.display = 'block';
+
+    document.body.style.overflow = 'hidden';
+
+  }
+
+
   function closeAdmin(){
-    overlay.style.display = 'none'; document.body.style.overflow='';
-    lockView.style.display='flex'; panelView.style.display='none';
-    document.getElementById('adminCode').value='';
-  }
-  function renderAdminList(){
-    var list = document.getElementById('productList');
-    list.innerHTML = '<p style="opacity:.6;font-size:14px;">Chargement…</p>';
-    fetchProducts().then(function(products){
-      if(products === null){
-        list.innerHTML = '<p style="opacity:.6;font-size:14px;">Connexion à la base impossible.</p>';
-        return;
-      }
-      if(!products.length){ list.innerHTML = '<p style="opacity:.6;font-size:14px;">Aucun produit pour l\'instant.</p>'; return; }
-      list.innerHTML = products.map(function(p){
-        return '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:var(--white);">'+
-          '<div style="font-size:14px;"><b>'+esc(p.name)+'</b> — '+esc(p.price)+
-          '<div style="font-size:12px;opacity:.6;">'+esc(p.cat||'')+'</div></div>'+
-          '<button data-id="'+p.id+'" class="adminDelBtn" style="background:#B4453A;color:#fff;border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;">Supprimer</button></div>';
-      }).join('');
-      Array.prototype.forEach.call(list.querySelectorAll('.adminDelBtn'), function(btn){
-        btn.addEventListener('click', function(){
-          var id = btn.getAttribute('data-id');
-          btn.textContent = '...';
-          deleteProduct(id).then(function(){ renderAdminList(); render(); });
-        });
-      });
+
+    logoutAdmin().then(function(){
+
+      overlay.style.display = 'none';
+
+      document.body.style.overflow = '';
+
+      lockView.style.display = 'flex';
+
+      panelView.style.display = 'none';
+
+      document.getElementById('adminEmail').value = '';
+
+      document.getElementById('adminPassword').value = '';
+
+      document.getElementById('adminMsg').textContent = '';
+
+      document.getElementById('formMsg').textContent = '';
+
     });
+
   }
 
-  document.getElementById('adminLink').addEventListener('click', function(e){ e.preventDefault(); openAdmin(); });
-  document.getElementById('adminClose1').addEventListener('click', function(e){ e.preventDefault(); closeAdmin(); });
-  document.getElementById('adminClose2').addEventListener('click', function(e){ e.preventDefault(); closeAdmin(); });
-  document.getElementById('adminUnlock').addEventListener('click', function(){
-    var val = document.getElementById('adminCode').value.trim();
-    if(val === ADMIN_CODE){
-      lockView.style.display='none'; panelView.style.display='block'; renderAdminList();
-    } else {
-      document.getElementById('adminMsg').textContent = 'Code incorrect.';
-    }
-  });
-  document.getElementById('adminCode').addEventListener('keydown', function(e){
-    if(e.key === 'Enter') document.getElementById('adminUnlock').click();
-  });
-  document.getElementById('addProductBtn').addEventListener('click', function(){
-    var name = document.getElementById('pname').value.trim();
-    var price = document.getElementById('pprice').value.trim();
-    var cat = document.getElementById('pcat').value;
-    var msg = document.getElementById('formMsg');
-    if(!name || !price){ msg.textContent = 'Nom et prix sont requis.'; return; }
-    msg.textContent = 'Ajout en cours…';
-    createProduct({ name: name, price: price, cat: cat }).then(function(ok){
-      msg.textContent = ok ? 'Produit ajouté.' : 'Erreur : vérifie la connexion à la base.';
-      if(ok){
-        document.getElementById('pname').value=''; document.getElementById('pprice').value='';
-        renderAdminList(); render();
+
+  /* =========================
+     CONNEXION SUPABASE AUTH
+     ========================= */
+
+  function loginAdmin(email,password){
+
+    return fetch(
+      SUPABASE_URL +
+      '/auth/v1/token?grant_type=password',
+      {
+        method:'POST',
+
+        headers:{
+          'apikey':SUPABASE_KEY,
+          'Content-Type':'application/json'
+        },
+
+        body:JSON.stringify({
+          email:email,
+          password:password
+        })
+
       }
+    )
+
+    .then(function(r){
+
+      return r.json().then(function(data){
+
+        return {
+          ok:r.ok,
+          data:data
+        };
+
+      });
+
+    })
+
+    .then(function(result){
+
+      if(
+        !result.ok ||
+        !result.data.access_token
+      ){
+
+        throw new Error(
+          result.data.error_description ||
+          result.data.msg ||
+          'Connexion impossible.'
+        );
+
+      }
+
+      accessToken =
+        result.data.access_token;
+
+      return true;
+
     });
-  });
+
+  }
+
+
+  /* =========================
+     DÉCONNEXION
+     ========================= */
+
+  function logoutAdmin(){
+
+    if(!accessToken){
+
+      return Promise.resolve();
+
+    }
+
+    var token =
+      accessToken;
+
+    accessToken = null;
+
+    return fetch(
+      SUPABASE_URL +
+      '/auth/v1/logout',
+      {
+        method:'POST',
+
+        headers:{
+          'apikey':SUPABASE_KEY,
+          'Authorization':'Bearer ' + token
+        }
+      }
+    )
+
+    .catch(function(){});
+
+  }
+
+
+  /* =========================
+     AJOUTER UN PRODUIT
+     ========================= */
+
+  function createProduct(product){
+
+    if(!accessToken){
+
+      return Promise.resolve(false);
+
+    }
+
+    return fetch(
+      SUPABASE_URL +
+      '/rest/v1/' +
+      TABLE,
+      {
+        method:'POST',
+
+        headers:Object.assign(
+          {},
+          getHeaders(),
+          {
+            'Prefer':'return=representation'
+          }
+        ),
+
+        body:JSON.stringify([product])
+
+      }
+    )
+
+    .then(function(r){
+
+      return r.ok;
+
+    })
+
+    .catch(function(){
+
+      return false;
+
+    });
+
+  }
+
+
+  /* =========================
+     SUPPRIMER UN PRODUIT
+     ========================= */
+
+  function deleteProduct(id){
+
+    if(!accessToken){
+
+      return Promise.resolve(false);
+
+    }
+
+    return fetch(
+      SUPABASE_URL +
+      '/rest/v1/' +
+      TABLE +
+      '?id=eq.' +
+      encodeURIComponent(id),
+      {
+        method:'DELETE',
+        headers:getHeaders()
+      }
+    )
+
+    .then(function(r){
+
+      return r.ok;
+
+    })
+
+    .catch(function(){
+
+      return false;
+
+    });
+
+  }
+
+
+  /* =========================
+     LISTE ADMIN
+     ========================= */
+
+  function renderAdminList(){
+
+    var list =
+      document.getElementById('productList');
+
+    list.innerHTML =
+      '<p style="opacity:.6;font-size:14px;">Chargement…</p>';
+
+
+    fetchProducts().then(function(products){
+
+      if(products === null){
+
+        list.innerHTML =
+          '<p style="opacity:.6;font-size:14px;">Connexion à la base impossible.</p>';
+
+        return;
+
+      }
+
+
+      if(!products.length){
+
+        list.innerHTML =
+          '<p style="opacity:.6;font-size:14px;">Aucun produit pour l\'instant.</p>';
+
+        return;
+
+      }
+
+
+      list.innerHTML =
+        products.map(function(p){
+
+          return (
+
+            '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:6px;padding:12px 16px;background:var(--white);">' +
+
+              '<div style="font-size:14px;">' +
+
+                '<b>' +
+                esc(p.name) +
+                '</b> — ' +
+                esc(p.price) +
+
+                '<div style="font-size:12px;opacity:.6;">' +
+                esc(p.cat || '') +
+                '</div>' +
+
+              '</div>' +
+
+              '<button ' +
+                'data-id="' + p.id + '" ' +
+                'class="adminDelBtn" ' +
+                'style="background:#B4453A;color:#fff;border:none;border-radius:4px;padding:8px 14px;font-size:13px;cursor:pointer;">' +
+                'Supprimer' +
+              '</button>' +
+
+            '</div>'
+
+          );
+
+        }).join('');
+
+
+      Array.prototype.forEach.call(
+
+        list.querySelectorAll('.adminDelBtn'),
+
+        function(btn){
+
+          btn.addEventListener(
+            'click',
+            function(){
+
+              if(!accessToken){
+
+                return;
+
+              }
+
+
+              var id =
+                btn.getAttribute('data-id');
+
+
+              btn.textContent =
+                '...';
+
+
+              deleteProduct(id)
+                .then(function(ok){
+
+                  if(!ok){
+
+                    btn.textContent =
+                      'Erreur';
+
+                    return;
+
+                  }
+
+                  renderAdminList();
+
+                  render();
+
+                });
+
+            }
+          );
+
+        }
+
+      );
+
+    });
+
+  }
+
+
+  /* =========================
+     OUVERTURE ADMIN
+     ========================= */
+
+  document
+    .getElementById('adminLink')
+    .addEventListener(
+      'click',
+      function(e){
+
+        e.preventDefault();
+
+        openAdmin();
+
+      }
+    );
+
+
+  /* =========================
+     FERMETURE ADMIN
+     ========================= */
+
+  document
+    .getElementById('adminClose1')
+    .addEventListener(
+      'click',
+      function(e){
+
+        e.preventDefault();
+
+        closeAdmin();
+
+      }
+    );
+
+
+  document
+    .getElementById('adminClose2')
+    .addEventListener(
+      'click',
+      function(e){
+
+        e.preventDefault();
+
+        closeAdmin();
+
+      }
+    );
+
+
+  /* =========================
+     BOUTON CONNEXION
+     ========================= */
+
+  document
+    .getElementById('adminUnlock')
+    .addEventListener(
+      'click',
+      function(){
+
+        var email =
+          document
+            .getElementById('adminEmail')
+            .value
+            .trim();
+
+
+        var password =
+          document
+            .getElementById('adminPassword')
+            .value;
+
+
+        var msg =
+          document.getElementById('adminMsg');
+
+
+        if(!email || !password){
+
+          msg.textContent =
+            'E-mail et mot de passe sont requis.';
+
+          return;
+
+        }
+
+
+        msg.textContent =
+          'Connexion en cours…';
+
+
+        loginAdmin(email,password)
+
+          .then(function(){
+
+            msg.textContent = '';
+
+            lockView.style.display = 'none';
+
+            panelView.style.display = 'block';
+
+            renderAdminList();
+
+          })
+
+          .catch(function(){
+
+            accessToken = null;
+
+            msg.textContent =
+              'E-mail ou mot de passe incorrect.';
+
+          });
+
+      }
+    );
+
+
+  /* =========================
+     ENTRÉE E-MAIL
+     ========================= */
+
+  document
+    .getElementById('adminEmail')
+    .addEventListener(
+      'keydown',
+      function(e){
+
+        if(e.key === 'Enter'){
+
+          document
+            .getElementById('adminPassword')
+            .focus();
+
+        }
+
+      }
+    );
+
+
+  /* =========================
+     ENTRÉE MOT DE PASSE
+     ========================= */
+
+  document
+    .getElementById('adminPassword')
+    .addEventListener(
+      'keydown',
+      function(e){
+
+        if(e.key === 'Enter'){
+
+          document
+            .getElementById('adminUnlock')
+            .click();
+
+        }
+
+      }
+    );
+
+
+  /* =========================
+     AJOUT PRODUIT
+     ========================= */
+
+  document
+    .getElementById('addProductBtn')
+    .addEventListener(
+      'click',
+      function(){
+
+        if(!accessToken){
+
+          document
+            .getElementById('formMsg')
+            .textContent =
+              'Veuillez vous connecter.';
+
+          return;
+
+        }
+
+
+        var name =
+          document
+            .getElementById('pname')
+            .value
+            .trim();
+
+
+        var price =
+          document
+            .getElementById('pprice')
+            .value
+            .trim();
+
+
+        var cat =
+          document
+            .getElementById('pcat')
+            .value;
+
+
+        var msg =
+          document.getElementById('formMsg');
+
+
+        if(!name || !price){
+
+          msg.textContent =
+            'Nom et prix sont requis.';
+
+          return;
+
+        }
+
+
+        msg.textContent =
+          'Ajout en cours…';
+
+
+        createProduct({
+          name:name,
+          price:price,
+          cat:cat
+        })
+
+        .then(function(ok){
+
+          if(ok){
+
+            msg.textContent =
+              'Produit ajouté.';
+
+            document
+              .getElementById('pname')
+              .value = '';
+
+            document
+              .getElementById('pprice')
+              .value = '';
+
+            renderAdminList();
+
+            render();
+
+          }else{
+
+            msg.textContent =
+              'Erreur : vérifie la connexion à la base.';
+
+          }
+
+        });
+
+      }
+    );
+
 })();
 </script>
 
