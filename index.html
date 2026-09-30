@@ -1,252 +1,4253 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Webora</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FENVA BEAUTY — Cosmétiques premium</title>
+
+<meta name="description"
+      content="FENVA BEAUTY — Cosmétiques premium, soins du visage, du corps, des cheveux, parfums et maquillage.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#F7F8FA;--surf:#fff;--fg:#14181F;--mut:#5B6472;--line:#E3E6EB;--ac:#2A3BE8;--acf:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1218;--surf:#171B23;--fg:#ECEEF2;--mut:#98A1B0;--line:#262C38;--ac:#7B88FF;--acf:#0F1218}}
-:root[data-theme="dark"]{--bg:#0F1218;--surf:#171B23;--fg:#ECEEF2;--mut:#98A1B0;--line:#262C38;--ac:#7B88FF;--acf:#0F1218}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*,*:before,*:after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.6 'Instrument Sans',system-ui,sans-serif}
-h1,h2,h3{font-family:'Bricolage Grotesque','Instrument Sans',sans-serif;font-weight:700;line-height:1.1;margin:0;letter-spacing:-.02em}
-a{color:inherit;text-decoration:none}
-button,input,textarea,select{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-.btn{display:inline-block;border:1px solid var(--line);background:var(--surf);padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:500}
-.btn.p{background:var(--ac);color:var(--acf);border-color:var(--ac)}
-.btn.lg{padding:14px 28px}
-.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:20px 0}
-.logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px}
-.top nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.hero{padding:96px 0 72px;max-width:760px}
-.hero h1{font-size:clamp(40px,7vw,72px)}
-.hero p{font-size:19px;color:var(--mut);max-width:560px;margin:24px 0 32px}
-.row{display:flex;gap:12px;flex-wrap:wrap}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding:56px 0;border-top:1px solid var(--line)}
-.steps h3{font-size:18px;margin-bottom:8px}.steps p{color:var(--mut);margin:0}
-.auth{min-height:100vh;display:grid;place-items:center;padding:24px}
-.card{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:32px;width:100%;max-width:420px}
-.card h2{font-size:28px;margin-bottom:24px}
-label{display:block;font-size:14px;font-weight:500;margin:16px 0 6px}
-input,textarea,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
-textarea{resize:vertical;min-height:84px}
-.note{color:var(--mut);font-size:14px;margin-top:20px}
-.note a{color:var(--ac);font-weight:500}
-.shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
-.side{border-right:1px solid var(--line);padding:24px 16px;display:flex;flex-direction:column;gap:4px}
-.side a{padding:9px 12px;border-radius:8px;color:var(--mut)}
-.side a.on,.side a:hover{background:var(--surf);color:var(--fg)}
-.side .logo{padding:0 12px 20px}
-.main{padding:40px;min-width:0}
-.main h1{font-size:34px;margin-bottom:8px}
-.sub{color:var(--mut);margin:0 0 32px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px}
-.stat{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:20px}
-.stat b{display:block;font:700 30px 'Bricolage Grotesque',sans-serif}.stat span{color:var(--mut);font-size:14px}
-.list{border:1px solid var(--line);border-radius:12px;background:var(--surf)}
-.li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
-.li:last-child{border:0}.li small{color:var(--mut);display:block}
-.tag{font-size:13px;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mut)}
-.tag.ok{color:#1B7A4B;border-color:#1B7A4B}
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.plans ul{padding-left:18px;color:var(--mut);margin:12px 0 0}
-.doc h1{font-size:clamp(32px,5vw,44px);margin-bottom:8px}.doc h3{font-size:20px;margin:32px 0 8px}.doc p{color:var(--mut)}
-details{border-bottom:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:500}details p{color:var(--mut);margin:10px 0 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
-.opt{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:24px;cursor:pointer;text-align:left;transition:border-color .15s}
-.opt:hover{border-color:var(--ac)}
-.opt h3{font-size:20px;margin-bottom:6px}.opt p{margin:0;color:var(--mut);font-size:15px}
-.thumb{height:150px;border-radius:8px;margin-bottom:14px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;border:1px solid var(--line)}
-.thumb i{display:block;height:8px;border-radius:4px;opacity:.85}
-.tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
-.tabs .btn.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.ed{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start}
-.panel{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:8px 20px 20px}
-.frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surf);margin:0 auto;transition:max-width .2s}
-.bar{padding:10px 14px;border-bottom:1px solid var(--line);font-size:13px;color:var(--mut)}
-.site{line-height:1.5}
-.site nav{display:flex;justify-content:space-between;padding:18px 28px;font-weight:600;font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:1px}
-.site .h{padding:56px 28px 48px}.site .h.c{text-align:center}
-.site h1,.site h2{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.3px}
-.site h1{font-size:clamp(28px,4vw,44px);margin-bottom:10px}
-.site .h p{margin:0 0 20px;opacity:.75}
-.site .b{display:inline-block;padding:12px 26px;border-radius:2px;font-weight:500;font-size:14px;letter-spacing:.3px}
-.site .it{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;padding:0 28px 32px}
-.site .it div{padding:18px;border-radius:8px;border:1px solid;opacity:.9}
-.site .ct{padding:24px 28px 36px;border-top:1px solid;font-size:14px}
-.pub{max-width:520px}
-.sd{display:flex;align-items:center;gap:0}
-.sd input{border-radius:8px 0 0 8px}.sd span{padding:11px 12px;border:1px solid var(--line);border-left:0;border-radius:0 8px 8px 0;color:var(--mut);white-space:nowrap}
-.ok-box{border:1px solid #1B7A4B;border-radius:12px;padding:24px}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-#app>*{animation:fade .25s ease}
-.hero h1,.hero p,.hero .row{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
-.hero h1{animation-delay:.05s}.hero p{animation-delay:.18s}.hero .row{animation-delay:.3s}
-.auth .card{animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
-.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}.rv.in{opacity:1;transform:none}
-.btn{transition:transform .15s,background .15s,border-color .15s}.btn:hover{transform:translateY(-1px);border-color:var(--ac)}.btn:active{transform:scale(.98)}
-.opt{transition:border-color .15s,transform .2s}.opt:hover{transform:translateY(-3px)}
-.side a{transition:background .15s,color .15s}
-details[open] p,.ok-box,#cf h3{animation:rise .35s ease both}
-@media(max-width:820px){
-.steps{grid-template-columns:1fr 1fr}.plans{grid-template-columns:1fr}.stats{grid-template-columns:1fr}
-.shell{grid-template-columns:1fr}.side{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}
-.side .logo{padding:0 12px 0 0;align-self:center}.side a{white-space:nowrap}
-.main{padding:24px 16px}.ed{grid-template-columns:1fr}.site .it{grid-template-columns:1fr}.hero{padding:56px 0 40px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}}
+
+:root{
+  --cream:#F7F4EE;
+  --beige:#E9E3D8;
+  --nude:#1F6F64;
+  --brown:#262322;
+  --gold:#2F8577;
+  --white:#FFFFFF;
+  --line:#E1DACB;
+  --whatsapp:#25D366;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--cream);
+  color:var(--brown);
+  line-height:1.6;
+}
+
+button,input,select{font-family:inherit;}
+button{cursor:pointer;}
+a{color:inherit;text-decoration:none;}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(247,244,238,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+
+.header-inner{
+  max-width:1250px;
+  margin:auto;
+  min-height:82px;
+  padding:0 30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:34px;
+  font-weight:600;
+  letter-spacing:3px;
+  color:var(--brown);
+}
+
+.logo span{color:var(--nude);}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:30px;
+}
+
+nav a{
+  font-size:14px;
+  letter-spacing:.5px;
+  transition:.2s;
+  position:relative;
+}
+
+nav a:hover{color:var(--nude);}
+
+/* CART NAV */
+
+.cart-nav{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  cursor:pointer;
+}
+
+.cart-count{
+  min-width:20px;
+  height:20px;
+  padding:0 5px;
+  border-radius:50%;
+  background:var(--nude);
+  color:white;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  line-height:1;
+}
+
+/* HERO */
+
+.hero{
+  min-height:650px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:80px 25px;
+  background:
+    linear-gradient(
+      rgba(247,244,238,.72),
+      rgba(247,244,238,.72)
+    );
+}
+
+.hero-content{max-width:850px;}
+
+.hero-small{
+  text-transform:uppercase;
+  letter-spacing:4px;
+  font-size:13px;
+  color:var(--nude);
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:76px;
+  line-height:1;
+  font-weight:500;
+  margin-bottom:25px;
+}
+
+.hero p{
+  max-width:650px;
+  margin:0 auto 30px;
+  font-size:18px;
+  color:#5d5752;
+}
+
+.hero-note{
+  font-size:13px;
+  color:#777;
+}
+
+/* SECTIONS */
+
+section{padding:90px 25px;}
+
+.section-inner{
+  max-width:1250px;
+  margin:auto;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.section-title span{
+  display:block;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:var(--nude);
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.section-title h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;
+  font-weight:500;
+}
+
+/* CATEGORIES */
+
+.categories{background:var(--white);}
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.category-card{
+  min-height:220px;
+  padding:35px;
+  display:flex;
+  align-items:flex-end;
+  background:var(--beige);
+  border:1px solid var(--line);
+  transition:.25s;
+  position:relative;
+  overflow:hidden;
+  background-size:cover;
+  background-position:center;
+}
+
+.category-card:hover{transform:translateY(-4px);}
+
+.category-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;
+  font-weight:500;
+  position:relative;
+  z-index:1;
+}
+
+.category-card.has-image::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.6) 100%);
+}
+
+.category-card.has-image h3{
+  color:#fff;
+}
+
+/* PRODUCTS */
+
+.products{background:var(--cream);}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+}
+
+.card{
+  background:var(--white);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+
+.card .thumb{
+  width:100%;
+  height:320px;
+  overflow:hidden;
+  background:var(--beige);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card .thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.card h4{
+  padding:18px 18px 5px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:25px;
+  font-weight:500;
+}
+
+.card .price{
+  padding:0 18px 12px;
+  color:var(--nude);
+  font-size:15px;
+  font-weight:500;
+}
+
+/* AJOUTER AU PANIER */
+
+.add-cart-button{
+  display:block;
+  width:calc(100% - 36px);
+  margin:0 18px 18px;
+  padding:12px 15px;
+  border:1px solid var(--nude);
+  background:var(--nude);
+  color:white;
+  font-size:13px;
+  transition:.2s;
+}
+
+.add-cart-button:hover{
+  opacity:.9;
+}
+
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  padding:60px 20px;
+  color:#777;
+}
+
+/* STORY */
+
+.story{background:var(--white);}
+
+.story-grid{
+  max-width:1000px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.story-label{
+  color:var(--nude);
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.story h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:50px;
+  font-weight:500;
+  line-height:1.05;
+  margin-bottom:25px;
+}
+
+.story p{
+  color:#666;
+  margin-bottom:15px;
+}
+
+/* CTA */
+
+.cta{
+  background:var(--beige);
+  text-align:center;
+}
+
+.cta h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;
+  font-weight:500;
+  margin-bottom:15px;
+}
+
+.cta p{
+  color:#666;
+  margin-bottom:25px;
+}
+
+/* FOOTER */
+
+footer{
+  padding:50px 25px;
+  background:var(--brown);
+  color:var(--white);
+}
+
+.footer-inner{
+  max-width:1250px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+}
+
+.footer-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;
+  letter-spacing:3px;
+}
+
+.footer-admin{
+  font-size:13px;
+  opacity:.7;
+  cursor:pointer;
+}
+
+.footer-admin:hover{opacity:1;}
+
+/* WHATSAPP */
+
+.whatsapp{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:var(--whatsapp);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  z-index:90;
+  box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+/* CART OVERLAY */
+
+.cart-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1100;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.cart-overlay.active{display:flex;}
+
+.cart-box{
+  width:100%;
+  max-width:650px;
+  max-height:90vh;
+  overflow:auto;
+  background:var(--white);
+  padding:30px;
+  border-radius:4px;
+}
+
+.cart-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:25px;
+}
+
+.cart-title h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:38px;
+  font-weight:500;
+}
+
+.close-cart{
+  border:0;
+  background:none;
+  font-size:25px;
+  color:#555;
+}
+
+.cart-empty{
+  text-align:center;
+  padding:40px 10px;
+  color:#777;
+}
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.cart-item-image{
+  width:70px;
+  height:70px;
+  flex-shrink:0;
+  background:var(--beige);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.cart-item-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.cart-item-info{flex:1;}
+
+.cart-item-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:21px;
+}
+
+.cart-item-price{
+  color:var(--nude);
+  font-size:13px;
+}
+
+.cart-quantity{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.quantity-button{
+  width:28px;
+  height:28px;
+  border:1px solid var(--line);
+  background:var(--cream);
+  font-size:16px;
+}
+
+.quantity-value{
+  min-width:20px;
+  text-align:center;
+  font-size:13px;
+}
+
+.cart-remove{
+  border:0;
+  background:none;
+  color:#9b4d4d;
+  font-size:12px;
+  margin-left:10px;
+}
+
+.cart-bottom{
+  margin-top:25px;
+}
+
+.cart-total-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-bottom:20px;
+  font-size:17px;
+}
+
+.cart-total{
+  color:var(--nude);
+  font-weight:600;
+}
+
+.cart-actions{
+  display:flex;
+  gap:10px;
+}
+
+.cart-order-button{
+  flex:1;
+  border:0;
+  background:var(--nude);
+  color:white;
+  padding:14px 20px;
+  font-size:14px;
+}
+
+.cart-clear-button{
+  border:1px solid var(--line);
+  background:white;
+  color:#555;
+  padding:14px 18px;
+  font-size:13px;
+}
+
+.cart-order-button:hover,
+.cart-clear-button:hover{
+  opacity:.9;
+}
+
+/* ADMIN OVERLAY */
+
+.admin-overlay{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.admin-overlay.active{display:flex;}
+
+.admin-box{
+  width:100%;
+  max-width:850px;
+  max-height:90vh;
+  overflow:auto;
+  background:var(--white);
+  padding:35px;
+  border-radius:4px;
+}
+
+.admin-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:30px;
+}
+
+.admin-title h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:38px;
+  font-weight:500;
+}
+
+.close-admin{
+  border:0;
+  background:none;
+  font-size:25px;
+  color:#555;
+}
+
+.admin-login{
+  max-width:450px;
+  margin:auto;
+}
+
+.admin-field{margin-bottom:16px;}
+
+.admin-field label{
+  display:block;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+.admin-field input,
+.admin-field select{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid var(--line);
+  background:var(--cream);
+  outline:none;
+}
+
+.admin-field input:focus,
+.admin-field select:focus{
+  border-color:var(--nude);
+}
+
+.admin-button{
+  border:0;
+  background:var(--nude);
+  color:white;
+  padding:13px 22px;
+  font-size:14px;
+}
+
+.admin-button:hover{opacity:.9;}
+
+.admin-message{
+  margin-top:12px;
+  font-size:13px;
+  color:#777;
+}
+
+/* ADMIN PANEL */
+
+.admin-panel{display:none;}
+
+.admin-panel.active{display:block;}
+
+.admin-form{
+  border:1px solid var(--line);
+  padding:25px;
+  margin-bottom:30px;
+}
+
+.admin-form h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;
+  margin-bottom:20px;
+}
+
+.image-preview-box{
+  width:150px;
+  height:150px;
+  background:var(--beige);
+  border:1px solid var(--line);
+  margin-top:10px;
+  margin-bottom:12px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.image-preview-box.active{display:flex;}
+
+.image-preview-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.remove-image{
+  display:none;
+  border:1px solid var(--line);
+  background:white;
+  padding:8px 12px;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.remove-image.active{display:inline-block;}
+
+.admin-products{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.admin-product{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:12px;
+  border:1px solid var(--line);
+  background:var(--cream);
+}
+
+.admin-product-image{
+  width:64px;
+  height:64px;
+  flex-shrink:0;
+  background:var(--beige);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  font-size:10px;
+  color:#777;
+  text-align:center;
+}
+
+.admin-product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.admin-product-info{flex:1;}
+
+.admin-product-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+}
+
+.admin-product-meta{
+  font-size:12px;
+  color:#777;
+}
+
+.delete-button{
+  border:1px solid #d6c9c3;
+  background:white;
+  color:#9b4d4d;
+  padding:9px 13px;
+  font-size:12px;
+}
+
+.category-admin-input{
+  font-size:11px;
+  margin-top:6px;
+}
+
+.category-save-button{
+  border:1px solid var(--nude);
+  background:var(--white);
+  color:var(--nude);
+  padding:9px 13px;
+  font-size:12px;
+  margin-top:6px;
+}
+
+.category-save-button:hover{opacity:.8;}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+  .product-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .category-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:700px){
+
+  .header-inner{
+    min-height:70px;
+    padding:0 18px;
+  }
+
+  .logo{font-size:27px;}
+
+  nav{gap:12px;}
+
+  nav a{font-size:11px;}
+
+  .hero{min-height:550px;}
+
+  .hero h1{font-size:52px;}
+
+  .hero p{font-size:16px;}
+
+  section{padding:65px 18px;}
+
+  .section-title h2{font-size:40px;}
+
+  .category-grid{
+    grid-template-columns:1fr;
+  }
+
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .card .thumb{height:240px;}
+
+  .card h4{
+    font-size:21px;
+    padding:13px 12px 4px;
+  }
+
+  .card .price{padding:0 12px 10px;}
+
+  .add-cart-button{
+    width:calc(100% - 24px);
+    margin:0 12px 14px;
+    padding:11px 8px;
+    font-size:12px;
+  }
+
+  .story-grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+
+  .story h2{font-size:42px;}
+
+  .cta h2{font-size:42px;}
+
+  .footer-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .admin-box,
+  .cart-box{
+    padding:22px;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .product-grid{
+    grid-template-columns:1fr;
+  }
+
+  .card .thumb{height:330px;}
+
+  nav a:nth-child(2),
+  nav a:nth-child(3){
+    display:none;
+  }
+
+  .cart-item{
+    align-items:flex-start;
+  }
+
+  .cart-actions{
+    flex-direction:column;
+  }
+
+}
+
 </style>
 </head>
+
 <body>
-<div id="app"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+
+<!-- HEADER -->
+
+<header>
+
+  <div class="header-inner">
+
+    <a href="#" class="logo">
+      FENVA <span>BEAUTY</span>
+    </a>
+
+    <nav>
+
+      <a href="#categories">Catégories</a>
+
+      <a href="#products">Nouveautés</a>
+
+      <a href="#story">La marque</a>
+
+      <a href="#products"
+         class="cart-nav"
+         id="cartNav">
+        Panier
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="hero-small">
+      Cosmétiques premium
+    </div>
+
+    <h1>
+      Le soin devient<br>
+      un rituel.
+    </h1>
+
+    <p>
+      Découvrez une sélection de produits de beauté
+      pensée pour accompagner chaque moment de votre routine.
+    </p>
+
+    <div class="hero-note">
+      Commandes et informations disponibles par WhatsApp.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="categories" id="categories">
+
+  <div class="section-inner">
+
+    <div class="section-title">
+
+      <span>
+        Explorer
+      </span>
+
+      <h2>
+        Nos catégories
+      </h2>
+
+    </div>
+
+    <div class="category-grid" id="categoryGrid">
+
+      <a href="#products" class="category-card" data-category="Soins du visage">
+        <h3>Soins du visage</h3>
+      </a>
+
+      <a href="#products" class="category-card" data-category="Soins du corps">
+        <h3>Soins du corps</h3>
+      </a>
+
+      <a href="#products" class="category-card" data-category="Soins des cheveux">
+        <h3>Soins des cheveux</h3>
+      </a>
+
+      <a href="#products" class="category-card" data-category="Parfums">
+        <h3>Parfums</h3>
+      </a>
+
+      <a href="#products" class="category-card" data-category="Maquillage">
+        <h3>Maquillage</h3>
+      </a>
+
+      <a href="#products" class="category-card" data-category="Accessoires">
+        <h3>Accessoires</h3>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="products" id="products">
+
+  <div class="section-inner">
+
+    <div class="section-title">
+
+      <span>
+        Sélection
+      </span>
+
+      <h2>
+        Nos produits
+      </h2>
+
+    </div>
+
+    <div id="productGrid" class="product-grid">
+
+      <div class="empty">
+        Chargement des produits...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- STORY -->
+
+<section class="story" id="story">
+
+  <div class="section-inner">
+
+    <div class="story-grid">
+
+      <div>
+
+        <div class="story-label">
+          La marque
+        </div>
+
+        <h2>
+          La beauté dans les détails.
+        </h2>
+
+      </div>
+
+      <div>
+
+        <p>
+          FENVA BEAUTY propose une sélection de produits
+          cosmétiques choisis avec attention.
+        </p>
+
+        <p>
+          Notre objectif est de créer une expérience simple,
+          élégante et accessible autour de la beauté.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+  <div class="section-inner">
+
+    <h2>
+      Votre prochain rituel commence ici.
+    </h2>
+
+    <p>
+      Découvrez nos produits et contactez-nous pour commander.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div class="footer-logo">
+      FENVA BEAUTY
+    </div>
+
+    <div>
+      © 2026 FENVA BEAUTY ING Fawenbert Regis
+    </div>
+
+    <div
+      class="footer-admin"
+      id="openAdmin">
+      Administration
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- WHATSAPP -->
+
+<a
+  class="whatsapp"
+  href="https://wa.me/50955744295"
+  target="_blank"
+  aria-label="WhatsApp">
+  W
+</a>
+
+
+<!-- =========================
+     CART MODAL
+========================= -->
+
+<div
+  class="cart-overlay"
+  id="cartOverlay">
+
+  <div class="cart-box">
+
+    <div class="cart-title">
+
+      <h2>
+        Votre panier
+      </h2>
+
+      <button
+        class="close-cart"
+        id="closeCart">
+        ×
+      </button>
+
+    </div>
+
+    <div id="cartContent"></div>
+
+    <div class="cart-bottom">
+
+      <div class="cart-total-row">
+
+        <span>
+          Total
+        </span>
+
+        <span
+          class="cart-total"
+          id="cartTotal">
+          0 HTG
+        </span>
+
+      </div>
+
+      <div class="cart-actions">
+
+        <button
+          class="cart-order-button"
+          id="orderCart">
+          Passer la commande
+        </button>
+
+        <button
+          class="cart-clear-button"
+          id="clearCart">
+          Vider le panier
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ADMIN OVERLAY -->
+
+<div
+  class="admin-overlay"
+  id="adminOverlay">
+
+  <div class="admin-box">
+
+    <div class="admin-title">
+
+      <h2>
+        Administration
+      </h2>
+
+      <button
+        class="close-admin"
+        id="closeAdmin">
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div
+      class="admin-login"
+      id="adminLogin">
+
+      <div class="admin-field">
+
+        <label for="adminEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="adminEmail"
+          placeholder="Votre email">
+
+      </div>
+
+
+      <div class="admin-field">
+
+        <label for="adminPassword">
+          Mot de passe
+        </label>
+
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Votre mot de passe">
+
+      </div>
+
+
+      <button
+        class="admin-button"
+        id="adminUnlock">
+        Se connecter
+      </button>
+
+      <div
+        class="admin-message"
+        id="adminMsg">
+      </div>
+
+    </div>
+
+
+    <!-- PANEL -->
+
+    <div
+      class="admin-panel"
+      id="adminPanel">
+
+      <!-- CATEGORY IMAGES -->
+
+      <div class="admin-form">
+
+        <h3>
+          Images des catégories
+        </h3>
+
+        <div
+          class="admin-products"
+          id="categoryAdminList">
+        </div>
+
+      </div>
+
+
+      <!-- ADD PRODUCT -->
+
+      <div class="admin-form">
+
+        <h3>
+          Ajouter un produit
+        </h3>
+
+        <div class="admin-field">
+
+          <label for="pname">
+            Nom du produit
+          </label>
+
+          <input
+            type="text"
+            id="pname"
+            placeholder="Ex : Sérum visage">
+
+        </div>
+
+
+        <div class="admin-field">
+
+          <label for="pprice">
+            Prix
+          </label>
+
+          <input
+            type="text"
+            id="pprice"
+            placeholder="Ex : 1 500 HTG">
+
+        </div>
+
+
+        <div class="admin-field">
+
+          <label for="pcat">
+            Catégorie
+          </label>
+
+          <select id="pcat">
+
+            <option value="">
+              Sélectionner une catégorie
+            </option>
+
+            <option value="Soins du visage">
+              Soins du visage
+            </option>
+
+            <option value="Soins du corps">
+              Soins du corps
+            </option>
+
+            <option value="Soins des cheveux">
+              Soins des cheveux
+            </option>
+
+            <option value="Parfums">
+              Parfums
+            </option>
+
+            <option value="Maquillage">
+              Maquillage
+            </option>
+
+            <option value="Accessoires">
+              Accessoires
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="admin-field">
+
+          <label for="pimage">
+            Image du produit
+          </label>
+
+          <input
+            type="file"
+            id="pimage"
+            accept="image/*">
+
+        </div>
+
+
+        <div
+          class="image-preview-box"
+          id="imagePreviewBox">
+
+          <img
+            id="imagePreview"
+            src=""
+            alt="Aperçu">
+
+        </div>
+
+
+        <button
+          type="button"
+          class="remove-image"
+          id="removeImageBtn">
+          Retirer l'image
+        </button>
+
+
+        <button
+          class="admin-button"
+          id="addProductBtn">
+          Ajouter le produit
+        </button>
+
+
+        <div
+          class="admin-message"
+          id="formMsg">
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT LIST -->
+
+      <div>
+
+        <h3
+          style="
+            font-family:'Cormorant Garamond',serif;
+            font-size:30px;
+            margin-bottom:20px;
+          ">
+          Produits
+        </h3>
+
+        <div
+          class="admin-products"
+          id="productList">
+        </div>
+
+      </div>
+
+
+      <div
+        style="
+          margin-top:25px;
+          text-align:right;
+        ">
+
+        <button
+          class="admin-button"
+          id="logoutAdmin">
+          Se déconnecter
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
-// Configuration Supabase : renseigner les deux valeurs (Project Settings > API). Vide = mode local.
-var SB_URL='https://pgiualcqiilgmjqdwlfq.supabase.co',SB_KEY='sb_publishable_KCYLHW-qWK7QVmLyNw5DlA_KRvSmNtB';
-var sb=(window.supabase&&SB_URL&&SB_KEY)?window.supabase.createClient(SB_URL,SB_KEY):null;
-var CATS={
-boutique:{n:'Boutique',d:'Vendez vos produits en ligne',it:['Produit phare','Nouveautés','Promotions'],b:'Voir la collection'},
-restaurant:{n:'Restaurant',d:'Menu, horaires et réservations',it:['Entrées','Plats','Desserts'],b:'Voir le menu'},
-salon:{n:'Salon',d:'Services et prise de rendez-vous',it:['Coiffure','Soins','Beauté'],b:'Prendre rendez-vous'},
-agence:{n:'Agence',d:'Présentez vos services et vos réalisations',it:['Conseil','Création','Accompagnement'],b:'Demander un devis'},
-hotel:{n:'Hôtel',d:'Chambres, tarifs et réservations',it:['Chambre Standard','Chambre Confort','Suite'],b:'Réserver'},
-photographe:{n:'Photographe',d:'Portfolio et prestations',it:['Mariage','Portrait','Événement'],b:'Réserver une séance'},
-beaute:{n:'Beauté',d:'Cosmétiques, soins et parfums',it:['Soins du visage','Parfums','Maquillage'],b:'Commander'},
-};
-var TPL=[
-{id:'atelier',c:'boutique',n:'Atelier',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'c'},
-{id:'vitrine',c:'boutique',n:'Vitrine',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'s'},
-{id:'minimal',p:1,c:'boutique',n:'Minimal',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'c'},
-{id:'bistro',c:'restaurant',n:'Bistro',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'c'},
-{id:'table',p:1,c:'restaurant',n:'Table',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'s'},
-{id:'saveur',c:'restaurant',n:'Saveur',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'s'},
-{id:'douceur',c:'salon',n:'Douceur',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'c'},
-{id:'studio',c:'salon',n:'Studio',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'s'},
-{id:'eclat',p:1,c:'salon',n:'Éclat',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'s'},
-{id:'signature',c:'agence',n:'Signature',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'s'},
-{id:'bureau',p:1,c:'agence',n:'Bureau',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'c'},
-{id:'sejour',c:'hotel',n:'Séjour',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'c'},
-{id:'rivage',p:1,c:'hotel',n:'Rivage',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'s'},
-{id:'expo',c:'photographe',n:'Expo',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'c'},
-{id:'cadre',p:1,c:'photographe',n:'Cadre',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'s'},
-{id:'rituel',c:'beaute',n:'Rituel',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'c'},
-{id:'flacon',p:1,c:'beaute',n:'Flacon',bg:'#F7F4EE',fg:'#262322',ac:'#1F6F64',ff:'Jost,sans-serif',l:'s'}];
-var PAL=[
-{n:'Modèle',bg:'',fg:'',ac:''},
-{n:'Ivoire & or',bg:'#FBF8F2',fg:'#2B2418',ac:'#B08D3F'},
-{n:'Nuit',bg:'#0D0F14',fg:'#F1F2F5',ac:'#6C7BFF'},
-{n:'Sauge',bg:'#F1F5EF',fg:'#1E2A20',ac:'#4C7A52'},
-{n:'Terracotta',bg:'#FBF1EA',fg:'#3A241B',ac:'#C9622D'},
-{n:'Améthyste',bg:'#F6F2FB',fg:'#251A33',ac:'#7B3FA0'},
-{n:'Océan',bg:'#EFF6F8',fg:'#132229',ac:'#1E7C93'},
-{n:'Corail',bg:'#FFF4F1',fg:'#2E1712',ac:'#E4573D'}];
-var S={cat:'boutique',tpl:'atelier',name:'Maison Delva',slogan:'Des produits choisis avec soin',desc:'Nous accompagnons nos clients depuis 2019.',color:'',pal:0,phone:'+509 0000 0000',email:'contact@exemple.com',wa:'',wam:'Bonjour, je viens de voir votre site',hours:'Lundi au samedi, 9 h à 17 h',addr:'',ig:'',fb:'',logo:'',img:'',q:'',f:'',sub:'',logged:false,pub:false,dev:'d'};
-var SITES=[{n:'Kédassa Bazar',u:'kedassa.webora.com',s:'Publié',v:'1 240 visites'},{n:'Neyoo',u:'neyoo.webora.com',s:'Publié',v:'860 visites'},{n:'Brouillon salon',u:'-',s:'Brouillon',v:'-'}];
-var $=function(s){return document.querySelector(s)};
-function tpl(){return TPL.filter(function(t){return t.id===S.tpl})[0]||TPL[0]}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function bind(k){return 'oninput="S.'+k+'=this.value;upd()"'}
-function waLink(){if(!S.wa)return '';var d=S.wa.replace(/[^0-9]/g,'');return 'https://wa.me/'+d+'?text='+encodeURIComponent(S.wam||'Bonjour')}
-function pal(){var p=PAL[S.pal||0];return (p&&p.bg)?p:null}
-function site(){
-var t=tpl(),c=CATS[t.c],p=pal(),bg=(p&&p.bg)||t.bg,fg=(p&&p.fg)||t.fg,ac=S.color||(p&&p.ac)||t.ac;
-var dark=/^#(0|1)/.test(bg)||['#0E0E10','#16201B','#101317','#0D2230','#111111','#0D0F14'].indexOf(t.bg)>-1;
-var btnFg=dark?bg:'#fff';
-var link=waLink();
-var cta=link?'<a class="b" href="'+link+'" target="_blank" rel="noopener" style="background:'+ac+';color:'+btnFg+'">'+c.b+' sur WhatsApp</a>':'<span class="b" style="background:'+ac+';color:'+btnFg+'">'+c.b+'</span>';
-return '<div class="site" style="background:'+bg+';color:'+fg+';font-family:'+t.ff+';position:relative">'+
-'<nav><span>'+(S.logo?'<img src="'+S.logo+'" alt="" style="height:26px;vertical-align:middle;margin-right:8px">':'')+esc(S.name)+'</span><span style="opacity:.6;font-weight:400">Accueil &nbsp; À propos &nbsp; Contact</span></nav>'+
-'<div class="h '+(t.l==='c'?'c':'')+'"><h1>'+esc(S.slogan)+'</h1><p>'+esc(S.desc)+'</p>'+cta+'</div>'+
-(S.img?'<img src="'+S.img+'" alt="" style="width:100%;max-height:220px;object-fit:cover;display:block;margin-bottom:24px">':'')+'<div class="it">'+ensureItems().map(function(x){return '<div style="border-color:'+ac+'55">'+(x.img?'<img src="'+x.img+'" alt="" style="width:100%;height:110px;object-fit:cover;border-radius:6px;margin-bottom:10px">':'')+'<b>'+esc(x.t)+'</b><br><span style="opacity:.6;font-size:14px">'+esc(x.d||'Description à personnaliser')+'</span></div>'}).join('')+'</div>'+
-'<div class="ct" style="border-color:'+ac+'44">'+[S.phone,S.hours,S.email,S.addr,S.ig&&'Instagram '+S.ig,S.fb&&'Facebook '+S.fb].filter(Boolean).map(function(x){return esc(x)}).join(' &nbsp;|&nbsp; ')+'</div>'+
-(link?'<a href="'+link+'" target="_blank" rel="noopener" style="position:absolute;bottom:16px;right:16px;background:#25D366;color:#fff;border-radius:99px;padding:10px 16px;font-size:13px;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.2)">WhatsApp</a>':'')+
-'</div>'}
-function thumb(t){return '<div class="thumb" style="background:'+t.bg+'"><i style="background:'+t.fg+';width:60%"></i><i style="background:'+t.ac+';width:30%"></i><i style="background:'+t.fg+';width:80%;opacity:.3"></i></div>'}
-function shell(on,body){
-var L=[['dashboard','Tableau de bord'],['categories','Nouveau site'],['editeur','Éditeur'],['apercu','Aperçu'],['publication','Publication'],['parametres','Paramètres'],['aide','Aide'],['contact','Contact']];
-return '<div class="shell"><aside class="side"><a class="logo" href="#/">Webora</a>'+L.map(function(l){return '<a href="#/'+l[0]+'" class="'+(l[0]===on?'on':'')+'">'+l[1]+'</a>'}).join('')+'<a href="#/" onclick="logout()" style="margin-top:auto">Déconnexion</a></aside><main class="main">'+body+'</main></div>'}
-function head(){return '<div class="wrap"><div class="top"><a class="logo" href="#/">Webora</a><nav><a href="#/aide" style="padding:10px 8px">Comment ça marche</a><a class="btn" href="#/connexion">Connexion</a><a class="btn p" href="#/inscription">Créer un compte</a></nav></div>'}
-var V={
-'':function(){return head()+'<section class="hero"><h1>Votre site professionnel, en quelques minutes.</h1><p>Choisissez un modèle, personnalisez vos textes et vos couleurs, puis publiez. Aucun code nécessaire.</p><div class="row"><a class="btn p lg" href="#/inscription">Commencer gratuitement</a><a class="btn lg" href="#/connexion">Se connecter</a></div></section>'+
-'<section class="steps"><div><h3>Choisissez</h3><p>Boutique, restaurant, salon, agence, hôtel, photographe ou beauté.</p></div><div><h3>Sélectionnez</h3><p>Dix-sept modèles, dans sept catégories, avec un style uniforme et soigné.</p></div><div><h3>Personnalisez</h3><p>Textes, couleurs et coordonnées en direct.</p></div><div><h3>Publiez</h3><p>Une adresse en votre-nom.webora.com.</p></div></section><section style="padding:56px 0 96px;border-top:1px solid var(--line)"><h2 style="font-size:32px;margin-bottom:24px">Des abonnements de 3 mois</h2><div class="plans"><div class="stat"><h3>BASIQUE</h3><p class="sub" style="margin:6px 0 0">Pour un site simple</p><span class="tag ok">1er mois offert</span><ul><li>Abonnement de 3 mois</li><li>Un site simple</li><li>Sous-domaine webora.com</li><li>Modèles inclus</li><li>Branding Webora</li></ul></div><div class="stat"><h3>PRO</h3><p class="sub" style="margin:6px 0 0">Pour un site plus grand</p><ul><li>Abonnement de 3 mois</li><li>Modèles premium</li><li>Plus de pages</li><li>Sans branding</li><li>Statistiques</li></ul></div><div class="stat"><h3>PRO MAX</h3><p class="sub" style="margin:6px 0 0">Tout inclus, pour un usage professionnel</p><ul><li>Abonnement de 3 mois</li><li>Tout le plan Pro</li><li>Nom de domaine dédié</li><li>Plus de choix de modèles et d’options</li><li>Plusieurs sites</li><li>Catalogue et boutique en ligne</li><li>Statistiques avancées</li></ul></div></div><p class="note">Le premier mois du plan Basique est offert. Tarifs communiqués prochainement.</p></section>'+foot()+'</div>'},
-'inscription':function(){return '<div class="auth"><div class="card"><h2>Créer un compte</h2><label>Nom complet</label><input id="n" autocomplete="name"><label>Adresse e-mail</label><input id="e" type="email" autocomplete="email"><label>Mot de passe</label><input id="p" type="password" autocomplete="new-password"><p id="er" class="note" style="color:#C0392B;margin:12px 0 0"></p><button class="btn p" style="width:100%;margin-top:20px" onclick="auth(1)">Créer mon compte</button><p class="note">En créant un compte, vous acceptez les <a href="#/conditions">conditions d’utilisation</a> et la <a href="#/confidentialite">politique de confidentialité</a>.</p><p class="note">Déjà inscrit ? <a href="#/connexion">Se connecter</a></p></div></div>'},
-'connexion':function(){return '<div class="auth"><div class="card"><h2>Connexion</h2><label>Adresse e-mail</label><input id="e" type="email" autocomplete="email"><label>Mot de passe</label><input id="p" type="password" autocomplete="current-password"><p id="er" class="note" style="color:#C0392B;margin:12px 0 0"></p><button class="btn p" style="width:100%;margin-top:20px" onclick="auth(0)">Se connecter</button><p class="note">Pas encore de compte ? <a href="#/inscription">Créer un compte</a></p></div></div>'},
-'dashboard':function(){return shell('dashboard','<h1>Tableau de bord</h1><p class="sub">Vos sites et leur activité.</p><div class="stats"><div class="stat"><b>'+sites().length+'</b><span>Sites</span></div><div class="stat"><b>'+sites().filter(function(x){return x.s==='Publié'}).length+'</b><span>Publiés</span></div><div class="stat"><b>2 100</b><span>Visites ce mois</span></div></div><div class="row" style="justify-content:space-between;align-items:center;margin-bottom:16px"><h3>Mes sites</h3><a class="btn p" href="#/categories">Nouveau site</a></div><div class="list">'+sites().map(function(s){return '<div class="li"'+(s.id?' onclick="openSite(\''+s.id+'\')" style="cursor:pointer"':'')+'><div><b>'+esc(s.n)+'</b><small>'+s.u+' &nbsp; '+s.v+'</small></div><span class="tag '+(s.s==='Publié'?'ok':'')+'">'+s.s+'</span></div>'}).join('')+(sites().length?'':'<div class="li"><span style="color:var(--mut)">Aucun site pour le moment. Cliquez sur « Nouveau site ».</span></div>')+'</div>')},
-'categories':function(){return shell('categories','<h1>Quel type de site ?</h1><p class="sub">Choisissez la catégorie qui correspond à votre activité.</p><div class="grid">'+Object.keys(CATS).map(function(k){return '<button class="opt" onclick="S.chg=0;S.cat=\''+k+'\';go(\'modeles\')"><h3>'+CATS[k].n+'</h3><p>'+CATS[k].d+'</p></button>'}).join('')+'</div>')},
-'modeles':function(){var q=S.q.toLowerCase(),list=TPL.filter(function(t){return (S.cat==='tous'||t.c===S.cat)&&(!q||(t.n+' '+CATS[t.c].n).toLowerCase().indexOf(q)>-1)&&(!S.f||(S.f==='p')===!!t.p)});
-return shell('categories','<h1>Choisissez un modèle</h1><p class="sub">17 modèles disponibles, tous avec la même identité visuelle élégante, personnalisable si besoin.</p><div class="tabs"><button class="btn '+(S.cat==='tous'?'on':'')+'" onclick="S.cat=\'tous\';route()">Tous</button>'+Object.keys(CATS).map(function(k){return '<button class="btn '+(S.cat===k?'on':'')+'" onclick="S.cat=\''+k+'\';route()">'+CATS[k].n+'</button>'}).join('')+'</div><div class="row" style="margin-bottom:24px"><input type="search" placeholder="Rechercher un modèle" value="'+esc(S.q)+'" onchange="S.q=this.value;route()" style="max-width:280px"><select onchange="S.f=this.value;route()" style="max-width:180px"><option value="">Tous</option><option value="g"'+(S.f==='g'?' selected':'')+'>Inclus</option><option value="p"'+(S.f==='p'?' selected':'')+'>Premium</option></select></div><div class="grid">'+list.map(function(t){return '<button class="opt" onclick="S.tpl=\''+t.id+'\';S.color=\'\';S.it=null;S.chg?changeTpl():newSite()">'+thumb(t)+'<h3>'+t.n+'</h3><p>'+CATS[t.c].n+' <span class="tag">'+(t.p?'Premium':'Inclus')+'</span></p></button>'}).join('')+'</div>'+(list.length?'':'<p class="sub">Aucun modèle ne correspond à cette recherche.</p>'))},
-'editeur':function(){var t=tpl();return shell('editeur','<h1>Éditeur</h1><p class="sub">Modèle '+t.n+'. Les modifications apparaissent en direct.</p><div class="ed"><div class="panel"><label>Nom de l\'activité</label><input value="'+esc(S.name)+'" '+bind('name')+'><label>Slogan</label><input value="'+esc(S.slogan)+'" '+bind('slogan')+'><label>Description</label><textarea '+bind('desc')+'>'+esc(S.desc)+'</textarea><label>Palette de couleurs</label><div class="pal">'+PAL.map(function(x,i){return '<button type="button" title="'+x.n+'" class="sw'+(S.pal===i?' on':'')+'" style="background:'+(x.bg||'linear-gradient(135deg,#eee,#ccc)')+'" onclick="S.pal='+i+';upd()"></button>'}).join('')+'</div><label>Couleur d\'accent (facultatif, remplace la palette)</label><input type="color" value="'+(S.color||(pal()&&pal().ac)||t.ac)+'" style="height:44px;padding:4px" oninput="S.color=this.value;upd()">'+(S.color?'<button type="button" class="btn" style="margin-top:8px" onclick="S.color=\'\';upd()">Revenir à la palette</button>':'')+itemsForm()+'<label>Horaires</label><input value="'+esc(S.hours)+'" '+bind('hours')+'><label>Téléphone</label><input value="'+esc(S.phone)+'" '+bind('phone')+'><label>E-mail</label><input value="'+esc(S.email)+'" '+bind('email')+'><label>Numéro WhatsApp (avec indicatif, ex. 50900000000)</label><input value="'+esc(S.wa)+'" '+bind('wa')+'><label>Message WhatsApp prérempli</label><input value="'+esc(S.wam)+'" '+bind('wam')+'><label>Adresse</label><input value="'+esc(S.addr)+'" '+bind('addr')+'><label>Instagram</label><input value="'+esc(S.ig)+'" '+bind('ig')+'><label>Facebook</label><input value="'+esc(S.fb)+'" '+bind('fb')+'><label>Logo (2 Mo maximum)</label><input type="file" accept="image/*" onchange="up(\'logo\',this)"><label>Image principale (2 Mo maximum)</label><input type="file" accept="image/*" onchange="up(\'img\',this)"><div class="row" style="margin-top:20px"><a class="btn" href="#/modeles" onclick="S.chg=1">Changer de modèle</a><a class="btn p" href="#/apercu">Aperçu</a></div></div><div class="frame"><div class="bar">Aperçu en direct</div><div id="live">'+site()+'</div></div></div>')},
-'apercu':function(){return shell('apercu','<div class="row" style="justify-content:space-between;align-items:center"><div><h1>Aperçu</h1><p class="sub">Vérifiez le rendu avant de publier.</p></div><div class="row"><button class="btn '+(S.dev==='d'?'on':'')+'" onclick="S.dev=\'d\';route()">Ordinateur</button><button class="btn '+(S.dev==='m'?'on':'')+'" onclick="S.dev=\'m\';route()">Mobile</button><a class="btn" href="#/editeur">Modifier</a><a class="btn p" href="#/publication">Continuer</a></div></div><div class="frame" style="max-width:'+(S.dev==='m'?'380px':'100%')+'"><div class="bar">'+(esc(S.sub||'monsite')+'.webora.com')+'</div>'+site()+'</div>')},
-'aide':function(){var st=[['1. Choisir','Sélectionnez votre type d’activité : boutique, restaurant, salon, agence, hôtel, photographe ou beauté.'],['2. Sélectionner','Chaque catégorie propose plusieurs modèles, inclus ou premium, avec la même identité visuelle élégante par défaut, personnalisable si besoin. Vous pouvez en changer à tout moment.'],['3. Personnaliser','Modifiez les textes, les couleurs, le logo, les images et les coordonnées. L’aperçu se met à jour en direct.'],['4. Publier','Choisissez une adresse en monsite.webora.com et votre site est en ligne.']];
-var fq=[['Créer un compte','Cliquez sur « Créer un compte », entrez votre adresse e-mail et un mot de passe de 6 caractères minimum.'],['Choisir ou changer de modèle','Dans « Nouveau site », choisissez une catégorie puis un modèle. Dans l’éditeur, le bouton « Changer de modèle » vous permet d’en essayer un autre.'],['Modifier les textes et les couleurs','Dans l’éditeur, remplissez les champs à gauche : nom, slogan, description, couleur d’accent. Le site à droite change immédiatement.'],['Ajouter un logo et une image','Dans l’éditeur, utilisez les champs « Logo » et « Image principale ». Le fichier doit être une image de 2 Mo maximum.'],['Vérifier le rendu sur mobile','Ouvrez « Aperçu » puis cliquez sur « Mobile ». Revenez à l’éditeur avec « Modifier » si quelque chose ne vous plaît pas.'],['Publier son site','Ouvrez « Publication », entrez votre adresse (3 caractères minimum, en lettres minuscules, chiffres ou tirets), puis cliquez sur « Publier ».'],['Avoir un nom de domaine dédié','Un nom de domaine dédié à votre site, par exemple www.monbusiness.com, est inclus dans le plan Pro Max.'],['Comment fonctionnent les abonnements','Chaque plan est un abonnement de 3 mois. Basique convient aux sites simples et son premier mois est offert. Pro convient aux sites plus grands. Pro Max donne accès à tout, avec un nom de domaine dédié.'],['Retrouver mes sites','Le tableau de bord liste tous vos sites avec leur adresse et leur statut : publié ou brouillon.']];
-var b='<div class="help" style="max-width:760px;padding:32px 0 96px"><h1 style="font-size:clamp(32px,5vw,44px);margin-bottom:8px">Comment ça marche</h1><p class="sub">Créer un site avec Webora ne demande aucune compétence en code.</p><h3 style="margin-bottom:16px">Comment ça fonctionne</h3><div class="list">'+st.map(function(x){return '<div class="li"><div><b>'+x[0]+'</b><small>'+x[1]+'</small></div></div>'}).join('')+'</div><h3 style="margin:40px 0 8px">Comment faire</h3>'+fq.map(function(x){return '<details><summary>'+x[0]+'</summary><p>'+x[1]+'</p></details>'}).join('')+'<div class="row" style="margin-top:32px"><a class="btn p lg" href="#/'+(S.logged?'categories':'inscription')+'">'+(S.logged?'Créer un site':'Commencer gratuitement')+'</a></div></div>';
-return S.logged?shell('aide',b):head()+b+foot()+'</div>'},
-'contact':function(){return pub('contact','<div class="doc" style="max-width:760px;padding:32px 0 64px"><h1>Contact</h1><p class="sub">Une question sur Webora ? Écrivez-nous, nous répondons sous deux jours ouvrables.</p><div class="list" style="margin-bottom:32px"><div class="li"><b>E-mail</b><span>contact@webora.com</span></div><div class="li"><b>WhatsApp</b><span>+509 0000 0000</span></div><div class="li"><b>Développeur</b><span>Fawenbert Regis</span></div><div class="li"><b>Horaires</b><span>Lundi au vendredi, 8 h à 17 h</span></div></div><div id="cf" class="card" style="max-width:100%"><label style="margin-top:0">Nom</label><input id="cn" autocomplete="name"><label>Adresse e-mail</label><input id="ce" type="email" autocomplete="email"><label>Message</label><textarea id="cm"></textarea><p id="er" class="note" style="color:#C0392B;margin:12px 0 0"></p><button class="btn p" style="margin-top:16px" onclick="sendMsg()">Envoyer le message</button></div></div>')},
-'confidentialite':function(){return pub('',doc('Politique de confidentialité',[['Données que nous collectons','Votre nom, votre adresse e-mail, votre mot de passe (conservé sous forme chiffrée) et les contenus que vous ajoutez à votre site : textes, logo, images et coordonnées.'],['Pourquoi nous les utilisons','Pour créer et gérer votre compte, afficher et publier votre site, gérer votre abonnement et répondre à vos demandes.'],['Ce qui devient public','Les informations saisies dans votre site (nom de l’activité, téléphone, WhatsApp, adresse, réseaux sociaux) sont visibles par tous dès la publication. Ne publiez que ce que vous souhaitez rendre public.'],['Partage des données','Nous ne vendons pas vos données. Elles ne sont partagées qu’avec les prestataires nécessaires au service, comme l’hébergement et le paiement.'],['Sécurité','Chaque compte n’accède qu’à ses propres sites. Les mots de passe sont chiffrés et les échanges sont protégés.'],['Conservation','Vos données sont conservées tant que votre compte est actif. Vous pouvez demander leur suppression à tout moment.'],['Vos droits','Vous pouvez consulter, corriger ou supprimer vos données en nous écrivant depuis la page Contact.'],['Cookies','Webora utilise uniquement les éléments techniques nécessaires au fonctionnement du service.']]))},
-'conditions':function(){return pub('',doc('Conditions d’utilisation',[['Utilisation du service','Webora permet de créer et publier un site à partir de modèles. Vous fournissez des informations exactes à l’inscription et vous protégez votre mot de passe.'],['Abonnements','Les plans Basique, Pro et Pro Max sont des abonnements de 3 mois. Le premier mois du plan Basique est offert. Les tarifs vous sont communiqués avant toute souscription.'],['Votre contenu','Vous restez propriétaire des textes, logos et images que vous ajoutez, et vous confirmez avoir le droit de les utiliser.'],['Contenus interdits','Il est interdit de publier des contenus illégaux, trompeurs, haineux ou qui portent atteinte aux droits d’autrui. Un site qui ne respecte pas ces règles peut être suspendu.'],['Publication et domaines','Les sites sont publiés sur une adresse en webora.com. Le nom de domaine dédié est réservé au plan Pro Max.'],['Résiliation','Vous pouvez arrêter votre abonnement à tout moment. Il reste actif jusqu’à la fin de la période de 3 mois en cours.'],['Disponibilité','Nous faisons le maximum pour garder le service disponible, sans garantir l’absence d’interruption.'],['Modifications','Nous pouvons mettre à jour ces conditions. Les changements sont indiqués sur cette page.']]))},
-'parametres':function(){return shell('parametres','<h1>Paramètres</h1><p class="sub">Profil et abonnement.</p><div class="card" style="max-width:520px"><label style="margin-top:0">Nom complet</label><input placeholder="Votre nom"><label>Adresse e-mail</label><input type="email" placeholder="vous@exemple.com"><label>Plan actuel</label><div class="li" style="padding:12px 0;border:0"><b>BASIQUE</b><span class="tag ok">1er mois offert</span></div><div class="row" style="margin-top:16px"><button class="btn p">Enregistrer</button><button class="btn">Passer au plan Pro</button></div></div>')},
-'publication':function(){return shell('publication','<h1>Publication</h1><p class="sub">Choisissez l\'adresse de votre site.</p><div class="pub">'+(S.pub?'<div class="ok-box"><h3>Site publié</h3><p class="sub" style="margin:8px 0 16px">Votre site est en ligne à l\'adresse ci-dessous.</p><b>'+esc(S.sub)+'.webora.com</b><div class="row" style="margin-top:20px"><a class="btn" href="#/s/'+esc(S.sub)+'">Voir le site</a><a class="btn p" href="#/dashboard" onclick="S.pub=false">Retour au tableau de bord</a></div></div>':'<label>Adresse du site</label><div class="sd"><input id="sd" value="'+esc(S.sub)+'" placeholder="monbusiness" oninput="S.sub=this.value.toLowerCase().replace(/[^a-z0-9-]/g,\'\')"><span>.webora.com</span></div><p id="er" class="note" style="color:#C0392B;margin:8px 0 0"></p><div class="row" style="margin-top:24px"><a class="btn" href="#/apercu">Retour</a><button class="btn p" onclick="publish()">Publier</button></div>')+'</div>')}
-};
-function foot(){return '<footer style="border-top:1px solid var(--line);padding:32px 0;display:flex;gap:16px 24px;flex-wrap:wrap;justify-content:space-between;color:var(--mut);font-size:14px"><span>© 2026 Webora. Développé par Fawenbert Regis</span><span style="display:flex;gap:8px 24px;flex-wrap:wrap"><a href="#/aide">Comment ça marche</a><a href="#/contact">Contact</a><a href="#/confidentialite">Confidentialité</a><a href="#/conditions">Conditions d’utilisation</a></span></footer>'}
-function pub(on,b){return S.logged?shell(on,b):head()+b+foot()+'</div>'}
-function doc(t,a){return '<div class="doc" style="max-width:760px;padding:32px 0 64px"><h1>'+t+'</h1><p class="sub" style="margin-bottom:0">Dernière mise à jour : 27 septembre 2026</p>'+a.map(function(x){return '<h3>'+x[0]+'</h3><p>'+x[1]+'</p>'}).join('')+'</div>'}
-function sendMsg(){var n=$('#cn').value.trim(),e=$('#ce').value.trim(),m=$('#cm').value.trim();if(!n||!/^\S+@\S+\.\S+$/.test(e)||m.length<10){$('#er').textContent='Renseignez votre nom, une adresse e-mail valide et un message d’au moins 10 caractères.';return}$('#cf').innerHTML='<h3>Message envoyé</h3><p class="sub" style="margin:8px 0 0">Merci '+esc(n)+'. Nous vous répondrons à '+esc(e)+'.</p>'}
-function up(k,el,idx){var f=el.files[0];if(!f)return;if(f.size>2000000){el.value='';el.previousElementSibling.textContent='Fichier trop lourd : 2 Mo maximum';return}function apply(url){if(idx!=null){ensureItems();S.it[idx].img=url}else{S[k]=url}upd()}if(sb&&S.uid){var pa=S.uid+'/'+(S.sid||'x')+'-'+(idx!=null?'item'+idx:k)+'-'+Date.now();sb.storage.from('webora-media').upload(pa,f,{contentType:f.type}).then(function(r){if(r.error){el.previousElementSibling.textContent='Envoi impossible (image de 2 Mo maximum)';return}apply(sb.storage.from('webora-media').getPublicUrl(pa).data.publicUrl)});return}
-var r=new FileReader();r.onload=function(){apply(r.result)};r.readAsDataURL(f)}
-function save(){try{localStorage.setItem('webora',JSON.stringify(S))}catch(e){}}
-function ensureItems(){if(!S.it||!S.it.length){var c=CATS[tpl().c];S.it=c.it.map(function(x){return{t:x,d:'',img:''}})}return S.it}
-function getIt(i){return ensureItems()[i]}
-function setIt(i,k,v){ensureItems();S.it[i][k]=v;upd()}
-function addItem(){ensureItems();S.it.push({t:'Nouveau',d:'',img:''});persist();reRender()}
-function removeItem(i){ensureItems();if(S.it.length<=1)return;S.it.splice(i,1);persist();reRender()}
-function reRender(){var r=location.hash.replace(/^#\/?/,'')||'';if(!V[r])r='';$('#app').innerHTML=V[r]();anim()}
-function itemsForm(){var l={boutique:'Produit',restaurant:'Plat',salon:'Service',agence:'Service',hotel:'Chambre',photographe:'Prestation'}[tpl().c];var its=ensureItems();return '<div class="itf">'+its.map(function(x,n){return '<div class="itfi"><div class="row" style="justify-content:space-between;align-items:center;margin-top:14px"><b style="font-size:14px">'+l+' '+(n+1)+'</b>'+(its.length>1?'<button type="button" class="btn" style="padding:4px 10px;font-size:13px" onclick="removeItem('+n+')">Retirer</button>':'')+'</div><input value="'+esc(x.t)+'" oninput="setIt('+n+',\'t\',this.value)" placeholder="Nom"><input style="margin-top:6px" value="'+esc(x.d)+'" oninput="setIt('+n+',\'d\',this.value)" placeholder="Description courte"><label style="margin-top:6px;font-size:13px">Photo (2 Mo maximum)</label><input type="file" accept="image/*" onchange="up(\'itimg\',this,'+n+')">'+(x.img?'<img src="'+x.img+'" alt="" style="width:100%;height:80px;object-fit:cover;border-radius:6px;margin-top:6px">':'')+'</div>'}).join('')+'<button type="button" class="btn" style="margin-top:12px;width:100%" onclick="addItem()">+ Ajouter '+l.toLowerCase()+'</button>'}
-function sites(){if(sb)return (S.remote||[]).map(function(x){return{id:x.id,n:x.name,u:x.subdomain?x.subdomain+'.webora.com':'-',s:x.published?'Publié':'Brouillon',v:''}});return (S.live?[{n:S.name,u:S.sub+'.webora.com',s:'Publié',v:'0 visite'}]:[]).concat(SITES)}
-function ensureSub(uid){return sb.from('webora_subscriptions').select('id').eq('user_id',uid).maybeSingle().then(function(r){if(r.data)return;var now=new Date();return sb.from('webora_subscriptions').insert({user_id:uid,plan:'basique',status:'active',starts_at:now.toISOString(),free_until:new Date(now.getTime()+30*864e5).toISOString(),ends_at:new Date(now.getTime()+90*864e5).toISOString()})})}
-function loadSites(){return sb.from('webora_sites').select('id,name,subdomain,published').order('updated_at',{ascending:false}).then(function(r){S.remote=r.data||[]})}
-function logout(){S.logged=false;S.uid=null;S.sid=null;S.remote=[];if(sb)sb.auth.signOut()}
-function content(){var o={};['slogan','desc','color','pal','phone','email','wa','wam','hours','addr','ig','fb','logo','img','it'].forEach(function(k){o[k]=S[k]});return o}
-function persist(){if(!sb||!S.logged||!S.sid)return;clearTimeout(persist.t);persist.t=setTimeout(function(){sb.from('webora_sites').update({name:S.name,template:S.tpl,category:tpl().c,content:content()}).eq('id',S.sid).then(function(){})},800)}
-function newSite(){Object.assign(S,{sid:null,pub:false,name:'Mon activité',slogan:'Votre slogan ici',desc:'Décrivez votre activité en quelques mots.',logo:'',img:'',it:null,sub:''});if(!sb){go('editeur');return}
-sb.from('webora_sites').insert({name:S.name,template:S.tpl,category:tpl().c,content:content()}).select('id').single().then(function(r){if(r.data)S.sid=r.data.id;go('editeur')})}
-function changeTpl(){S.chg=0;persist();go('editeur')}
-function openSite(id){sb.from('webora_sites').select('*').eq('id',id).single().then(function(r){if(r.error)return;var d=r.data;Object.assign(S,{sid:d.id,name:d.name,tpl:d.template,cat:d.category,sub:d.subdomain||'',pub:false,it:null},d.content||{});go('editeur')})}
-function nf(){$('#app').innerHTML=head()+'<section class="hero"><h1>Site introuvable</h1><p>Cette adresse n’existe pas ou n’est pas publiée.</p></section></div>'}
-function viewSite(x){var show=function(d){var bak=Object.assign({},S);Object.assign(S,{name:d.name,tpl:d.template},d.content||{});var h=site();Object.assign(S,bak);$('#app').innerHTML=h+'<p style="text-align:center;padding:16px;font-size:13px;color:var(--mut)">Créé avec Webora</p>'};
-if(!sb){if(x===S.sub)show({name:S.name,template:S.tpl,content:content()});else nf();return}
-sb.from('webora_sites').select('name,template,content').eq('subdomain',x).eq('published',true).maybeSingle().then(function(r){if(r.data)show(r.data);else nf()})}
-function upd(){save();persist();var l=$('#live');if(l)l.innerHTML=site()}
-function go(r){location.hash='#/'+r}
-function auth(su){var e=$('#e').value.trim(),p=$('#p').value;
-if(!/^\S+@\S+\.\S+$/.test(e)){$('#er').textContent='Entrez une adresse e-mail valide.';return}
-if(p.length<6){$('#er').textContent='Le mot de passe doit contenir au moins 6 caractères.';return}
-if(!sb){S.logged=true;go('dashboard');return}
-var n=su?$('#n').value.trim():'';
-(su?sb.auth.signUp({email:e,password:p,options:{data:{full_name:n}}}):sb.auth.signInWithPassword({email:e,password:p})).then(function(r){
-if(r.error){$('#er').textContent=su?'Inscription impossible : '+r.error.message:'Adresse e-mail ou mot de passe incorrect.';return}
-if(!r.data.session){$('#er').textContent='Compte créé. Vérifiez votre e-mail pour le confirmer, puis connectez-vous.';return}
-S.logged=true;S.uid=r.data.session.user.id;ensureSub(S.uid).then(loadSites).then(function(){go('dashboard')})})}
-function publish(){if(S.sub.length<3){$('#er').textContent='L\'adresse doit contenir au moins 3 caractères (lettres, chiffres, tirets).';return}
-if(!sb){S.pub=true;S.live=1;route();return}
-if(!S.sid){$('#er').textContent='Créez d’abord un site depuis « Nouveau site ».';return}
-sb.from('webora_sites').update({subdomain:S.sub,published:true,name:S.name,content:content()}).eq('id',S.sid).then(function(r){if(r.error){$('#er').textContent=r.error.code==='23505'?'Cette adresse est déjà utilisée.':'Publication impossible, réessayez.';return}S.pub=true;loadSites().then(route)})}
-function anim(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-document.querySelectorAll('.stat b').forEach(function(b){var n=parseInt(b.textContent.replace(/\s/g,''),10),t0=null;if(isNaN(n))return;function f(t){t0=t0||t;var k=Math.min((t-t0)/700,1);b.textContent=Math.round(n*(1-Math.pow(1-k,3))).toLocaleString('fr-FR');if(k<1)requestAnimationFrame(f)}requestAnimationFrame(f)});
-if(!('IntersectionObserver' in window))return;
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
-document.querySelectorAll('.steps>div,.plans>.stat').forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*80+'ms';io.observe(el)})}
-var PROT=['dashboard','categories','modeles','editeur','apercu','publication'];
-function route(){var m=location.hash.match(/^#\/s\/([a-z0-9-]+)/);if(m){viewSite(m[1]);return}var r=(location.hash.replace(/^#\/?/,'')||'');if(!V[r])r='';
-if(PROT.indexOf(r)>-1&&!S.logged){go('connexion');return}
-$('#app').innerHTML=V[r]();window.scrollTo(0,0);anim();save()}
-try{Object.assign(S,JSON.parse(localStorage.getItem('webora')||'{}'))}catch(e){}
-window.addEventListener('hashchange',route);
-if(sb){sb.auth.getSession().then(function(r){var u=r.data.session&&r.data.session.user;S.logged=!!u;S.uid=u?u.id:null;return u?ensureSub(u.id).then(loadSites):0}).then(route)}else route();
+
+/* =========================================
+   SUPABASE CONFIGURATION
+========================================= */
+
+var SUPABASE_URL =
+  'https://pgiualcqiilgmjqdwlfq.supabase.co';
+
+var SUPABASE_KEY =
+  'sb_publishable_KCYLHW-qWK7QVmLyNw5DlA_KRvSmNtB';
+
+var TABLE =
+  'produits';
+
+var CATEGORY_TABLE =
+  'categories';
+
+var STORAGE_BUCKET =
+  'produits';
+
+var FIXED_CATEGORIES =
+  [
+    'Soins du visage',
+    'Soins du corps',
+    'Soins des cheveux',
+    'Parfums',
+    'Maquillage',
+    'Accessoires'
+  ];
+
+var accessToken =
+  null;
+
+
+/* =========================================
+   PANIER
+========================================= */
+
+var WHATSAPP_NUMBER =
+  '50955744295';
+
+var CART_KEY =
+  'fenva_cart';
+
+var currentProducts =
+  [];
+
+var currentCategories =
+  [];
+
+var cart =
+  JSON.parse(
+    localStorage.getItem(CART_KEY) || '[]'
+  );
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+var adminOverlay =
+  document.getElementById('adminOverlay');
+
+var openAdmin =
+  document.getElementById('openAdmin');
+
+var closeAdmin =
+  document.getElementById('closeAdmin');
+
+var adminLogin =
+  document.getElementById('adminLogin');
+
+var adminPanel =
+  document.getElementById('adminPanel');
+
+var adminUnlock =
+  document.getElementById('adminUnlock');
+
+var logoutAdmin =
+  document.getElementById('logoutAdmin');
+
+var adminMsg =
+  document.getElementById('adminMsg');
+
+var adminEmail =
+  document.getElementById('adminEmail');
+
+var adminPassword =
+  document.getElementById('adminPassword');
+
+var pname =
+  document.getElementById('pname');
+
+var pprice =
+  document.getElementById('pprice');
+
+var pcat =
+  document.getElementById('pcat');
+
+var pimage =
+  document.getElementById('pimage');
+
+var addProductBtn =
+  document.getElementById('addProductBtn');
+
+var formMsg =
+  document.getElementById('formMsg');
+
+var productGrid =
+  document.getElementById('productGrid');
+
+var productList =
+  document.getElementById('productList');
+
+var categoryGrid =
+  document.getElementById('categoryGrid');
+
+var categoryAdminList =
+  document.getElementById('categoryAdminList');
+
+var imagePreviewBox =
+  document.getElementById('imagePreviewBox');
+
+var imagePreview =
+  document.getElementById('imagePreview');
+
+var removeImageBtn =
+  document.getElementById('removeImageBtn');
+
+var cartNav =
+  document.getElementById('cartNav');
+
+var cartCount =
+  document.getElementById('cartCount');
+
+var cartOverlay =
+  document.getElementById('cartOverlay');
+
+var closeCart =
+  document.getElementById('closeCart');
+
+var cartContent =
+  document.getElementById('cartContent');
+
+var cartTotal =
+  document.getElementById('cartTotal');
+
+var orderCartButton =
+  document.getElementById('orderCart');
+
+var clearCartButton =
+  document.getElementById('clearCart');
+
+var selectedImageFile =
+  null;
+
+var previewObjectUrl =
+  null;
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function esc(value){
+
+  if(value === null || value === undefined){
+    return '';
+  }
+
+  return String(value)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
+
+}
+
+
+/* =========================================
+   CART STORAGE
+========================================= */
+
+function saveCart(){
+
+  localStorage.setItem(
+    CART_KEY,
+    JSON.stringify(cart)
+  );
+
+}
+
+
+/* =========================================
+   CART COUNT
+========================================= */
+
+function updateCartCount(){
+
+  var count =
+    cart.reduce(function(total,item){
+
+      return total +
+        Number(item.quantity || 0);
+
+    },0);
+
+
+  cartCount.textContent =
+    count;
+
+}
+
+
+/* =========================================
+   PRICE
+========================================= */
+
+function parsePrice(price){
+
+  if(!price){
+    return 0;
+  }
+
+  var value =
+    String(price)
+      .replace(/\s/g,'')
+      .replace(/HTG/gi,'')
+      .replace(/,/g,'')
+      .replace(/[^0-9.]/g,'');
+
+  return parseFloat(value) || 0;
+
+}
+
+
+function formatPrice(value){
+
+  return new Intl.NumberFormat(
+    'fr-FR'
+  ).format(value) + ' HTG';
+
+}
+
+
+/* =========================================
+   ADD TO CART
+========================================= */
+
+function addToCartById(id){
+
+  var product =
+    currentProducts.find(function(p){
+
+      return String(p.id) === String(id);
+
+    });
+
+
+  if(!product){
+    return;
+  }
+
+
+  var existing =
+    cart.find(function(item){
+
+      return String(item.id) === String(product.id);
+
+    });
+
+
+  if(existing){
+
+    existing.quantity =
+      Number(existing.quantity || 0) + 1;
+
+  }else{
+
+    cart.push({
+
+      id:
+        product.id,
+
+      name:
+        product.name,
+
+      price:
+        product.price,
+
+      cat:
+        product.cat || '',
+
+      image_url:
+        product.image_url || '',
+
+      quantity:
+        1
+
+    });
+
+  }
+
+
+  saveCart();
+  updateCartCount();
+  renderCart();
+  openCart();
+
+}
+
+
+/* =========================================
+   CHANGE QUANTITY
+========================================= */
+
+function changeCartQuantity(
+  id,
+  change
+){
+
+  var item =
+    cart.find(function(product){
+
+      return String(product.id) === String(id);
+
+    });
+
+
+  if(!item){
+    return;
+  }
+
+
+  item.quantity =
+    Number(item.quantity || 0) + change;
+
+
+  if(item.quantity <= 0){
+
+    cart =
+      cart.filter(function(product){
+
+        return String(product.id) !== String(id);
+
+      });
+
+  }
+
+
+  saveCart();
+  updateCartCount();
+  renderCart();
+
+}
+
+
+/* =========================================
+   REMOVE CART ITEM
+========================================= */
+
+function removeFromCart(id){
+
+  cart =
+    cart.filter(function(item){
+
+      return String(item.id) !== String(id);
+
+    });
+
+
+  saveCart();
+  updateCartCount();
+  renderCart();
+
+}
+
+
+/* =========================================
+   CLEAR CART
+========================================= */
+
+function clearCart(){
+
+  cart = [];
+
+  saveCart();
+  updateCartCount();
+  renderCart();
+
+}
+
+
+/* =========================================
+   RENDER CART
+========================================= */
+
+function renderCart(){
+
+  if(!cart.length){
+
+    cartContent.innerHTML =
+      '<div class="cart-empty">' +
+      'Votre panier est vide.' +
+      '</div>';
+
+    cartTotal.textContent =
+      '0 HTG';
+
+    return;
+
+  }
+
+
+  var total = 0;
+
+
+  cartContent.innerHTML =
+    cart.map(function(item){
+
+      var price =
+        parsePrice(item.price);
+
+      var quantity =
+        Number(item.quantity || 1);
+
+      var subtotal =
+        price * quantity;
+
+      total += subtotal;
+
+
+      var imageUrl =
+        item.image_url || '';
+
+
+      if(
+        imageUrl &&
+        imageUrl.indexOf('http') !== 0
+      ){
+
+        imageUrl =
+          getPublicImageUrl(
+            imageUrl
+          );
+
+      }
+
+
+      var imageHTML =
+        imageUrl
+
+        ?
+
+        '<img src="' +
+        esc(imageUrl) +
+        '" alt="' +
+        esc(item.name) +
+        '">'
+
+        :
+
+        '<span style="color:#888;font-size:11px;">' +
+        'Aucune image' +
+        '</span>';
+
+
+      return (
+
+        '<div class="cart-item">' +
+
+          '<div class="cart-item-image">' +
+            imageHTML +
+          '</div>' +
+
+          '<div class="cart-item-info">' +
+
+            '<div class="cart-item-name">' +
+              esc(item.name) +
+            '</div>' +
+
+            '<div class="cart-item-price">' +
+              formatPrice(price) +
+            '</div>' +
+
+            '<div class="cart-quantity">' +
+
+              '<button' +
+              ' class="quantity-button"' +
+              ' onclick="changeCartQuantity(' +
+              item.id +
+              ',-1)">' +
+              '−' +
+              '</button>' +
+
+              '<span class="quantity-value">' +
+                quantity +
+              '</span>' +
+
+              '<button' +
+              ' class="quantity-button"' +
+              ' onclick="changeCartQuantity(' +
+              item.id +
+              ',1)">' +
+              '+' +
+              '</button>' +
+
+              '<button' +
+              ' class="cart-remove"' +
+              ' onclick="removeFromCart(' +
+              item.id +
+              ')">' +
+              'Supprimer' +
+              '</button>' +
+
+            '</div>' +
+
+          '</div>' +
+
+          '<div style="font-size:13px;font-weight:500;">' +
+            formatPrice(subtotal) +
+          '</div>' +
+
+        '</div>'
+
+      );
+
+    }).join('');
+
+
+  cartTotal.textContent =
+    formatPrice(total);
+
+}
+
+
+/* =========================================
+   OPEN CART
+========================================= */
+
+function openCart(){
+
+  renderCart();
+
+  cartOverlay.classList.add(
+    'active'
+  );
+
+}
+
+
+/* =========================================
+   CLOSE CART
+========================================= */
+
+function closeCartModal(){
+
+  cartOverlay.classList.remove(
+    'active'
+  );
+
+}
+
+
+/* =========================================
+   ORDER WHATSAPP
+========================================= */
+
+function orderCart(){
+
+  if(!cart.length){
+
+    return;
+
+  }
+
+
+  var message =
+    'Bonjour FENVA BEAUTY,\n\n';
+
+  message +=
+    'Je souhaite passer la commande suivante :\n\n';
+
+
+  var total = 0;
+
+
+  cart.forEach(function(item){
+
+    var price =
+      parsePrice(item.price);
+
+    var quantity =
+      Number(item.quantity || 1);
+
+    var subtotal =
+      price * quantity;
+
+    total += subtotal;
+
+
+    message +=
+      '- ' +
+      item.name +
+      ' x' +
+      quantity +
+      ' — ' +
+      formatPrice(subtotal) +
+      '\n';
+
+  });
+
+
+  message +=
+    '\nTotal : ' +
+    formatPrice(total);
+
+
+  message +=
+    '\n\nMerci.';
+
+
+  var whatsappURL =
+    'https://wa.me/' +
+    WHATSAPP_NUMBER +
+    '?text=' +
+    encodeURIComponent(message);
+
+
+  window.open(
+    whatsappURL,
+    '_blank'
+  );
+
+}
+
+
+/* =========================================
+   CART EVENTS
+========================================= */
+
+cartNav.addEventListener(
+  'click',
+  function(event){
+
+    event.preventDefault();
+
+    openCart();
+
+  }
+);
+
+
+closeCart.addEventListener(
+  'click',
+  function(){
+
+    closeCartModal();
+
+  }
+);
+
+
+cartOverlay.addEventListener(
+  'click',
+  function(event){
+
+    if(
+      event.target ===
+      cartOverlay
+    ){
+
+      closeCartModal();
+
+    }
+
+  }
+);
+
+
+orderCartButton.addEventListener(
+  'click',
+  function(){
+
+    orderCart();
+
+  }
+);
+
+
+clearCartButton.addEventListener(
+  'click',
+  function(){
+
+    clearCart();
+
+  }
+);
+
+
+/* =========================================
+   HEADERS
+========================================= */
+
+function getHeaders(){
+
+  return {
+
+    'apikey':
+      SUPABASE_KEY,
+
+    'Authorization':
+      'Bearer ' +
+      (accessToken || SUPABASE_KEY),
+
+    'Content-Type':
+      'application/json'
+
+  };
+
+}
+
+
+/* =========================================
+   FETCH PRODUCTS
+========================================= */
+
+function fetchProducts(){
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/rest/v1/' +
+    TABLE +
+    '?select=*&order=created_at.desc',
+
+    {
+      headers:getHeaders()
+    }
+
+  )
+
+  .then(function(response){
+
+    if(!response.ok){
+
+      return response.text()
+        .then(function(text){
+
+          throw new Error(
+            'Erreur produits : ' +
+            text
+          );
+
+        });
+
+    }
+
+    return response.json();
+
+  })
+
+  .catch(function(error){
+
+    console.error(error);
+
+    return null;
+
+  });
+
+}
+
+
+/* =========================================
+   FETCH CATEGORIES
+========================================= */
+
+function fetchCategories(){
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/rest/v1/' +
+    CATEGORY_TABLE +
+    '?select=*',
+
+    {
+      headers:getHeaders()
+    }
+
+  )
+
+  .then(function(response){
+
+    if(!response.ok){
+
+      return response.text()
+        .then(function(text){
+
+          throw new Error(
+            'Erreur catégories : ' +
+            text
+          );
+
+        });
+
+    }
+
+    return response.json();
+
+  })
+
+  .catch(function(error){
+
+    console.error(error);
+
+    return [];
+
+  });
+
+}
+
+
+/* =========================================
+   PUBLIC IMAGE URL
+========================================= */
+
+function getPublicImageUrl(path){
+
+  if(!path){
+    return '';
+  }
+
+  return (
+    SUPABASE_URL +
+    '/storage/v1/object/public/' +
+    STORAGE_BUCKET +
+    '/' +
+    path
+      .split('/')
+      .map(function(part){
+        return encodeURIComponent(part);
+      })
+      .join('/')
+  );
+
+}
+
+
+/* =========================================
+   RENDER PRODUCTS
+========================================= */
+
+function renderProducts(products){
+
+  currentProducts =
+    products || [];
+
+
+  if(!products || !products.length){
+
+    productGrid.innerHTML =
+      '<div class="empty">' +
+      'Aucun produit disponible pour le moment.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  productGrid.innerHTML =
+    products.map(function(p){
+
+      var imageUrl =
+        p.image_url || '';
+
+
+      if(
+        imageUrl &&
+        imageUrl.indexOf('http') !== 0
+      ){
+
+        imageUrl =
+          getPublicImageUrl(
+            imageUrl
+          );
+
+      }
+
+
+      var imageHTML = '';
+
+
+      if(imageUrl){
+
+        imageHTML =
+          '<img' +
+          ' src="' +
+          esc(imageUrl) +
+          '"' +
+          ' alt="' +
+          esc(p.name) +
+          '"' +
+          ' loading="lazy"' +
+          ' onerror="imageLoadError(this)">';
+
+      }
+
+
+      return (
+
+        '<div class="card">' +
+
+          '<div class="thumb">' +
+
+            (
+              imageHTML ||
+
+              '<span style="color:#888;font-size:13px;">' +
+              'Aucune image' +
+              '</span>'
+            ) +
+
+          '</div>' +
+
+          '<h4>' +
+            esc(p.name) +
+          '</h4>' +
+
+          '<div class="price">' +
+            esc(p.price) +
+          '</div>' +
+
+          '<button' +
+          ' class="add-cart-button"' +
+          ' onclick="addToCartById(' +
+          p.id +
+          ')">' +
+            'Ajouter au panier' +
+          '</button>' +
+
+        '</div>'
+
+      );
+
+    }).join('');
+
+}
+
+
+/* =========================================
+   RENDER CATEGORY IMAGES (PUBLIC GRID)
+========================================= */
+
+function applyCategoryImages(categories){
+
+  currentCategories =
+    categories || [];
+
+
+  var cards =
+    categoryGrid.querySelectorAll(
+      '.category-card'
+    );
+
+
+  cards.forEach(function(card){
+
+    var name =
+      card.getAttribute(
+        'data-category'
+      );
+
+
+    var match =
+      currentCategories.find(function(c){
+
+        return c.name === name;
+
+      });
+
+
+    if(
+      match &&
+      match.image_url
+    ){
+
+      var imageUrl =
+        match.image_url;
+
+
+      if(imageUrl.indexOf('http') !== 0){
+
+        imageUrl =
+          getPublicImageUrl(
+            imageUrl
+          );
+
+      }
+
+
+      card.style.backgroundImage =
+        'url("' +
+        imageUrl +
+        '")';
+
+      card.classList.add(
+        'has-image'
+      );
+
+    }else{
+
+      card.style.backgroundImage =
+        '';
+
+      card.classList.remove(
+        'has-image'
+      );
+
+    }
+
+  });
+
+}
+
+
+/* =========================================
+   IMAGE ERROR
+========================================= */
+
+function imageLoadError(img){
+
+  console.error(
+    'Impossible de charger cette image :',
+    img.src
+  );
+
+  img.style.display =
+    'none';
+
+  if(img.parentElement){
+
+    img.parentElement.innerHTML =
+      '<span style="color:#888;font-size:13px;">' +
+      'Image indisponible' +
+      '</span>';
+
+  }
+
+}
+
+
+/* =========================================
+   RENDER ADMIN PRODUCTS
+========================================= */
+
+function renderAdminProducts(products){
+
+  if(!products || !products.length){
+
+    productList.innerHTML =
+      '<div style="color:#777;">' +
+      'Aucun produit.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  productList.innerHTML =
+    products.map(function(p){
+
+      var imageUrl =
+        p.image_url || '';
+
+
+      if(
+        imageUrl &&
+        imageUrl.indexOf('http') !== 0
+      ){
+
+        imageUrl =
+          getPublicImageUrl(
+            imageUrl
+          );
+
+      }
+
+
+      var imageHTML =
+        imageUrl
+
+        ?
+
+        '<img src="' +
+        esc(imageUrl) +
+        '" alt="' +
+        esc(p.name) +
+        '">'
+
+        :
+
+        '<span>Aucune image</span>';
+
+
+      return (
+
+        '<div class="admin-product">' +
+
+          '<div class="admin-product-image">' +
+            imageHTML +
+          '</div>' +
+
+          '<div class="admin-product-info">' +
+
+            '<div class="admin-product-name">' +
+              esc(p.name) +
+            '</div>' +
+
+            '<div class="admin-product-meta">' +
+              esc(p.price) +
+
+              (
+                p.cat
+                ?
+                ' · ' + esc(p.cat)
+                :
+                ''
+              ) +
+
+            '</div>' +
+
+          '</div>' +
+
+          '<button' +
+          ' class="delete-button"' +
+          ' onclick="handleDeleteProduct(' +
+          p.id +
+          ')">' +
+
+            'Supprimer' +
+
+          '</button>' +
+
+        '</div>'
+
+      );
+
+    }).join('');
+
+}
+
+
+/* =========================================
+   RENDER ADMIN CATEGORIES
+========================================= */
+
+function renderCategoryAdmin(categories){
+
+  currentCategories =
+    categories || [];
+
+
+  categoryAdminList.innerHTML =
+    FIXED_CATEGORIES.map(function(name,index){
+
+      var match =
+        currentCategories.find(function(c){
+
+          return c.name === name;
+
+        });
+
+
+      var imageUrl =
+        match && match.image_url
+          ?
+          match.image_url
+          :
+          '';
+
+
+      if(
+        imageUrl &&
+        imageUrl.indexOf('http') !== 0
+      ){
+
+        imageUrl =
+          getPublicImageUrl(
+            imageUrl
+          );
+
+      }
+
+
+      var imageHTML =
+        imageUrl
+
+        ?
+
+        '<img src="' +
+        esc(imageUrl) +
+        '" alt="' +
+        esc(name) +
+        '">'
+
+        :
+
+        '<span>Aucune image</span>';
+
+
+      var inputId =
+        'catFile' + index;
+
+
+      return (
+
+        '<div class="admin-product">' +
+
+          '<div class="admin-product-image">' +
+            imageHTML +
+          '</div>' +
+
+          '<div class="admin-product-info">' +
+
+            '<div class="admin-product-name">' +
+              esc(name) +
+            '</div>' +
+
+            '<input' +
+            ' type="file"' +
+            ' accept="image/*"' +
+            ' class="category-admin-input"' +
+            ' id="' + inputId + '">' +
+
+            '<br>' +
+
+            '<button' +
+            ' type="button"' +
+            ' class="category-save-button"' +
+            ' onclick="saveCategoryImage(' +
+            "'" + esc(name).replace(/'/g, "\\'") + "'" +
+            ',' +
+            "'" + inputId + "'" +
+            ')">' +
+              'Enregistrer l\u2019image' +
+            '</button>' +
+
+          '</div>' +
+
+        '</div>'
+
+      );
+
+    }).join('');
+
+}
+
+
+/* =========================================
+   REFRESH PRODUCTS
+========================================= */
+
+function refreshProducts(){
+
+  return fetchProducts()
+
+    .then(function(products){
+
+      if(!products){
+        return;
+      }
+
+      renderProducts(
+        products
+      );
+
+      if(accessToken){
+
+        renderAdminProducts(
+          products
+        );
+
+      }
+
+    });
+
+}
+
+
+/* =========================================
+   REFRESH CATEGORIES
+========================================= */
+
+function refreshCategories(){
+
+  return fetchCategories()
+
+    .then(function(categories){
+
+      applyCategoryImages(
+        categories
+      );
+
+      if(accessToken){
+
+        renderCategoryAdmin(
+          categories
+        );
+
+      }
+
+    });
+
+}
+
+
+/* =========================================
+   LOGIN ADMIN
+========================================= */
+
+function loginAdmin(
+  email,
+  password
+){
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/auth/v1/token?grant_type=password',
+
+    {
+
+      method:'POST',
+
+      headers:{
+
+        'apikey':
+          SUPABASE_KEY,
+
+        'Content-Type':
+          'application/json'
+
+      },
+
+      body:JSON.stringify({
+
+        email:
+          email,
+
+        password:
+          password
+
+      })
+
+    }
+
+  )
+
+  .then(function(response){
+
+    return response.json()
+      .then(function(data){
+
+        return {
+
+          ok:
+            response.ok,
+
+          data:
+            data
+
+        };
+
+      });
+
+  })
+
+  .then(function(result){
+
+    if(
+      !result.ok ||
+      !result.data.access_token
+    ){
+
+      throw new Error(
+
+        result.data.error_description ||
+        result.data.msg ||
+        'Connexion impossible.'
+
+      );
+
+    }
+
+
+    accessToken =
+      result.data.access_token;
+
+
+    return true;
+
+  });
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logoutAdminUser(){
+
+  if(!accessToken){
+
+    return Promise.resolve();
+
+  }
+
+
+  var token =
+    accessToken;
+
+
+  accessToken =
+    null;
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/auth/v1/logout',
+
+    {
+
+      method:'POST',
+
+      headers:{
+
+        'apikey':
+          SUPABASE_KEY,
+
+        'Authorization':
+          'Bearer ' +
+          token
+
+      }
+
+    }
+
+  )
+
+  .catch(function(){});
+
+}
+
+
+/* =========================================
+   UPLOAD IMAGE (helper used by products and categories)
+========================================= */
+
+function uploadImageFile(
+  file,
+  pathPrefix
+){
+
+  if(!accessToken){
+
+    return Promise.reject(
+      new Error(
+        'Vous devez être connecté.'
+      )
+    );
+
+  }
+
+
+  if(!file){
+
+    return Promise.reject(
+      new Error(
+        'Aucune image sélectionnée.'
+      )
+    );
+
+  }
+
+
+  var maxSize =
+    50 * 1024 * 1024;
+
+
+  if(file.size > maxSize){
+
+    return Promise.reject(
+      new Error(
+        'L’image dépasse la limite de 50 MB.'
+      )
+    );
+
+  }
+
+
+  var extension =
+    'jpg';
+
+
+  if(
+    file.name &&
+    file.name.indexOf('.') !== -1
+  ){
+
+    extension =
+      file.name
+        .split('.')
+        .pop()
+        .toLowerCase();
+
+  }
+
+
+  var randomPart =
+    Math.random()
+      .toString(36)
+      .substring(2,10);
+
+
+  var storagePath =
+    pathPrefix +
+    Date.now() +
+    '-' +
+    randomPart +
+    '.' +
+    extension;
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/storage/v1/object/' +
+    STORAGE_BUCKET +
+    '/' +
+    encodeURIComponent(
+      storagePath
+    ),
+
+    {
+
+      method:'POST',
+
+      headers:{
+
+        'apikey':
+          SUPABASE_KEY,
+
+        'Authorization':
+          'Bearer ' +
+          accessToken,
+
+        'Content-Type':
+          file.type ||
+          'application/octet-stream',
+
+        'x-upsert':
+          'false'
+
+      },
+
+      body:file
+
+    }
+
+  )
+
+  .then(function(response){
+
+    return response.text()
+      .then(function(text){
+
+        var data = null;
+
+        try{
+
+          data =
+            text
+              ?
+              JSON.parse(text)
+              :
+              null;
+
+        }catch(error){}
+
+
+        if(!response.ok){
+
+          console.error(
+            'Erreur upload image:',
+            data || text
+          );
+
+          throw new Error(
+
+            (
+              data &&
+              (
+                data.message ||
+                data.error ||
+                data.msg
+              )
+            )
+
+            ||
+
+            'Impossible d’envoyer l’image.'
+
+          );
+
+        }
+
+
+        return {
+
+          path:
+            storagePath,
+
+          url:
+            getPublicImageUrl(
+              storagePath
+            )
+
+        };
+
+      });
+
+  });
+
+}
+
+
+function uploadProductImage(file){
+
+  return uploadImageFile(
+    file,
+    'produit-'
+  );
+
+}
+
+
+function uploadCategoryImage(file){
+
+  return uploadImageFile(
+    file,
+    'categorie-'
+  );
+
+}
+
+
+/* =========================================
+   DELETE STORAGE IMAGE
+========================================= */
+
+function deleteStorageImage(
+  imageUrl
+){
+
+  if(
+    !imageUrl ||
+    !accessToken
+  ){
+
+    return Promise.resolve(true);
+
+  }
+
+
+  var marker =
+    '/storage/v1/object/public/' +
+    STORAGE_BUCKET +
+    '/';
+
+
+  var index =
+    imageUrl.indexOf(marker);
+
+
+  if(index === -1){
+
+    return Promise.resolve(true);
+
+  }
+
+
+  var path =
+    imageUrl.substring(
+      index +
+      marker.length
+    );
+
+
+  path =
+    path
+      .split('/')
+      .map(function(part){
+
+        try{
+
+          return decodeURIComponent(
+            part
+          );
+
+        }catch(error){
+
+          return part;
+
+        }
+
+      })
+      .join('/');
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/storage/v1/object/' +
+    STORAGE_BUCKET +
+    '/' +
+    path
+      .split('/')
+      .map(function(part){
+
+        return encodeURIComponent(
+          part
+        );
+
+      })
+      .join('/'),
+
+    {
+
+      method:'DELETE',
+
+      headers:{
+
+        'apikey':
+          SUPABASE_KEY,
+
+        'Authorization':
+          'Bearer ' +
+          accessToken
+
+      }
+
+    }
+
+  )
+
+  .then(function(response){
+
+    if(!response.ok){
+
+      console.warn(
+        'Impossible de supprimer l’image du Storage.'
+      );
+
+    }
+
+    return true;
+
+  })
+
+  .catch(function(){
+
+    return true;
+
+  });
+
+}
+
+
+/* =========================================
+   CREATE PRODUCT
+========================================= */
+
+function createProduct(
+  product
+){
+
+  if(!accessToken){
+
+    return Promise.resolve(false);
+
+  }
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/rest/v1/' +
+    TABLE,
+
+    {
+
+      method:'POST',
+
+      headers:Object.assign(
+
+        {},
+
+        getHeaders(),
+
+        {
+          'Prefer':
+            'return=representation'
+        }
+
+      ),
+
+      body:JSON.stringify([
+        product
+      ])
+
+    }
+
+  )
+
+  .then(function(response){
+
+    return response.text()
+      .then(function(text){
+
+        if(!response.ok){
+
+          console.error(
+            'Erreur création produit:',
+            text
+          );
+
+          return false;
+
+        }
+
+
+        try{
+
+          var data =
+            JSON.parse(text);
+
+          return data &&
+                 data.length
+            ?
+              data[0]
+            :
+              false;
+
+        }catch(error){
+
+          return false;
+
+        }
+
+      });
+
+  })
+
+  .catch(function(error){
+
+    console.error(error);
+
+    return false;
+
+  });
+
+}
+
+
+/* =========================================
+   UPSERT CATEGORY IMAGE
+========================================= */
+
+function upsertCategory(
+  name,
+  imageUrl
+){
+
+  if(!accessToken){
+
+    return Promise.resolve(false);
+
+  }
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/rest/v1/' +
+    CATEGORY_TABLE +
+    '?on_conflict=name',
+
+    {
+
+      method:'POST',
+
+      headers:Object.assign(
+
+        {},
+
+        getHeaders(),
+
+        {
+
+          'Prefer':
+            'return=representation,resolution=merge-duplicates'
+
+        }
+
+      ),
+
+      body:JSON.stringify([
+
+        {
+
+          name:
+            name,
+
+          image_url:
+            imageUrl
+
+        }
+
+      ])
+
+    }
+
+  )
+
+  .then(function(response){
+
+    return response.text()
+      .then(function(text){
+
+        if(!response.ok){
+
+          console.error(
+            'Erreur enregistrement catégorie:',
+            text
+          );
+
+          return false;
+
+        }
+
+
+        try{
+
+          var data =
+            JSON.parse(text);
+
+          return data &&
+                 data.length
+            ?
+              data[0]
+            :
+              false;
+
+        }catch(error){
+
+          return false;
+
+        }
+
+      });
+
+  })
+
+  .catch(function(error){
+
+    console.error(error);
+
+    return false;
+
+  });
+
+}
+
+
+/* =========================================
+   SAVE CATEGORY IMAGE (admin action)
+========================================= */
+
+function saveCategoryImage(
+  name,
+  inputId
+){
+
+  var input =
+    document.getElementById(
+      inputId
+    );
+
+  var file =
+    input &&
+    input.files &&
+    input.files[0];
+
+
+  if(!file){
+
+    alert(
+      'Veuillez choisir une image.'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !file.type ||
+    file.type.indexOf('image/') !== 0
+  ){
+
+    alert(
+      'Veuillez sélectionner une image.'
+    );
+
+    return;
+
+  }
+
+
+  var maxSize =
+    50 * 1024 * 1024;
+
+
+  if(file.size > maxSize){
+
+    alert(
+      'L’image dépasse la limite de 50 MB.'
+    );
+
+    return;
+
+  }
+
+
+  var oldMatch =
+    currentCategories.find(function(c){
+
+      return c.name === name;
+
+    });
+
+
+  var oldImageUrl =
+    oldMatch && oldMatch.image_url
+      ?
+      oldMatch.image_url
+      :
+      '';
+
+
+  if(
+    oldImageUrl &&
+    oldImageUrl.indexOf('http') !== 0
+  ){
+
+    oldImageUrl =
+      getPublicImageUrl(
+        oldImageUrl
+      );
+
+  }
+
+
+  uploadCategoryImage(file)
+
+  .then(function(uploaded){
+
+    return upsertCategory(
+      name,
+      uploaded.url
+    )
+
+    .then(function(saved){
+
+      if(!saved){
+
+        return deleteStorageImage(
+          uploaded.url
+        )
+
+        .then(function(){
+
+          throw new Error(
+            'La catégorie n’a pas pu être enregistrée.'
+          );
+
+        });
+
+      }
+
+
+      if(oldImageUrl){
+
+        deleteStorageImage(
+          oldImageUrl
+        );
+
+      }
+
+
+      return refreshCategories();
+
+    });
+
+  })
+
+  .catch(function(error){
+
+    console.error(error);
+
+    alert(
+      error.message ||
+      'Une erreur est survenue.'
+    );
+
+  });
+
+}
+
+
+/* =========================================
+   DELETE PRODUCT
+========================================= */
+
+function deleteProduct(
+  id
+){
+
+  if(!accessToken){
+
+    return Promise.resolve(false);
+
+  }
+
+
+  return fetch(
+
+    SUPABASE_URL +
+    '/rest/v1/' +
+    TABLE +
+    '?id=eq.' +
+    encodeURIComponent(id) +
+    '&select=*',
+
+    {
+      headers:
+        getHeaders()
+    }
+
+  )
+
+  .then(function(response){
+
+    if(!response.ok){
+
+      throw new Error(
+        'Impossible de récupérer le produit.'
+      );
+
+    }
+
+    return response.json();
+
+  })
+
+  .then(function(products){
+
+    var product =
+      products &&
+      products.length
+      ?
+        products[0]
+      :
+        null;
+
+
+    return fetch(
+
+      SUPABASE_URL +
+      '/rest/v1/' +
+      TABLE +
+      '?id=eq.' +
+      encodeURIComponent(id),
+
+      {
+
+        method:'DELETE',
+
+        headers:
+          getHeaders()
+
+      }
+
+    )
+
+    .then(function(response){
+
+      if(!response.ok){
+
+        throw new Error(
+          'Impossible de supprimer le produit.'
+        );
+
+      }
+
+
+      return product;
+
+    });
+
+  })
+
+  .then(function(product){
+
+    if(
+      product &&
+      product.image_url
+    ){
+
+      return deleteStorageImage(
+        product.image_url
+      );
+
+    }
+
+    return true;
+
+  })
+
+  .then(function(){
+
+    return true;
+
+  })
+
+  .catch(function(error){
+
+    console.error(error);
+
+    return false;
+
+  });
+
+}
+
+
+/* =========================================
+   DELETE PRODUCT HANDLER
+========================================= */
+
+function handleDeleteProduct(
+  id
+){
+
+  if(
+    !confirm(
+      'Voulez-vous vraiment supprimer ce produit ?'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  deleteProduct(id)
+
+  .then(function(success){
+
+    if(!success){
+
+      alert(
+        'La suppression a échoué.'
+      );
+
+      return;
+
+    }
+
+
+    refreshProducts();
+
+  });
+
+}
+
+
+/* =========================================
+   OPEN ADMIN
+========================================= */
+
+openAdmin.addEventListener(
+  'click',
+  function(){
+
+    adminOverlay.classList.add(
+      'active'
+    );
+
+  }
+);
+
+
+/* =========================================
+   CLOSE ADMIN
+========================================= */
+
+closeAdmin.addEventListener(
+  'click',
+  function(){
+
+    adminOverlay.classList.remove(
+      'active'
+    );
+
+  }
+);
+
+
+/* =========================================
+   CLOSE OUTSIDE ADMIN
+========================================= */
+
+adminOverlay.addEventListener(
+  'click',
+  function(event){
+
+    if(
+      event.target ===
+      adminOverlay
+    ){
+
+      adminOverlay.classList.remove(
+        'active'
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+adminUnlock.addEventListener(
+  'click',
+  function(){
+
+    var email =
+      adminEmail.value.trim();
+
+    var password =
+      adminPassword.value;
+
+
+    adminMsg.textContent =
+      'Connexion en cours...';
+
+
+    loginAdmin(
+      email,
+      password
+    )
+
+    .then(function(){
+
+      adminMsg.textContent =
+        '';
+
+      adminLogin.style.display =
+        'none';
+
+      adminPanel.classList.add(
+        'active'
+      );
+
+
+      refreshProducts();
+      refreshCategories();
+
+    })
+
+    .catch(function(error){
+
+      console.error(error);
+
+      adminMsg.textContent =
+        error.message ||
+        'Connexion impossible.';
+
+    });
+
+  }
+);
+
+
+/* =========================================
+   LOGOUT BUTTON
+========================================= */
+
+logoutAdmin.addEventListener(
+  'click',
+  function(){
+
+    logoutAdminUser()
+      .then(function(){
+
+        adminPanel.classList.remove(
+          'active'
+        );
+
+        adminLogin.style.display =
+          'block';
+
+        adminEmail.value =
+          '';
+
+        adminPassword.value =
+          '';
+
+        adminMsg.textContent =
+          '';
+
+      });
+
+  }
+);
+
+
+/* =========================================
+   IMAGE SELECT
+========================================= */
+
+pimage.addEventListener(
+  'change',
+  function(){
+
+    var file =
+      pimage.files &&
+      pimage.files[0];
+
+
+    if(previewObjectUrl){
+
+      URL.revokeObjectURL(
+        previewObjectUrl
+      );
+
+      previewObjectUrl =
+        null;
+
+    }
+
+
+    selectedImageFile =
+      null;
+
+
+    imagePreviewBox.classList.remove(
+      'active'
+    );
+
+    removeImageBtn.classList.remove(
+      'active'
+    );
+
+
+    if(!file){
+
+      return;
+
+    }
+
+
+    if(
+      !file.type ||
+      file.type.indexOf(
+        'image/'
+      ) !== 0
+    ){
+
+      formMsg.textContent =
+        'Veuillez sélectionner une image.';
+
+      pimage.value =
+        '';
+
+      return;
+
+    }
+
+
+    var maxSize =
+      50 * 1024 * 1024;
+
+
+    if(file.size > maxSize){
+
+      formMsg.textContent =
+        'L’image dépasse la limite de 50 MB.';
+
+      pimage.value =
+        '';
+
+      return;
+
+    }
+
+
+    selectedImageFile =
+      file;
+
+
+    previewObjectUrl =
+      URL.createObjectURL(file);
+
+
+    imagePreview.src =
+      previewObjectUrl;
+
+
+    imagePreviewBox.classList.add(
+      'active'
+    );
+
+    removeImageBtn.classList.add(
+      'active'
+    );
+
+    formMsg.textContent =
+      '';
+
+  }
+);
+
+
+/* =========================================
+   REMOVE IMAGE
+========================================= */
+
+removeImageBtn.addEventListener(
+  'click',
+  function(){
+
+    pimage.value =
+      '';
+
+    selectedImageFile =
+      null;
+
+
+    if(previewObjectUrl){
+
+      URL.revokeObjectURL(
+        previewObjectUrl
+      );
+
+      previewObjectUrl =
+        null;
+
+    }
+
+
+    imagePreview.src =
+      '';
+
+    imagePreviewBox.classList.remove(
+      'active'
+    );
+
+    removeImageBtn.classList.remove(
+      'active'
+    );
+
+  }
+);
+
+
+/* =========================================
+   ADD PRODUCT
+========================================= */
+
+addProductBtn.addEventListener(
+  'click',
+  function(){
+
+    var name =
+      pname.value.trim();
+
+    var price =
+      pprice.value.trim();
+
+    var cat =
+      pcat.value.trim();
+
+    var file =
+      selectedImageFile;
+
+
+    formMsg.textContent =
+      '';
+
+
+    if(!name){
+
+      formMsg.textContent =
+        'Veuillez entrer le nom du produit.';
+
+      return;
+
+    }
+
+
+    if(!price){
+
+      formMsg.textContent =
+        'Veuillez entrer le prix.';
+
+      return;
+
+    }
+
+
+    if(!file){
+
+      formMsg.textContent =
+        'Veuillez sélectionner une image.';
+
+      return;
+
+    }
+
+
+    addProductBtn.disabled =
+      true;
+
+    addProductBtn.textContent =
+      'Envoi en cours...';
+
+
+    uploadProductImage(file)
+
+    .then(function(uploaded){
+
+      return createProduct({
+
+        name:
+          name,
+
+        price:
+          price,
+
+        cat:
+          cat,
+
+        image_url:
+          uploaded.url
+
+      })
+
+      .then(function(product){
+
+        if(!product){
+
+          return deleteStorageImage(
+            uploaded.url
+          )
+
+          .then(function(){
+
+            throw new Error(
+              'Le produit n’a pas pu être enregistré dans la base de données.'
+            );
+
+          });
+
+        }
+
+
+        return product;
+
+      });
+
+    })
+
+    .then(function(){
+
+      pname.value =
+        '';
+
+      pprice.value =
+        '';
+
+      pcat.value =
+        '';
+
+      pimage.value =
+        '';
+
+      selectedImageFile =
+        null;
+
+
+      if(previewObjectUrl){
+
+        URL.revokeObjectURL(
+          previewObjectUrl
+        );
+
+        previewObjectUrl =
+          null;
+
+      }
+
+
+      imagePreview.src =
+        '';
+
+      imagePreviewBox.classList.remove(
+        'active'
+      );
+
+      removeImageBtn.classList.remove(
+        'active'
+      );
+
+
+      formMsg.textContent =
+        'Produit ajouté avec succès.';
+
+
+      return refreshProducts();
+
+    })
+
+    .catch(function(error){
+
+      console.error(error);
+
+      formMsg.textContent =
+        error.message ||
+        'Une erreur est survenue.';
+
+    })
+
+    .finally(function(){
+
+      addProductBtn.disabled =
+        false;
+
+      addProductBtn.textContent =
+        'Ajouter le produit';
+
+    });
+
+  }
+);
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+updateCartCount();
+
+renderCart();
+
+refreshProducts();
+refreshCategories();
+
 </script>
+
 </body>
 </html>
