@@ -42,6 +42,7 @@ body{
   background:var(--cream);
   color:var(--brown);
   line-height:1.6;
+  overflow-x:hidden;
 }
 
 button,
@@ -52,11 +53,13 @@ select{
 
 button{
   cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
 a{
   color:inherit;
   text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
 }
 
 /* HEADER */
@@ -87,6 +90,7 @@ header{
   font-weight:600;
   letter-spacing:3px;
   color:var(--brown);
+  white-space:nowrap;
 }
 
 .logo span{
@@ -104,6 +108,7 @@ nav a{
   letter-spacing:.5px;
   transition:.2s;
   position:relative;
+  white-space:nowrap;
 }
 
 nav a:hover{
@@ -281,6 +286,7 @@ section{
   background:var(--white);
   border:1px solid var(--line);
   overflow:hidden;
+  min-width:0;
 }
 
 .card .thumb{
@@ -324,6 +330,7 @@ section{
   color:white;
   font-size:13px;
   transition:.2s;
+  min-height:44px;
 }
 
 .add-cart-button:hover{
@@ -419,6 +426,7 @@ footer{
   font-size:13px;
   opacity:.7;
   cursor:pointer;
+  padding:8px;
 }
 
 .footer-admin:hover{
@@ -490,6 +498,8 @@ footer{
   background:none;
   font-size:25px;
   color:#555;
+  width:42px;
+  height:42px;
 }
 
 .cart-empty{
@@ -525,6 +535,7 @@ footer{
 
 .cart-item-info{
   flex:1;
+  min-width:0;
 }
 
 .cart-item-name{
@@ -541,11 +552,13 @@ footer{
   display:flex;
   align-items:center;
   gap:8px;
+  margin-top:7px;
+  flex-wrap:wrap;
 }
 
 .quantity-button{
-  width:28px;
-  height:28px;
+  width:32px;
+  height:32px;
   border:1px solid var(--line);
   background:var(--cream);
   font-size:16px;
@@ -562,7 +575,8 @@ footer{
   background:none;
   color:#9b4d4d;
   font-size:12px;
-  margin-left:10px;
+  margin-left:5px;
+  padding:7px;
 }
 
 .cart-bottom{
@@ -594,6 +608,7 @@ footer{
   color:white;
   padding:14px 20px;
   font-size:14px;
+  min-height:48px;
 }
 
 .cart-clear-button{
@@ -602,6 +617,7 @@ footer{
   color:#555;
   padding:14px 18px;
   font-size:13px;
+  min-height:48px;
 }
 
 .cart-order-button:hover,
@@ -655,6 +671,8 @@ footer{
   background:none;
   font-size:25px;
   color:#555;
+  width:42px;
+  height:42px;
 }
 
 .admin-login{
@@ -679,6 +697,7 @@ footer{
   border:1px solid var(--line);
   background:var(--cream);
   outline:none;
+  min-height:46px;
 }
 
 .admin-field input:focus,
@@ -692,6 +711,7 @@ footer{
   color:white;
   padding:13px 22px;
   font-size:14px;
+  min-height:46px;
 }
 
 .admin-button:hover{
@@ -778,6 +798,7 @@ footer{
   padding:12px;
   border:1px solid var(--line);
   background:var(--cream);
+  min-width:0;
 }
 
 .admin-product-image{
@@ -802,16 +823,19 @@ footer{
 
 .admin-product-info{
   flex:1;
+  min-width:0;
 }
 
 .admin-product-name{
   font-family:'Cormorant Garamond',serif;
   font-size:22px;
+  overflow-wrap:anywhere;
 }
 
 .admin-product-meta{
   font-size:12px;
   color:#777;
+  overflow-wrap:anywhere;
 }
 
 .delete-button{
@@ -820,6 +844,8 @@ footer{
   color:#9b4d4d;
   padding:9px 13px;
   font-size:12px;
+  flex-shrink:0;
+  min-height:40px;
 }
 
 .delete-button:hover{
@@ -829,6 +855,7 @@ footer{
 .category-admin-input{
   font-size:11px;
   margin-top:6px;
+  max-width:100%;
 }
 
 .category-save-button{
@@ -838,6 +865,7 @@ footer{
   padding:9px 13px;
   font-size:12px;
   margin-top:6px;
+  min-height:40px;
 }
 
 .category-delete-image-button{
@@ -848,6 +876,7 @@ footer{
   font-size:12px;
   margin-top:6px;
   margin-left:5px;
+  min-height:40px;
 }
 
 .category-save-button:hover,
@@ -855,113 +884,371 @@ footer{
   opacity:.8;
 }
 
-/* RESPONSIVE */
+/* =========================================
+   TABLETTE
+========================================= */
 
 @media(max-width:950px){
 
+  .header-inner{
+    padding:0 22px;
+  }
+
   .product-grid{
     grid-template-columns:repeat(3,1fr);
+    gap:16px;
   }
 
   .category-grid{
     grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+
+  .card .thumb{
+    height:280px;
   }
 
 }
 
+/* =========================================
+   MOBILE
+========================================= */
+
 @media(max-width:700px){
 
+  body{
+    overflow-x:hidden;
+  }
+
   .header-inner{
-    min-height:70px;
-    padding:0 18px;
+    min-height:64px;
+    padding:0 15px;
+    gap:10px;
   }
 
   .logo{
-    font-size:27px;
+    font-size:25px;
+    letter-spacing:2px;
   }
 
   nav{
-    gap:12px;
+    gap:10px;
   }
 
   nav a{
-    font-size:11px;
+    font-size:10px;
+    letter-spacing:.2px;
   }
 
+  .cart-nav{
+    gap:5px;
+  }
+
+  .cart-count{
+    min-width:19px;
+    height:19px;
+    font-size:10px;
+  }
+
+  /* HERO */
+
   .hero{
-    min-height:550px;
+    min-height:520px;
+    padding:60px 18px;
+  }
+
+  .hero-small{
+    letter-spacing:2.5px;
+    font-size:11px;
+    margin-bottom:16px;
   }
 
   .hero h1{
     font-size:52px;
+    line-height:.98;
+    margin-bottom:22px;
   }
 
   .hero p{
-    font-size:16px;
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:22px;
   }
 
+  .hero-note{
+    font-size:11px;
+    line-height:1.5;
+  }
+
+  /* SECTIONS */
+
   section{
-    padding:65px 18px;
+    padding:60px 15px;
+  }
+
+  .section-title{
+    margin-bottom:32px;
+  }
+
+  .section-title span{
+    letter-spacing:2px;
+    font-size:10px;
+    margin-bottom:8px;
   }
 
   .section-title h2{
     font-size:40px;
+    line-height:1.05;
   }
 
+  /* CATEGORIES */
+
   .category-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
   }
+
+  .category-card{
+    min-height:165px;
+    padding:16px;
+  }
+
+  .category-card:hover{
+    transform:none;
+  }
+
+  .category-card h3{
+    font-size:22px;
+    line-height:1.05;
+  }
+
+  /* PRODUCTS */
 
   .product-grid{
     grid-template-columns:repeat(2,1fr);
-    gap:12px;
+    gap:10px;
   }
 
   .card .thumb{
-    height:240px;
+    height:230px;
   }
 
   .card h4{
-    font-size:21px;
-    padding:13px 12px 4px;
+    font-size:20px;
+    line-height:1.1;
+    padding:12px 10px 5px;
+
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
   }
 
   .card .price{
-    padding:0 12px 10px;
+    padding:0 10px 10px;
+    font-size:13px;
   }
 
   .add-cart-button{
-    width:calc(100% - 24px);
-    margin:0 12px 14px;
-    padding:11px 8px;
-    font-size:12px;
+    width:calc(100% - 20px);
+    margin:0 10px 12px;
+    padding:10px 6px;
+    font-size:11px;
+    min-height:44px;
   }
+
+  /* STORY */
 
   .story-grid{
     grid-template-columns:1fr;
-    gap:30px;
+    gap:28px;
+  }
+
+  .story-label{
+    font-size:10px;
+    letter-spacing:2px;
   }
 
   .story h2{
     font-size:42px;
+    line-height:1;
+    margin-bottom:20px;
   }
+
+  .story p{
+    font-size:14px;
+  }
+
+  /* CTA */
 
   .cta h2{
     font-size:42px;
+    line-height:1;
+  }
+
+  .cta p{
+    font-size:14px;
+  }
+
+  /* FOOTER */
+
+  footer{
+    padding:40px 18px;
   }
 
   .footer-inner{
     flex-direction:column;
     text-align:center;
+    gap:16px;
   }
 
-  .admin-box,
+  .footer-logo{
+    font-size:27px;
+  }
+
+  .footer-inner > div{
+    font-size:12px;
+  }
+
+  /* WHATSAPP */
+
+  .whatsapp{
+    right:15px;
+    bottom:15px;
+    width:52px;
+    height:52px;
+    font-size:20px;
+  }
+
+  /* CART */
+
+  .cart-overlay{
+    padding:0;
+    align-items:flex-end;
+  }
+
   .cart-box{
-    padding:22px;
+    width:100%;
+    max-width:none;
+    max-height:88vh;
+    padding:20px 16px;
+    border-radius:18px 18px 0 0;
+  }
+
+  .cart-title{
+    margin-bottom:18px;
+  }
+
+  .cart-title h2{
+    font-size:32px;
+  }
+
+  .cart-item{
+    display:grid;
+    grid-template-columns:60px 1fr;
+    gap:10px;
+    align-items:start;
+  }
+
+  .cart-item-image{
+    width:60px;
+    height:60px;
+  }
+
+  .cart-item-name{
+    font-size:19px;
+    line-height:1.1;
+  }
+
+  .cart-item-price{
+    font-size:12px;
+  }
+
+  .cart-quantity{
+    gap:5px;
+  }
+
+  .quantity-button{
+    width:32px;
+    height:32px;
+  }
+
+  .cart-remove{
+    margin-left:0;
+  }
+
+  .cart-item > div:last-child{
+    grid-column:2;
+    font-size:12px !important;
+  }
+
+  .cart-actions{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .cart-order-button,
+  .cart-clear-button{
+    width:100%;
+  }
+
+  /* ADMIN */
+
+  .admin-overlay{
+    padding:0;
+    align-items:flex-end;
+  }
+
+  .admin-box{
+    width:100%;
+    max-width:none;
+    max-height:92vh;
+    padding:20px 16px;
+    border-radius:18px 18px 0 0;
+  }
+
+  .admin-title{
+    margin-bottom:20px;
+  }
+
+  .admin-title h2{
+    font-size:32px;
+  }
+
+  .admin-form{
+    padding:17px;
+    margin-bottom:20px;
+  }
+
+  .admin-form h3{
+    font-size:27px;
+    margin-bottom:17px;
   }
 
   .admin-product{
     align-items:flex-start;
+    gap:10px;
+    padding:10px;
+  }
+
+  .admin-product-image{
+    width:58px;
+    height:58px;
+  }
+
+  .admin-product-name{
+    font-size:19px;
+    line-height:1.1;
+  }
+
+  .admin-product-meta{
+    font-size:11px;
+    margin-top:3px;
+  }
+
+  .delete-button{
+    padding:8px 9px;
+    font-size:10px;
   }
 
   .category-save-button,
@@ -971,16 +1258,39 @@ footer{
     width:100%;
   }
 
+  .category-admin-input{
+    width:100%;
+  }
+
+  .image-preview-box{
+    width:130px;
+    height:130px;
+  }
+
 }
+
+/* =========================================
+   PETITS TELEPHONES
+========================================= */
 
 @media(max-width:430px){
 
-  .product-grid{
-    grid-template-columns:1fr;
+  .header-inner{
+    min-height:60px;
+    padding:0 11px;
   }
 
-  .card .thumb{
-    height:330px;
+  .logo{
+    font-size:22px;
+    letter-spacing:1.5px;
+  }
+
+  nav{
+    gap:7px;
+  }
+
+  nav a{
+    font-size:9px;
   }
 
   nav a:nth-child(2),
@@ -988,12 +1298,186 @@ footer{
     display:none;
   }
 
-  .cart-item{
-    align-items:flex-start;
+  .cart-count{
+    min-width:18px;
+    height:18px;
+    padding:0 4px;
   }
 
-  .cart-actions{
-    flex-direction:column;
+  /* HERO */
+
+  .hero{
+    min-height:480px;
+    padding:50px 15px;
+  }
+
+  .hero-small{
+    font-size:10px;
+    letter-spacing:2px;
+  }
+
+  .hero h1{
+    font-size:43px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  /* SECTIONS */
+
+  section{
+    padding:50px 12px;
+  }
+
+  .section-title{
+    margin-bottom:27px;
+  }
+
+  .section-title h2{
+    font-size:36px;
+  }
+
+  /* CATEGORIES */
+
+  .category-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:7px;
+  }
+
+  .category-card{
+    min-height:145px;
+    padding:12px;
+  }
+
+  .category-card h3{
+    font-size:20px;
+  }
+
+  /* PRODUCTS */
+
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+  }
+
+  .card .thumb{
+    height:205px;
+  }
+
+  .card h4{
+    font-size:18px;
+    padding:10px 8px 4px;
+  }
+
+  .card .price{
+    font-size:12px;
+    padding:0 8px 8px;
+  }
+
+  .add-cart-button{
+    width:calc(100% - 16px);
+    margin:0 8px 9px;
+    padding:9px 4px;
+    font-size:10px;
+    min-height:42px;
+  }
+
+  /* STORY */
+
+  .story h2{
+    font-size:37px;
+  }
+
+  /* CTA */
+
+  .cta h2{
+    font-size:37px;
+  }
+
+  /* CART */
+
+  .cart-box{
+    padding:18px 13px;
+  }
+
+  .cart-title h2{
+    font-size:29px;
+  }
+
+  .cart-item{
+    grid-template-columns:54px 1fr;
+    gap:8px;
+  }
+
+  .cart-item-image{
+    width:54px;
+    height:54px;
+  }
+
+  .cart-item-name{
+    font-size:18px;
+  }
+
+  .cart-quantity{
+    gap:3px;
+  }
+
+  .quantity-button{
+    width:30px;
+    height:30px;
+  }
+
+  .cart-remove{
+    font-size:11px;
+  }
+
+  /* ADMIN */
+
+  .admin-box{
+    padding:17px 12px;
+  }
+
+  .admin-title h2{
+    font-size:29px;
+  }
+
+  .admin-form{
+    padding:14px;
+  }
+
+  .admin-form h3{
+    font-size:25px;
+  }
+
+  .admin-product{
+    display:grid;
+    grid-template-columns:55px 1fr;
+  }
+
+  .admin-product-image{
+    width:55px;
+    height:55px;
+  }
+
+  .admin-product-info{
+    min-width:0;
+  }
+
+  .delete-button{
+    grid-column:2;
+    width:100%;
+  }
+
+  .admin-button{
+    width:100%;
+  }
+
+  .whatsapp{
+    width:50px;
+    height:50px;
+    right:12px;
+    bottom:12px;
   }
 
 }
@@ -2604,7 +3088,7 @@ function renderAdminProducts(products){
         esc(imageUrl) +
         '" alt="' +
         esc(p.name) +
-        '">'
+        '">' +
 
         :
 
@@ -3603,11 +4087,6 @@ function deleteCategoryImage(name){
       getPublicImageUrl(imageUrl);
 
   }
-
-  var deleteButton =
-    null;
-
-  deleteButton = true;
 
   removeCategoryImageFromDatabase(name)
 
